@@ -1,30 +1,28 @@
 package it.polimi.ingsw;
 
-import java.util.ArrayList;
-
 public final class PersonalCard {
      private int i, j;
-     private card[] bookshelf = new card[12];
+     private Card[] bookshelf = new Card[12];
 
 
 }
 
-class card{
+class Card {
      int IdCard, i;
-     private triplet[] DataTriad = new triplet[6];
+     private Triplet[] DataTriad = new Triplet[6];
 
-     card(int IdCard, int x, int y, Enum color){
+     Card(int IdCard, int x, int y, Enum color){
           this.IdCard = IdCard;
           for(i=0; i<6; i++)
-               DataTriad[i] = new triplet(x, y, color);
+               DataTriad[i] = new Triplet(x, y, color);
      }
 }
 
-class triplet{
+class Triplet {
      private int x, y;
      private Enum color;
 
-     triplet(int x, int y, Enum color){
+     Triplet(int x, int y, Enum color){
           this.x = x;
           this.y = y;
           this.color = color;
