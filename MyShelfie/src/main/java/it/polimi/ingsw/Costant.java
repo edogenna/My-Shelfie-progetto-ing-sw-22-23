@@ -1,5 +1,5 @@
 package it.polimi.ingsw;
 
-public class Costant {
+public final class Costant {
 
 }
