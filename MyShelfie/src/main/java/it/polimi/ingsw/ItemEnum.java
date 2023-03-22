@@ -17,7 +17,7 @@ public enum ItemEnum {
 
     public static ItemEnum generateRandomItemEnum(){
         Random rand = new Random();
-        int n = rand.nextInt(7);
+        int n = rand.nextInt(6); //blank is excluded
 
         return switch (n) {
             case 0 -> ItemEnum.GREEN;
