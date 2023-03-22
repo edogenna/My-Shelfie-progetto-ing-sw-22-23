@@ -43,6 +43,24 @@ public class Board {
         }
     }
 
+    //TODO: finire l'implementazione
+    public Matrix charMatrix(){
+        Matrix m = new Matrix(BOARD_SIZE + 1, (BOARD_SIZE*5) +3);
+
+        for(int i = 0; i < BOARD_SIZE; i++){
+            m.setValue(0,i," " + i + " ");
+        }
+
+        for(int i = 0; i < BOARD_SIZE; i++){
+            for(int j = 0; j < BOARD_SIZE; j++){
+                m.setValue(i,j,matrix[i][j].label + Costant.square + " " + ItemEnum.RESET);
+            }
+            // m.setValue(i);
+        }
+
+        return null;
+    }
+
     private boolean isPositionValid(int r, int c){
         for(int i = 0; i < numPosAlwaysForbidden; i++){
             if(arePositionsEqual4Square(positionsAlwaysForbidden[i][0],positionsAlwaysForbidden[i][1],r,c))

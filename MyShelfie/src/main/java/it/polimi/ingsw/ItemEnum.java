@@ -2,12 +2,12 @@ package it.polimi.ingsw;
 import java.util.Random;
 
 public enum ItemEnum {
-    GREEN ("\u001B[32m"),
-    WHITE ("\u001B[38;5;15m"),
-    YELLOW ("\u001B[33m"),
-    BLUE ("\u001B[38;5;18m"),
-    AZURE ("\u001b[36m"),
-    PURPLE ("\u001B[35m"),
+    GREEN ("\u001B[38;5;040m"),
+    WHITE ("\u001B[38;5;255m"),
+    YELLOW ("\u001B[38;5;221m"),
+    BLUE ("\u001B[38;5;018m"),
+    AZURE ("\u001B[38;5;050m"),
+    PURPLE ("\u001B[38;5;135m"),
     BLANK ("\u001b[38;5;235m");
 
     public static final String RESET = "\u001B[0m";
