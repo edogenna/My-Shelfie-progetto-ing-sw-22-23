@@ -56,13 +56,13 @@ public final class PersonalCard {
 
 class Card{
      int IdCard, i;
-     private Triplet[] dataTriad = new triplet[6];
+     private Triplet[] dataTriad = new Triplet[6];
 
      Card(int IdCard){
           this.IdCard = IdCard;
      }
      void addTriplet(int idTriplet,int x, int y, ItemEnum color){
-          dataTriad[idTriplet] = new triplet(x, y, color);
+          dataTriad[idTriplet] = new Triplet(x, y, color);
      }
 }
 

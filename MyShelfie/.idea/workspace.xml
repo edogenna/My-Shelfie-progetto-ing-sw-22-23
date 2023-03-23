@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="changed the name &quot;bookshelf&quot; to &quot;figure&quot;" />
+    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="changed the name &quot;bookshelf&quot; to &quot;figure&quot;">
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/PersonalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/PersonalCard.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +22,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RESET_MODE" value="HARD" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -56,7 +57,7 @@
       <workItem from="1679410713136" duration="912000" />
       <workItem from="1679412081961" duration="3405000" />
       <workItem from="1679567944504" duration="4731000" />
-      <workItem from="1679576991127" duration="881000" />
+      <workItem from="1679576991127" duration="1562000" />
     </task>
     <task id="LOCAL-00001" summary="Test git donato">
       <created>1679411053113</created>
@@ -86,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679572683127</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="changed the name &quot;bookshelf&quot; to &quot;figure&quot;">
+      <created>1679578295058</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679578295058</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
