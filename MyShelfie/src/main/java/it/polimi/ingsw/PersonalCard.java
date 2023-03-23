@@ -1,12 +1,13 @@
 package it.polimi.ingsw;
 
+//TODO: change names to "PersonalCard" and "Card" classes
+
 public final class PersonalCard {
-     private int i, j;
-     private Card[] figure = new Card[12];
+     private final Card[] figure = new Card[12];
 
      //implementation of the 12 personal cards; each card has 6 triplets.
      PersonalCard(){
-          for(i=0; i<12; i++)
+          for(int i =0; i <12; i++)
                this.figure[i] = new Card(i);
 
           figure[0].addTriplet(0,2,0, ItemEnum.AZURE);
@@ -64,6 +65,14 @@ class Card{
      void addTriplet(int idTriplet,int x, int y, ItemEnum color){
           dataTriad[idTriplet] = new Triplet(x, y, color);
      }
+
+     public Triplet getTriplet(int i){
+          Triplet tris;
+
+          tris = dataTriad[i];
+
+          return tris;
+     }
 }
 
 class Triplet {
@@ -77,9 +86,9 @@ class Triplet {
      }
 }
 /*
-x e y sono interi; color è un enum.
+x e y are int; color is ENUM.
 Card 1:   {x_1; y_1; color_1}
           {x_2; y_2; color_2}
 
-array di lunghezza 12 card
+array of length 12 card
 */

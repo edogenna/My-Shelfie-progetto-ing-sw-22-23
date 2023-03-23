@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="changed the name &quot;bookshelf&quot; to &quot;figure&quot;">
+    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="problems with push-merge 01">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Bookshelf.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/PersonalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/PersonalCard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +60,7 @@
       <workItem from="1679410713136" duration="912000" />
       <workItem from="1679412081961" duration="3405000" />
       <workItem from="1679567944504" duration="4731000" />
-      <workItem from="1679576991127" duration="1562000" />
+      <workItem from="1679576991127" duration="4744000" />
     </task>
     <task id="LOCAL-00001" summary="Test git donato">
       <created>1679411053113</created>
@@ -94,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679578295058</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="problems with push-merge 01">
+      <created>1679578914957</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679578914957</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +126,7 @@
     <MESSAGE value="implementation of the &quot;Personal Card&quot; class through 2 auxiliary private classes.&#10;The &quot;Triplet&quot; class is formed by the x and y coordinates and the color of the tile." />
     <MESSAGE value="implemented the first 6 personal cards" />
     <MESSAGE value="changed the name &quot;bookshelf&quot; to &quot;figure&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed the name &quot;bookshelf&quot; to &quot;figure&quot;" />
+    <MESSAGE value="problems with push-merge 01" />
+    <option name="LAST_COMMIT_MESSAGE" value="problems with push-merge 01" />
   </component>
 </project>
