@@ -3,18 +3,18 @@ package it.polimi.ingsw;
 public class Matrix {
     private int r;
     private int c;
-    private String m[][];
+    private char m[][];
 
     public Matrix(int r, int c){
         this.r = r;
         this.c = c;
-        m = new String[r][c];
+        m = new char[r][c];
     }
 
     public int getR() {return r;}
     public int getC() {return c;}
-    public String getValue(int r, int c){return m[r][c];}
-    public void setValue(int r, int c, String value){m[r][c] = value;}
+    public char getValue(int r, int c){return m[r][c];}
+    public void setValue(int r, int c, char value){m[r][c] = value;}
     public Matrix addOnRight(Matrix toBeAdded){
         int newR = Math.max(r, toBeAdded.r);
         int newC = c + toBeAdded.c;
@@ -47,5 +47,16 @@ public class Matrix {
             }
             System.out.print("\n");
         }
+    }
+
+    public void printLine(int l){
+        if(l < 0 || l >= r){
+            System.out.print("errore linea");
+            return;
+        }
+        for(int j = 0; j < c; j++){
+            System.out.print(m[l][j]);
+        }
+        System.out.print("\n");
     }
 }
