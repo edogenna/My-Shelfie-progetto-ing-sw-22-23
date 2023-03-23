@@ -1,7 +1,5 @@
 package it.polimi.ingsw;
 
-import java.util.ArrayList;
-
 public final class PersonalCard {
      private int i, j;
      private Card[] figure = new Card[12];
@@ -58,7 +56,7 @@ public final class PersonalCard {
 
 class Card{
      int IdCard, i;
-     private triplet[] dataTriad = new triplet[6];
+     private Triplet[] dataTriad = new triplet[6];
 
      Card(int IdCard){
           this.IdCard = IdCard;
@@ -68,11 +66,11 @@ class Card{
      }
 }
 
-class triplet{
+class Triplet {
      private int x, y;
      private ItemEnum color;
 
-     triplet(int x, int y, ItemEnum color){
+     Triplet(int x, int y, ItemEnum color){
           this.x = x;
           this.y = y;
           this.color = color;
