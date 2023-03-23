@@ -1,7 +1,7 @@
 package it.polimi.ingsw;
 
 public class Board {
-    private final int BOARD_SIZE = 9;
+    public static final int BOARD_SIZE = 9;
     private ItemEnum[][] matrix;
     private int numPlayers;
 
@@ -28,37 +28,12 @@ public class Board {
         this.numPlayers = numPlayers;
     }
 
-    //TODO: modificare printBoard in modo che restituisca la sua matrice che va unita alle altre
-    public void printBoard(){
-        for(int i = 0; i < BOARD_SIZE; i++){
-            System.out.print(" "+i+" ");
-        }
-        System.out.print("\n");
-
-        for(int i = 0; i < BOARD_SIZE; i++){
-            for(int j = 0; j < BOARD_SIZE; j++){
-                System.out.print(matrix[i][j].label + Costant.square + " " + ItemEnum.RESET);
-            }
-            System.out.print(" "+Costant.toChar(i)+"\n");
-        }
-    }
-
-    //TODO: finire l'implementazione
-    public Matrix charMatrix(){
-        Matrix m = new Matrix(BOARD_SIZE + 1, (BOARD_SIZE*5) +3);
-
-        for(int i = 0; i < BOARD_SIZE; i++){
-            m.setValue(0,i," " + i + " ");
-        }
-
-        for(int i = 0; i < BOARD_SIZE; i++){
-            for(int j = 0; j < BOARD_SIZE; j++){
-                m.setValue(i,j,matrix[i][j].label + Costant.square + " " + ItemEnum.RESET);
-            }
-            // m.setValue(i);
-        }
-
-        return null;
+    public ItemEnum[][] getMatrix() {
+        ItemEnum[][] copy = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
+        for(int i = 0; i < BOARD_SIZE; i++)
+            for(int j = 0; j < BOARD_SIZE; j++)
+                copy[i][j] = matrix[i][j];
+        return copy;
     }
 
     private boolean isPositionValid(int r, int c){
