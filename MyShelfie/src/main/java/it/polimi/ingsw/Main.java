@@ -8,8 +8,6 @@ public class Main {
         ItemEnum.generateCharMatrix(b.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addHeaders(Board.BOARD_SIZE).printMatrix();
 
-
-
     }
 
 }

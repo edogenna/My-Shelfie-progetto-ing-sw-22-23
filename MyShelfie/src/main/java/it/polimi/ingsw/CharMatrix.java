@@ -58,4 +58,16 @@ public class CharMatrix {
 
         return this;
     }
+
+    public CharMatrix appendEmptyLine(int numberSpaces){
+        String s = "";
+        for(int i = 0; i < numberSpaces; i++)
+            s = s.concat(" ");
+        m.add(s);
+        return this;
+    }
+
+    public CharMatrix addOnRight(CharMatrix sec){
+        return this;
+    }
 }
