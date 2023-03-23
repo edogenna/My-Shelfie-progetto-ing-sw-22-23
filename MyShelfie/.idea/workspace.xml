@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="changed the name &quot;bookshelf&quot; to &quot;figure&quot;" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2NKRInvbo8GdcbwjMhQ51J4uNB9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/donat/Desktop/Progetto Ing Sftw/ing-sw-2023-Gennaretti-Fiore-Fornara-Galli/MyShelfie&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="" />
+      <created>1679410711067</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679410711067</updated>
+      <workItem from="1679410713136" duration="912000" />
+      <workItem from="1679412081961" duration="3405000" />
+      <workItem from="1679567944504" duration="4731000" />
+      <workItem from="1679576991127" duration="881000" />
+    </task>
+    <task id="LOCAL-00001" summary="Test git donato">
+      <created>1679411053113</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679411053113</updated>
+    </task>
+    <task id="LOCAL-00002" summary="implementation of the &quot;Personal Card&quot; class through 2 auxiliary private classes.&#10;The &quot;Triplet&quot; class is formed by the x and y coordinates and the color of the tile.">
+      <created>1679415453941</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679415453941</updated>
+    </task>
+    <task id="LOCAL-00003" summary="implemented the first 6 personal cards">
+      <created>1679572469249</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679572469249</updated>
+    </task>
+    <task id="LOCAL-00004" summary="changed the name &quot;bookshelf&quot; to &quot;figure&quot;">
+      <created>1679572683127</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679572683127</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Test git donato" />
+    <MESSAGE value="implementation of the &quot;Personal Card&quot; class through 2 auxiliary private classes.&#10;The &quot;Triplet&quot; class is formed by the x and y coordinates and the color of the tile." />
+    <MESSAGE value="implemented the first 6 personal cards" />
+    <MESSAGE value="changed the name &quot;bookshelf&quot; to &quot;figure&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed the name &quot;bookshelf&quot; to &quot;figure&quot;" />
+  </component>
+</project>
