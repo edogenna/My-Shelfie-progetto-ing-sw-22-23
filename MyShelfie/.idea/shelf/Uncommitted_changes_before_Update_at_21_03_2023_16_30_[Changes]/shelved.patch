@@ -1,0 +1,33 @@
+Index: src/main/java/it/polimi/ingsw/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.polimi.ingsw;\r\n\r\npublic class Main {\r\n    public static void main( String[] args )\r\n    {\r\n        System.out.println( \"Hello World!\" );\r\n    }\r\n    //test Alessandro\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/it/polimi/ingsw/Main.java b/src/main/java/it/polimi/ingsw/Main.java
+--- a/src/main/java/it/polimi/ingsw/Main.java	(revision fe4ba1e4384dedf0e12c0953cdf990ff6520405d)
++++ b/src/main/java/it/polimi/ingsw/Main.java	(date 1679412134866)
+@@ -5,7 +5,6 @@
+     {
+         System.out.println( "Hello World!" );
+     }
+-    //test Alessandro
+ 
+ }
+ 
+Index: src/main/java/it/polimi/ingsw/PersonalCard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/it/polimi/ingsw/PersonalCard.java b/src/main/java/it/polimi/ingsw/PersonalCard.java
+new file mode 100644
+--- /dev/null	(date 1679412617220)
++++ b/src/main/java/it/polimi/ingsw/PersonalCard.java	(date 1679412617220)
+@@ -0,0 +1,5 @@
++package it.polimi.ingsw;
++
++public class PersonalCard {
++     private int i, j;
++}
