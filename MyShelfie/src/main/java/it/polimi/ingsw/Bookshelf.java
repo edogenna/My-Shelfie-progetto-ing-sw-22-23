@@ -34,7 +34,8 @@ public class Bookshelf {
     }
 
     //TODO: potential error about the use of the "Card" class; check the class visibility.
-    // At the moment there aren't any errors
+    // At the moment there aren't any errors!
+    //this method calculates the points achieved with the own PersonalCard
     public int pointPersonalCard(Card item){
         int i, points;
         Triplet control;

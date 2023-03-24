@@ -1,7 +1,6 @@
 package it.polimi.ingsw;
 
-//TODO: change names to "PersonalCard" and "Card" classes
-
+//TODO: change names to "PersonalCard" and "Card" classes; however it isn't important
 public final class PersonalCard {
      private final Card[] figure = new Card[12];
 
@@ -60,14 +59,28 @@ public final class PersonalCard {
 }
 
 class Card{
+
      int IdCard, i;
      private Triplet[] dataTriad = new Triplet[6];
+     private ItemEnum[][] matrixPersonal = new ItemEnum[6][5];
 
      Card(int IdCard){
           this.IdCard = IdCard;
+          for(int i=0; i<6; i++)
+               for(int j=0; j<5; j++)
+                    matrixPersonal[i][j] = ItemEnum.BLANK;
      }
      void addTriplet(int idTriplet,int x, int y, ItemEnum color){
+          matrixPersonal[x][y] = color;
           dataTriad[idTriplet] = new Triplet(x, y, color);
+     }
+
+     public ItemEnum[][] getMatrix() {
+          ItemEnum[][] copy = new ItemEnum[6][5];
+          for(int i = 0; i < 6; i++)
+               for(int j = 0; j < 5; j++)
+                    copy[i][j] = matrixPersonal[i][j];
+          return copy;
      }
 
      public Triplet getTriplet(int i){

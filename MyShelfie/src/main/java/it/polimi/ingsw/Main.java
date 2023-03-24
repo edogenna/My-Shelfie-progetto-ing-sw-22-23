@@ -42,8 +42,18 @@ public class Main {
             testTiles = ItemEnum.valueOf(readInput.next());
             testBookshelf.insert(j, testTiles);
         }
-        System.out.println("Print Bookshelf");
-        ItemEnum.generateCharMatrix(testBookshelf.getMatrix(), 6,5 ).printMatrix();
+        System.out.println("Print Bookshelf + Personal Card");
+
+        //TODO: align column indexes
+        ItemEnum.generateCharMatrix(testBookshelf.getMatrix(), 6,5 )
+                .addHeaders(5).appendToAllRows("   ").addOnRight(ItemEnum.generateCharMatrix(testCards.getCard(0).getMatrix(), 6,5)
+                        .addHeaders(5)).printMatrix();
+
+        System.out.println();
+        System.out.println();
+        System.out.println("Personal Card");
+        ItemEnum.generateCharMatrix(testCards.getCard(0).getMatrix(), 6,5 ).printMatrix();
+
         personalPoints = testBookshelf.pointPersonalCard(testCards.getCard(0));
         System.out.println("Points done: " + personalPoints);
 
