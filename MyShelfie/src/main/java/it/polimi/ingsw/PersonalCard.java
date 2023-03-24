@@ -53,6 +53,10 @@ public final class PersonalCard {
           figure[5].addTriplet(5,4,4, ItemEnum.PURPLE);
      }
 
+     public Card getCard(int i){
+          return this.figure[i];
+     }
+
 }
 
 class Card{
@@ -84,9 +88,21 @@ class Triplet {
           this.y = y;
           this.color = color;
      }
+
+     public int getX(){
+          return this.x;
+     }
+
+     public int getY(){
+          return this.y;
+     }
+
+     public ItemEnum getColor(){
+          return this.color;
+     }
 }
 /*
-x e y are int; color is ENUM.
+x e y are int; color is ItemEnum.
 Card 1:   {x_1; y_1; color_1}
           {x_2; y_2; color_2}
 
