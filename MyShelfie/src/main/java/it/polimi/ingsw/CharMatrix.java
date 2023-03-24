@@ -1,6 +1,5 @@
 package it.polimi.ingsw;
 import java.util.ArrayList;
-import java.util.concurrent.CompletionStage;
 
 public class CharMatrix {
     private ArrayList<String> m;
@@ -59,15 +58,75 @@ public class CharMatrix {
         return this;
     }
 
-    public CharMatrix appendEmptyLine(int numberSpaces){
-        String s = "";
-        for(int i = 0; i < numberSpaces; i++)
-            s = s.concat(" ");
-        m.add(s);
+    public CharMatrix addOnRight(CharMatrix toBeAdded){
+        //TODO modificare questa situazione aggiungento in this.m una righa di spazi allineata
+        if(toBeAdded.m.size() > m.size()) {
+            System.out.println("errore");
+            return this;
+        }
+
+        for(int i = 0; i < toBeAdded.m.size(); i++)
+            this.appendAtLine(toBeAdded.m.get(i), i);
+
         return this;
     }
 
-    public CharMatrix addOnRight(CharMatrix sec){
+    public CharMatrix appendToAllRows(String s){
+        for(int i = 0; i < m.size(); i++){
+            this.appendAtLine(s,i);
+        }
+
         return this;
     }
+
+    public int countNonSpecialCharInRow(int r){
+        if(r < 0 || r >= m.size())
+            return -1;
+
+        int count = 0;
+
+        for(int i = 0; i < m.get(r).length(); i++){
+            if(m.get(r).charAt(i) == ItemEnum.RESET.charAt(0)
+                || m.get(r).charAt(i) == ItemEnum.BLANK.label.charAt(0))
+                i += 11;
+            count++;
+        }
+
+        return count;
+    }
+
+    //TODO: migliorare l'implementazione salvando la lunghezza dei caratteri non speciali in un array ??
+    public CharMatrix alignColumn(){
+        if(m.size() == 0) //matrix is empty
+            return this;
+
+        int maxCountChar = countNonSpecialCharInRow(0);
+        int n;
+
+        for(int i = 1; i < m.size(); i++){
+            n = countNonSpecialCharInRow(i);
+            if(n > maxCountChar)
+                maxCountChar = n;
+        }
+
+
+        int diff;
+        String spaces;
+        for(int i = 0; i < m.size(); i++){
+            diff = maxCountChar - countNonSpecialCharInRow(i);
+            if(diff > 0){
+                spaces = "";
+                for(int j = 0; j < diff; j++)
+                    spaces = spaces.concat(" ");
+
+                appendAtLine(spaces, i);
+            }
+        }
+
+        return this;
+    }
+
+
+
+
 }
