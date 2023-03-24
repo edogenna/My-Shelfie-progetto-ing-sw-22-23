@@ -1,5 +1,7 @@
 package it.polimi.ingsw;
 
+import java.awt.event.ItemEvent;
+
 public class Bookshelf {
     private ItemEnum[][] shelf = new ItemEnum[6][];
     private int[] heights = new int[5];
@@ -56,6 +58,21 @@ public class Bookshelf {
             points = 9;
         else if(points == 6)
             points = 12;
+
+        return points;
+    }
+
+    public int adjacentTilesPoints(){
+        int points, near, i, j;
+        ItemEnum[][] copy = new ItemEnum[6][5];
+        points = 0;
+        near = 0;
+
+        for(i=0; i<6; i++)
+            for(j=0; j<5; j++)
+                copy[i][j] = this.shelf[i][j];
+
+        //TODO: to implement stack
 
         return points;
     }
