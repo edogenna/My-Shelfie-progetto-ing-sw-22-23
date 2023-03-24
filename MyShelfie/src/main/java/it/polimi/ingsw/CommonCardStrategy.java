@@ -1,4 +1,4 @@
-package it.polimi.ingsw.CommonCards;
+package it.polimi.ingsw;
 
 import it.polimi.ingsw.ItemEnum;
 

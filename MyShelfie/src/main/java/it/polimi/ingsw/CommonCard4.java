@@ -1,6 +1,4 @@
-package it.polimi.ingsw.CommonCards;
-
-import it.polimi.ingsw.ItemEnum;
+package it.polimi.ingsw;
 
 public class CommonCard4 implements CommonCardStrategy {
     public boolean checkBookshelf(ItemEnum[][] b) {
