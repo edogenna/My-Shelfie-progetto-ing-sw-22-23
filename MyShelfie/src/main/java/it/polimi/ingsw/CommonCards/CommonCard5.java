@@ -1,4 +1,6 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.CommonCards;
+
+import it.polimi.ingsw.ItemEnum;
 
 public class CommonCard5 implements CommonCardStrategy{
 
