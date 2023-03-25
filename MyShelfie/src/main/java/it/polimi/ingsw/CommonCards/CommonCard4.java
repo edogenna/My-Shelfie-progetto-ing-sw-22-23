@@ -2,7 +2,13 @@ package it.polimi.ingsw.CommonCards;
 
 import it.polimi.ingsw.ItemEnum;
 
+/**
+ * Contains the algorithms for the fourth common card:
+ * Four lines each formed by 5 tiles of maximum three different types. One line can show the same or a different combination of another line.
+ * @author Alessandro Fornara
+ */
 public class CommonCard4 implements CommonCardStrategy {
+    @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum firstColor;
         ItemEnum secondColor=ItemEnum.WHITE;
@@ -45,6 +51,11 @@ public class CommonCard4 implements CommonCardStrategy {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void printCommonCard() {
+        //TODO: implementation coming soon
     }
 }
 

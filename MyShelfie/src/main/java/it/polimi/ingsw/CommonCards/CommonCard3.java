@@ -1,14 +1,21 @@
 package it.polimi.ingsw.CommonCards;
 
 import it.polimi.ingsw.ItemEnum;
+
+/**
+ * Contains the algorithms for the third common card:
+ * Four groups each containing at least 4 tiles of the same type (non necessarily in the depicted shape). The tiles of one group can be different from those of another group.
+ * @author Alessandro Fornara
+ */
 public class CommonCard3 implements CommonCardStrategy{
     private final int r=6;
     private final int c=5;
     private final int minGroups =4;
     private final int minTiles=4;
+    @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[][] m=new int[r][c];
-        int[] groups=new int[14];
+        int[] groups=new int[15];
         int counterGroups=0; //indice di vettore groups
         int counter=0;
         int i, j;
@@ -62,12 +69,27 @@ public class CommonCard3 implements CommonCardStrategy{
         return false;
     }
 
+    @Override
+    public void printCommonCard() {
+        //TODO: implementation coming soon
+    }
+
+    /**
+     * Sets all cells in a matrix to the indicated value
+     * @param m Matrix
+     * @param value Number to be assigned
+     */
     private void setMatrix(int[][] m, int value){
         for(int i=0; i<r; i++)
             for (int j = 0; j < c; j++)
                 m[i][j]=value;
     }
 
+    /**
+     * Sets all cells in an array to the indicated value
+     * @param a Array
+     * @param value Number to be assigned
+     */
     private void setArray(int[] a, int value){
         for(int i=0; i<a.length; i++)
             a[i]=value;

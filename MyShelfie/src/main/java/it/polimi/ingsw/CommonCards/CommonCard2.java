@@ -2,7 +2,13 @@ package it.polimi.ingsw.CommonCards;
 
 import it.polimi.ingsw.ItemEnum;
 
+/**
+ * Contains the algorithms for the second common card:
+ * Five tiles of the same type forming a diagonal.
+ * @author Alessandro Fornara
+ */
 public class CommonCard2 implements CommonCardStrategy {
+    @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum color;
 
@@ -60,5 +66,10 @@ public class CommonCard2 implements CommonCardStrategy {
 
         }
         return false;
+    }
+
+    @Override
+    public void printCommonCard() {
+        //TODO: implementation coming soon
     }
 }

@@ -1,8 +1,13 @@
 package it.polimi.ingsw.CommonCards;
 
 import it.polimi.ingsw.ItemEnum;
-
+/**
+ * Contains the algorithms for the tenth common card:
+ * Five tiles of the same type forming an X.
+ * @author Alessandro Fornara
+ */
 public class CommonCard10 implements CommonCardStrategy{
+    @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;
         final int numberOfColumns=b[0].length;
@@ -22,6 +27,11 @@ public class CommonCard10 implements CommonCardStrategy{
             }
         }
         return false;
+    }
+
+    @Override
+    public void printCommonCard() {
+        //TODO: implementation coming soon
     }
 }
 

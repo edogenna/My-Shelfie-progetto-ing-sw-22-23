@@ -1,8 +1,13 @@
 package it.polimi.ingsw.CommonCards;
 
 import it.polimi.ingsw.ItemEnum;
-
+/**
+ * Contains the algorithms for the ninth common card:
+ * Three columns each formed by 6 tiles of maximum three different types. One column can show the same ir a different combination of another column.
+ * @author Alessandro Fornara
+ */
 public class CommonCard9 implements CommonCardStrategy {
+    @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum firstColor;
         ItemEnum secondColor;
@@ -40,6 +45,11 @@ public class CommonCard9 implements CommonCardStrategy {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void printCommonCard() {
+        //TODO: implementation coming soon
     }
 }
 
