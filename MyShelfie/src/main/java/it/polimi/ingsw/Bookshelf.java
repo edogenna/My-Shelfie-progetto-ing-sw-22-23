@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import java.awt.event.ItemEvent;
+import java.util.Stack;
 
 public class Bookshelf {
     private ItemEnum[][] shelf = new ItemEnum[6][];
@@ -63,8 +64,12 @@ public class Bookshelf {
     }
 
     public int adjacentTilesPoints(){
-        int points, near, i, j;
+        int points, near, i, j, x, y;
         ItemEnum[][] copy = new ItemEnum[6][5];
+        Stack<Couple> path = new Stack<Couple>();
+        Couple search;
+        boolean stop;
+
         points = 0;
         near = 0;
 
@@ -72,8 +77,71 @@ public class Bookshelf {
             for(j=0; j<5; j++)
                 copy[i][j] = this.shelf[i][j];
 
-        //TODO: to implement stack
+        for(i=0; i<6; i++){
+            for(j=0; j<5; j++){
+                search = new Couple(i,j);
+                path.push(search);
+                near = 1;
+                stop = false;
+                x = i;
+                y = j;
+                while(!path.isEmpty()){
+                    while(!stop) {
+                        if (x > 0 && copy[x - 1][y] == copy[x][y] && copy[x][y] != ItemEnum.BLANK) {
+                            near++;
+                            search.set(x - 1, y);
+                            path.push(search);
+                            copy[x][y] = ItemEnum.BLANK;
+                            x = x - 1;
+                        } else if (y > 0 && copy[x][y - 1] == copy[x][y] && copy[x][y] != ItemEnum.BLANK) {
+                            near++;
+                            search.set(x, y - 1);
+                            path.push(search);
+                            copy[x][y] = ItemEnum.BLANK;
+                            y = y - 1;
+                        } else if (y < 4 && copy[x][y + 1] == copy[x][y] && copy[x][y] != ItemEnum.BLANK) {
+                            near++;
+                            search.set(x, y + 1);
+                            path.push(search);
+                            copy[x][y] = ItemEnum.BLANK;
+                            y = y + 1;
+                        } else if (x < 4 && copy[x + 1][y] == copy[x][y] && copy[x][y] != ItemEnum.BLANK) {
+                            near++;
+                            search.set(x + 1, y);
+                            path.push(search);
+                            copy[x][y] = ItemEnum.BLANK;
+                            x = x + 1;
+                        } else {
+                            stop = true;
+                            copy[x][y] = ItemEnum.BLANK;
+                        }
+                    }
+                    //TODO: finish the algorithm of crossing path; I have to empty the stack
+                }
+            }
+        }
 
         return points;
+    }
+}
+
+class Couple{
+    int x, y;
+
+    Couple(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public void set(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
     }
 }
