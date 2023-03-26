@@ -7,6 +7,7 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  */
 public class CommonCard10 implements CommonCardStrategy{
+    //TODO: possible error
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;
