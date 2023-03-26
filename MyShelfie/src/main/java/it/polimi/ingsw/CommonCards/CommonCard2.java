@@ -8,7 +8,7 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  */
 public class CommonCard2 implements CommonCardStrategy {
-    static String constant2=
+    private final String constant2=
             "Card number 2   Description:\n"+
             "|=|             Five tiles of the same type forming\n"+
             "  |=|           a diagonal.\n"+

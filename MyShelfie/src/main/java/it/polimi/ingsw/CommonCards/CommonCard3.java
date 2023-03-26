@@ -12,7 +12,7 @@ public class CommonCard3 implements CommonCardStrategy{
     private final int c=5;
     private final int minGroups =4;
     private final int minTiles=4;
-    static String constant3=
+    private final String constant3=
             "Card number 3   Description:\n"+
             "   |=|          Four groups each containing at least\n"+
             "   |=|  x4      4 tiles of the same type (non necessarily\n"+
