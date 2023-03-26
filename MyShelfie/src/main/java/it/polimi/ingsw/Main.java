@@ -6,7 +6,7 @@ public class Main {
     public static void main( String[] args ){
         Bookshelf testBookshelf = new Bookshelf();
         PersonalCard testCards = new PersonalCard();
-        int i, j, personalPoints;
+        int i, j, personalPoints, adjacentPoints;
         ItemEnum testTiles;
         Scanner readInput = new Scanner(System.in);
 
@@ -46,7 +46,7 @@ public class Main {
 
         //TODO: align column indexes
         ItemEnum.generateCharMatrix(testBookshelf.getMatrix(), 6,5 )
-                .addHeaders(5).appendToAllRows("   ").addOnRight(ItemEnum.generateCharMatrix(testCards.getCard(0).getMatrix(), 6,5)
+                .addHeaders(5).appendToAllRows("   ").alignColumn().addOnRight(ItemEnum.generateCharMatrix(testCards.getCard(0).getMatrix(), 6,5)
                         .addHeaders(5)).printMatrix();
 
         System.out.println();
@@ -55,7 +55,9 @@ public class Main {
         ItemEnum.generateCharMatrix(testCards.getCard(0).getMatrix(), 6,5 ).printMatrix();
 
         personalPoints = testBookshelf.pointPersonalCard(testCards.getCard(0));
-        System.out.println("Points done: " + personalPoints);
+        System.out.println("Personal Points done: " + personalPoints);
+        adjacentPoints = testBookshelf.adjacentTilesPoints();
+        System.out.println("Adjacent Points done: " + adjacentPoints);
 
     }
 

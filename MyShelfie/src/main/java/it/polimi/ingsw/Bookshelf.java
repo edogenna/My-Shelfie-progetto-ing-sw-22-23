@@ -65,7 +65,7 @@ public class Bookshelf {
 
     public int adjacentTilesPoints(){
         int points, near, i, j, x, y;
-        ItemEnum[][] copy = new ItemEnum[6][5];
+        int[][] visited = new int[6][5];
         Stack<Couple> path = new Stack<Couple>();
         Couple search;
         boolean stop;
@@ -73,54 +73,76 @@ public class Bookshelf {
         points = 0;
         near = 0;
 
-        for(i=0; i<6; i++)
-            for(j=0; j<5; j++)
-                copy[i][j] = this.shelf[i][j];
+        for(i=0; i<6; i++){
+            for(j=0; j<5; j++){
+                visited[i][j] = 0;
+            }
+        }
 
         for(i=0; i<6; i++){
             for(j=0; j<5; j++){
                 search = new Couple(i,j);
                 path.push(search);
+                visited[i][j] = 1;
                 near = 1;
                 stop = false;
                 x = i;
                 y = j;
+                System.out.println("I = " + i + "; J = " + j);
                 while(!path.isEmpty()){
                     while(!stop) {
-                        if (x > 0 && copy[x - 1][y] == copy[x][y] && copy[x][y] != ItemEnum.BLANK) {
+                        System.out.println("x = " + x + "; y = "+ y);
+                        if (x > 0 && this.shelf[x - 1][y] == this.shelf[x][y] && visited[x-1][y]==0) {
                             near++;
+                            visited[x-1][y] = 1;
                             search.set(x - 1, y);
                             path.push(search);
-                            copy[x][y] = ItemEnum.BLANK;
                             x = x - 1;
-                        } else if (y > 0 && copy[x][y - 1] == copy[x][y] && copy[x][y] != ItemEnum.BLANK) {
+                        } else if (y > 0 && this.shelf[x][y - 1] == this.shelf[x][y] && visited[x][y-1]==0) {
                             near++;
+                            visited[x][y-1] = 1;
                             search.set(x, y - 1);
                             path.push(search);
-                            copy[x][y] = ItemEnum.BLANK;
                             y = y - 1;
-                        } else if (y < 4 && copy[x][y + 1] == copy[x][y] && copy[x][y] != ItemEnum.BLANK) {
+                        } else if (y < 4 && this.shelf[x][y + 1] == this.shelf[x][y] && visited[x][y+1]==0) {
                             near++;
+                            visited[x][y+1] = 1;
                             search.set(x, y + 1);
                             path.push(search);
-                            copy[x][y] = ItemEnum.BLANK;
                             y = y + 1;
-                        } else if (x < 4 && copy[x + 1][y] == copy[x][y] && copy[x][y] != ItemEnum.BLANK) {
+                        } else if (x < 5 && this.shelf[x + 1][y] == this.shelf[x][y] && visited[x+1][y]==0) {
                             near++;
+                            visited[x+1][y] = 1;
                             search.set(x + 1, y);
                             path.push(search);
-                            copy[x][y] = ItemEnum.BLANK;
                             x = x + 1;
                         } else {
                             stop = true;
-                            copy[x][y] = ItemEnum.BLANK;
                         }
                     }
-                    //TODO: finish the algorithm of crossing path; I have to empty the stack
+                    //TODO: resolve the bug of the stack's "pop" method
+                    search = path.pop();
+                    x = search.getX();
+                    y = search.getY();
+                    System.out.println("POP: x = " + x + "; y = "+ y);
+                    stop = false;
                 }
+                System.out.println("near = " + near);
+                if(near == 3) {
+                    points += 2;
+                }
+                else if(near == 4) {
+                    points += 3;
+                }
+                else if(near == 5) {
+                    points += 5;
+                }
+                else if(near >= 6) {
+                    points += 8;
+                }
+                System.out.println("points = " + points);
             }
         }
-
         return points;
     }
 }
