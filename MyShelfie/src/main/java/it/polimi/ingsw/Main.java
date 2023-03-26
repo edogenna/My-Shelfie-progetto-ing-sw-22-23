@@ -17,7 +17,7 @@ public class Main {
                 .addHeaders(Board.BOARD_SIZE).printMatrix();
 
 
-        System.out.println("\n\n");
+        /*System.out.println("\n\n");
         Board b2 = new Board(2);
         ItemEnum.generateCharMatrix(b2.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addHeaders(Board.BOARD_SIZE).printMatrix();
@@ -58,7 +58,10 @@ public class Main {
         System.out.println("Personal Points done: " + personalPoints);
         adjacentPoints = testBookshelf.adjacentTilesPoints();
         System.out.println("Adjacent Points done: " + adjacentPoints);
+        */
 
+        b.CommonCards[0].printCommonCard();
+        b.CommonCards[1].printCommonCard();
     }
 
 }

@@ -63,6 +63,7 @@ public class CommonCard12 implements CommonCardStrategy{
     @Override
     public void printCommonCard() {
         //TODO: implementation coming soon
+        System.out.println("12");
     }
 }
 
