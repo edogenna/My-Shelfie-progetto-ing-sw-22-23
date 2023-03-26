@@ -50,6 +50,7 @@ public class CommonCard9 implements CommonCardStrategy {
     @Override
     public void printCommonCard() {
         //TODO: implementation coming soon
+        System.out.println("9");
     }
 }
 

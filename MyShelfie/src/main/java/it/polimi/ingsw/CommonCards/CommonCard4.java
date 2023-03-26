@@ -56,6 +56,7 @@ public class CommonCard4 implements CommonCardStrategy {
     @Override
     public void printCommonCard() {
         //TODO: implementation coming soon
+        System.out.println("4");
     }
 }
 
