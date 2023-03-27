@@ -32,6 +32,7 @@ public class Player {
         Scanner readCoordinates = new Scanner(System.in);
         done = false;
         readAgain = false;
+        int y;
 
         while(!done){
             if(tileBoard[x1][y1] == ItemEnum.BLANK){
@@ -50,10 +51,14 @@ public class Player {
                 y1 = readCoordinates.nextInt();
             }
         }
+        //TODO: remove tile(x1, y1);
+        System.out.println("Decide the column of your shelf");
+        y = readCoordinates.nextInt();
+        myShelf.insert(y,tileBoard[x1][y1]);
     }
 
     public void fish(ItemEnum[][] tileBoard, int x1, int y1, int x2, int y2){
-        int i, j;
+        int j;
         boolean done, readAgain;
         Scanner readCoordinates = new Scanner(System.in);
         done = false;
@@ -64,7 +69,7 @@ public class Player {
                 System.out.println("you have selected an empty position");
                 readAgain = true;
             }else{
-                //TODO: the selected position aren't adjacent
+                //the selected tiles aren't adjacent
                 if(!((x1==x2 && (y1==y2+1 || y1==y2-1)) || (y1==y2 && (x1==x2+1 || x1==x2-1)))){
                     readAgain = true;
                     System.out.println("The tiles aren't adjacent");
@@ -73,7 +78,25 @@ public class Player {
                 }
             }
             //TODO: the selected tiles haven't got a free side
+            if(!readAgain){
+                if((tileBoard[x1+1][y1] == ItemEnum.BLANK || tileBoard[x1-1][y1] == ItemEnum.BLANK || tileBoard[x1][y1-1] == ItemEnum.BLANK || tileBoard[x1][y1+1] == ItemEnum.BLANK) && (tileBoard[x2+1][y2] == ItemEnum.BLANK || tileBoard[x2-1][y2] == ItemEnum.BLANK || tileBoard[x2][y2-1] == ItemEnum.BLANK || tileBoard[x2][y2+1] == ItemEnum.BLANK)){
+                    done = true;
+                }else
+                    readAgain = true;
+            }
+            if(readAgain){
+                System.out.println("Select another 2 tiles: x1 y1; x2 y2");
+                x1 = readCoordinates.nextInt();
+                y1 = readCoordinates.nextInt();
+                x2 = readCoordinates.nextInt();
+                y2 = readCoordinates.nextInt();
+            }
         }
+        //TODO: remove tile(x1, y1);
+        System.out.println("Decide the column of your shelf");
+        j = readCoordinates.nextInt();
+        //TODO: create new method "insert" in bookshelf with another parameter: the number of tiles i want to insert
+        myShelf.insert(j,tileBoard[x1][y1]);
     }
 
     //TODO: "fish" method with 3 tiles
