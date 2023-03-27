@@ -28,6 +28,30 @@ public class Bookshelf {
         }
     }
 
+    public void insert(int y, ItemEnum tile1, ItemEnum tile2){
+        if(heights[y]<5) {
+            shelf[5-heights[y]][y] = tile1;
+            heights[y]++;
+            shelf[5-heights[y]][y] = tile2;
+            heights[y]++;
+        }else{
+            System.out.println("The column is full!");
+        }
+    }
+
+    public void insert(int y, ItemEnum tile1, ItemEnum tile2, ItemEnum tile3){
+        if(heights[y]<4) {
+            shelf[5-heights[y]][y] = tile1;
+            heights[y]++;
+            shelf[5-heights[y]][y] = tile2;
+            heights[y]++;
+            shelf[5-heights[y]][y] = tile3;
+            heights[y]++;
+        }else{
+            System.out.println("The column is full!");
+        }
+    }
+
     public ItemEnum[][] getMatrix() {
         ItemEnum[][] copy = new ItemEnum[6][5];
         for(int i = 0; i < 6; i++)
