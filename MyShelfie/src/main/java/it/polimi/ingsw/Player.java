@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Player {
     private int id, myPoints;
-    private String username;
+    public String username;
     Bookshelf myShelf;
     Card myGoals;
 
