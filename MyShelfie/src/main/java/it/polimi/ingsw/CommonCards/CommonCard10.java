@@ -7,6 +7,12 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  */
 public class CommonCard10 implements CommonCardStrategy{
+    private final String constant10=
+            "Card number 10   Description:\n" +
+            "|=|   |=|        Five tiles of the same type forming an X.\n"+
+            "   |=|\n"+
+            "|=|   |=|\n";
+    //TODO: possible error
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;
@@ -31,8 +37,7 @@ public class CommonCard10 implements CommonCardStrategy{
 
     @Override
     public void printCommonCard() {
-        //TODO: implementation coming soon
-        System.out.println("10");
+        System.out.println(constant10);
     }
 }
 

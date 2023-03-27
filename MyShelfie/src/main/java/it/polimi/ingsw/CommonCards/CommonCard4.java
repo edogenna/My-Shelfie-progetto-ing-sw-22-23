@@ -8,6 +8,11 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  */
 public class CommonCard4 implements CommonCardStrategy {
+    private final String constant4=
+            "Card number 4        Description:\n"+
+            "|■| |■| |■| |■| |■|  Four lines each formed by 5 tiles of\n"+
+            "     MAX 3 ≠         maximum three different types.\n"+
+            "       x4            Lines can be different from one another.\n";
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum firstColor;
@@ -55,8 +60,7 @@ public class CommonCard4 implements CommonCardStrategy {
 
     @Override
     public void printCommonCard() {
-        //TODO: implementation coming soon
-        System.out.println("4");
+        System.out.println(constant4);
     }
 }
 

@@ -12,6 +12,12 @@ public class CommonCard1 implements CommonCardStrategy{
     private final int c=5;
     private final int minGroups =6;
     private final int minTiles=2;
+    private final String constant1=
+            "Card number 1   Description:\n"+
+            "   |=|          Six groups each containing at least\n"+
+            "   |=|   x6     2 tiles of the same type (non necessarily\n"+
+            "                in the depicted shape). Tiles can be\n"+
+            "                different between different groups.\n";
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[][] m=new int[r][c];
@@ -71,8 +77,7 @@ public class CommonCard1 implements CommonCardStrategy{
 
     @Override
     public void printCommonCard() {
-        //TODO: implementation coming soon
-        System.out.println("1");
+        System.out.println(constant1);
     }
 
     /**

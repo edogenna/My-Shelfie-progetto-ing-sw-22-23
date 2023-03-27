@@ -8,6 +8,14 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  */
 public class CommonCard2 implements CommonCardStrategy {
+    private final String constant2=
+            "Card number 2   Description:\n"+
+            "|=|             Five tiles of the same type forming\n"+
+            "  |=|           a diagonal.\n"+
+            "    |=|\n"+
+            "      |=|\n"+
+            "        |=|\n";
+    //TODO: possible error
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum color;
@@ -70,7 +78,6 @@ public class CommonCard2 implements CommonCardStrategy {
 
     @Override
     public void printCommonCard() {
-        //TODO: implementation coming soon
-        System.out.println("2");
+        System.out.println(constant2);
     }
 }
