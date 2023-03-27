@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 //TODO: change names to "PersonalCard" and "Card" classes; however it isn't important
 public final class PersonalCard {
      private final Card[] figure = new Card[12];
+     //TODO: actually i have done 6 cards
 
      //implementation of the 12 personal cards; each card has 6 triplets.
      PersonalCard(){
@@ -60,15 +61,18 @@ public final class PersonalCard {
 
 class Card{
 
-     int IdCard, i;
+     int idCard, i;
      private Triplet[] dataTriad = new Triplet[6];
      private ItemEnum[][] matrixPersonal = new ItemEnum[6][5];
 
-     Card(int IdCard){
-          this.IdCard = IdCard;
+     Card(int idCard){
+          this.idCard = idCard;
           for(int i=0; i<6; i++)
                for(int j=0; j<5; j++)
                     matrixPersonal[i][j] = ItemEnum.BLANK;
+     }
+     Card(){
+          idCard = -1;
      }
      void addTriplet(int idTriplet,int x, int y, ItemEnum color){
           matrixPersonal[x][y] = color;
