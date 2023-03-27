@@ -42,6 +42,7 @@ public class Player {
                 readAgain = false;
             }else{
                 System.out.println("The selected tile hasn't a free side");
+                readAgain = true;
             }
             if(readAgain){
                 System.out.println("Select another tile: x - y");
@@ -64,6 +65,12 @@ public class Player {
                 readAgain = true;
             }else{
                 //TODO: the selected position aren't adjacent
+                if(!((x1==x2 && (y1==y2+1 || y1==y2-1)) || (y1==y2 && (x1==x2+1 || x1==x2-1)))){
+                    readAgain = true;
+                    System.out.println("The tiles aren't adjacent");
+                }else{
+                    readAgain = false;
+                }
             }
             //TODO: the selected tiles haven't got a free side
         }
