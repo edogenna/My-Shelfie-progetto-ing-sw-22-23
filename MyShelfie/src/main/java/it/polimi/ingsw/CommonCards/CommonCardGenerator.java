@@ -15,10 +15,10 @@ public class CommonCardGenerator {
         CommonCardStrategy[] result=new CommonCardStrategy[2];
         Random rand=new Random();
 
-        array[0]= rand.nextInt(1,12);
+        array[0]= rand.nextInt(1,13);
         array[1]=array[0];
         while(array[1]==array[0])
-            array[1]= rand.nextInt(1,12);
+            array[1]= rand.nextInt(1,13);
 
         switch(array[0]){
             case 1: result[0]=new CommonCard1();
