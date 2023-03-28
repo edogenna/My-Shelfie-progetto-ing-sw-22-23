@@ -10,9 +10,13 @@ public class Bookshelf {
     //The "heights" array stores the available x-coordinates for each library column.
 
     Bookshelf(){
-        int i;
+        int i, j;
         for(i=0; i<6; i++){
             shelf[i] = new ItemEnum[5];
+        }
+        for(i=0; i<6; i++){
+            for(j=0; j<5; j++)
+                shelf[i][j] = ItemEnum.BLANK;
         }
         for(i=0; i<5; i++)
             heights[i] = 0;
