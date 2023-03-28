@@ -1,8 +1,20 @@
 package it.polimi.ingsw.CommonCards;
 
 import it.polimi.ingsw.ItemEnum;
-
+/**
+ * Contains the algorithms for the twelfth common card:
+ * Five columns of increasing or decreasing height. Starting from the first column on the left or on the right, each next column must be made of exactly one more tile. Tiles can be of any type.
+ * @author Alessandro Fornara
+ */
 public class CommonCard12 implements CommonCardStrategy{
+    private final String constant12=
+            "Card number 12  Description:\n"+
+            "|=|             Five columns of increasing o decreasing height.\n"+
+            "|=|=|           Starting from the first column on the left or \n"+
+            "|=|=|=|         on the right, each next column must be made of\n"+
+            "|=|=|=|=|       exactly one more tile. Tiles can be of any type.\n"+
+            "|=|=|=|=|=|\n";
+    @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         final int numberOfRows=b.length;
         final int numberOfColumns=b[0].length;
@@ -55,5 +67,9 @@ public class CommonCard12 implements CommonCardStrategy{
         return false;
     }
 
+    @Override
+    public void printCommonCard() {
+        System.out.println(constant12);
+    }
 }
 

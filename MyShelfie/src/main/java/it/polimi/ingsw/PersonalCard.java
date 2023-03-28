@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
-//TODO: change names to "PersonalCard" and "Card" classes
-
+//TODO: change names to "PersonalCard" and "Card" classes; however it isn't important
 public final class PersonalCard {
      private final Card[] figure = new Card[12];
+     //TODO: actually i have done 6 cards
 
      //implementation of the 12 personal cards; each card has 6 triplets.
      PersonalCard(){
@@ -53,17 +53,38 @@ public final class PersonalCard {
           figure[5].addTriplet(5,4,4, ItemEnum.PURPLE);
      }
 
+     public Card getCard(int i){
+          return this.figure[i];
+     }
+
 }
 
 class Card{
-     int IdCard, i;
-     private Triplet[] dataTriad = new Triplet[6];
 
-     Card(int IdCard){
-          this.IdCard = IdCard;
+     int idCard, i;
+     private Triplet[] dataTriad = new Triplet[6];
+     private ItemEnum[][] matrixPersonal = new ItemEnum[6][5];
+
+     Card(int idCard){
+          this.idCard = idCard;
+          for(int i=0; i<6; i++)
+               for(int j=0; j<5; j++)
+                    matrixPersonal[i][j] = ItemEnum.BLANK;
+     }
+     Card(){
+          idCard = -1;
      }
      void addTriplet(int idTriplet,int x, int y, ItemEnum color){
+          matrixPersonal[x][y] = color;
           dataTriad[idTriplet] = new Triplet(x, y, color);
+     }
+
+     public ItemEnum[][] getMatrix() {
+          ItemEnum[][] copy = new ItemEnum[6][5];
+          for(int i = 0; i < 6; i++)
+               for(int j = 0; j < 5; j++)
+                    copy[i][j] = matrixPersonal[i][j];
+          return copy;
      }
 
      public Triplet getTriplet(int i){
@@ -84,9 +105,21 @@ class Triplet {
           this.y = y;
           this.color = color;
      }
+
+     public int getX(){
+          return this.x;
+     }
+
+     public int getY(){
+          return this.y;
+     }
+
+     public ItemEnum getColor(){
+          return this.color;
+     }
 }
 /*
-x e y are int; color is ENUM.
+x e y are int; color is ItemEnum.
 Card 1:   {x_1; y_1; color_1}
           {x_2; y_2; color_2}
 
