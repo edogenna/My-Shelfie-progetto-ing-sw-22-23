@@ -15,7 +15,6 @@ public class CommonCard02 implements CommonCardStrategy {
             "    |=|\n"+
             "      |=|\n"+
             "        |=|\n";
-    //TODO: possible error
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum color;

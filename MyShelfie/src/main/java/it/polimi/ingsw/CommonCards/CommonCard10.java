@@ -12,7 +12,6 @@ public class CommonCard10 implements CommonCardStrategy{
             "|=|   |=|        Five tiles of the same type forming an X.\n"+
             "   |=|\n"+
             "|=|   |=|\n";
-    //TODO: possible error
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;
