@@ -1,5 +1,6 @@
 package it.polimi.ingsw.CommonCards;
 
+import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 
 /**
@@ -12,12 +13,13 @@ public class CommonCard01 implements CommonCardStrategy{
     private final int c=5;
     private final int minGroups =6;
     private final int minTiles=2;
-    private final String constant1=
+    private static final String constant1=
             "Card number 1   Description:\n"+
             "   |=|          Six groups each containing at least\n"+
             "   |=|   x6     2 tiles of the same type (non necessarily\n"+
             "                in the depicted shape). Tiles can be\n"+
             "                different between different groups.\n";
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[][] m=new int[r][c];
@@ -78,6 +80,15 @@ public class CommonCard01 implements CommonCardStrategy{
     @Override
     public void printCommonCard() {
         System.out.println(constant1);
+    }
+
+    public CharMatrix printCommonCardMatrix(){
+
+        //TODO: finere e sitemare le print di tutte
+        return  new CharMatrix()
+                .addNewLine("Card number 1   Description:")
+                .addNewLine("   |=|          Six groups each containing at least")
+                .addNewLine("   |=|   x6     2 tiles of the same type (non necessarily");
     }
 
     /**

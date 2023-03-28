@@ -30,7 +30,7 @@ public class Board {
     private final static int[][] positionValid4Players = new int[][]{{4, 0}, {3, 1}};
     private final static int numPosValid4Players = 2;
     private int[][] forbiddenPositions;
-    public CommonCardStrategy[] CommonCards;
+    private CommonCardStrategy[] CommonCards;
 
     public Board(int numPlayers) {
         matrix = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
@@ -50,7 +50,7 @@ public class Board {
     /**
      * Returns a copy of the matrix of the board.
      *
-     * @autor Edoardo Gennaretti
+     * @author Edoardo Gennaretti
      * @return matrix of ItemEnum
      */
     public ItemEnum[][] getMatrix() {
@@ -79,7 +79,7 @@ public class Board {
     /**
      * It returns the ItemEnum from a given position.
      *
-     * @autor Edoardo Gennaretti
+     * @author Edoardo Gennaretti
      * @param r row of the matrix
      * @param c coloumn of the matrix
      * @return ItemEnum
@@ -93,7 +93,7 @@ public class Board {
     /**
      * It returns the ItemEnum from a given position and inserts a blank ItemEnum in that position.
      *
-     * @autor Edoardo Gennaretti
+     * @author Edoardo Gennaretti
      * @param r row of the matrix
      * @param c coloumn of the matrix
      * @return ItemEnum
@@ -110,7 +110,7 @@ public class Board {
     /**
      * It refills the matrix following the rule of the game.
      *
-     * @autor Edoardo Gennaretti
+     * @author Edoardo Gennaretti
      */
     public void refill(){
         Random rand = new Random();
@@ -147,7 +147,7 @@ public class Board {
     /**
      * It returns if the matrix need to be refilled following the rule of the game
      *
-     * @autor Edordo Gennaretti
+     * @author Edordo Gennaretti
      * @return true if the board need to be refilled, false otherwise
      */
     public boolean isRefillable(){
@@ -168,6 +168,14 @@ public class Board {
         }
 
         return true;
+    }
+
+    /**
+     * @author Alessandro Fornara
+     * @return Array of CommonCardStrategy
+     */
+    public CommonCardStrategy[] getCommonCards(){
+        return CommonCards;
     }
 
 }

@@ -7,12 +7,16 @@ public class Player {
     public String username;
     Bookshelf myShelf;
     Card myGoals;
+    private boolean CommonDone1, CommonDone2;
+    private int myCommonPoints;
 
     Player(int id, String username){
         this.id = id;
         this.username = username;
         myPoints = 0;
         myShelf = new Bookshelf();
+        CommonDone1 = false;
+        CommonDone2 = false;
     }
 
     public void setPersonalCard(Card goals){
@@ -168,5 +172,36 @@ public class Player {
             isAdjacent = false;
 
         return isAdjacent;
+    }
+
+    /**
+     * @author Alessandro Fornara
+     * @return Returns the boolean value CommonDone1
+     */
+    boolean getCommonDone1(){
+        return this.CommonDone1;
+    }
+    /**
+     * @author Alessandro Fornara
+     * @return Returns the boolean value CommonDone2
+     */
+    boolean getCommonDone2(){
+        return this.CommonDone2;
+    }
+    /**
+     * @author Alessandro Fornara
+     * @return Returns the int value myCommonPoints
+     */
+    int getMyCommonPoints(){
+        return this.myCommonPoints;
+    }
+
+    /**
+     * Assigns to MyCommonPoints a value
+     * @author Alessandro Fornara
+     * @param p int value
+     */
+    void calculateCommonPoints(int p){
+        this.myCommonPoints=p;
     }
 }

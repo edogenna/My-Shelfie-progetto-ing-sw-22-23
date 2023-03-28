@@ -3,12 +3,18 @@ package it.polimi.ingsw;
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+ * This class is used to play a match
+ * @author Alessandro Fornara
+ */
 public class Match {
-    int[] arrayID;
-    String[] arrayUsername;
+    private final Board board;
+    private final int[] arrayID;
+    private final String[] arrayUsername;
     private Player[] Players;
-    private int numPlayers;
-    public Card[] PersonalCards;
+    private final int numPlayers;
+    private Card[] PersonalCards;
+    private int CommonPoints1, CommonPoints2;
     Match(int num) {
 
         numPlayers=num;
@@ -16,13 +22,17 @@ public class Match {
         arrayID = new int[numPlayers];
         arrayUsername= new String[numPlayers];
         //The board and common goal cards are created and printed
-        Board board = new Board(numPlayers);
+        board = new Board(numPlayers);
         Scanner getName = new Scanner(System.in);
 
         ItemEnum.generateCharMatrix(board.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
-                .addHeaders(Board.BOARD_SIZE).printMatrix();
-        board.CommonCards[0].printCommonCard();
-        board.CommonCards[1].printCommonCard();
+                .addHeaders(Board.BOARD_SIZE)
+                .addOnRight(board.getCommonCards()[0].printCommonCardMatrix())
+                .addOnRight(board.getCommonCards()[1].printCommonCardMatrix())
+                .printMatrix();
+
+        //board.getCommonCards()[0].printCommonCard();
+        //board.getCommonCards()[1].printCommonCard();
 
         for(int i=1; i<numPlayers+1; i++){
             System.out.println("Inserire ID giocatore " + i + ": ");
@@ -43,15 +53,22 @@ public class Match {
         PersonalCards = new Card[numPlayers];
         GeneratePersonalCards();
 
+        for(int i=0; i<numPlayers; i++)
+            Players[i].setPersonalCard(PersonalCards[i]);
+
         //TODO: insert methods to print personal cards for each player
 
+        CommonPoints1=8;
+        CommonPoints2=8;
     }
 
     public void begin(){
         Scanner getMove = new Scanner(System.in);
         Random random = new Random();
-        int firstPlayerNumber, curr, x, y;
-        boolean endGame = false;
+        int firstPlayerNumber, curr, n=0;
+        int x1, y1, x2, y2, x3, y3;
+
+        boolean moveOK, endGame = false;
 
         //it's decided who will go first
         firstPlayerNumber = random.nextInt(1, numPlayers);
@@ -60,22 +77,60 @@ public class Match {
 
         //the game starts
         while(!endGame){
-            System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tile you want to remove: ");
-            x = getMove.nextInt();
-            y = getMove.nextInt();
-            System.out.println(x);
-            System.out.println(y);
-            //TODO: insert methods from class Player and class Board to allow the player to take tiles from the board and insert them in his bookshelf
-            //TODO: then call CommonCards methods to verify if the player has completed one or both
-            //TODO: call method to see if the current player's bookshelf is complete, if yes then one last turn
-            //TODO: We also have to check if the board has to be refilled
-            //TODO: the board and cards will be printed again and the next player can make his move
+            moveOK=false;
+            while(n!=1 && n!=2 && n!=3) {
+                System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tiles you want to remove: ");
+                n = getMove.nextInt();
+            }
+            if(n == 1) {
+                System.out.println("please enter the coordinates of the tiles you want to remove: ");
+                x1 = getMove.nextInt();
+                y1 = getMove.nextInt();
+                moveOK=Players[curr].pickCard(board, x1, y1);
+            }
+            else if(n == 2){
+                System.out.println("please enter the coordinates of the tiles you want to remove: ");
+                x1 = getMove.nextInt();
+                y1 = getMove.nextInt();
+                x2 = getMove.nextInt();
+                y2 = getMove.nextInt();
+                moveOK=Players[curr].pickCard(board, x1, y1, x2, y2);
+            }
+            else if(n == 3){
+                System.out.println("please enter the coordinates of the tiles you want to remove: ");
+                x1 = getMove.nextInt();
+                y1 = getMove.nextInt();
+                x2 = getMove.nextInt();
+                y2 = getMove.nextInt();
+                x3 = getMove.nextInt();
+                y3 = getMove.nextInt();
+                moveOK=Players[curr].pickCard(board, x1, y1, x2, y2, x3, y3);
+            }
+
+            if(moveOK) {
+                if(!Players[curr].getCommonDone1() && board.getCommonCards()[0].checkBookshelf(Players[curr].myShelf.getMatrix())) {
+                    Players[curr].calculateCommonPoints(CommonPoints1);
+                    CommonPoints1=CommonPoints1-2;
+                }
+                if(!Players[curr].getCommonDone2() && board.getCommonCards()[1].checkBookshelf(Players[curr].myShelf.getMatrix())) {
+                    Players[curr].calculateCommonPoints(CommonPoints2);
+                    CommonPoints2=CommonPoints2-2;
+                }
+
+                if(board.isRefillable())
+                    board.refill();
+                //TODO: call method to see if the current player's bookshelf is complete, if yes then one last turn
+                //TODO: the board and cards will be printed again and the next player can make his move
+            }
             endGame=true;
-            //I'm not sure if it's necessary printing the personal and common cards every single time since they're always the same
-            //maybe implement a command for a player to request them?
         }
     }
 
+    /**
+     * This method creates 2 players
+     * @author Alessandro Fornara
+     * @return an Array containing 2 players
+     */
     private Player[] create2Players() {
         Player[] playersArray = new Player[2];
         Player player1 = new Player(arrayID[0], arrayUsername[0]);
@@ -86,6 +141,12 @@ public class Match {
 
         return playersArray;
     }
+
+    /**
+     * This method creates 3 players
+     * @author Alessandro Fornara
+     * @return an Array containing 3 players
+     */
     private Player[] create3Players() {
         Player[] playersArray = new Player[3];
         Player player1 = new Player(arrayID[0], arrayUsername[0]);
@@ -98,6 +159,12 @@ public class Match {
 
         return playersArray;
     }
+
+    /**
+     * This method creates 4 players
+     * @author ALessandro Fornara
+     * @return an Array containing 4 players
+     */
 
     private Player[] create4Players() {
         Player[] playersArray = new Player[4];
@@ -114,6 +181,10 @@ public class Match {
         return playersArray;
     }
 
+    /**
+     * This method generates random Personal Cards which are contained in the class PersonalClass, (all different from one another).
+     * @author Alessandro Fornara
+     */
     private void GeneratePersonalCards(){
         int[] array=new int[numPlayers];
         Random rand=new Random();

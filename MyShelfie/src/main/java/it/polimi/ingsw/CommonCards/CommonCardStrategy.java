@@ -1,5 +1,6 @@
 package it.polimi.ingsw.CommonCards;
 
+import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 
 /**
@@ -19,5 +20,7 @@ public interface CommonCardStrategy {
      * Prints a certain common goal card on CLI
      */
     void printCommonCard();
+
+    CharMatrix printCommonCardMatrix();
 }
 
