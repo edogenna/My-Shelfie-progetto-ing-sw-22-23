@@ -9,10 +9,10 @@ import it.polimi.ingsw.ItemEnum;
 public class CommonCard05 implements CommonCardStrategy{
     private final String constant5=
             "Card number 5     Description:\n"+
-            "|=|-------|=|     Four tiles of the same type in the four\n"+
-            " |         |      corners of the bookshelf.\n"+
-            " |         |\n"+
-            "|=|-------|=|\n";
+            "|=|       |=|     Four tiles of the same type in the four\n"+
+            "                  corners of the bookshelf.\n"+
+            "\n"+
+            "|=|       |=|\n";
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;

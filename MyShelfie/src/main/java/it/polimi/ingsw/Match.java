@@ -4,19 +4,32 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Match {
+    int[] arrayID;
+    String[] arrayUsername;
     private Player[] Players;
     private int numPlayers;
     public Card[] PersonalCards;
     Match(int num) {
 
         numPlayers=num;
+
+        arrayID = new int[numPlayers];
+        arrayUsername= new String[numPlayers];
         //The board and common goal cards are created and printed
         Board board = new Board(numPlayers);
+        Scanner getName = new Scanner(System.in);
+
         ItemEnum.generateCharMatrix(board.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addHeaders(Board.BOARD_SIZE).printMatrix();
         board.CommonCards[0].printCommonCard();
         board.CommonCards[1].printCommonCard();
 
+        for(int i=1; i<numPlayers+1; i++){
+            System.out.println("Inserire ID giocatore " + i + ": ");
+            arrayID[i-1]=getName.nextInt();
+            System.out.println("Inserire username giocatore " + i + ": ");
+            arrayUsername[i-1]=getName.next();
+        }
         //An array of players is created containing all the information for each one (Bookshelf, Personal Cards, ID and so on...)
         switch (num) {
             case 2: Players = create2Players();
@@ -37,7 +50,7 @@ public class Match {
     public void begin(){
         Scanner getMove = new Scanner(System.in);
         Random random = new Random();
-        int firstPlayerNumber, curr;
+        int firstPlayerNumber, curr, x, y;
         boolean endGame = false;
 
         //it's decided who will go first
@@ -47,8 +60,11 @@ public class Match {
 
         //the game starts
         while(!endGame){
-            System.out.println(Players[curr].username + " It's your turn!" + " please enter your move:");
-            getMove.next();
+            System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tile you want to remove: ");
+            x = getMove.nextInt();
+            y = getMove.nextInt();
+            System.out.println(x);
+            System.out.println(y);
             //TODO: insert methods from class Player and class Board to allow the player to take tiles from the board and insert them in his bookshelf
             //TODO: then call CommonCards methods to verify if the player has completed one or both
             //TODO: call method to see if the current player's bookshelf is complete, if yes then one last turn
@@ -62,8 +78,8 @@ public class Match {
 
     private Player[] create2Players() {
         Player[] playersArray = new Player[2];
-        Player player1 = new Player(/*nome giocatore ecc.*/);
-        Player player2 = new Player();
+        Player player1 = new Player(arrayID[0], arrayUsername[0]);
+        Player player2 = new Player(arrayID[1], arrayUsername[1]);
 
         playersArray[0] = player1;
         playersArray[1] = player2;
@@ -72,9 +88,9 @@ public class Match {
     }
     private Player[] create3Players() {
         Player[] playersArray = new Player[3];
-        Player player1 = new Player(/*nome giocatore ecc.*/);
-        Player player2 = new Player();
-        Player player3 = new Player();
+        Player player1 = new Player(arrayID[0], arrayUsername[0]);
+        Player player2 = new Player(arrayID[1], arrayUsername[1]);
+        Player player3 = new Player(arrayID[2], arrayUsername[2]);
 
         playersArray[0] = player1;
         playersArray[1] = player2;
@@ -85,10 +101,10 @@ public class Match {
 
     private Player[] create4Players() {
         Player[] playersArray = new Player[4];
-        Player player1 = new Player(/*nome giocatore ecc.*/);
-        Player player2 = new Player();
-        Player player3 = new Player();
-        Player player4 = new Player();
+        Player player1 = new Player(arrayID[0], arrayUsername[0]);
+        Player player2 = new Player(arrayID[1], arrayUsername[1]);
+        Player player3 = new Player(arrayID[2], arrayUsername[2]);
+        Player player4 = new Player(arrayID[3], arrayUsername[3 ]);
 
         playersArray[0] = player1;
         playersArray[1] = player2;
