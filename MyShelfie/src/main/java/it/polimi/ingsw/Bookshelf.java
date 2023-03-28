@@ -18,6 +18,7 @@ public class Bookshelf {
             heights[i] = 0;
     }
 
+
     //"y" is the library column. The tile is placed on the first available row starting from the bottom.
     public void insert(int y, ItemEnum tile){
         if(heights[y]<=5) {
