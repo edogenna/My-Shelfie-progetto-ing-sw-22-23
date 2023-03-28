@@ -6,7 +6,7 @@ import it.polimi.ingsw.ItemEnum;
  * Four tiles of the same type in the four corners of the bookshelf.
  * @author Alessandro Fornara
  */
-public class CommonCard5 implements CommonCardStrategy{
+public class CommonCard05 implements CommonCardStrategy{
     private final String constant5=
             "Card number 5     Description:\n"+
             "|=|-------|=|     Four tiles of the same type in the four\n"+

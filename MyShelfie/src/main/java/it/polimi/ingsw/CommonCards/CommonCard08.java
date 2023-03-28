@@ -7,7 +7,7 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  * @author Samuele Galli
  */
-public class CommonCard8 implements CommonCardStrategy {
+public class CommonCard08 implements CommonCardStrategy {
 
     private final String constant8=
             "Card number 8        Description:\n"+

@@ -7,7 +7,7 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  * @author Samuele Galli
  */
-public class CommonCard7 implements CommonCardStrategy {
+public class CommonCard07 implements CommonCardStrategy {
     private final String constant7=
             "Card number 7   Description\n"+
             "|=| |=|         Two groups each containing 4 tiles of\n" +
@@ -16,7 +16,18 @@ public class CommonCard7 implements CommonCardStrategy {
             "                those of the other square.\n";
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
-        //TODO: implementation coming soon
+        //TODO: check if works
+        int count=0;
+        for (int i=0; i<5; i++){ //scorro la matrice
+            for (int j=0; j<4; j++){
+                //if che controlla a destra, poi sotto, poi in diagonale
+                if(b[i][j].equals(b[i][j+1]) && b[i][j].equals(b[i+1][j]) && b[i][j].equals(b[i+1][j+1])){
+                    count++;
+                }
+                if(count == 2)
+                    return true;
+            }
+        }
         return false;
     }
 

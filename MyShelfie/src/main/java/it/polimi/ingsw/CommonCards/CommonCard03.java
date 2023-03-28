@@ -7,7 +7,7 @@ import it.polimi.ingsw.ItemEnum;
  * Four groups each containing at least 4 tiles of the same type (non necessarily in the depicted shape). The tiles of one group can be different from those of another group.
  * @author Alessandro Fornara
  */
-public class CommonCard3 implements CommonCardStrategy{
+public class CommonCard03 implements CommonCardStrategy{
     private final int r=6;
     private final int c=5;
     private final int minGroups =4;

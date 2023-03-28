@@ -6,7 +6,7 @@ import it.polimi.ingsw.ItemEnum;
  * Three columns each formed by 6 tiles of maximum three different types. One column can show the same or a different combination of another column.
  * @author Alessandro Fornara
  */
-public class CommonCard9 implements CommonCardStrategy {
+public class CommonCard09 implements CommonCardStrategy {
 
     private final String constant9=
             "| ■ | number 9  Description:\n"+

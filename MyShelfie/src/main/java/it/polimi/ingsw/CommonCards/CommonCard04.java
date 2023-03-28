@@ -7,7 +7,7 @@ import it.polimi.ingsw.ItemEnum;
  * Four lines each formed by 5 tiles of maximum three different types. One line can show the same or a different combination of another line.
  * @author Alessandro Fornara
  */
-public class CommonCard4 implements CommonCardStrategy {
+public class CommonCard04 implements CommonCardStrategy {
     private final String constant4=
             "Card number 4        Description:\n"+
             "|■| |■| |■| |■| |■|  Four lines each formed by 5 tiles of\n"+
