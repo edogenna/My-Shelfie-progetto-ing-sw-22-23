@@ -5,6 +5,11 @@ import it.polimi.ingsw.CommonCards.CommonCardStrategy;
 
 import java.util.Random;
 
+/**
+ * Board represent the common board from which players take cards.
+ *
+ * @author Edoardo Gennaretti
+ */
 public class Board {
     public static final int BOARD_SIZE = 9;
     public static final int INITIAL_NUMBER_ITEMENUM = 20;
@@ -42,6 +47,12 @@ public class Board {
         CommonCards = gen.GenerateCommonCards();
     }
 
+    /**
+     * Returns a copy of the matrix of the board.
+     *
+     * @autor Edoardo Gennaretti
+     * @return matrix of ItemEnum
+     */
     public ItemEnum[][] getMatrix() {
         ItemEnum[][] copy = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
         for (int i = 0; i < BOARD_SIZE; i++)
@@ -65,11 +76,28 @@ public class Board {
                 (r1 == c2 && c1 == BOARD_SIZE - 1 - r2);
     }
 
+    /**
+     * It returns the ItemEnum from a given position.
+     *
+     * @autor Edoardo Gennaretti
+     * @param r row of the matrix
+     * @param c coloumn of the matrix
+     * @return ItemEnum
+     */
     public ItemEnum getItemEnum(int r, int c){
         if(matrix[r][c] == ItemEnum.BLANK)
             System.out.println("Restituita una carta Blank!");
         return matrix[r][c];
     }
+
+    /**
+     * It returns the ItemEnum from a given position and inserts a blank ItemEnum in that position.
+     *
+     * @autor Edoardo Gennaretti
+     * @param r row of the matrix
+     * @param c coloumn of the matrix
+     * @return ItemEnum
+     */
     public ItemEnum deleteItemEnum(int r, int c){
         ItemEnum i = matrix[r][c];
         if(i == ItemEnum.BLANK)
@@ -79,7 +107,11 @@ public class Board {
         return i;
     }
 
-
+    /**
+     * It refills the matrix following the rule of the game.
+     *
+     * @autor Edoardo Gennaretti
+     */
     public void refill(){
         Random rand = new Random();
         int n;
@@ -111,5 +143,31 @@ public class Board {
         }
     }
 
+
+    /**
+     * It returns if the matrix need to be refilled following the rule of the game
+     *
+     * @autor Edordo Gennaretti
+     * @return true if the board need to be refilled, false otherwise
+     */
+    public boolean isRefillable(){
+        for(int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if(matrix[i][j] != ItemEnum.BLANK) {
+                    for (int k = -1; k <= 1; k++) {
+                        if (i + k >= 0 && i + k < BOARD_SIZE && matrix[i+k][j] != ItemEnum.BLANK)
+                                return false;
+                    }
+
+                    for (int h = -1; h <= 1; h++) {
+                        if (j + h >= 0 && j + h < BOARD_SIZE && matrix[i][j+h] != ItemEnum.BLANK)
+                            return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
 
 }
