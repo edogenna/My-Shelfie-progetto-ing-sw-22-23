@@ -21,23 +21,23 @@ public class CommonCardGenerator {
             array[1]= rand.nextInt(1,13);
 
         switch(array[0]){
-            case 1: result[0]=new CommonCard1();
+            case 1: result[0]=new CommonCard01();
                     break;
-            case 2: result[0]=new CommonCard2();
+            case 2: result[0]=new CommonCard02();
                     break;
-            case 3: result[0]=new CommonCard3();
+            case 3: result[0]=new CommonCard03();
                     break;
-            case 4: result[0]=new CommonCard4();
+            case 4: result[0]=new CommonCard04();
                     break;
-            case 5: result[0]=new CommonCard5();
+            case 5: result[0]=new CommonCard05();
                     break;
-            case 6: result[0]=new CommonCard6();
+            case 6: result[0]=new CommonCard06();
                     break;
-            case 7: result[0]=new CommonCard7();
+            case 7: result[0]=new CommonCard07();
                     break;
-            case 8: result[0]=new CommonCard8();
+            case 8: result[0]=new CommonCard08();
                     break;
-            case 9: result[0]=new CommonCard9();
+            case 9: result[0]=new CommonCard09();
                     break;
             case 10: result[0]=new CommonCard10();
                      break;
@@ -48,23 +48,23 @@ public class CommonCardGenerator {
         }
 
         switch(array[1]){
-            case 1: result[1]=new CommonCard1();
+            case 1: result[1]=new CommonCard01();
                     break;
-            case 2: result[1]=new CommonCard2();
+            case 2: result[1]=new CommonCard02();
                     break;
-            case 3: result[1]=new CommonCard3();
+            case 3: result[1]=new CommonCard03();
                     break;
-            case 4: result[1]=new CommonCard4();
+            case 4: result[1]=new CommonCard04();
                     break;
-            case 5: result[1]=new CommonCard5();
+            case 5: result[1]=new CommonCard05();
                     break;
-            case 6: result[1]=new CommonCard6();
+            case 6: result[1]=new CommonCard06();
                     break;
-            case 7: result[1]=new CommonCard7();
+            case 7: result[1]=new CommonCard07();
                     break;
-            case 8: result[1]=new CommonCard8();
+            case 8: result[1]=new CommonCard08();
                     break;
-            case 9: result[1]=new CommonCard9();
+            case 9: result[1]=new CommonCard09();
                     break;
             case 10: result[1]=new CommonCard10();
                      break;

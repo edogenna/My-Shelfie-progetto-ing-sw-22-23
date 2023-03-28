@@ -7,7 +7,7 @@ import it.polimi.ingsw.ItemEnum;
  * Five tiles of the same type forming a diagonal.
  * @author Alessandro Fornara
  */
-public class CommonCard2 implements CommonCardStrategy {
+public class CommonCard02 implements CommonCardStrategy {
     private final String constant2=
             "Card number 2   Description:\n"+
             "|=|             Five tiles of the same type forming\n"+

@@ -7,7 +7,7 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  * @author Samuele Galli
  */
-public class CommonCard7 implements CommonCardStrategy {
+public class CommonCard07 implements CommonCardStrategy {
     private final String constant7=
             "Card number 7   Description\n"+
             "|=| |=|         Two groups each containing 4 tiles of\n" +
