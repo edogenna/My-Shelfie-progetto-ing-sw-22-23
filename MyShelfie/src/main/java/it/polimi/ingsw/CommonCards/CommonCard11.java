@@ -15,12 +15,43 @@ public class CommonCard11 implements CommonCardStrategy {
             "|=| |=| |=|     of these tiles.\n";
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
-        //TODO: implementation coming soon
+        int[] occurrences = new int[6];
+        int pos=0;
+
+        for (int i=0; i<6; i++) { //scorro la matrice
+            for (int j=0; j<5; j++) {
+                if(!b[i][j].equals(ItemEnum.BLANK)){
+                    pos = enumToInt(b[i][j]);
+                    occurrences[pos]++;
+                    if(occurrences[pos] == 8)
+                        return true;
+                }
+            }
+        }
         return false;
     }
 
     @Override
     public void printCommonCard() {
         System.out.println(constant11);
+    }
+
+    private int enumToInt(ItemEnum b) { //hash per array occorrenze
+        int value=0;
+
+        if(b.equals(ItemEnum.GREEN))
+            value=0;
+        else if(b.equals(ItemEnum.WHITE))
+            value=1;
+        else if(b.equals(ItemEnum.YELLOW))
+            value=2;
+        else if(b.equals(ItemEnum.BLUE))
+            value=3;
+        else if(b.equals(ItemEnum.AZURE))
+            value=4;
+        else if(b.equals(ItemEnum.PURPLE))
+            value=5;
+
+        return value;
     }
 }
