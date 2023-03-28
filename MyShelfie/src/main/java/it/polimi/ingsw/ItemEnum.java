@@ -16,12 +16,15 @@ public enum ItemEnum {
     public static final int LEN_LABEL = 11;
     public static final int LEN_RESET = 11;
 
+    public static final int NUM_ITEMENUM = 6; //blank is excluded
+
     public final String label;
     private ItemEnum(String label) { this.label = label; }
 
+    @Deprecated
     public static ItemEnum generateRandomItemEnum(){
         Random rand = new Random();
-        int n = rand.nextInt(6); //blank is excluded
+        int n = rand.nextInt(NUM_ITEMENUM); //blank is excluded
 
         return switch (n) {
             case 0 -> ItemEnum.GREEN;
@@ -33,7 +36,6 @@ public enum ItemEnum {
             default -> ItemEnum.BLANK; //covers also for case 6
         };
     }
-
     @Deprecated
     public static void printMatrix(ItemEnum[][] m, int r, int c){
         for(int i = 0; i < c; i++){
@@ -48,12 +50,10 @@ public enum ItemEnum {
             System.out.print(" "+ Constant.toChar(i) + "\n");
         }
     }
-
     @Deprecated
     public static void printMatrix(ItemEnum[][] m, int size){
         printMatrix(m, size, size);
     }
-
     public static CharMatrix generateCharMatrix(ItemEnum mEnum[][], int r, int c) {
         CharMatrix cm = new CharMatrix();
         String s = "";

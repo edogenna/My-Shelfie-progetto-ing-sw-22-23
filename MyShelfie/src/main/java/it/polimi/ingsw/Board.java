@@ -3,12 +3,18 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.CommonCards.CommonCardGenerator;
 import it.polimi.ingsw.CommonCards.CommonCardStrategy;
 
+import java.util.Random;
+
 public class Board {
     public static final int BOARD_SIZE = 9;
+    public static final int INITIAL_NUMBER_ITEMENUM = 20;
     private ItemEnum[][] matrix;
     private int numPlayers;
+    private int[] numItemRemained = new int[ItemEnum.NUM_ITEMENUM];
 
     //TODO: modificare in un array in cui togliere i punti se si è in 3/4 giocatori
+    //TODO: aggiungere funzione per togliere carta in una posizione, refill e prendere carta in una posizione
+
     private final static int[][] positionsAlwaysForbidden = new int[][]{{0, 0}, {0, 1}, {0, 2},
             {1, 0}, {1, 1}, {1, 2},
             {2, 0}, {2, 1},
@@ -23,12 +29,11 @@ public class Board {
 
     public Board(int numPlayers) {
         matrix = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
-        for (int i = 0; i < BOARD_SIZE; i++)
-            for (int j = 0; j < BOARD_SIZE; j++)
-                if (isPositionValid(i, j))
-                    matrix[i][j] = ItemEnum.generateRandomItemEnum();
-                else
-                    matrix[i][j] = ItemEnum.BLANK;
+
+        for(int i = 0; i < ItemEnum.NUM_ITEMENUM; i++)
+            numItemRemained[i] = INITIAL_NUMBER_ITEMENUM;
+        refill();
+
         this.numPlayers = numPlayers;
 
         //Generating Common Goal Cards
@@ -59,5 +64,52 @@ public class Board {
                 (r1 == BOARD_SIZE - 1 - r2 && c1 == BOARD_SIZE - 1 - c2) ||
                 (r1 == c2 && c1 == BOARD_SIZE - 1 - r2);
     }
+
+    public ItemEnum getItemEnum(int r, int c){
+        if(matrix[r][c] == ItemEnum.BLANK)
+            System.out.println("Restituita una carta Blank!");
+        return matrix[r][c];
+    }
+    public ItemEnum deleteItemEnum(int r, int c){
+        ItemEnum i = matrix[r][c];
+        if(i == ItemEnum.BLANK)
+            System.out.println("Eliminata una carta Blank!");
+        else
+            matrix[r][c] = ItemEnum.BLANK;
+        return i;
+    }
+
+
+    public void refill(){
+        Random rand = new Random();
+        int n;
+        ItemEnum item;
+
+        for (int i = 0; i < BOARD_SIZE; i++){
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                if (isPositionValid(i, j)) {
+                    n = rand.nextInt(ItemEnum.NUM_ITEMENUM); //blank is excluded
+                    while (numItemRemained[n] == 0)
+                        n = rand.nextInt(ItemEnum.NUM_ITEMENUM);
+
+                    numItemRemained[n]--;
+                    item = switch (n) {
+                        case 0 -> ItemEnum.GREEN;
+                        case 1 -> ItemEnum.WHITE;
+                        case 2 -> ItemEnum.YELLOW;
+                        case 3 -> ItemEnum.BLUE;
+                        case 4 -> ItemEnum.AZURE;
+                        case 5 -> ItemEnum.PURPLE;
+                        default -> ItemEnum.BLANK; //covers also for case 6
+                    };
+
+                    matrix[i][j] = item;
+                } else {
+                    matrix[i][j] = ItemEnum.BLANK;
+                }
+            }
+        }
+    }
+
 
 }
