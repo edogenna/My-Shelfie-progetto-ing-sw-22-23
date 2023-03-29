@@ -23,7 +23,7 @@ public class Main {
         ItemEnum.generateCharMatrix(b2.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addHeaders(Board.BOARD_SIZE).printMatrix();
 
-        /**/
+        /**//*
         /*System.out.println("\n\n");
         ItemEnum.generateCharMatrix(b.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addHeaders(Board.BOARD_SIZE).appendToAllRows("   ").addOnRight(ItemEnum.generateCharMatrix(b2.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
@@ -69,6 +69,5 @@ public class Main {
         m1=new Match(3);
         m1.begin();
     }
-
 }
 
