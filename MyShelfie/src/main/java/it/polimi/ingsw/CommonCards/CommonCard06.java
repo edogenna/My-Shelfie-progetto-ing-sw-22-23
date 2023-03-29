@@ -1,5 +1,6 @@
 package it.polimi.ingsw.CommonCards;
 
+import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 /**
  * Contains the algorithms for the sixth common card:
@@ -82,5 +83,17 @@ public class CommonCard06 implements CommonCardStrategy{
     private void setArray(int[] a, int value){
         for(int i=0; i<a.length; i++)
             a[i]=value;
+    }
+    @Override
+    public CharMatrix printCommonCardMatrix(){
+
+        return  new CharMatrix()
+                .addNewLine("Card number 6   Description:")
+                .addNewLine("  | ≠ |         Two columns each formed")
+                .addNewLine("  | ≠ |         by 6 different")
+                .addNewLine("  | ≠ |         types of tiles.")
+                .addNewLine("  | ≠ |         different between different groups.")
+                .addNewLine("  | ≠ |  ")
+                .addNewLine("  | ≠ | x2  ");
     }
 }
