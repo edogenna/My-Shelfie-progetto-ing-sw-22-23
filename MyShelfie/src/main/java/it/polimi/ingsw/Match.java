@@ -64,7 +64,7 @@ public class Match {
         boolean moveOK, endGame = false;
 
         //it's decided who will go first
-        firstPlayerNumber = random.nextInt(1, numPlayers);
+        firstPlayerNumber = random.nextInt(0, numPlayers);
         curr=firstPlayerNumber;
         System.out.println(Players[firstPlayerNumber].username +" will go first");
 
@@ -114,10 +114,19 @@ public class Match {
 
                 if(board.isRefillable())
                     board.refill();
-                //TODO: call method to see if the current player's bookshelf is complete, if yes then one last turn
+
                 printGame();
+
+                if(Players[curr].myShelf.checkifFull()){
+                    endGame=true;
+                }
+
+                if(curr<numPlayers-1)
+                    curr++;
+                else
+                    curr=0;
             }
-            //endGame=true;
+
         }
     }
 

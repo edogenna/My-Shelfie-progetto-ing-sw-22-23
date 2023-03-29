@@ -171,7 +171,7 @@ public class Bookshelf {
         }
         return points;
     }
-    private boolean checkifFull(){
+    public boolean checkifFull(){
         //TODO: check if okay
         int i=0;
         for(int j=0; j < 5; j++){
