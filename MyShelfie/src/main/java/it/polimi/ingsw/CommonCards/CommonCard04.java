@@ -65,7 +65,7 @@ public class CommonCard04 implements CommonCardStrategy {
                 .addNewLine("Card number 4         Description:")
                 .addNewLine("|■| |■| |■| |■| |■|   Four lines each formed by 5 tiles of")
                 .addNewLine("     MAX 3 ≠          maximum three different types.")
-                .addNewLine("       x4             Lines can be different from one another.");               .addNewLine("                different between different groups.");
+                .addNewLine("       x4             Lines can be different from one another.");
     }
     @Override
     public void printCommonCard() {
