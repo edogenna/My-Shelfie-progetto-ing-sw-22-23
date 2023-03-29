@@ -84,7 +84,6 @@ public class CommonCard01 implements CommonCardStrategy{
 
     public CharMatrix printCommonCardMatrix(){
 
-        //TODO: finere e sitemare le print di tutte
         return  new CharMatrix()
                 .addNewLine("Card number 1   Description:")
                 .addNewLine("   |=|          Six groups each containing at least")
