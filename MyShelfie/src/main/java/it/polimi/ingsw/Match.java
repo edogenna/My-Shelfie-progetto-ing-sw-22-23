@@ -21,19 +21,12 @@ public class Match {
 
         arrayID = new int[numPlayers];
         arrayUsername= new String[numPlayers];
+
         //The board and common goal cards are created and printed
         board = new Board(numPlayers);
         Scanner getName = new Scanner(System.in);
-
-        ItemEnum.generateCharMatrix(board.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
-                .addHeaders(Board.BOARD_SIZE)
-                .addOnRight(board.getCommonCards()[0].printCommonCardMatrix())
-                .addOnRight(board.getCommonCards()[1].printCommonCardMatrix())
-                .printMatrix();
-
-        //board.getCommonCards()[0].printCommonCard();
-        //board.getCommonCards()[1].printCommonCard();
-
+        System.out.println(Constant.MY_SHELFIE_TITLE);
+        printGame();
         for(int i=1; i<numPlayers+1; i++){
             System.out.println("Inserire ID giocatore " + i + ": ");
             arrayID[i-1]=getName.nextInt();
@@ -109,20 +102,22 @@ public class Match {
 
             if(moveOK) {
                 if(!Players[curr].getCommonDone1() && board.getCommonCards()[0].checkBookshelf(Players[curr].myShelf.getMatrix())) {
-                    Players[curr].calculateCommonPoints(CommonPoints1);
+                    System.out.println(Players[curr].username + " has completed the first common goal card");
+                    Players[curr].calculateCommonPoints1(CommonPoints1);
                     CommonPoints1=CommonPoints1-2;
                 }
                 if(!Players[curr].getCommonDone2() && board.getCommonCards()[1].checkBookshelf(Players[curr].myShelf.getMatrix())) {
-                    Players[curr].calculateCommonPoints(CommonPoints2);
+                    System.out.println(Players[curr].username + " has completed the second common goal card");
+                    Players[curr].calculateCommonPoints2(CommonPoints2);
                     CommonPoints2=CommonPoints2-2;
                 }
 
                 if(board.isRefillable())
                     board.refill();
                 //TODO: call method to see if the current player's bookshelf is complete, if yes then one last turn
-                //TODO: the board and cards will be printed again and the next player can make his move
+                printGame();
             }
-            endGame=true;
+            //endGame=true;
         }
     }
 
@@ -190,26 +185,38 @@ public class Match {
         Random rand=new Random();
         PersonalCard p=new PersonalCard();
         this.PersonalCards=new Card[numPlayers];
-
+        //TODO: Change end of interval of random numbers from 6 to 13
         if(this.numPlayers==2) {
-            array[0] = rand.nextInt(1, 13);
+            array[0] = rand.nextInt(0, 6);
             array[1] = array[0];
             while (array[1] == array[0])
-                array[1] = rand.nextInt(1, 13);
+                array[1] = rand.nextInt(0, 6);
             this.PersonalCards[0]=p.getCard(array[0]);
             this.PersonalCards[1]=p.getCard(array[1]);
         }
         if(this.numPlayers==3){
             array[2]=array[0];
             while (array[2]==array[0] || array[2]==array[1])
-                array[2] = rand.nextInt(1, 13);
+                array[2] = rand.nextInt(0, 6);
             this.PersonalCards[2]=p.getCard(array[2]);
         }
         if(this.numPlayers==4){
             array[3]=array[0];
             while (array[3]==array[0] || array[3]==array[1] || array[3]==array[2])
-                array[3] = rand.nextInt(1, 13);
+                array[3] = rand.nextInt(0, 6);
             this.PersonalCards[3]=p.getCard(array[3]);
         }
+    }
+
+    /**
+     * This method prints the board and common goal cards
+     * @author Alessandro Fornara
+     */
+    private void printGame(){
+        ItemEnum.generateCharMatrix(board.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
+                .addHeaders(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
+                .addOnRight(board.getCommonCards()[0].printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
+                .addOnRight(board.getCommonCards()[1].printCommonCardMatrix())
+                .printMatrix();
     }
 }
