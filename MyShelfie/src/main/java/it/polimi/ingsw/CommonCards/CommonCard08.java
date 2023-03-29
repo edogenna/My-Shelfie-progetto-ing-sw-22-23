@@ -1,5 +1,6 @@
 package it.polimi.ingsw.CommonCards;
 
+import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 /**
  * Contains the algorithms for the eighth common card:
@@ -75,5 +76,16 @@ public class CommonCard08 implements CommonCardStrategy {
     @Override
     public void printCommonCard() {
         System.out.println(constant8);
+    }
+
+    @Override
+    public CharMatrix printCommonCardMatrix(){
+
+        return  new CharMatrix()
+                .addNewLine("Card number 8        Description:")
+                .addNewLine("|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different")
+                .addNewLine("   x2                types of tiles. One line can show the")
+                .addNewLine("                     the same or a different combination")
+                .addNewLine("                     of another line.");
     }
 }

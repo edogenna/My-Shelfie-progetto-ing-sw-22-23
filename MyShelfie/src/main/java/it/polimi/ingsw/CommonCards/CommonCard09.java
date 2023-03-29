@@ -1,5 +1,6 @@
 package it.polimi.ingsw.CommonCards;
 
+import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 /**
  * Contains the algorithms for the ninth common card:
@@ -58,6 +59,18 @@ public class CommonCard09 implements CommonCardStrategy {
     @Override
     public void printCommonCard() {
         System.out.println(constant9);
+    }
+    @Override
+    public CharMatrix printCommonCardMatrix(){
+
+        return  new CharMatrix()
+                .addNewLine("Card number 9    Description:")
+                .addNewLine("  | ■ |          Three column each formed by 6 tiles")
+                .addNewLine("  | ■ | MAX 3 ≠  of maximum three different types. One")
+                .addNewLine("  | ■ |          column can show the same or a different")
+                .addNewLine("  | ■ |        combination of another column.")
+                .addNewLine("  | ■ |  ")
+                .addNewLine("  | ■ |  x3");
     }
 }
 
