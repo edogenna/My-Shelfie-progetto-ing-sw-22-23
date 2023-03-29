@@ -28,6 +28,7 @@ public class Player {
     public int calculatePoints(){
         myPoints = myShelf.pointPersonalCard(myGoals);
         myPoints += myShelf.adjacentTilesPoints();
+        myPoints += myCommonPoints;
         return myPoints;
     }
 
@@ -201,7 +202,13 @@ public class Player {
      * @author Alessandro Fornara
      * @param p int value
      */
-    void calculateCommonPoints(int p){
-        this.myCommonPoints=p;
+    void calculateCommonPoints1(int p){
+        this.myCommonPoints += p;
+        this.CommonDone1 = true;
+    }
+
+    void calculateCommonPoints2(int p){
+        this.myCommonPoints += p;
+        this.CommonDone2 = true;
     }
 }

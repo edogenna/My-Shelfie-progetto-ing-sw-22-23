@@ -4,11 +4,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main( String[] args ){
-        Bookshelf testBookshelf = new Bookshelf();
+        Match m1;
+
+        m1=new Match(2);
+        m1.begin();
+
+        /*Bookshelf testBookshelf = new Bookshelf();
         PersonalCard testCards = new PersonalCard();
         int i, j, personalPoints, adjacentPoints;
         ItemEnum testTiles;
-        Match m1;
         Scanner readInput = new Scanner(System.in);
 
         System.out.println(Constant.MY_SHELFIE_TITLE);
@@ -18,12 +22,12 @@ public class Main {
                 .addHeaders(Board.BOARD_SIZE).printMatrix();
 
 
-        /*System.out.println("\n\n");
+        System.out.println("\n\n");
         Board b2 = new Board(2);
         ItemEnum.generateCharMatrix(b2.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addHeaders(Board.BOARD_SIZE).printMatrix();
 
-        /**//*
+
         /*System.out.println("\n\n");
         ItemEnum.generateCharMatrix(b.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addHeaders(Board.BOARD_SIZE).appendToAllRows("   ").addOnRight(ItemEnum.generateCharMatrix(b2.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
@@ -61,13 +65,10 @@ public class Main {
         System.out.println("Adjacent Points done: " + adjacentPoints);
 
 
-        /*b.CommonCards[0].printCommonCard();
+        b.CommonCards[0].printCommonCard();
         b.CommonCards[1].printCommonCard();
         */
 
-
-        m1=new Match(3);
-        m1.begin();
     }
 }
 
