@@ -88,7 +88,9 @@ public class CommonCard01 implements CommonCardStrategy{
         return  new CharMatrix()
                 .addNewLine("Card number 1   Description:")
                 .addNewLine("   |=|          Six groups each containing at least")
-                .addNewLine("   |=|   x6     2 tiles of the same type (non necessarily");
+                .addNewLine("   |=|   x6     2 tiles of the same type (non necessarily")
+                .addNewLine("                in the depicted shape). Tiles can be")
+                .addNewLine("                different between different groups.");
     }
 
     /**
