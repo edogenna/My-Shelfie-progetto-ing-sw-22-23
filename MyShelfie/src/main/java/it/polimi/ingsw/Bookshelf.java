@@ -171,4 +171,14 @@ public class Bookshelf {
         }
         return points;
     }
+    private boolean checkifFull(){
+        //TODO: check if okay
+        int i=0;
+        for(int j=0; j < 5; j++){
+            if(this.shelf[i][j].equals(ItemEnum.BLANK)){
+                return false;
+            }
+        }
+        return true;
+    }
 }
