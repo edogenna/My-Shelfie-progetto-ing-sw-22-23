@@ -92,8 +92,8 @@ public class CommonCard06 implements CommonCardStrategy{
                 .addNewLine("  | ≠ |         Two columns each formed")
                 .addNewLine("  | ≠ |         by 6 different")
                 .addNewLine("  | ≠ |         types of tiles.")
-                .addNewLine("  | ≠ |         different between different groups.")
+                .addNewLine("  | ≠ |  x2     different between different groups.")
                 .addNewLine("  | ≠ |  ")
-                .addNewLine("  | ≠ | x2  ");
+                .addNewLine("  | ≠ |  ");
     }
 }

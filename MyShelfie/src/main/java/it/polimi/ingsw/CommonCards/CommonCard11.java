@@ -1,5 +1,6 @@
 package it.polimi.ingsw.CommonCards;
 
+import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 /**
  * Contains the algorithms for the eleventh common card:
@@ -53,5 +54,14 @@ public class CommonCard11 implements CommonCardStrategy {
             value=5;
 
         return value;
+    }
+    @Override
+    public CharMatrix printCommonCardMatrix(){
+
+        return  new CharMatrix()
+                .addNewLine("Card number 11  Description:")
+                .addNewLine("  |=| |=|       Eight tiles of the same type. There's")
+                .addNewLine("|=| |=| |=|     no restriction about the positions")
+                .addNewLine("|=| |=| |=|     of these tiles.");
     }
 }
