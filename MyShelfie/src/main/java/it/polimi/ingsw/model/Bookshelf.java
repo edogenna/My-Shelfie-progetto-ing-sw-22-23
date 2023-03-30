@@ -170,6 +170,12 @@ public class Bookshelf {
         }
         return points;
     }
+
+    /**
+     * This method checks if the bookshelf is full of tiles that are not BLANK.
+     * @author Samuele Galli
+     * @return true if is full, false otherwise.
+     */
     public boolean checkIfFull(){
         //TODO: check if okay
         int i=0;
