@@ -1,15 +1,17 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
+
+import it.polimi.ingsw.ItemEnum;
 
 import java.util.Scanner;
 
 public class Player {
     private int id, myPoints, myCommonPoints;
     public String username;
-    Bookshelf myShelf;
-    Card myGoals;
+    private Bookshelf myShelf;
+    private Card myGoals;
     private boolean CommonDone1, CommonDone2;
 
-    Player(int id, String username){
+    public Player(int id, String username){
         this.id = id;
         this.username = username;
         myPoints = 0;
@@ -24,12 +26,19 @@ public class Player {
         myGoals = goals;
     }
 
+    public ItemEnum[][] getMatrixBookshelf(){
+        return myShelf.getMatrix();
+    }
     //"calculatePoints" counts the points excluding the "common cards"
     public int calculatePoints(){
         myPoints = myShelf.pointPersonalCard(myGoals);
         myPoints += myShelf.adjacentTilesPoints();
         myPoints += myCommonPoints;
         return myPoints;
+    }
+
+    public boolean fullShelf(){
+        return myShelf.checkIfFull();
     }
 
     public boolean pickCard(Board tileBoard, int x1, int y1){
@@ -195,21 +204,21 @@ x3 x1 x2 not
      * @author Alessandro Fornara
      * @return Returns the boolean value CommonDone1
      */
-    boolean getCommonDone1(){
+    public boolean getCommonDone1(){
         return this.CommonDone1;
     }
     /**
      * @author Alessandro Fornara
      * @return Returns the boolean value CommonDone2
      */
-    boolean getCommonDone2(){
+    public boolean getCommonDone2(){
         return this.CommonDone2;
     }
     /**
      * @author Alessandro Fornara
      * @return Returns the int value myCommonPoints
      */
-    int getMyCommonPoints(){
+    public int getMyCommonPoints(){
         return this.myCommonPoints;
     }
 
@@ -218,12 +227,12 @@ x3 x1 x2 not
      * @author Alessandro Fornara
      * @param p int value
      */
-    void calculateCommonPoints1(int p){
+    public void calculateCommonPoints1(int p){
         this.myCommonPoints += p;
         this.CommonDone1 = true;
     }
 
-    void calculateCommonPoints2(int p){
+    public void calculateCommonPoints2(int p){
         this.myCommonPoints += p;
         this.CommonDone2 = true;
     }

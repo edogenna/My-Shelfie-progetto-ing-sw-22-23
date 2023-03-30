@@ -1,7 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.CommonCards.CommonCardGenerator;
-import it.polimi.ingsw.CommonCards.CommonCardStrategy;
+import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.model.CommonCards.CommonCardGenerator;
+import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 import java.util.Random;
 

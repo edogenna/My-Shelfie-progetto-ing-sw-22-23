@@ -1,24 +1,25 @@
-package it.polimi.ingsw.CommonCards;
+package it.polimi.ingsw.model.CommonCards;
 
 import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 
 /**
- * Contains the algorithms for the third common card:
- * Four groups each containing at least 4 tiles of the same type (non necessarily in the depicted shape). The tiles of one group can be different from those of another group.
+ * Contains the algorithms for the first common card:
+ * Six groups each containing at least 2 tiles of the same type (non necessarily in the depicted shape). The tiles of one group can be different from those of another group.
  * @author Alessandro Fornara
  */
-public class CommonCard03 implements CommonCardStrategy{
+public class CommonCard01 implements CommonCardStrategy{
     private final int r=6;
     private final int c=5;
-    private final int minGroups =4;
-    private final int minTiles=4;
-    private final String constant3=
-            "Card number 3   Description:\n"+
-            "   |=|          Four groups each containing at least\n"+
-            "   |=|  x4      4 tiles of the same type (non necessarily\n"+
-            "   |=|          in the depicted shape). Tiles can be\n"+
-            "   |=|          different between different groups.\n";
+    private final int minGroups =6;
+    private final int minTiles=2;
+    private static final String constant1=
+            "Card number 1   Description:\n"+
+            "   |=|          Six groups each containing at least\n"+
+            "   |=|   x6     2 tiles of the same type (non necessarily\n"+
+            "                in the depicted shape). Tiles can be\n"+
+            "                different between different groups.\n";
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[][] m=new int[r][c];
@@ -78,7 +79,17 @@ public class CommonCard03 implements CommonCardStrategy{
 
     @Override
     public void printCommonCard() {
-        System.out.println(constant3);
+        System.out.println(constant1);
+    }
+
+    public CharMatrix printCommonCardMatrix(){
+
+        return  new CharMatrix()
+                .addNewLine("Card number 1   Description:")
+                .addNewLine("   |=|          Six groups each containing at least")
+                .addNewLine("   |=|   x6     2 tiles of the same type (non necessarily")
+                .addNewLine("                in the depicted shape). Tiles can be")
+                .addNewLine("                different between different groups.");
     }
 
     /**
@@ -101,16 +112,4 @@ public class CommonCard03 implements CommonCardStrategy{
         for(int i=0; i<a.length; i++)
             a[i]=value;
     }
-
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-
-        return  new CharMatrix()
-                .addNewLine("Card number 3   Description:")
-                .addNewLine("   |=|          Four groups each containing at least")
-                .addNewLine("   |=|          4 tiles of the same type (non necessarily")
-                .addNewLine("   |=|          in the depicted shape). Tiles can be")
-                .addNewLine("   |=| x4       different between different groups.");
-    }
 }
-

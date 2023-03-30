@@ -1,6 +1,7 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
-import java.awt.event.ItemEvent;
+import it.polimi.ingsw.ItemEnum;
+
 import java.util.Stack;
 
 public class Bookshelf {
@@ -9,7 +10,7 @@ public class Bookshelf {
 
     //The "heights" array stores the available x-coordinates for each library column.
 
-    Bookshelf(){
+    public Bookshelf(){
         int i, j;
         for(i=0; i<6; i++){
             shelf[i] = new ItemEnum[5];
@@ -65,8 +66,6 @@ public class Bookshelf {
         return copy;
     }
 
-    //TODO: potential error about the use of the "Card" class; check the class visibility.
-    // At the moment there aren't any errors!
     //this method calculates the points achieved with the own PersonalCard
     public int pointPersonalCard(Card item){
         int i, points;
@@ -171,7 +170,7 @@ public class Bookshelf {
         }
         return points;
     }
-    public boolean checkifFull(){
+    public boolean checkIfFull(){
         //TODO: check if okay
         int i=0;
         for(int j=0; j < 5; j++){

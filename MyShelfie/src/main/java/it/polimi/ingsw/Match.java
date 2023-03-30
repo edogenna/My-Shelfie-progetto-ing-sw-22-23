@@ -1,5 +1,10 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.model.Board;
+import it.polimi.ingsw.model.Card;
+import it.polimi.ingsw.model.PersonalCard;
+import it.polimi.ingsw.model.Player;
+
 import java.util.Scanner;
 import java.util.Random;
 
@@ -73,8 +78,8 @@ public class Match {
             moveOK=false;
             n=0;
             while(n!=1 && n!=2 && n!=3) {
-                ItemEnum.generateCharMatrix(Players[curr].myShelf.getMatrix(), 6, 5).printMatrix();
-                Players[curr].myShelf.getMatrix();
+                ItemEnum.generateCharMatrix(Players[curr].getMatrixBookshelf(), 6, 5).printMatrix();
+                Players[curr].getMatrixBookshelf();
                 System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tiles you want to remove: ");
                 n = getMove.nextInt();
             }
@@ -104,12 +109,12 @@ public class Match {
             }
 
             if(moveOK) {
-                if(!Players[curr].getCommonDone1() && board.getCommonCards()[0].checkBookshelf(Players[curr].myShelf.getMatrix())) {
+                if(!Players[curr].getCommonDone1() && board.getCommonCards()[0].checkBookshelf(Players[curr].getMatrixBookshelf())) {
                     System.out.println(Players[curr].username + " has completed the first common goal card");
                     Players[curr].calculateCommonPoints1(CommonPoints1);
                     CommonPoints1=CommonPoints1-2;
                 }
-                if(!Players[curr].getCommonDone2() && board.getCommonCards()[1].checkBookshelf(Players[curr].myShelf.getMatrix())) {
+                if(!Players[curr].getCommonDone2() && board.getCommonCards()[1].checkBookshelf(Players[curr].getMatrixBookshelf())) {
                     System.out.println(Players[curr].username + " has completed the second common goal card");
                     Players[curr].calculateCommonPoints2(CommonPoints2);
                     CommonPoints2=CommonPoints2-2;
@@ -120,7 +125,7 @@ public class Match {
 
                 printGame();
 
-                if(Players[curr].myShelf.checkifFull()){
+                if(Players[curr].fullShelf()){
                     endGame=true;
                 }
 
