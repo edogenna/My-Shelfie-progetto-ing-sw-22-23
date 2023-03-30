@@ -3,12 +3,11 @@ package it.polimi.ingsw;
 import java.util.Scanner;
 
 public class Player {
-    private int id, myPoints;
+    private int id, myPoints, myCommonPoints;
     public String username;
     Bookshelf myShelf;
     Card myGoals;
     private boolean CommonDone1, CommonDone2;
-    private int myCommonPoints;
 
     Player(int id, String username){
         this.id = id;
@@ -119,8 +118,7 @@ public class Player {
             readAgain = true;
         }else{
             //the selected tiles aren't adjacent
-            //TODO: control the warning
-            if(!((x1==x2 && x2==x3 && ((y1==y2+1 && y2==y3+1) || (y1==y3+1 && y3==y2+1) || (y2==y1+1 && y1==y3+1) || (y2==y3+1 && y3==y1+1) || (y3==y2+1 && y2==y1+1) || (y3==y1+1 && y1==y2+1))) || ((y1==y2 && y2==y3 && ((x1==x2+1 && x2==x3+1) || (x1==x3+1 && x3==x2+1) || (x2==x1+1 && x1==x3+1) || (x2==x3+1 && x3==x1+1) || (x3==x2+1 && x2==x1+1) || (x3==x1+1 && x1==x2+1)))))){
+            if(!adjacentTiles(x1,y1,x2,y2,x3,y3)){
                 readAgain = true;
                 System.out.println("The tiles aren't adjacent");
             }else{
@@ -153,6 +151,15 @@ public class Player {
         return !readAgain;
     }
 
+    //TODO: the private method "tileFreeSide", move this method in Board class
+    private boolean tileFreeSide(ItemEnum[][] boardTest, int x, int y){
+        boolean freeSide;
+
+        freeSide = (x>0 && boardTest[x-1][y] == ItemEnum.BLANK) || (x<8 && boardTest[x+1][y] == ItemEnum.BLANK) || (y>0 && boardTest[x][y-1] == ItemEnum.BLANK) || (y<8 && boardTest[x][y+1] == ItemEnum.BLANK) || x==0 || y==0 || x==8 || y==8;
+
+        return freeSide;
+    }
+
     private boolean adjacentTiles(int x1, int y1, int x2, int y2){
         boolean isAdjacent;
 
@@ -169,11 +176,8 @@ public class Player {
     private boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
         boolean isAdjacent;
 
-        //TODO: check operation
-        if((x1==x2 && x2==x3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2,y2,x3,y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2,y2,x3,y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1,y1,x3,y3)))) || (y1==y2 && y2==y3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2,y2,x3,y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2,y2,x3,y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1,y1,x3,y3)))))
-            isAdjacent = true;
-        else
-            isAdjacent = false;
+        isAdjacent = (x1 == x2 && x2 == x3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3)))) || (y1 == y2 && y2 == y3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3))));
+
 
         return isAdjacent;
     }
@@ -222,17 +226,5 @@ x3 x1 x2 not
     void calculateCommonPoints2(int p){
         this.myCommonPoints += p;
         this.CommonDone2 = true;
-    }
-
-    //TODO: the private method "tileFreeSide", move this method in Board class
-    private boolean tileFreeSide(ItemEnum[][] boardTest, int x, int y){
-        boolean freeSide;
-
-        if((x>0 && boardTest[x-1][y] == ItemEnum.BLANK) || (x<8 && boardTest[x+1][y] == ItemEnum.BLANK) || (y>0 && boardTest[x][y-1] == ItemEnum.BLANK) || (y<8 && boardTest[x][y+1] == ItemEnum.BLANK) || x==0 || y==0 || x==8 || y==8){
-            freeSide = true;
-        }else
-            freeSide = false;
-
-        return freeSide;
     }
 }
