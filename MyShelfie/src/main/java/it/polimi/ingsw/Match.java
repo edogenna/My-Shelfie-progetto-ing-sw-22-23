@@ -91,7 +91,7 @@ public class Match {
                 ItemEnum.generateCharMatrix(Players[curr].getMatrixBookshelf(), 6, 5).printMatrix();
                 Players[curr].getMatrixBookshelf();
                 System.out.println("\n" + "Your bookshelf:");
-                ItemEnum.generateCharMatrix(Players[curr].myShelf.getMatrix(), 6, 5).printMatrix();
+                ItemEnum.generateCharMatrix(Players[curr].getMatrixBookshelf(), 6, 5).printMatrix();
                 System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tiles you want to remove: ");
                 n = getMove.nextInt();
             }
