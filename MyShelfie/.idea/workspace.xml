@@ -4,29 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="fixed the &quot;pickCard&quot; method in Player class.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Bookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Bookshelf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard01.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard01.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard02.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard02.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard03.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard03.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard04.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard04.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard05.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard05.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard06.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard06.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard07.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard07.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard08.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard08.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard09.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard09.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard10.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard10.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard11.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCard12.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCard12.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCardGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCardGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/CommonCards/CommonCardStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/CommonCards/CommonCardStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/PersonalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/PersonalCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
-    </list>
+    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="created the Model package and upgraded the visibility of some classes and methods" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,7 +78,7 @@
       <workItem from="1680007261945" duration="6716000" />
       <workItem from="1680119534277" duration="2323000" />
       <workItem from="1680157944752" duration="4264000" />
-      <workItem from="1680168851987" duration="2742000" />
+      <workItem from="1680168851987" duration="3241000" />
     </task>
     <task id="LOCAL-00001" summary="Test git donato">
       <created>1679411053113</created>
@@ -263,7 +241,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680162739346</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="created the Model package and upgraded the visibility of some classes and methods">
+      <created>1680173372682</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1680173372682</updated>
+    </task>
+    <task id="LOCAL-00025" summary="created the Model package and upgraded the visibility of some classes and methods">
+      <created>1680173702959</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1680173702959</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +293,7 @@
     <MESSAGE value="new private methods in &quot;Player&quot; class to check the adjacency of the tiles" />
     <MESSAGE value="done the new method &quot;tileFreeSide&quot; in Player class.&#10;finished the method &quot;adjacentTiles&quot;, I have to put it into the &quot;pickCard&quot; method" />
     <MESSAGE value="fixed the &quot;pickCard&quot; method in Player class." />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the &quot;pickCard&quot; method in Player class." />
+    <MESSAGE value="created the Model package and upgraded the visibility of some classes and methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="created the Model package and upgraded the visibility of some classes and methods" />
   </component>
 </project>
