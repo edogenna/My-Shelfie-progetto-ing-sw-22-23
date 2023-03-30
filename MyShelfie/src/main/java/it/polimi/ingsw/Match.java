@@ -88,8 +88,6 @@ public class Match {
             moveOK=false;
             n=0;
             while(n!=1 && n!=2 && n!=3) {
-                ItemEnum.generateCharMatrix(Players[curr].getMatrixBookshelf(), 6, 5).printMatrix();
-                Players[curr].getMatrixBookshelf();
                 System.out.println("\n" + "Your bookshelf:");
                 ItemEnum.generateCharMatrix(Players[curr].getMatrixBookshelf(), 6, 5).printMatrix();
                 System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tiles you want to remove: ");
