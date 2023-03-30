@@ -53,6 +53,48 @@ public final class PersonalCard {
           figure[5].addTriplet(3,2,2, ItemEnum.GREEN);
           figure[5].addTriplet(4,3,4, ItemEnum.WHITE);
           figure[5].addTriplet(5,4,4, ItemEnum.PURPLE);
+
+          figure[6].addTriplet(0,4,1, ItemEnum.BLUE);
+          figure[6].addTriplet(1,0,4, ItemEnum.AZURE);
+          figure[6].addTriplet(2,1,1, ItemEnum.YELLOW);
+          figure[6].addTriplet(3,3,3, ItemEnum.GREEN);
+          figure[6].addTriplet(4,2,0, ItemEnum.WHITE);
+          figure[6].addTriplet(5,5,3, ItemEnum.PURPLE);
+
+          figure[7].addTriplet(0,2,2, ItemEnum.BLUE);
+          figure[7].addTriplet(1,3,3, ItemEnum.AZURE);
+          figure[7].addTriplet(2,4,4, ItemEnum.YELLOW);
+          figure[7].addTriplet(3,5,0, ItemEnum.GREEN);
+          figure[7].addTriplet(4,0,2, ItemEnum.WHITE);
+          figure[7].addTriplet(5,1,1, ItemEnum.PURPLE);
+
+          figure[8].addTriplet(0,1,3, ItemEnum.BLUE);
+          figure[8].addTriplet(1,3,0, ItemEnum.AZURE);
+          figure[8].addTriplet(2,4,4, ItemEnum.YELLOW);
+          figure[8].addTriplet(3,0,0, ItemEnum.GREEN);
+          figure[8].addTriplet(4,5,2, ItemEnum.WHITE);
+          figure[8].addTriplet(5,2,1, ItemEnum.PURPLE);
+
+          figure[9].addTriplet(0,0,4, ItemEnum.BLUE);
+          figure[9].addTriplet(1,2,2, ItemEnum.AZURE);
+          figure[9].addTriplet(2,5,3, ItemEnum.YELLOW);
+          figure[9].addTriplet(3,1,1, ItemEnum.GREEN);
+          figure[9].addTriplet(4,4,3, ItemEnum.WHITE);
+          figure[9].addTriplet(5,3,0, ItemEnum.PURPLE);
+
+          figure[10].addTriplet(0,4,3, ItemEnum.BLUE);
+          figure[10].addTriplet(1,0,2, ItemEnum.AZURE);
+          figure[10].addTriplet(2,4,1, ItemEnum.YELLOW);
+          figure[10].addTriplet(3,0,4, ItemEnum.GREEN);
+          figure[10].addTriplet(4,2,3, ItemEnum.WHITE);
+          figure[10].addTriplet(5,5,0, ItemEnum.PURPLE);
+
+          figure[11].addTriplet(0,5,4, ItemEnum.BLUE);
+          figure[11].addTriplet(1,4,3, ItemEnum.AZURE);
+          figure[11].addTriplet(2,2,2, ItemEnum.YELLOW);
+          figure[11].addTriplet(3,2,0, ItemEnum.GREEN);
+          figure[11].addTriplet(4,3,4, ItemEnum.WHITE);
+          figure[11].addTriplet(5,1,1, ItemEnum.PURPLE);
      }
 
      public Card getCard(int i){

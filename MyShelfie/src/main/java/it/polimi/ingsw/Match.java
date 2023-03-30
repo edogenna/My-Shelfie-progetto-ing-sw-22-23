@@ -215,23 +215,23 @@ public class Match {
         this.PersonalCards=new Card[numPlayers];
         //TODO: Change end of interval of random numbers from 6 to 13
         if(this.numPlayers==2) {
-            array[0] = rand.nextInt(6);
+            array[0] = rand.nextInt(12);
             array[1] = array[0];
             while (array[1] == array[0])
-                array[1] = rand.nextInt(6);
+                array[1] = rand.nextInt(12);
             this.PersonalCards[0]=p.getCard(array[0]);
             this.PersonalCards[1]=p.getCard(array[1]);
         }
         if(this.numPlayers==3){
             array[2]=array[0];
             while (array[2]==array[0] || array[2]==array[1])
-                array[2] = rand.nextInt(6);
+                array[2] = rand.nextInt(12);
             this.PersonalCards[2]=p.getCard(array[2]);
         }
         if(this.numPlayers==4){
             array[3]=array[0];
             while (array[3]==array[0] || array[3]==array[1] || array[3]==array[2])
-                array[3] = rand.nextInt(6);
+                array[3] = rand.nextInt(12);
             this.PersonalCards[3]=p.getCard(array[3]);
         }
     }
