@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 /**
- * This class is used to play a match
+ * This class is used to create and play a match
  * @author Alessandro Fornara
  */
 public class Match {
@@ -15,6 +15,12 @@ public class Match {
     private final int numPlayers;
     private Card[] PersonalCards;
     private int CommonPoints1, CommonPoints2;
+
+    /**
+     * This constructor creates a new board, common goal cards, player's bookshelves, assigns personal cards and everything else necessary to play the game.
+     * @author Alessandro Fornara
+     * @param num number of players for this match
+     */
     Match(int num) {
 
         numPlayers=num;
@@ -55,6 +61,10 @@ public class Match {
         CommonPoints2=8;
     }
 
+    /**
+     * This method starts a match allowing the players to play the game.
+     * @author Alessandro Fornara
+     */
     public void begin(){
         Scanner getMove = new Scanner(System.in);
         Random random = new Random();
