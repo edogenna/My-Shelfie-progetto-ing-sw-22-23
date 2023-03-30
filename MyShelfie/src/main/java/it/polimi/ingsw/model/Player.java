@@ -44,7 +44,7 @@ public class Player {
     public boolean pickCard(Board tileBoard, int x1, int y1){
         boolean readAgain;
         Scanner readCoordinates = new Scanner(System.in);
-        int y;
+        int j;
         ItemEnum removed;
 
         if(tileBoard.getMatrix()[x1][y1] == ItemEnum.BLANK){
@@ -66,10 +66,11 @@ public class Player {
 */
         if(!readAgain){
             removed = tileBoard.deleteItemEnum(x1, y1);
-            System.out.println("Decide the column of your shelf");
-            //TODO: method of bookshelf class that show the possible column
-            y = readCoordinates.nextInt();
-            myShelf.insert(y, removed);
+            do {
+                System.out.println("Decide the column of your shelf, this message will repeat again if you choose a wrong move");
+                j = readCoordinates.nextInt();
+            } while (columnOk(j, 1));
+            myShelf.insert(j, removed);
         }
         return !readAgain;
     }
@@ -109,8 +110,10 @@ public class Player {
         if(!readAgain){
             removed1 = tileBoard.deleteItemEnum(x1,y1);
             removed2 = tileBoard.deleteItemEnum(x2,y2);
-            System.out.println("Decide the column of your shelf");
-            j = readCoordinates.nextInt();
+            do {
+                System.out.println("Decide the column of your shelf, this message will repeat again if you choose a wrong move");
+                j = readCoordinates.nextInt();
+            } while (columnOk(j, 2));
             myShelf.insert(j, removed1, removed2);
         }
         return !readAgain;
@@ -154,8 +157,10 @@ public class Player {
             removed1 = tileBoard.getMatrix()[x1][y1];
             removed2 = tileBoard.getMatrix()[x2][y2];
             removed3 = tileBoard.getMatrix()[x3][y3];
-            System.out.println("Decide the column of your shelf");
-            j = readCoordinates.nextInt();
+            do {
+                System.out.println("Decide the column of your shelf, this message will repeat again if you choose a wrong move");
+                j = readCoordinates.nextInt();
+            } while (columnOk(j, 3));
             myShelf.insert(j, removed1, removed2, removed3);
         }
         return !readAgain;
@@ -236,5 +241,21 @@ x3 x1 x2 not
     public void calculateCommonPoints2(int p){
         this.myCommonPoints += p;
         this.CommonDone2 = true;
+    }
+
+    /**
+     * This method returns true if a column has enough cells to cover the move
+     * @author Samuele Galli
+     * @author Alessandro Fornara
+     * @param j column selected
+     * @param n number of tiles to insert
+     * @return true if the column has enough cells, false otherwise
+     */
+    private boolean columnOk(int j, int n){
+        for (int i = 0; i < n; i++){
+            if(myShelf.getMatrix()[i][j].equals(ItemEnum.BLANK))
+               return false;
+        }
+        return true;
     }
 }
