@@ -89,7 +89,7 @@ public class Match {
             n=0;
             while(n!=1 && n!=2 && n!=3) {
                 System.out.println("\n" + "Your bookshelf:");
-                ItemEnum.generateCharMatrix(Players[curr].getMatrixBookshelf(), 6, 5).printMatrix();
+                printBookshelfAndPersonal(curr);
                 System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tiles you want to remove: ");
                 n = getMove.nextInt();
             }
@@ -143,6 +143,7 @@ public class Match {
                     curr++;
                 else
                     curr=0;
+                //TODO: implement the last turn
             }else
                 System.out.println("That move is not allowed, please try again.");
 
@@ -213,7 +214,7 @@ public class Match {
         Random rand=new Random();
         PersonalCard p=new PersonalCard();
         this.PersonalCards=new Card[numPlayers];
-        //TODO: Change end of interval of random numbers from 6 to 13
+
         if(this.numPlayers==2) {
             array[0] = rand.nextInt(12);
             array[1] = array[0];
@@ -246,5 +247,10 @@ public class Match {
                 .addOnRight(board.getCommonCards()[0].printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
                 .addOnRight(board.getCommonCards()[1].printCommonCardMatrix())
                 .printMatrix();
+    }
+
+    private void printBookshelfAndPersonal(int i){
+        ItemEnum.generateCharMatrix(Players[i].getMatrixBookshelf(), 6, 5).appendToAllRows("   ")
+                .addOnRight(ItemEnum.generateCharMatrix(PersonalCards[i].getMatrix(), 6, 5)).printMatrix();
     }
 }
