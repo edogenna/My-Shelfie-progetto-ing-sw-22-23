@@ -30,11 +30,11 @@ public class CommonCard05 implements CommonCardStrategy{
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .addNewLine("Card number 5  Description:")
-                .addNewLine("|=|       |=|  Four tiles of the same type in the four")
-                .addNewLine("               corners of the bookshelf.")
-                .addNewLine("               ")
-                .addNewLine("|=|       |=|");
+                .appendAtBottom("Card number 5  Description:")
+                .appendAtBottom("|=|       |=|  Four tiles of the same type in the four")
+                .appendAtBottom("               corners of the bookshelf.")
+                .appendAtBottom("               ")
+                .appendAtBottom("|=|       |=|");
     }
 
     @Override

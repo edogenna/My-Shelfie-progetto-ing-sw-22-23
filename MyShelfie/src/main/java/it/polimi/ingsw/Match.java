@@ -226,7 +226,7 @@ public class Match {
      */
     private void printGame(){
         ItemEnum.generateCharMatrix(board.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
-                .addHeaders(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
+                .addNumbering(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
                 .addOnRight(board.getCommonCards()[0].printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
                 .addOnRight(board.getCommonCards()[1].printCommonCardMatrix())
                 .printMatrix();
