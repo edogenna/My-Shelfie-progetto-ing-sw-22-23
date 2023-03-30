@@ -88,12 +88,12 @@ public class CommonCard06 implements CommonCardStrategy{
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .addNewLine("Card number 6   Description:")
-                .addNewLine("  | ≠ |         Two columns each formed")
-                .addNewLine("  | ≠ |         by 6 different")
-                .addNewLine("  | ≠ |         types of tiles.")
-                .addNewLine("  | ≠ |  x2     different between different groups.")
-                .addNewLine("  | ≠ |  ")
-                .addNewLine("  | ≠ |  ");
+                .appendAtBottom("Card number 6   Description:")
+                .appendAtBottom("  | ≠ |         Two columns each formed")
+                .appendAtBottom("  | ≠ |         by 6 different")
+                .appendAtBottom("  | ≠ |         types of tiles.")
+                .appendAtBottom("  | ≠ |  x2     different between different groups.")
+                .appendAtBottom("  | ≠ |  ")
+                .appendAtBottom("  | ≠ |  ");
     }
 }

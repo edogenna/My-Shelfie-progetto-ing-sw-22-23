@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 /**
- * This class is used to play a match
+ * This class is used to create and play a match
  * @author Alessandro Fornara
  */
 public class Match {
@@ -20,6 +20,12 @@ public class Match {
     private final int numPlayers;
     private Card[] PersonalCards;
     private int CommonPoints1, CommonPoints2;
+
+    /**
+     * This constructor creates a new board, common goal cards, player's bookshelves, assigns personal cards and everything else necessary to play the game.
+     * @author Alessandro Fornara
+     * @param num number of players for this match
+     */
     Match(int num) {
 
         numPlayers=num;
@@ -60,6 +66,10 @@ public class Match {
         CommonPoints2=8;
     }
 
+    /**
+     * This method starts a match allowing the players to play the game.
+     * @author Alessandro Fornara
+     */
     public void begin(){
         Scanner getMove = new Scanner(System.in);
         Random random = new Random();
@@ -69,9 +79,9 @@ public class Match {
         boolean moveOK, endGame = false;
 
         //it's decided who will go first
-        firstPlayerNumber = random.nextInt(0, numPlayers);
+        firstPlayerNumber = random.nextInt(numPlayers);
         curr=firstPlayerNumber;
-        System.out.println(Players[firstPlayerNumber].username +" will go first");
+        System.out.println(Players[curr].username +" will go first");
 
         //the game starts
         while(!endGame){
@@ -80,6 +90,8 @@ public class Match {
             while(n!=1 && n!=2 && n!=3) {
                 ItemEnum.generateCharMatrix(Players[curr].getMatrixBookshelf(), 6, 5).printMatrix();
                 Players[curr].getMatrixBookshelf();
+                System.out.println("\n" + "Your bookshelf:");
+                ItemEnum.generateCharMatrix(Players[curr].myShelf.getMatrix(), 6, 5).printMatrix();
                 System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tiles you want to remove: ");
                 n = getMove.nextInt();
             }
@@ -133,7 +145,8 @@ public class Match {
                     curr++;
                 else
                     curr=0;
-            }
+            }else
+                System.out.println("That move is not allowed, please try again.");
 
         }
     }
@@ -204,23 +217,23 @@ public class Match {
         this.PersonalCards=new Card[numPlayers];
         //TODO: Change end of interval of random numbers from 6 to 13
         if(this.numPlayers==2) {
-            array[0] = rand.nextInt(0, 6);
+            array[0] = rand.nextInt(6);
             array[1] = array[0];
             while (array[1] == array[0])
-                array[1] = rand.nextInt(0, 6);
+                array[1] = rand.nextInt(6);
             this.PersonalCards[0]=p.getCard(array[0]);
             this.PersonalCards[1]=p.getCard(array[1]);
         }
         if(this.numPlayers==3){
             array[2]=array[0];
             while (array[2]==array[0] || array[2]==array[1])
-                array[2] = rand.nextInt(0, 6);
+                array[2] = rand.nextInt(6);
             this.PersonalCards[2]=p.getCard(array[2]);
         }
         if(this.numPlayers==4){
             array[3]=array[0];
             while (array[3]==array[0] || array[3]==array[1] || array[3]==array[2])
-                array[3] = rand.nextInt(0, 6);
+                array[3] = rand.nextInt(6);
             this.PersonalCards[3]=p.getCard(array[3]);
         }
     }
@@ -231,7 +244,7 @@ public class Match {
      */
     private void printGame(){
         ItemEnum.generateCharMatrix(board.getMatrix(), Board.BOARD_SIZE, Board.BOARD_SIZE)
-                .addHeaders(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
+                .addNumbering(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
                 .addOnRight(board.getCommonCards()[0].printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
                 .addOnRight(board.getCommonCards()[1].printCommonCardMatrix())
                 .printMatrix();

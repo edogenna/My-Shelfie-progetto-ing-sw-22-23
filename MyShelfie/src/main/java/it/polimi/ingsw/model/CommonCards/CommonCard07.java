@@ -35,11 +35,11 @@ public class CommonCard07 implements CommonCardStrategy {
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .addNewLine("Card number 7   Description:")
-                .addNewLine(" |=| |=|        Two groups each containing 4 tiles of")
-                .addNewLine(" |=| |=|        the same type in a 2x2 square. The tiles")
-                .addNewLine("   x2           of one square can be different from")
-                .addNewLine("                those of the other square.");
+                .appendAtBottom("Card number 7   Description:")
+                .appendAtBottom(" |=| |=|        Two groups each containing 4 tiles of")
+                .appendAtBottom(" |=| |=|        the same type in a 2x2 square. The tiles")
+                .appendAtBottom("   x2           of one square can be different from")
+                .appendAtBottom("                those of the other square.");
     }
     @Override
     public void printCommonCard() {

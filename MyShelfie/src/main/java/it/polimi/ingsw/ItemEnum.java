@@ -67,7 +67,7 @@ public enum ItemEnum {
                         .concat(" ");
             }
 
-            cm.addNewLine(s);
+            cm.appendAtBottom(s);
         }
 
         return cm;

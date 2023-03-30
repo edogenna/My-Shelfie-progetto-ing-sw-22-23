@@ -59,9 +59,9 @@ public class CommonCard11 implements CommonCardStrategy {
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .addNewLine("Card number 11  Description:")
-                .addNewLine("  |=| |=|       Eight tiles of the same type. There's")
-                .addNewLine("|=| |=| |=|     no restriction about the positions")
-                .addNewLine("|=| |=| |=|     of these tiles.");
+                .appendAtBottom("Card number 11  Description:")
+                .appendAtBottom("  |=| |=|       Eight tiles of the same type. There's")
+                .appendAtBottom("|=| |=| |=|     no restriction about the positions")
+                .appendAtBottom("|=| |=| |=|     of these tiles.");
     }
 }

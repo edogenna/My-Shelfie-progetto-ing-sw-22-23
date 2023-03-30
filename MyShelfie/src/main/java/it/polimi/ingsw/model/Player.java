@@ -49,12 +49,12 @@ public class Player {
 
         if(tileBoard.getMatrix()[x1][y1] == ItemEnum.BLANK){
             readAgain = true;
-            System.out.println("you have selected an empty position");
+            System.out.println("you have selected an empty position.");
         }else if(tileFreeSide(tileBoard.getMatrix(),x1,y1)){
             //the tile has a free side
             readAgain = false;
         }else{
-            System.out.println("The selected tile hasn't a free side");
+            System.out.println("one of the selected tiles hasn't a free side.");
             readAgain = true;
         }
 /*
@@ -81,13 +81,13 @@ public class Player {
         ItemEnum removed1, removed2;
 
         if(tileBoard.getMatrix()[x1][y1] == ItemEnum.BLANK || tileBoard.getMatrix()[x2][y2] == ItemEnum.BLANK){
-            System.out.println("you have selected an empty position");
+            System.out.println("you have selected an empty position.");
             readAgain = true;
         }else{
             //the selected tiles aren't adjacent
             if(!adjacentTiles(x1, y1, x2, y2)){
                 readAgain = true;
-                System.out.println("The tiles aren't adjacent");
+                System.out.println("The tiles aren't adjacent.");
             }else{
                 readAgain = false;
             }
@@ -95,7 +95,7 @@ public class Player {
         if(!readAgain){
             if(!(tileFreeSide(tileBoard.getMatrix(),x1,y1) && tileFreeSide(tileBoard.getMatrix(),x2,y2))){
                 readAgain = true;
-                //the tiles haven't any free sides
+                System.out.println("one of the selected tiles hasn't a free side.");
             }
         }
 /*            if(readAgain){
@@ -123,13 +123,13 @@ public class Player {
         ItemEnum removed1, removed2, removed3;
 
         if(tileBoard.getMatrix()[x1][y1] == ItemEnum.BLANK || tileBoard.getMatrix()[x2][y2] == ItemEnum.BLANK || tileBoard.getMatrix()[x3][y3] == ItemEnum.BLANK){
-            System.out.println("you have selected an empty position");
+            System.out.println("you have selected an empty position.");
             readAgain = true;
         }else{
             //the selected tiles aren't adjacent
             if(!adjacentTiles(x1,y1,x2,y2,x3,y3)){
                 readAgain = true;
-                System.out.println("The tiles aren't adjacent");
+                System.out.println("The tiles aren't adjacent.");
             }else{
                 readAgain = false;
             }
@@ -138,6 +138,7 @@ public class Player {
             //control no free side of the tiles
             if(!(tileFreeSide(tileBoard.getMatrix(),x1,y1) && tileFreeSide(tileBoard.getMatrix(),x2,y2) && tileFreeSide(tileBoard.getMatrix(),x3,y3))){
                 readAgain = true;
+                System.out.println("one of the selected tiles hasn't a free side.");
             }
         }
 /*            if(readAgain){

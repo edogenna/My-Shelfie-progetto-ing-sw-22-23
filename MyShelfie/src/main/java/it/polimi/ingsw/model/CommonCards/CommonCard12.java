@@ -76,12 +76,12 @@ public class CommonCard12 implements CommonCardStrategy{
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .addNewLine("Card number 12  Description:")
-                .addNewLine(" |=|            Five columns of increasing o decreasing height.")
-                .addNewLine(" |=|=|          Starting from the first column on the left or")
-                .addNewLine(" |=|=|=|        on the right, each next column must be made of")
-                .addNewLine(" |=|=|=|=|      exactly one more tile. Tiles can be of any type.")
-                .addNewLine(" |=|=|=|=|=| ");
+                .appendAtBottom("Card number 12  Description:")
+                .appendAtBottom(" |=|            Five columns of increasing o decreasing height.")
+                .appendAtBottom(" |=|=|          Starting from the first column on the left or")
+                .appendAtBottom(" |=|=|=|        on the right, each next column must be made of")
+                .appendAtBottom(" |=|=|=|=|      exactly one more tile. Tiles can be of any type.")
+                .appendAtBottom(" |=|=|=|=|=| ");
     }
 }
 

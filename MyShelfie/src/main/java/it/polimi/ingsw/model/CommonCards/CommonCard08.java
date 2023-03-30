@@ -82,10 +82,10 @@ public class CommonCard08 implements CommonCardStrategy {
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .addNewLine("Card number 8        Description:")
-                .addNewLine("|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different")
-                .addNewLine("   x2                types of tiles. One line can show the")
-                .addNewLine("                     the same or a different combination")
-                .addNewLine("                     of another line.");
+                .appendAtBottom("Card number 8        Description:")
+                .appendAtBottom("|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different")
+                .appendAtBottom("   x2                types of tiles. One line can show the")
+                .appendAtBottom("                     the same or a different combination")
+                .appendAtBottom("                     of another line.");
     }
 }

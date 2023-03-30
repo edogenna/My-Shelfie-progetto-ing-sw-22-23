@@ -64,13 +64,13 @@ public class CommonCard09 implements CommonCardStrategy {
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .addNewLine("Card number 9    Description:")
-                .addNewLine("  | ■ |          Three column each formed by 6 tiles")
-                .addNewLine("  | ■ | MAX 3 ≠  of maximum three different types. One")
-                .addNewLine("  | ■ |          column can show the same or a different")
-                .addNewLine("  | ■ |          combination of another column.")
-                .addNewLine("  | ■ |  ")
-                .addNewLine("  | ■ |  x3");
+                .appendAtBottom("Card number 9    Description:")
+                .appendAtBottom("  | ■ |          Three column each formed by 6 tiles")
+                .appendAtBottom("  | ■ | MAX 3 ≠  of maximum three different types. One")
+                .appendAtBottom("  | ■ |          column can show the same or a different")
+                .appendAtBottom("  | ■ |          combination of another column.")
+                .appendAtBottom("  | ■ |  ")
+                .appendAtBottom("  | ■ |  x3");
     }
 }
 
