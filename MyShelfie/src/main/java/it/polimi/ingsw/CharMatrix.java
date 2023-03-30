@@ -102,6 +102,23 @@ public class CharMatrix {
     }
 
     /**
+     * adds columns numbering
+     *
+     * @author Edoardo Gennaretti
+     * @param col number of columns of the matrix
+     * @return CharMatrix modified
+     */
+    public CharMatrix addColumnNumbering(int col){
+        //adding headers for column
+        String s = "";
+        for(int i = 0; i < col; i++)
+            s = s.concat(" "+ i + " ");
+        m.add(0, s);
+
+        return this;
+    }
+
+    /**
      * adds rows numbering
      *
      * @author Edoardo Gennaretti
