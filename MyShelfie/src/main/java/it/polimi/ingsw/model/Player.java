@@ -224,23 +224,24 @@ x3 x1 x2 not
      * @author Alessandro Fornara
      * @return Returns the int value myCommonPoints
      */
-    public int getMyCommonPoints(){
-        return this.myCommonPoints;
+    public int getMyPoints(){
+        return this.myPoints;
     }
 
     /**
-     * Assigns to MyCommonPoints a value
+     * Adds to MyCommonPoints a value and sets CommonDone1 or CommonDone2 to true
      * @author Alessandro Fornara
      * @param p int value
      */
-    public void calculateCommonPoints1(int p){
-        this.myCommonPoints += p;
-        this.CommonDone1 = true;
-    }
-
-    public void calculateCommonPoints2(int p){
-        this.myCommonPoints += p;
-        this.CommonDone2 = true;
+    public void calculateCommonPoints(int p, int whichCard){
+        if(whichCard==1) {
+            this.myCommonPoints += p;
+            this.CommonDone1 = true;
+        }
+        else if(whichCard==2) {
+            this.myCommonPoints += p;
+            this.CommonDone2 = true;
+        }
     }
 
     /**
