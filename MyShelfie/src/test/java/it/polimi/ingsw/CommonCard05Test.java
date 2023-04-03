@@ -19,7 +19,7 @@ public class CommonCard05Test {
     }
 
     /**
-     * This method inserts in the corners of an ItemEnum matrix a certain color
+     * This method inserts in the corners of an ItemEnum matrix some colors
      * @author Alessandro Fornara
      */
     public void insert(ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4){
