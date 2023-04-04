@@ -5,7 +5,6 @@ import it.polimi.ingsw.ItemEnum;
 //TODO: change names to "PersonalCard" and "Card" classes; however it isn't important
 public final class PersonalCard {
      private final Card[] figure = new Card[12];
-     //TODO: actually i have done 6 cards
 
      //implementation of the 12 personal cards; each card has 6 triplets.
      public PersonalCard(){
@@ -104,8 +103,9 @@ public final class PersonalCard {
 }
 
 class Triplet {
-     private int x, y;
-     private ItemEnum color;
+     private final int x;
+     private final int y;
+     private final ItemEnum color;
 
      public Triplet(int x, int y, ItemEnum color){
           this.x = x;

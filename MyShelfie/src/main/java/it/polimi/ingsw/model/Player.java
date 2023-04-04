@@ -6,8 +6,10 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Player {
-    private int id, myPoints, myCommonPoints;
-    private String username;
+    private final int id;
+    private int myPoints;
+    private int myCommonPoints;
+    private final String username;
     private Card myGoals;
     private boolean CommonDone1, CommonDone2;
     private ItemEnum[][] shelf = new ItemEnum[6][5];
@@ -32,8 +34,7 @@ public class Player {
     }
 
     public String getUsername(){
-        String copy = new String(this.username);
-        return copy;
+        return new String(this.username);
     }
 
     public int getId(){
@@ -43,8 +44,7 @@ public class Player {
     public ItemEnum[][] getMatrixBookshelf() {
         ItemEnum[][] copy = new ItemEnum[6][5];
         for(int i = 0; i < 6; i++)
-            for(int j = 0; j < 5; j++)
-                copy[i][j] = shelf[i][j];
+            System.arraycopy(shelf[i], 0, copy[i], 0, 5);
         return copy;
     }
 
@@ -178,6 +178,14 @@ public class Player {
         return true;
     }
 
+/*    public boolean checkIfFull2(){
+        for(int i=0; i<5; i++) {
+            if(this.heights[i] < 6)
+                return false;
+        }
+        return true;
+    }*/
+
     public boolean pickCard(Board tileBoard, int x1, int y1){
         boolean readAgain;
         Scanner readCoordinates = new Scanner(System.in);
@@ -254,7 +262,7 @@ public class Player {
 
     public boolean pickCard(Board tileBoard, int x1, int y1, int x2, int y2, int x3, int y3){
         int j;
-        boolean done, readAgain;
+        boolean readAgain;
         Scanner readCoordinates = new Scanner(System.in);
         ItemEnum removed1, removed2, removed3;
 

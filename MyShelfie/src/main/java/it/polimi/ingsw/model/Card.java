@@ -3,10 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.ItemEnum;
 
 public class Card {
-
-    int idCard, i;
-    private Triplet[] dataTriad = new Triplet[6];
-    private ItemEnum[][] matrixPersonal = new ItemEnum[6][5];
+    int idCard;
+    private final Triplet[] dataTriad = new Triplet[6];
+    private final ItemEnum[][] matrixPersonal = new ItemEnum[6][5];
 
     Card(int idCard) {
         this.idCard = idCard;
@@ -27,8 +26,7 @@ public class Card {
     public ItemEnum[][] getMatrix() {
         ItemEnum[][] copy = new ItemEnum[6][5];
         for (int i = 0; i < 6; i++)
-            for (int j = 0; j < 5; j++)
-                copy[i][j] = matrixPersonal[i][j];
+            System.arraycopy(this.matrixPersonal[i], 0, copy[i], 0, 5);
         return copy;
     }
 
