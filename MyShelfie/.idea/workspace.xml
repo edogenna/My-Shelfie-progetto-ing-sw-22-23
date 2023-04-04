@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="merge bug">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_03_2023_16_53_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_03_2023_16_53__Changes_.xml" beforeDir="false" />
+    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="fixed the Player's constructor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Bookshelf.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +84,7 @@
       <workItem from="1680178701713" duration="609000" />
       <workItem from="1680180809260" duration="47000" />
       <workItem from="1680277841187" duration="2043000" />
-      <workItem from="1680595830845" duration="4842000" />
+      <workItem from="1680595830845" duration="6251000" />
     </task>
     <task id="LOCAL-00001" summary="Test git donato">
       <created>1679411053113</created>
@@ -280,7 +275,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680179010144</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Removed the &quot;Bookshelf&quot; Class;&#10;Fixed some errors of the methods: isColumnFull and checkIfFull;&#10;Created the methods &quot;getId&quot; and &quot;getUsername&quot;;&#10;changed the visibility of the player's &quot;username&quot;.">
+      <created>1680601107216</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1680601107216</updated>
+    </task>
+    <task id="LOCAL-00029" summary="fixed the Player's constructor">
+      <created>1680601450579</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1680601450579</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,6 +329,8 @@
     <MESSAGE value="fixed the &quot;pickCard&quot; method in Player class." />
     <MESSAGE value="created the Model package and upgraded the visibility of some classes and methods" />
     <MESSAGE value="merge bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge bug" />
+    <MESSAGE value="Removed the &quot;Bookshelf&quot; Class;&#10;Fixed some errors of the methods: isColumnFull and checkIfFull;&#10;Created the methods &quot;getId&quot; and &quot;getUsername&quot;;&#10;changed the visibility of the player's &quot;username&quot;." />
+    <MESSAGE value="fixed the Player's constructor" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the Player's constructor" />
   </component>
 </project>
