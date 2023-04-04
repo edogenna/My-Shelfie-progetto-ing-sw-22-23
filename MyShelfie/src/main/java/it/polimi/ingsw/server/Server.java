@@ -1,21 +1,37 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.server.ServerSocket;
+import it.polimi.ingsw.server.SocketServer;
 
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
+//TODO: check everything
 
 public class Server {
-    private final ServerSocket socketServer;
-    private final int port = 0;
+    private final SocketServer socketServer;
+
+    //metodo che stacca le connessioni dal server quando legge quit
+    public void quitter() {
+
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            if (scanner.next().equalsIgnoreCase("QUIT")) {
+                getSocketServer().setActive(false);
+                System.exit(0);
+                break;
+            }
+        }
+    }
+
+
     public Server() {
-        socketServer = new ServerSocket (port, this);
-        //clientToConnection = new HashMap<>();
-        //totalPlayers = -1;
+        //TODO: change port utilization
+        private int port;
+        socketServer = new SocketServer(port, this);
         Thread thread = new Thread(this::quitter);
         thread.start();
+    }
+
+    public synchronized SocketServer getSocketServer() {
+        return socketServer;
     }
 }
