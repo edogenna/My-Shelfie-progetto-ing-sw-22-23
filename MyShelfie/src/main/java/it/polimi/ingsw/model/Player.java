@@ -3,20 +3,21 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.ItemEnum;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Player {
     private int id, myPoints, myCommonPoints;
-    public String username;
-    private Bookshelf myShelf;
+    private String username;
     private Card myGoals;
     private boolean CommonDone1, CommonDone2;
+    private ItemEnum[][] shelf = new ItemEnum[6][5];
+    private int[] heights = new int[5];
 
     public Player(int id, String username){
         this.id = id;
         this.username = username;
         myPoints = 0;
         myCommonPoints = 0;
-        myShelf = new Bookshelf();
         CommonDone1 = false;
         CommonDone2 = false;
     }
@@ -26,19 +27,151 @@ public class Player {
         myGoals = goals;
     }
 
-    public ItemEnum[][] getMatrixBookshelf(){
-        return myShelf.getMatrix();
+    public String getUsername(){
+        String copy = new String(this.username);
+        return copy;
     }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public ItemEnum[][] getMatrixBookshelf() {
+        ItemEnum[][] copy = new ItemEnum[6][5];
+        for(int i = 0; i < 6; i++)
+            for(int j = 0; j < 5; j++)
+                copy[i][j] = shelf[i][j];
+        return copy;
+    }
+
     //"calculatePoints" counts the points excluding the "common cards"
     public int calculatePoints(){
-        myPoints = myShelf.pointPersonalCard(myGoals);
-        myPoints += myShelf.adjacentTilesPoints();
+        myPoints = pointPersonalCard();
+        myPoints += adjacentTilesPoints();
         myPoints += myCommonPoints;
         return myPoints;
     }
 
-    public boolean fullShelf(){
-        return myShelf.checkIfFull();
+    //this method calculates the points achieved with the own PersonalCard
+    private int pointPersonalCard(){
+        int i, points;
+        Triplet control;
+
+        points = 0;
+        for(i=0; i<6; i++){
+            control = this.myGoals.getTriplet(i);
+            if(control.getColor() == this.shelf[control.getX()][control.getY()]){
+                points++;
+            }
+        }
+
+        if(points == 3)
+            points = 4;
+        else if(points == 4)
+            points = 6;
+        else if(points == 5)
+            points = 9;
+        else if(points == 6)
+            points = 12;
+
+        return points;
+    }
+
+    private int adjacentTilesPoints(){
+        int points, near, i, j, x, y;
+        int[][] visited = new int[6][5];
+        Stack<Integer> pathX = new Stack<Integer>();
+        Stack<Integer> pathY = new Stack<Integer>();
+        boolean stop;
+
+        points = 0;
+        near = 0;
+
+        for(i=0; i<6; i++){
+            for(j=0; j<5; j++){
+                visited[i][j] = 0;
+            }
+        }
+
+        for(i=0; i<6; i++){
+            for(j=0; j<5; j++){
+                pathX.push(i);
+                pathY.push(j);
+                visited[i][j] = 1;
+                near = 1;
+                stop = false;
+                x = i;
+                y = j;
+                while(!pathX.isEmpty()){
+                    if(stop){
+                        x = pathX.pop();
+                        y = pathY.pop();
+                    }
+                    stop = false;
+
+                    while(!stop) {
+                        if (x > 0 && this.shelf[x - 1][y] == this.shelf[x][y] && visited[x-1][y]==0) {
+                            near++;
+                            visited[x-1][y] = 1;
+                            pathX.push(x-1);
+                            pathY.push(y);
+                            x = x - 1;
+                        } else if (y > 0 && this.shelf[x][y - 1] == this.shelf[x][y] && visited[x][y-1]==0) {
+                            near++;
+                            visited[x][y-1] = 1;
+                            pathX.push(x);
+                            pathY.push(y-1);
+                            y = y - 1;
+                        } else if (y < 4 && this.shelf[x][y + 1] == this.shelf[x][y] && visited[x][y+1]==0) {
+                            near++;
+                            visited[x][y+1] = 1;
+                            pathX.push(x);
+                            pathY.push(y+1);
+                            y = y + 1;
+                        } else if (x < 5 && this.shelf[x + 1][y] == this.shelf[x][y] && visited[x+1][y]==0) {
+                            near++;
+                            visited[x+1][y] = 1;
+                            pathX.push(x+1);
+                            pathY.push(y);
+                            x = x + 1;
+                        } else {
+                            stop = true;
+                        }
+                    }
+
+                }
+                if(near == 3) {
+                    points += 2;
+                }
+                else if(near == 4) {
+                    points += 3;
+                }
+                else if(near == 5) {
+                    points += 5;
+                }
+                else if(near >= 6) {
+                    points += 8;
+                }
+            }
+        }
+        return points;
+    }
+
+    /**
+     * This method checks if the bookshelf is full of tiles that are not BLANK.
+     * @author Samuele Galli
+     * @author Donato Fiore
+     * @return true if is full, false otherwise.
+     */
+    public boolean checkIfFull(){
+        for(int i=0; i<6; i++) {
+            for(int j=0; j < 5; j++){
+                if(this.shelf[i][j].equals(ItemEnum.BLANK)){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public boolean pickCard(Board tileBoard, int x1, int y1){
@@ -66,11 +199,13 @@ public class Player {
 */
         if(!readAgain){
             removed = tileBoard.deleteItemEnum(x1, y1);
-            do {
-                System.out.println("Decide the column of your shelf, this message will repeat again if you choose a wrong move");
+            System.out.println("Decide the column of your shelf");
+            j = readCoordinates.nextInt();
+            while(isColumnFull(j,1)){
+                System.out.println("The column " +j+ "hasn't enough space, select another column");
                 j = readCoordinates.nextInt();
-            } while (columnOk(j, 1));
-            myShelf.insert(j, removed);
+            }
+            insert(j, removed);
         }
         return !readAgain;
     }
@@ -99,22 +234,16 @@ public class Player {
                 System.out.println("one of the selected tiles hasn't a free side.");
             }
         }
-/*            if(readAgain){
-                System.out.println("Select another 2 tiles: x1 y1; x2 y2");
-                x1 = readCoordinates.nextInt();
-                y1 = readCoordinates.nextInt();
-                x2 = readCoordinates.nextInt();
-                y2 = readCoordinates.nextInt();
-            }
- */
         if(!readAgain){
             removed1 = tileBoard.deleteItemEnum(x1,y1);
             removed2 = tileBoard.deleteItemEnum(x2,y2);
-            do {
-                System.out.println("Decide the column of your shelf, this message will repeat again if you choose a wrong move");
+            System.out.println("Decide the column of your shelf");
+            j = readCoordinates.nextInt();
+            while(isColumnFull(j,2)){
+                System.out.println("The column " +j+ " hasn't enough space, select another column");
                 j = readCoordinates.nextInt();
-            } while (columnOk(j, 2));
-            myShelf.insert(j, removed1, removed2);
+            }
+            insert(j, removed1, removed2);
         }
         return !readAgain;
     }
@@ -157,11 +286,13 @@ public class Player {
             removed1 = tileBoard.getMatrix()[x1][y1];
             removed2 = tileBoard.getMatrix()[x2][y2];
             removed3 = tileBoard.getMatrix()[x3][y3];
-            do {
-                System.out.println("Decide the column of your shelf, this message will repeat again if you choose a wrong move");
+            System.out.println("Decide the column of your shelf");
+            j = readCoordinates.nextInt();
+            while(isColumnFull(j,3)){
+                System.out.println("The column "+ j + " hasn't enough space, select another column");
                 j = readCoordinates.nextInt();
-            } while (columnOk(j, 3));
-            myShelf.insert(j, removed1, removed2, removed3);
+            }
+            insert(j, removed1, removed2, removed3);
         }
         return !readAgain;
     }
@@ -245,18 +376,37 @@ x3 x1 x2 not
     }
 
     /**
-     * This method returns true if a column has enough cells to cover the move
+     * This method returns true if the column hasn't enough cells to cover the move
      * @author Samuele Galli
      * @author Alessandro Fornara
+     * @author Donato Fiore
      * @param j column selected
      * @param n number of tiles to insert
      * @return true if the column has enough cells, false otherwise
      */
-    private boolean columnOk(int j, int n){
-        for (int i = 0; i < n; i++){
-            if(myShelf.getMatrix()[i][j].equals(ItemEnum.BLANK))
-               return false;
-        }
-        return true;
+    private boolean isColumnFull(int j, int n){
+        return this.heights[j] + n > 6;
+    }
+
+    //"y" is the library column. The tile is placed on the first available row starting from the bottom.
+    private void insert(int y, ItemEnum tile){
+            this.shelf[5-heights[y]][y] = tile;
+            heights[y]++;
+    }
+
+    private void insert(int y, ItemEnum tile1, ItemEnum tile2){
+            this.shelf[5-heights[y]][y] = tile1;
+            heights[y]++;
+            this.shelf[5-heights[y]][y] = tile2;
+            heights[y]++;
+    }
+
+    private void insert(int y, ItemEnum tile1, ItemEnum tile2, ItemEnum tile3){
+        this.shelf[5-heights[y]][y] = tile1;
+        heights[y]++;
+        this.shelf[5-heights[y]][y] = tile2;
+        heights[y]++;
+        this.shelf[5-heights[y]][y] = tile3;
+        heights[y]++;
     }
 }

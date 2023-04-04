@@ -14,12 +14,12 @@ import java.util.Random;
  */
 public class Match {
     private final Board board;
-    private final int[] arrayID;
+    private final int[] arrayId;
     private final String[] arrayUsername;
-    private Player[] Players;
+    private Player[] players;
     private final int numPlayers;
-    private Card[] PersonalCards;
-    private int CommonPoints1, CommonPoints2;
+    private Card[] personalCards;
+    private int commonPoints1, commonPoints2;
 
     /**
      * This constructor creates a new board, common goal cards, player's bookshelves, assigns personal cards and everything else necessary to play the game.
@@ -30,7 +30,7 @@ public class Match {
 
         numPlayers=num;
 
-        arrayID = new int[numPlayers];
+        arrayId = new int[numPlayers];
         arrayUsername= new String[numPlayers];
 
         //The board and common goal cards are created and printed
@@ -41,28 +41,28 @@ public class Match {
         for(int i=1; i<numPlayers+1; i++){
             //TODO: all ID must be different
             System.out.println("Inserire ID giocatore " + i + ": ");
-            arrayID[i-1]=getName.nextInt();
-            System.out.println("Inserire username giocatore " + i + ": ");
+            arrayId[i-1]=getName.nextInt();
+            System.out.println("Inserire getUsername() giocatore " + i + ": ");
             arrayUsername[i-1]=getName.next();
         }
         //An array of players is created containing all the information for each one (Bookshelf, Personal Cards, ID and so on...)
         switch (num) {
-            case 2: Players = create2Players();
+            case 2: players = create2Players();
                     break;
-            case 3: Players = create3Players();
+            case 3: players = create3Players();
                     break;
-            case 4: Players = create4Players();
+            case 4: players = create4Players();
                     break;
         }
         //assign to each player a personal card
-        PersonalCards = new Card[numPlayers];
+        personalCards = new Card[numPlayers];
         GeneratePersonalCards();
 
         for(int i=0; i<numPlayers; i++)
-            Players[i].setPersonalCard(PersonalCards[i]);
+            players[i].setPersonalCard(personalCards[i]);
 
-        CommonPoints1=8;
-        CommonPoints2=8;
+        commonPoints1 =8;
+        commonPoints2 =8;
     }
 
     /**
@@ -82,7 +82,7 @@ public class Match {
         curr=firstPlayerNumber;
         //lastPlayer contains the position of the player whose move will end the game
         lastPlayer=(firstPlayerNumber+numPlayers-1)%numPlayers;
-        System.out.println(Players[curr].username +" will go first");
+        System.out.println(players[curr].getUsername() +" will go first");
 
         //the game starts
         while(!exitGame){
@@ -91,14 +91,14 @@ public class Match {
             while(n!=1 && n!=2 && n!=3) {
                 System.out.println("\n" + "Your bookshelf:   Your personal card:");
                 printBookshelfAndPersonal(curr);
-                System.out.println(Players[curr].username + " It's your turn!" + " please enter how many tiles you want to remove: ");
+                System.out.println(players[curr].getUsername() + " It's your turn!" + " please enter how many tiles you want to remove: ");
                 n = getMove.nextInt();
             }
             if(n == 1) {
                 System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
                 x1 = getMove.nextInt();
                 y1 = getMove.nextInt();
-                moveOK=Players[curr].pickCard(board, x1, y1);
+                moveOK= players[curr].pickCard(board, x1, y1);
             }
             else if(n == 2){
                 System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
@@ -106,7 +106,7 @@ public class Match {
                 y1 = getMove.nextInt();
                 x2 = getMove.nextInt();
                 y2 = getMove.nextInt();
-                moveOK=Players[curr].pickCard(board, x1, y1, x2, y2);
+                moveOK= players[curr].pickCard(board, x1, y1, x2, y2);
             }
             else if(n == 3){
                 System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
@@ -116,24 +116,24 @@ public class Match {
                 y2 = getMove.nextInt();
                 x3 = getMove.nextInt();
                 y3 = getMove.nextInt();
-                moveOK=Players[curr].pickCard(board, x1, y1, x2, y2, x3, y3);
+                moveOK= players[curr].pickCard(board, x1, y1, x2, y2, x3, y3);
             }
 
             if(moveOK) {
-                if(!Players[curr].getCommonDone1() && board.getCommonCards()[0].checkBookshelf(Players[curr].getMatrixBookshelf())) {
-                    System.out.println(Players[curr].username + " has completed the first common goal card");
-                    Players[curr].calculateCommonPoints(CommonPoints1, 1);
-                    System.out.println(Players[curr].username + " scored " + CommonPoints1 + " points");
-                    CommonPoints1=CommonPoints1-2;
-                    System.out.println(CommonPoints1 + " points will be awarded to the next player who completes this common goal card");
+                if(!players[curr].getCommonDone1() && board.getCommonCards()[0].checkBookshelf(players[curr].getMatrixBookshelf())) {
+                    System.out.println(players[curr].getUsername() + " has completed the first common goal card");
+                    players[curr].calculateCommonPoints(commonPoints1, 1);
+                    System.out.println(players[curr].getUsername() + " scored " + commonPoints1 + " points");
+                    commonPoints1 = commonPoints1 -2;
+                    System.out.println(commonPoints1 + " points will be awarded to the next player who completes this common goal card");
 
                 }
-                if(!Players[curr].getCommonDone2() && board.getCommonCards()[1].checkBookshelf(Players[curr].getMatrixBookshelf())) {
-                    System.out.println(Players[curr].username + " has completed the second common goal card");
-                    Players[curr].calculateCommonPoints(CommonPoints2, 2);
-                    System.out.println(Players[curr].username + " scored " + CommonPoints2 + " points");
-                    CommonPoints2=CommonPoints2-2;
-                    System.out.println(CommonPoints2 + " points will be awarded to the next player who completes this common goal card");
+                if(!players[curr].getCommonDone2() && board.getCommonCards()[1].checkBookshelf(players[curr].getMatrixBookshelf())) {
+                    System.out.println(players[curr].getUsername() + " has completed the second common goal card");
+                    players[curr].calculateCommonPoints(commonPoints2, 2);
+                    System.out.println(players[curr].getUsername() + " scored " + commonPoints2 + " points");
+                    commonPoints2 = commonPoints2 -2;
+                    System.out.println(commonPoints2 + " points will be awarded to the next player who completes this common goal card");
                 }
 
                 if(board.isRefillable())
@@ -141,7 +141,7 @@ public class Match {
 
                 printGame();
 
-                if(Players[curr].fullShelf()){
+                if(players[curr].checkIfFull()){
                     endGame=true;
                 }
 
@@ -153,7 +153,7 @@ public class Match {
                 if(endGame && curr==lastPlayer){
                     exitGame=true;
                     for(int i=0; i<numPlayers; i++){
-                        System.out.println(Players[curr].username + " has scored a total of: " + Players[curr].calculatePoints() + " points");
+                        System.out.println(players[curr].getUsername() + " has scored a total of: " + players[curr].calculatePoints() + " points");
                     }
                     Winner(firstPlayerNumber);
                 }
@@ -171,8 +171,8 @@ public class Match {
      */
     private Player[] create2Players() {
         Player[] playersArray = new Player[2];
-        Player player1 = new Player(arrayID[0], arrayUsername[0]);
-        Player player2 = new Player(arrayID[1], arrayUsername[1]);
+        Player player1 = new Player(arrayId[0], arrayUsername[0]);
+        Player player2 = new Player(arrayId[1], arrayUsername[1]);
 
         playersArray[0] = player1;
         playersArray[1] = player2;
@@ -187,9 +187,9 @@ public class Match {
      */
     private Player[] create3Players() {
         Player[] playersArray = new Player[3];
-        Player player1 = new Player(arrayID[0], arrayUsername[0]);
-        Player player2 = new Player(arrayID[1], arrayUsername[1]);
-        Player player3 = new Player(arrayID[2], arrayUsername[2]);
+        Player player1 = new Player(arrayId[0], arrayUsername[0]);
+        Player player2 = new Player(arrayId[1], arrayUsername[1]);
+        Player player3 = new Player(arrayId[2], arrayUsername[2]);
 
         playersArray[0] = player1;
         playersArray[1] = player2;
@@ -206,10 +206,10 @@ public class Match {
 
     private Player[] create4Players() {
         Player[] playersArray = new Player[4];
-        Player player1 = new Player(arrayID[0], arrayUsername[0]);
-        Player player2 = new Player(arrayID[1], arrayUsername[1]);
-        Player player3 = new Player(arrayID[2], arrayUsername[2]);
-        Player player4 = new Player(arrayID[3], arrayUsername[3 ]);
+        Player player1 = new Player(arrayId[0], arrayUsername[0]);
+        Player player2 = new Player(arrayId[1], arrayUsername[1]);
+        Player player3 = new Player(arrayId[2], arrayUsername[2]);
+        Player player4 = new Player(arrayId[3], arrayUsername[3 ]);
 
         playersArray[0] = player1;
         playersArray[1] = player2;
@@ -227,27 +227,27 @@ public class Match {
         int[] array=new int[numPlayers];
         Random rand=new Random();
         PersonalCard p=new PersonalCard();
-        this.PersonalCards=new Card[numPlayers];
+        this.personalCards =new Card[numPlayers];
 
         if(this.numPlayers==2) {
             array[0] = rand.nextInt(12);
             array[1] = array[0];
             while (array[1] == array[0])
                 array[1] = rand.nextInt(12);
-            this.PersonalCards[0]=p.getCard(array[0]);
-            this.PersonalCards[1]=p.getCard(array[1]);
+            this.personalCards[0]=p.getCard(array[0]);
+            this.personalCards[1]=p.getCard(array[1]);
         }
         if(this.numPlayers==3){
             array[2]=array[0];
             while (array[2]==array[0] || array[2]==array[1])
                 array[2] = rand.nextInt(12);
-            this.PersonalCards[2]=p.getCard(array[2]);
+            this.personalCards[2]=p.getCard(array[2]);
         }
         if(this.numPlayers==4){
             array[3]=array[0];
             while (array[3]==array[0] || array[3]==array[1] || array[3]==array[2])
                 array[3] = rand.nextInt(12);
-            this.PersonalCards[3]=p.getCard(array[3]);
+            this.personalCards[3]=p.getCard(array[3]);
         }
     }
 
@@ -269,12 +269,12 @@ public class Match {
      * @param i the index of the array Players
      */
     private void printBookshelfAndPersonal(int i){
-        ItemEnum.generateCharMatrix(Players[i].getMatrixBookshelf(), 6, 5).appendToAllRows("   ")
-                .addOnRight(ItemEnum.generateCharMatrix(PersonalCards[i].getMatrix(), 6, 5)).printMatrix();
+        ItemEnum.generateCharMatrix(players[i].getMatrixBookshelf(), 6, 5).appendToAllRows("   ")
+                .addOnRight(ItemEnum.generateCharMatrix(personalCards[i].getMatrix(), 6, 5)).printMatrix();
     }
 
     /**
-     * This method decides the winner of the game and prints this player's username
+     * This method decides the winner of the game and prints this player's getUsername()
      * @author Alessandro Fornara
      */
     private void Winner(int first){
@@ -282,13 +282,13 @@ public class Match {
         for(int i=0; i<numPlayers; i++){
 
             k=(i+first)%numPlayers;
-            points=Players[k].getMyPoints();
+            points= players[k].getMyPoints();
 
             if(points>=max) {
                 max=points;
                 pos=k;
             }
         }
-        System.out.println(Players[pos].username + " has won the game!");
+        System.out.println(players[pos].getUsername() + " has won the game!");
     }
 }
