@@ -20,6 +20,10 @@ public class Player {
         myCommonPoints = 0;
         CommonDone1 = false;
         CommonDone2 = false;
+        for(int i=0; i<6; i++){
+            for(int j=0; j<5; j++)
+                shelf[i][j] = ItemEnum.BLANK;
+        }
     }
 
     public void setPersonalCard(Card goals){
