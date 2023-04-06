@@ -339,15 +339,6 @@ public class Player {
 
         return isAdjacent;
     }
-/*
-x1 x2 x3
-x1 x3 x2
-x2 x1 x3
-x2 x3 x1 not
-x3 x1 x2 not
-x3 x1 x2 not
-*/
-
 
     /**
      * @author Alessandro Fornara
@@ -389,8 +380,6 @@ x3 x1 x2 not
 
     /**
      * This method returns true if the column hasn't enough cells to cover the move
-     * @author Samuele Galli
-     * @author Alessandro Fornara
      * @author Donato Fiore
      * @param j column selected
      * @param n number of tiles to insert
@@ -401,7 +390,7 @@ x3 x1 x2 not
     }
 
     //"y" is the library column. The tile is placed on the first available row starting from the bottom.
-    private void insert(int y, ItemEnum tile){
+    public void insert(int y, ItemEnum tile){
             this.shelf[5-heights[y]][y] = tile;
             heights[y]++;
     }

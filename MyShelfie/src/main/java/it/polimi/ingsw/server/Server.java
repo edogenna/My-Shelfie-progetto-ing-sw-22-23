@@ -25,7 +25,7 @@ public class Server {
 
     public Server() {
         //TODO: change port utilization
-        private int port;
+        int port = 0; //TODO: fixed the value;
         socketServer = new SocketServer(port, this);
         Thread thread = new Thread(this::quitter);
         thread.start();

@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="fixed the Player's constructor">
+    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="Removed some warnings and cleared the code">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/ControllerCli.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/MovePickCard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CLI/CliView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +42,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2NKRInvbo8GdcbwjMhQ51J4uNB9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -85,6 +95,8 @@
       <workItem from="1680180809260" duration="47000" />
       <workItem from="1680277841187" duration="2043000" />
       <workItem from="1680595830845" duration="6251000" />
+      <workItem from="1680618939902" duration="1528000" />
+      <workItem from="1680773081066" duration="7785000" />
     </task>
     <task id="LOCAL-00001" summary="Test git donato">
       <created>1679411053113</created>
@@ -289,7 +301,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680601450579</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Created view and controller packages">
+      <created>1680619215237</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1680619215237</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Removed some warnings and cleared the code">
+      <created>1680620539438</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1680620539439</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,7 +333,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Test git donato" />
     <MESSAGE value="implementation of the &quot;Personal Card&quot; class through 2 auxiliary private classes.&#10;The &quot;Triplet&quot; class is formed by the x and y coordinates and the color of the tile." />
     <MESSAGE value="implemented the first 6 personal cards" />
     <MESSAGE value="changed the name &quot;bookshelf&quot; to &quot;figure&quot;" />
@@ -331,6 +356,8 @@
     <MESSAGE value="merge bug" />
     <MESSAGE value="Removed the &quot;Bookshelf&quot; Class;&#10;Fixed some errors of the methods: isColumnFull and checkIfFull;&#10;Created the methods &quot;getId&quot; and &quot;getUsername&quot;;&#10;changed the visibility of the player's &quot;username&quot;." />
     <MESSAGE value="fixed the Player's constructor" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed the Player's constructor" />
+    <MESSAGE value="Created view and controller packages" />
+    <MESSAGE value="Removed some warnings and cleared the code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed some warnings and cleared the code" />
   </component>
 </project>
