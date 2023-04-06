@@ -14,9 +14,12 @@ public class Model extends Observable {
         bob.insert(z, board.deleteItemEnum(x,y));
     }
 
-    public boolean checkFullShelf(){
-        boolean finished = false;
-        //TODO: control if the bookshelf of the player is full after the move;
-        return finished;
+    public boolean checkFullShelf(Player bob){
+        for(int i=0; i<5; i++){
+            if(bob.getHeights(i) != 6){
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -41,6 +41,10 @@ public class Player {
         return this.id;
     }
 
+    public int getHeights(int i){
+        return this.heights[i];
+    }
+
     public ItemEnum[][] getMatrixBookshelf() {
         ItemEnum[][] copy = new ItemEnum[6][5];
         for(int i = 0; i < 6; i++)
@@ -202,13 +206,6 @@ public class Player {
             System.out.println("one of the selected tiles hasn't a free side.");
             readAgain = true;
         }
-/*
-        if(readAgain){
-            System.out.println("Select another tile: x - y");
-            x1 = readCoordinates.nextInt();
-            y1 = readCoordinates.nextInt();
-        }
-*/
         if(!readAgain){
             removed = tileBoard.deleteItemEnum(x1, y1);
             System.out.println("Decide the column of your shelf");
