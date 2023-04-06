@@ -21,6 +21,13 @@ public class CommonCard09Test {
     /**
      * This method inserts in a column of an ItemEnum matrix some colors
      * @author Alessandro Fornara
+     * @param j Column
+     * @param x1 First color
+     * @param x2 Second color
+     * @param x3 Third color
+     * @param x4 Fourth color
+     * @param x5 Fifth color
+     * @param x6 Sixth color
      */
     public void insert(int j, ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5, ItemEnum x6){
         matrix[0][j]=x1;
