@@ -1,13 +1,11 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.server.SocketServer;
-
 import java.util.*;
 
 //TODO: check everything
 
 public class Server {
-    private final SocketServer socketServer;
+    private final ServerSocket socketServer;
 
     //metodo che stacca le connessioni dal server quando legge quit
     public void quitter() {
@@ -25,13 +23,13 @@ public class Server {
 
     public Server() {
         //TODO: change port utilization
-        private int port;
-        socketServer = new SocketServer(port, this);
+        int port = 0;
+        socketServer = new ServerSocket(port, this);
         Thread thread = new Thread(this::quitter);
         thread.start();
     }
 
-    public synchronized SocketServer getSocketServer() {
+    public synchronized ServerSocket getSocketServer() {
         return socketServer;
     }
 }

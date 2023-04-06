@@ -1,13 +1,10 @@
 package it.polimi.ingsw.server;
 
 import java.util.concurrent.ExecutorService;
-import java.io.IOException;
-import java.net.ServerSocket;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
 
 
-public class SocketServer implements Runnable {
+public class ServerSocket implements Runnable {
     private final int port;
     private final ExecutorService executorService;
     private final Server server;
@@ -15,7 +12,7 @@ public class SocketServer implements Runnable {
     //private final Logger logger = Logger.getLogger(getClass().getName());
 
 
-    public SocketServer(int port, Server server) {
+    public ServerSocket(int port, Server server) {
         this.server = server;
         this.port = port;
         executorService = Executors.newCachedThreadPool();
@@ -26,3 +23,9 @@ public class SocketServer implements Runnable {
     public void setActive(boolean value) {
         active = value;
     }
+
+    @Override
+    public void run() {
+
+    }
+}
