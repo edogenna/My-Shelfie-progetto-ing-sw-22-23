@@ -42,7 +42,7 @@ public class Match {
             //TODO: all ID must be different
             System.out.println("Inserire ID giocatore " + i + ": ");
             arrayId[i-1]=getName.nextInt();
-            System.out.println("Inserire getUsername() giocatore " + i + ": ");
+            System.out.println("Inserire Username giocatore " + i + ": ");
             arrayUsername[i-1]=getName.next();
         }
         //An array of players is created containing all the information for each one (Bookshelf, Personal Cards, ID and so on...)
@@ -73,8 +73,8 @@ public class Match {
         Scanner getMove = new Scanner(System.in);
         Random random = new Random();
         int firstPlayerNumber, lastPlayer, curr, n=0;
-        int x1, y1, x2, y2, x3, y3;
-
+        int[] xArray=new int[3];
+        int[] yArray=new int[3];
         boolean moveOK, endGame = false, exitGame = false;
 
         //it's decided who will go first
@@ -95,28 +95,16 @@ public class Match {
                 n = getMove.nextInt();
             }
             if(n == 1) {
-                System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
-                x1 = getMove.nextInt();
-                y1 = getMove.nextInt();
-                moveOK= players[curr].pickCard(board, x1, y1);
+                readMove(getMove, n, xArray, yArray);
+                moveOK = players[curr].pickCard(board, xArray[0] - 'a', yArray[0]);
             }
             else if(n == 2){
-                System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
-                x1 = getMove.nextInt();
-                y1 = getMove.nextInt();
-                x2 = getMove.nextInt();
-                y2 = getMove.nextInt();
-                moveOK= players[curr].pickCard(board, x1, y1, x2, y2);
+                readMove(getMove, n, xArray, yArray);
+                moveOK= players[curr].pickCard(board, xArray[0] - 'a', yArray[0], xArray[1] - 'a', yArray[1]);
             }
-            else if(n == 3){
-                System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
-                x1 = getMove.nextInt();
-                y1 = getMove.nextInt();
-                x2 = getMove.nextInt();
-                y2 = getMove.nextInt();
-                x3 = getMove.nextInt();
-                y3 = getMove.nextInt();
-                moveOK= players[curr].pickCard(board, x1, y1, x2, y2, x3, y3);
+            else {
+                readMove(getMove, n, xArray, yArray);
+                moveOK= players[curr].pickCard(board, xArray[0] - 'a', yArray[0], xArray[1] - 'a', yArray[1], xArray[2] - 'a', yArray[2]);
             }
 
             if(moveOK) {
@@ -125,7 +113,7 @@ public class Match {
                     players[curr].calculateCommonPoints(commonPoints1, 1);
                     System.out.println(players[curr].getUsername() + " scored " + commonPoints1 + " points");
                     commonPoints1 = commonPoints1 -2;
-                    System.out.println(commonPoints1 + " points will be awarded to the next player who completes this common goal card");
+                    System.out.println(commonPoints1 + " points will be awarded to the next player who completes this common goal card\n");
 
                 }
                 if(!players[curr].getCommonDone2() && board.getCommonCards()[1].checkBookshelf(players[curr].getMatrixBookshelf())) {
@@ -133,7 +121,7 @@ public class Match {
                     players[curr].calculateCommonPoints(commonPoints2, 2);
                     System.out.println(players[curr].getUsername() + " scored " + commonPoints2 + " points");
                     commonPoints2 = commonPoints2 -2;
-                    System.out.println(commonPoints2 + " points will be awarded to the next player who completes this common goal card");
+                    System.out.println(commonPoints2 + " points will be awarded to the next player who completes this common goal card\n");
                 }
 
                 if(board.isRefillable())
@@ -251,6 +239,23 @@ public class Match {
         }
     }
 
+    /**
+     * This method reads some coordinates of the tiles that a player wishes to remove from the board. the X coordinate is read as a letter from 'a' to 'i' and is converted to an int value from 0 to 8, the Y coordinate is read as an int value from 0 to 8. Then the coordinates are saved in 2 arrays (one for X coordinates and one for Y coordinates).
+     * @author Alessandro Fornara
+     * @param getMove Scanner variable
+     * @param n       Number of tiles
+     * @param xArray  Array of int values that contains the X coordinates of the tiles
+     * @param yArray  Array of int values that contains the Y coordinates of the tiles
+     */
+    private void readMove(Scanner getMove, int n, int[] xArray, int[] yArray){
+        System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
+        String input;
+        for(int i=0; i<n; i++) {
+            input = getMove.next();
+            xArray[i] = input.charAt(0);
+            yArray[i] = getMove.nextInt();
+        }
+    }
     /**
      * This method prints the board and common goal cards
      * @author Alessandro Fornara

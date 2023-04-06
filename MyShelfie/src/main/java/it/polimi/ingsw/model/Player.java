@@ -295,9 +295,9 @@ public class Player {
             y3 = readCoordinates.nextInt();
         }*/
         if(!readAgain){
-            removed1 = tileBoard.getMatrix()[x1][y1];
-            removed2 = tileBoard.getMatrix()[x2][y2];
-            removed3 = tileBoard.getMatrix()[x3][y3];
+            removed1 = tileBoard.deleteItemEnum(x1, y1);
+            removed2 = tileBoard.deleteItemEnum(x2, y2);
+            removed3 = tileBoard.deleteItemEnum(x3, y3);
             System.out.println("Decide the column of your shelf");
             j = readCoordinates.nextInt();
             while(isColumnFull(j,3)){
