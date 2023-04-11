@@ -5,12 +5,14 @@ import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.MovePickCard;
 import it.polimi.ingsw.view.CLI.CliView;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
 
-public class ControllerCli {
+public class ControllerCli implements PropertyChangeListener {
     private CliView view;
     private Model model;
 
@@ -20,13 +22,11 @@ public class ControllerCli {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        if(o != view || !(arg instanceof MovePickCard)){
-            throw new IllegalArgumentException();
-        }
-        MovePickCard m = (MovePickCard) arg;
+    public void propertyChange(PropertyChangeEvent o) {
+
+        MovePickCard m = (MovePickCard) o.getOldValue();
         if(model.isFeasiblePickMove(m.getRow(), m.getCol())){
-            model.performMove(m.getRow(), m.getCol(), model.getPlayerMarker());
+            model.performMove(m.getRow(), m.getCol(), model.getPlayer(0));
         } else {
             return;
         }

@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="Removed some warnings and cleared the code">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/ControllerCli.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Model.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/MovePickCard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CLI/CliView.java" afterDir="false" />
+    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="model class modified">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/ControllerCli.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/controller/ControllerCli.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CLI/CliView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CLI/CliView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,12 +19,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -62,6 +64,11 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="it.polimi.ingsw.model" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="checkIfFull" />
@@ -96,7 +103,12 @@
       <workItem from="1680277841187" duration="2043000" />
       <workItem from="1680595830845" duration="6251000" />
       <workItem from="1680618939902" duration="1528000" />
-      <workItem from="1680773081066" duration="7785000" />
+      <workItem from="1680773081066" duration="7944000" />
+      <workItem from="1680789391395" duration="1918000" />
+      <workItem from="1680813526202" duration="27000" />
+      <workItem from="1680960421358" duration="724000" />
+      <workItem from="1681210349738" duration="1147000" />
+      <workItem from="1681214806795" duration="7460000" />
     </task>
     <task id="LOCAL-00001" summary="Test git donato">
       <created>1679411053113</created>
@@ -315,7 +327,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680620539439</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="implementing the mvc design pattern">
+      <created>1680781642951</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1680781642951</updated>
+    </task>
+    <task id="LOCAL-00033" summary="model class modified">
+      <created>1680791414688</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1680791414688</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,8 +359,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implementation of the &quot;Personal Card&quot; class through 2 auxiliary private classes.&#10;The &quot;Triplet&quot; class is formed by the x and y coordinates and the color of the tile." />
-    <MESSAGE value="implemented the first 6 personal cards" />
     <MESSAGE value="changed the name &quot;bookshelf&quot; to &quot;figure&quot;" />
     <MESSAGE value="problems with push-merge 01" />
     <MESSAGE value="create and start to implemente the Bookshelf class" />
@@ -358,6 +382,8 @@
     <MESSAGE value="fixed the Player's constructor" />
     <MESSAGE value="Created view and controller packages" />
     <MESSAGE value="Removed some warnings and cleared the code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed some warnings and cleared the code" />
+    <MESSAGE value="implementing the mvc design pattern" />
+    <MESSAGE value="model class modified" />
+    <option name="LAST_COMMIT_MESSAGE" value="model class modified" />
   </component>
 </project>

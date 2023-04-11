@@ -2,12 +2,16 @@ package it.polimi.ingsw.view.CLI;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.view.UI;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.PrintStream;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-public class CliView extends Observable implements Runnable, Observer{
+public class CliView implements Runnable, UI{
     private Scanner scanner;
     private PrintStream outputStream;
     private boolean done;
@@ -35,16 +39,8 @@ public class CliView extends Observable implements Runnable, Observer{
     }
 
     private void handleMove(int row, int col) {
-        setChanged();
-        notifyObservers(new MovePickCard(row, col));
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        if(!(o instanceof Model) || !(arg instanceof Board)){
-            throw new IllegalArgumentException();
-        }
-//        showBoard((Board)arg);
+//        setChanged();
+//        notifyObservers(new MovePickCard(row, col));
     }
 
     @Override
@@ -52,5 +48,10 @@ public class CliView extends Observable implements Runnable, Observer{
         while(!done){
             playerMove();
         }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+//        showBoard((Board)arg);
     }
 }
