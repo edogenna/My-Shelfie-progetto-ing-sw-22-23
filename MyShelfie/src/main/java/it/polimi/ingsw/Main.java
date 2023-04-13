@@ -9,8 +9,12 @@ public class Main {
         m1=new Match(2);
         m1.begin();
         */
+        /*
         Server s=new Server(1234);
         s.startServer();
+
+        */
+
     }
 }
 
