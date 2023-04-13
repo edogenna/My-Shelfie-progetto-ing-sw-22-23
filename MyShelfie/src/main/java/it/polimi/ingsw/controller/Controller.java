@@ -1,7 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.view.View;
+import it.polimi.ingsw.Client.view.View;
 
 public class Controller {
 
