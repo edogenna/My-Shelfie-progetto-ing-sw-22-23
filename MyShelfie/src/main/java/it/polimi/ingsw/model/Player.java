@@ -182,13 +182,13 @@ public class Player {
         return true;
     }
 
-/*    public boolean checkIfFull2(){
+    public boolean checkIfFull2(){
         for(int i=0; i<5; i++) {
             if(this.heights[i] < 6)
                 return false;
         }
         return true;
-    }*/
+    }
 
     public boolean pickCard(Board tileBoard, int x1, int y1){
         boolean readAgain;
@@ -384,6 +384,15 @@ public class Player {
      */
     private boolean isColumnFull(int j, int n){
         return this.heights[j] + n > 6;
+    }
+
+    public int maxTilesPick(){
+        int x=0;
+        for(int i=0; i<5; i++){
+            if(6-this.getHeights(i)>x)
+                x = 6 - this.getHeights(i);
+        }
+        return x;
     }
 
     //"y" is the library column. The tile is placed on the first available row starting from the bottom.

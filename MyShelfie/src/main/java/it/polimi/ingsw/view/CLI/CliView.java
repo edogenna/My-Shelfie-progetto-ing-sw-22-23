@@ -1,7 +1,9 @@
 package it.polimi.ingsw.view.CLI;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.model.Board;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -9,13 +11,17 @@ public class CliView implements Runnable {
     private Scanner scanner;
     private PrintStream outputStream;
     private boolean done;
+    private Controller controllerCli;
 
-    public CliView(){
+//it is temporary; later I will create an interface similar to the observers;
+
+    public CliView(int numPlayers){
         scanner = new Scanner(System.in);
         outputStream = new PrintStream(System.out);
+        controllerCli = new Controller(numPlayers);
     }
 
-    public void playerMove(){
+    public void match(){
         while (true) {
             outputStream.println("How many tiles do you want to pick?");
             int i = scanner.nextInt();
@@ -32,10 +38,14 @@ public class CliView implements Runnable {
         }
     }
 
+/*    private ItemEnum[][] getMatrixBoard(){
+
+    }*/
+
     @Override
     public void run() {
         while(!done){
-            playerMove();
+            match();
         }
     }
 }

@@ -61,8 +61,8 @@ public class Match {
         for(int i=0; i<numPlayers; i++)
             players[i].setPersonalCard(personalCards[i]);
 
-        commonPoints1 =8;
-        commonPoints2 =8;
+        commonPoints1 = 8;
+        commonPoints2 = 8;
     }
 
     /**
@@ -224,30 +224,30 @@ public class Match {
      * @author Alessandro Fornara
      */
     private void GeneratePersonalCards(){
-        int[] array=new int[numPlayers];
-        Random rand=new Random();
-        PersonalCard p=new PersonalCard();
-        this.personalCards =new Card[numPlayers];
+        int[] idPersonalCards = new int[numPlayers];
+        Random rand = new Random();
+        PersonalCard p = new PersonalCard();
+        this.personalCards = new Card[numPlayers];
 
         if(this.numPlayers==2) {
-            array[0] = rand.nextInt(12);
-            array[1] = array[0];
-            while (array[1] == array[0])
-                array[1] = rand.nextInt(12);
-            this.personalCards[0]=p.getCard(array[0]);
-            this.personalCards[1]=p.getCard(array[1]);
+            idPersonalCards[0] = rand.nextInt(12);
+            idPersonalCards[1] = idPersonalCards[0];
+            while (idPersonalCards[1] == idPersonalCards[0])
+                idPersonalCards[1] = rand.nextInt(12);
+            this.personalCards[0] = p.getCard(idPersonalCards[0]);
+            this.personalCards[1] = p.getCard(idPersonalCards[1]);
         }
         if(this.numPlayers==3){
-            array[2]=array[0];
-            while (array[2]==array[0] || array[2]==array[1])
-                array[2] = rand.nextInt(12);
-            this.personalCards[2]=p.getCard(array[2]);
+            idPersonalCards[2] = idPersonalCards[0];
+            while (idPersonalCards[2]==idPersonalCards[0] || idPersonalCards[2]==idPersonalCards[1])
+                idPersonalCards[2] = rand.nextInt(12);
+            this.personalCards[2] = p.getCard(idPersonalCards[2]);
         }
         if(this.numPlayers==4){
-            array[3]=array[0];
-            while (array[3]==array[0] || array[3]==array[1] || array[3]==array[2])
-                array[3] = rand.nextInt(12);
-            this.personalCards[3]=p.getCard(array[3]);
+            idPersonalCards[3] = idPersonalCards[0];
+            while (idPersonalCards[3]==idPersonalCards[0] || idPersonalCards[3]==idPersonalCards[1] || idPersonalCards[3]==idPersonalCards[2])
+                idPersonalCards[3] = rand.nextInt(12);
+            this.personalCards[3] = p.getCard(idPersonalCards[3]);
         }
     }
 
