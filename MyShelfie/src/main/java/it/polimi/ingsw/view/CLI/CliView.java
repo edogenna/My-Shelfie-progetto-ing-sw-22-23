@@ -1,17 +1,11 @@
 package it.polimi.ingsw.view.CLI;
 
-import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.view.UI;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.PrintStream;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Scanner;
 
-public class CliView implements Runnable, UI{
+public class CliView implements Runnable {
     private Scanner scanner;
     private PrintStream outputStream;
     private boolean done;
@@ -30,7 +24,7 @@ public class CliView implements Runnable, UI{
             String s = scanner.next();
             try {
                 String[] inputs = s.split(",");
-                handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
+//                handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
                 break;
             }catch(NumberFormatException e){
                 outputStream.println("Please provide integer values as coordinates");
@@ -38,20 +32,10 @@ public class CliView implements Runnable, UI{
         }
     }
 
-    private void handleMove(int row, int col) {
-//        setChanged();
-//        notifyObservers(new MovePickCard(row, col));
-    }
-
     @Override
     public void run() {
         while(!done){
             playerMove();
         }
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-//        showBoard((Board)arg);
     }
 }
