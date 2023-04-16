@@ -22,11 +22,28 @@ public class CliView implements Runnable {
     }
 
     public void match(){
+        int x, id;
+        String name;
+        x = controllerCli.getNumPlayers();
+        for(int i=0; i<x; i++){
+            outputStream.println("Player" + i + ", insert your ID");
+            do{
+                id = scanner.nextInt();
+                if(controllerCli.duplicatedId(id)){
+                    outputStream.println("Select another ID, this has been already selected.");
+                }
+            }while(controllerCli.duplicatedId(id));
+            //todo: can two players have the same username?
+            outputStream.println("Player" + i + ", insert your username");
+            name = scanner.next();
+            controllerCli.setIdUsernamePlayer(id, name);
+        }
+        //TODO: print the board
         while (true) {
             outputStream.println("How many tiles do you want to pick?");
             int i = scanner.nextInt();
-            //control the space in the bookshelf; ...
-            outputStream.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
+            //control the space in the bookshelf;
+            outputStream.println("please enter the tiles' coordinates you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
             String s = scanner.next();
             try {
                 String[] inputs = s.split(",");

@@ -15,4 +15,16 @@ public class Controller {
         this.model = model;
         this.view = view;
     }
+
+    public int getNumPlayers(){
+        return this.model.getNumPlayers();
+    }
+
+    public boolean duplicatedId(int x){
+        return this.model.duplicatedId(x);
+    }
+
+    public void setIdUsernamePlayer(int id, String name){
+        this.model.setIdUsernamePlayer(id, name);
+    }
 }

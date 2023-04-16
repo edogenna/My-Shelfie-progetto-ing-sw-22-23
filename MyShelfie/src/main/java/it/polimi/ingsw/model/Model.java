@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Model {
@@ -9,6 +10,7 @@ public class Model {
     private Player activePlayer;
     private Card[] personalCards;
     private int commonPoints1, commonPoints2;
+    private ArrayList<Integer> idPlayers = new ArrayList<>();
 
     public Model(int numPlayers){
         this.numPlayers = numPlayers;
@@ -24,11 +26,6 @@ public class Model {
 
     public boolean isFeasiblePickMove(int x, int y){
         return this.board.tileFreeSide(x, y);
-    }
-
-    public void performMove(int x, int y, Player bob){
-        int z = 1;
-        bob.insert(z, board.deleteItemEnum(x,y));
     }
 
     public boolean checkFullShelf(){
@@ -52,8 +49,25 @@ public class Model {
         this.activePlayer = this.players[i];
     }
 
-    public void setIdUsernamePlayer(int i, int id, String username){
+    public void setIdUsernamePlayer(int id, String username){
+        int i = idPlayers.size();
         this.players[i] = new Player(id, username);
+        idPlayers.add(id);
+    }
+
+    public int getNumPlayers(){
+        return this.numPlayers;
+    }
+
+    public boolean duplicatedId(int x){
+        int y = idPlayers.size();
+        if(y==0)
+            return false;
+        for(int i=0; i<y; i++){
+            if(x == idPlayers.get(i))
+                return true;
+        }
+        return false;
     }
 
     /**
