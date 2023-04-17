@@ -49,6 +49,10 @@ public class Model {
         this.activePlayer = this.players[i];
     }
 
+    public String getActivePlayerName(){
+        return new String(this.activePlayer.getUsername());
+    }
+
     public void setUsernamePlayer(String username){
         int i;
         this.idActivePlayer++;
@@ -119,5 +123,26 @@ public class Model {
 
     public void insert(int x, int y, int z){
         this.activePlayer.insert(z,board.deleteItemEnum(x,y));
+    }
+
+    public boolean controlCommonCards(int x){
+        boolean done = false;
+        if(x==1){
+            done = this.activePlayer.getCommonDone1();
+        } else if (x==2) {
+            done = this.activePlayer.getCommonDone2();
+        }
+        if(!done && board.getCommonCards()[x-1].checkBookshelf(this.activePlayer.getMatrixBookshelf())){
+            return true;
+        }
+        return false;
+    }
+
+    public int getCommonCardsPoints(int card){
+        if(card == 1)
+            return this.commonPoints1;
+        else if(card == 2)
+            return this.commonPoints2;
+        return 0;
     }
 }

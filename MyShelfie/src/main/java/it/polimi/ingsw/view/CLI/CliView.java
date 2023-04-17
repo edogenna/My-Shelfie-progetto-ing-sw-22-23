@@ -18,7 +18,7 @@ public class CliView implements Runnable {
     public CliView(int numPlayers){
         scanner = new Scanner(System.in);
         outputStream = new PrintStream(System.out);
-        controllerCli = new Controller(numPlayers);
+        controllerCli = new Controller(numPlayers, this);
     }
 
     public void match(){
@@ -79,6 +79,8 @@ public class CliView implements Runnable {
                     input3Tiles();
                     break;
             }
+            done = controllerCli.finishTurn();
+            //TODO: now we have controlled the commonPoints and if someone has filled the bookshelf; finish the match
         }
     }
 
@@ -88,6 +90,11 @@ public class CliView implements Runnable {
 
     private void input3Tiles(){
         String s = scanner.next();
+    }
+
+    public void commonPoints(String nickname, int points, int number){
+        outputStream.println(nickname + "has completed the "+ number + " common goal card");
+        outputStream.println(nickname + "scored " + points + " points");
     }
 
     @Override

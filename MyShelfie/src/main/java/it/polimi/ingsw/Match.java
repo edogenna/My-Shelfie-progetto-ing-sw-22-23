@@ -75,7 +75,7 @@ public class Match {
         int firstPlayerNumber, lastPlayer, curr, n=0;
         int x1, y1, x2, y2, x3, y3;
 
-        boolean moveOK, endGame = false, exitGame = false;
+        boolean moveOk, endGame = false, exitGame = false;
 
         //it's decided who will go first
         firstPlayerNumber = random.nextInt(numPlayers);
@@ -86,7 +86,7 @@ public class Match {
 
         //the game starts
         while(!exitGame){
-            moveOK=false;
+            moveOk=false;
             n=0;
             while(n!=1 && n!=2 && n!=3) {
                 System.out.println("\n" + "Your bookshelf:   Your personal card:");
@@ -98,14 +98,14 @@ public class Match {
             if(n == 1) {
                 x1 = getMove.nextInt();
                 y1 = getMove.nextInt();
-                moveOK= players[curr].pickCard(board, x1, y1);
+                moveOk= players[curr].pickCard(board, x1, y1);
             }
             else if(n == 2){
                 x1 = getMove.nextInt();
                 y1 = getMove.nextInt();
                 x2 = getMove.nextInt();
                 y2 = getMove.nextInt();
-                moveOK= players[curr].pickCard(board, x1, y1, x2, y2);
+                moveOk= players[curr].pickCard(board, x1, y1, x2, y2);
             }
             else if(n == 3){
                 x1 = getMove.nextInt();
@@ -114,10 +114,10 @@ public class Match {
                 y2 = getMove.nextInt();
                 x3 = getMove.nextInt();
                 y3 = getMove.nextInt();
-                moveOK= players[curr].pickCard(board, x1, y1, x2, y2, x3, y3);
+                moveOk= players[curr].pickCard(board, x1, y1, x2, y2, x3, y3);
             }
 
-            if(moveOK) {
+            if(moveOk) {
                 if(!players[curr].getCommonDone1() && board.getCommonCards()[0].checkBookshelf(players[curr].getMatrixBookshelf())) {
                     System.out.println(players[curr].getUsername() + " has completed the first common goal card");
                     players[curr].calculateCommonPoints(commonPoints1, 1);

@@ -11,8 +11,8 @@ public class Controller {
         model = new Model(x);
     }
 
-    public Controller(Model model, CliView view){
-        this.model = model;
+    public Controller(int x, CliView view){
+        this.model = new Model(x);
         this.view = view;
     }
 
@@ -45,5 +45,24 @@ public class Controller {
             return false;
         model.insert(x,y,z);
         return true;
+    }
+
+    public boolean finishTurn(){
+        int points;
+        boolean card;
+        card = model.controlCommonCards(0);
+        if(card){
+            points = model.getCommonCardsPoints(0);
+            view.commonPoints(model.getActivePlayerName(), points, 0);
+        }
+        card = model.controlCommonCards(1);
+        if(card){
+            points = model.getCommonCardsPoints(1);
+            view.commonPoints(model.getActivePlayerName(), points, 1);
+        }
+        //TODO: control the next statement;
+        card = model.checkFullShelf();
+        model.changeActivePlayer();
+        return card;
     }
 }
