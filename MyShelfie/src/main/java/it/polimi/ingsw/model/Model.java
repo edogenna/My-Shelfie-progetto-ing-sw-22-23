@@ -114,5 +114,10 @@ public class Model {
         if(x>activePlayer.maxTilesPick())
             return false;
         return true;
+        //TODO: can i print here in the model? "you don't have enough space"
+    }
+
+    public void insert(int x, int y, int z){
+        this.activePlayer.insert(z,board.deleteItemEnum(x,y));
     }
 }

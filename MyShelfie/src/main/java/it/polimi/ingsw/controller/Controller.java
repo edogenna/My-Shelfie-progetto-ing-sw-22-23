@@ -39,4 +39,11 @@ public class Controller {
     public boolean isFeasibleMove(int x, int y){
         return model.isFeasiblePickMove(x,y);
     }
+
+    public boolean pickCard(int x, int y, int z){
+        if(!model.enoughSpaceBookshelf(z))
+            return false;
+        model.insert(x,y,z);
+        return true;
+    }
 }

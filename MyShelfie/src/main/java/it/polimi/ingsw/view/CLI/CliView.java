@@ -22,8 +22,10 @@ public class CliView implements Runnable {
     }
 
     public void match(){
-        int x, i;
-        String name;
+        int x, z, i, j, k;
+        boolean done;
+        String name, inputs;
+        String[] tiles;
         x = controllerCli.getNumPlayers();
         for(i=0; i<x; i++){
             outputStream.println("Player" + i + ", insert your username");
@@ -50,7 +52,25 @@ public class CliView implements Runnable {
             //TODO: complete the selection and insertion of the tiles!
             switch (i){
                 case 1:
-                    input1Tile();
+                    inputs = scanner.next();
+                    tiles = inputs.split(",");
+                    done = controllerCli.isFeasibleMove(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]));
+                    while(!done){
+                        outputStream.println("the tile hasn't any free sides, so select another tile");
+                        inputs = scanner.next();
+                        tiles = inputs.split(",");
+                        done = controllerCli.isFeasibleMove(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]));
+                    }
+                    j = Integer.parseInt(tiles[0]);
+                    k = Integer.parseInt(tiles[1]);
+                    outputStream.println("in which column do you want to insert the tile?");
+                    z = scanner.nextInt();
+                    done = controllerCli.pickCard(j,k,z);
+                    while(!done){
+                        outputStream.println("the column selected hasn't enough space, select another one");
+                        z = scanner.nextInt();
+                        done = controllerCli.pickCard(j,k,z);
+                    }
                     break;
                 case 2:
                     input2Tiles();
@@ -60,13 +80,6 @@ public class CliView implements Runnable {
                     break;
             }
         }
-    }
-
-    //TODO: complete this method
-    private boolean input1Tile(){
-        String s = scanner.next();
-        String[] inputs = s.split(",");
-        return controllerCli.isFeasibleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
     }
 
     private void input2Tiles(){
