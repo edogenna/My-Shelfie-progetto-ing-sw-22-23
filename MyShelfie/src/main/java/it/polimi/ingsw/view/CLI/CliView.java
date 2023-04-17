@@ -22,42 +22,60 @@ public class CliView implements Runnable {
     }
 
     public void match(){
-        int x, id;
+        int x, i;
         String name;
         x = controllerCli.getNumPlayers();
-        for(int i=0; i<x; i++){
-            outputStream.println("Player" + i + ", insert your ID");
-            do{
-                id = scanner.nextInt();
-                if(controllerCli.duplicatedId(id)){
-                    outputStream.println("Select another ID, this has been already selected.");
-                }
-            }while(controllerCli.duplicatedId(id));
-            //todo: can two players have the same username?
+        for(i=0; i<x; i++){
             outputStream.println("Player" + i + ", insert your username");
-            name = scanner.next();
-            controllerCli.setIdUsernamePlayer(id, name);
+            do{
+                name = scanner.next();
+                if(controllerCli.duplicatedUsername(name)){
+                    outputStream.println("Select another username, this has been already selected.");
+                }
+            }while(controllerCli.duplicatedUsername(name));
+            controllerCli.setUsernamePlayer(name);
         }
+        controllerCli.setFirstPlayer();
         //TODO: print the board
         while (true) {
             outputStream.println("How many tiles do you want to pick?");
-            int i = scanner.nextInt();
+            i = scanner.nextInt();
             //control the space in the bookshelf;
-            outputStream.println("please enter the tiles' coordinates you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
-            String s = scanner.next();
-            try {
-                String[] inputs = s.split(",");
-//                handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
-                break;
-            }catch(NumberFormatException e){
-                outputStream.println("Please provide integer values as coordinates");
+            while(controllerCli.enoughSpaceBookshelf(i)){
+                outputStream.println("You don't have enough space in your bookshelf");
+                i = scanner.nextInt();
+            }
+            outputStream.println("please enter the tiles' coordinates you want to remove in the order you want to put them in the bookshelf, from bottom to top.");
+            outputStream.println("example: x1,y1");
+            //TODO: complete the selection and insertion of the tiles!
+            switch (i){
+                case 1:
+                    input1Tile();
+                    break;
+                case 2:
+                    input2Tiles();
+                    break;
+                case 3:
+                    input3Tiles();
+                    break;
             }
         }
     }
 
-/*    private ItemEnum[][] getMatrixBoard(){
+    //TODO: complete this method
+    private boolean input1Tile(){
+        String s = scanner.next();
+        String[] inputs = s.split(",");
+        return controllerCli.isFeasibleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
+    }
 
-    }*/
+    private void input2Tiles(){
+        String s = scanner.next();
+    }
+
+    private void input3Tiles(){
+        String s = scanner.next();
+    }
 
     @Override
     public void run() {

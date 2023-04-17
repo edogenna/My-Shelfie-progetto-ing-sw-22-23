@@ -94,14 +94,13 @@ public class Match {
                 System.out.println(players[curr].getUsername() + " It's your turn!" + " please enter how many tiles you want to remove: ");
                 n = getMove.nextInt();
             }
+            System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
             if(n == 1) {
-                System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
                 x1 = getMove.nextInt();
                 y1 = getMove.nextInt();
                 moveOK= players[curr].pickCard(board, x1, y1);
             }
             else if(n == 2){
-                System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
                 x1 = getMove.nextInt();
                 y1 = getMove.nextInt();
                 x2 = getMove.nextInt();
@@ -109,7 +108,6 @@ public class Match {
                 moveOK= players[curr].pickCard(board, x1, y1, x2, y2);
             }
             else if(n == 3){
-                System.out.println("please enter the coordinates of the tiles you want to remove in the order you want to put them in the bookshelf (from bottom to top): ");
                 x1 = getMove.nextInt();
                 y1 = getMove.nextInt();
                 x2 = getMove.nextInt();

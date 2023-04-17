@@ -13,8 +13,6 @@ public class Player {
     private Card myGoals;
     private boolean CommonDone1, CommonDone2;
     private ItemEnum[][] shelf = new ItemEnum[6][5];
-    private int[] heights = new int[5];
-
     public Player(int id, String username){
         this.id = id;
         this.username = username;
@@ -27,6 +25,22 @@ public class Player {
                 shelf[i][j] = ItemEnum.BLANK;
         }
     }
+
+    public Player(String username){
+        //todo: after cleaned the match class, remove the id
+        this.id = -2;
+        this.username = username;
+        myPoints = 0;
+        myCommonPoints = 0;
+        CommonDone1 = false;
+        CommonDone2 = false;
+        for(int i=0; i<6; i++){
+            for(int j=0; j<5; j++)
+                shelf[i][j] = ItemEnum.BLANK;
+        }
+    }
+
+    private int[] heights = new int[5];
 
     public void setPersonalCard(Card goals){
         myGoals = new Card();

@@ -20,11 +20,23 @@ public class Controller {
         return this.model.getNumPlayers();
     }
 
-    public boolean duplicatedId(int x){
-        return this.model.duplicatedId(x);
+    public boolean duplicatedUsername(String x){
+        return this.model.duplicatedUsername(x);
     }
 
-    public void setIdUsernamePlayer(int id, String name){
-        this.model.setIdUsernamePlayer(id, name);
+    public void setUsernamePlayer(String name){
+        this.model.setUsernamePlayer(name);
+    }
+
+    public void setFirstPlayer(){
+        model.setFirstPlayer();
+    }
+
+    public boolean enoughSpaceBookshelf(int x){
+        return model.enoughSpaceBookshelf(x);
+    }
+
+    public boolean isFeasibleMove(int x, int y){
+        return model.isFeasiblePickMove(x,y);
     }
 }

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Model {
@@ -10,7 +9,7 @@ public class Model {
     private Player activePlayer;
     private Card[] personalCards;
     private int commonPoints1, commonPoints2;
-    private ArrayList<Integer> idPlayers = new ArrayList<>();
+    private int idActivePlayer;
 
     public Model(int numPlayers){
         this.numPlayers = numPlayers;
@@ -22,6 +21,7 @@ public class Model {
         }
         commonPoints1 = 8;
         commonPoints2 = 8;
+        idActivePlayer = -1;
     }
 
     public boolean isFeasiblePickMove(int x, int y){
@@ -49,22 +49,23 @@ public class Model {
         this.activePlayer = this.players[i];
     }
 
-    public void setIdUsernamePlayer(int id, String username){
-        int i = idPlayers.size();
-        this.players[i] = new Player(id, username);
-        idPlayers.add(id);
+    public void setUsernamePlayer(String username){
+        int i;
+        this.idActivePlayer++;
+        i = this.idActivePlayer;
+        this.players[i] = new Player(username);
     }
 
     public int getNumPlayers(){
         return this.numPlayers;
     }
 
-    public boolean duplicatedId(int x){
-        int y = idPlayers.size();
-        if(y==0)
+    public boolean duplicatedUsername(String x){
+        int y = idActivePlayer;
+        if(y==-1)
             return false;
         for(int i=0; i<y; i++){
-            if(x == idPlayers.get(i))
+            if(x.equals(players[i].getUsername()))
                 return true;
         }
         return false;
@@ -100,5 +101,18 @@ public class Model {
                 idPersonalCards[3] = rand.nextInt(12);
             this.personalCards[3] = p.getCard(idPersonalCards[3]);
         }
+    }
+
+    public void setFirstPlayer(){
+        Random xyz = new Random();
+        int i;
+        i = xyz.nextInt(numPlayers);
+        this.idActivePlayer = i;
+    }
+
+    public boolean enoughSpaceBookshelf(int x){
+        if(x>activePlayer.maxTilesPick())
+            return false;
+        return true;
     }
 }
