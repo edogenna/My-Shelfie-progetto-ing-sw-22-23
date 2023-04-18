@@ -67,7 +67,7 @@ public class CommonCard03 implements CommonCardStrategy{
                 i++; j++; //mi sposto in diagonale
             }
         }
-        for(int k=0; k<14; k++)
+        for(int k=0; k<15; k++)
             if(groups[k]>=minTiles) {
                 counter++;
                 if(counter== minGroups) return true;

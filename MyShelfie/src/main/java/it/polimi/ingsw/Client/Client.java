@@ -25,16 +25,12 @@ public class Client {
         */
         try (
                 Socket Socket = new Socket(hostName, portNumber);
-                PrintWriter out =
-                new PrintWriter(Socket.getOutputStream(), true);
-                BufferedReader in =
-                new BufferedReader(
-                    new InputStreamReader(Socket.getInputStream()));
-                BufferedReader stdIn =
-                new BufferedReader(
-                    new InputStreamReader(System.in))
+                PrintWriter out = new PrintWriter(Socket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(Socket.getInputStream()));
+                BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
         ) {
             String userInput;
+
             while ((userInput = stdIn.readLine()) != null) {
                 out.println(userInput);
                 System.out.println(in.readLine());
