@@ -22,17 +22,20 @@ public class CommonCard06 implements CommonCardStrategy{
         int[] occurrences = new int[6];
         int pos;
         int i=0;
-        boolean columnOk = true; //true finchè una colonna ha tutte le occorrenze = 1
+        boolean columnOk; //true finchè una colonna ha tutte le occorrenze = 1
         int counter=0; //contatore per il numero di colonne
 
         for (int j=0; j<5; j++) {
             setArray(occurrences, 0);
-            if(!b[i][j].equals(ItemEnum.BLANK)){ //escludo le colonne non piene
+            columnOk=true;
+
                 for (i=0; i<6; i++) {
-                    pos = enumToInt(b[i][j]); //scorro tutta la colonna aumentando le righe
-                    occurrences[pos]++;
+                    if(!b[i][j].equals(ItemEnum.BLANK)) {
+                        pos = enumToInt(b[i][j]); //scorro tutta la colonna aumentando le righe
+                        occurrences[pos]++;
+                    }
                 }
-                for (int k=0; k<6; k++)
+                for (int k=0; k<6 && columnOk; k++)
                     if(occurrences[k] != 1)
                         columnOk=false;
 
@@ -41,7 +44,7 @@ public class CommonCard06 implements CommonCardStrategy{
                 if(counter == 2)
                     return true;
             }
-        }
+
         return false;
     }
 
