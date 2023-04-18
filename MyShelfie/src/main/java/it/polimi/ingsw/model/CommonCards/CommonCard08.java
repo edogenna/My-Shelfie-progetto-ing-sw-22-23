@@ -22,34 +22,39 @@ public class CommonCard08 implements CommonCardStrategy {
         //TODO: rethink algorithm
         int[] occurrences = new int[6];
         int pos;
-        int sum;
         int j=0;
         boolean lineOk = true; //true finchè una riga ha tutte le occorrenze = 1
         int counter=0; //contatore per il numero di righe
 
         for (int i=0; i<6; i++) {
             setArray(occurrences, 0);
-            sum=0;
+            lineOk=true;
                 for (j=0; j<5; j++) {
-                    if(!b[i][j].equals(ItemEnum.BLANK)){ //escludo le righe non piene
+                    if (!b[i][j].equals(ItemEnum.BLANK)) { //escludo le righe non piene
                         pos = enumToInt(b[i][j]); //popolo array occorrenze
                         occurrences[pos]++;
                     }
-                    for (int k=0; k<6; k++) //conto le occorrenze per sapere se ci sono almeno 5 carte
-                        sum += occurrences[k];
-                    for (int k1=0; k1<6; k1++){//se ci sono occorrenze con 2 o più di 5 carte non va bene
-                        if(occurrences[k1] >= 2 || sum < 5)
-                            lineOk = false;
-                    }
-                    if(lineOk)
-                        counter++;
-                    if(counter == 2)
-                        return true;
-            }
+                }
+                bubbleSort(occurrences);
+                for(int k=0; k<5 && lineOk; k++) {
+                    if (occurrences[k]!=1)
+                        lineOk=false;
+                }
+                if(lineOk)
+                    counter++;
+                if(counter == 2)
+                    return true;
+
         }
         return false;
     }
 
+    /**
+     * This method hashes an ItemEnum colour with a number.
+     * @author Samuele Pietro Galli
+     * @param b ItemEnum
+     * @return an integer between 0 and 5
+     */
     private int enumToInt(ItemEnum b) { //hash per colori array occorrenze
         int value=0;
 
@@ -76,6 +81,23 @@ public class CommonCard08 implements CommonCardStrategy {
     @Override
     public void printCommonCard() {
         System.out.println(constant8);
+    }
+
+    /**
+     * This method sorts an array in decreasing order.
+     * @author Samuele Pietro Galli
+     * @param arr array.
+     */
+    private void bubbleSort(int arr[])
+    {
+        int n = arr.length;
+        for (int i = 0; i < n-1; i++)
+            for (int j = 0; j < n-i-1; j++)
+                if (arr[j] < arr[j+1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
     }
 
     @Override

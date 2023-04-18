@@ -53,8 +53,9 @@ public class CommonCard06 implements CommonCardStrategy{
 
     /**
      * This function converts an ItemEnum value into an int value
+     * @author Samuele Pietro Galli
      * @param b ItemEnum value
-     * @return Converted int value
+     * @return an integer between 0 and 5
      */
     private int enumToInt(ItemEnum b) { //hash per array occorrenze
         int value=0;
