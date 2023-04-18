@@ -17,7 +17,9 @@ public class CommonCard11 implements CommonCardStrategy {
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         int[] occurrences = new int[6];
-        int pos=0;
+        int pos;
+        for (int i=0; i<occurrences.length; i++)
+            occurrences[i]=0;
 
         for (int i=0; i<6; i++) { //scorro la matrice
             for (int j=0; j<5; j++) {
