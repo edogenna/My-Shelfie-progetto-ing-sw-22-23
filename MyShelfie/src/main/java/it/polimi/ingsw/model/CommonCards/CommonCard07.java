@@ -17,7 +17,6 @@ public class CommonCard07 implements CommonCardStrategy {
             "                those of the other square.\n";
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
-        //TODO: check if works
         int count=0;
         for (int i=0; i<5; i++){ //scorro la matrice fino alla penultima riga e penultima colonna dati i controlli
             for (int j=0; j<4; j++){
