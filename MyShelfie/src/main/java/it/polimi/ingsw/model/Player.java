@@ -13,8 +13,6 @@ public class Player {
     private Card myGoals;
     private boolean CommonDone1, CommonDone2;
     private ItemEnum[][] shelf = new ItemEnum[6][5];
-    private int[] heights = new int[5];
-
     public Player(int id, String username){
         this.id = id;
         this.username = username;
@@ -28,6 +26,22 @@ public class Player {
         }
     }
 
+    public Player(String username){
+        //todo: after cleaned the match class, remove the id
+        this.id = -2;
+        this.username = username;
+        myPoints = 0;
+        myCommonPoints = 0;
+        CommonDone1 = false;
+        CommonDone2 = false;
+        for(int i=0; i<6; i++){
+            for(int j=0; j<5; j++)
+                shelf[i][j] = ItemEnum.BLANK;
+        }
+    }
+
+    private int[] heights = new int[5];
+
     public void setPersonalCard(Card goals){
         myGoals = new Card();
         myGoals = goals;
@@ -39,6 +53,10 @@ public class Player {
 
     public int getId(){
         return this.id;
+    }
+
+    public int getHeights(int i){
+        return this.heights[i];
     }
 
     public ItemEnum[][] getMatrixBookshelf() {
@@ -178,13 +196,13 @@ public class Player {
         return true;
     }
 
-/*    public boolean checkIfFull2(){
+    public boolean checkIfFull2(){
         for(int i=0; i<5; i++) {
             if(this.heights[i] < 6)
                 return false;
         }
         return true;
-    }*/
+    }
 
     public boolean pickCard(Board tileBoard, int x1, int y1){
         boolean readAgain;
@@ -202,13 +220,6 @@ public class Player {
             System.out.println("one of the selected tiles hasn't a free side.");
             readAgain = true;
         }
-/*
-        if(readAgain){
-            System.out.println("Select another tile: x - y");
-            x1 = readCoordinates.nextInt();
-            y1 = readCoordinates.nextInt();
-        }
-*/
         if(!readAgain){
             removed = tileBoard.deleteItemEnum(x1, y1);
             System.out.println("Decide the column of your shelf");
@@ -339,15 +350,6 @@ public class Player {
 
         return isAdjacent;
     }
-/*
-x1 x2 x3
-x1 x3 x2
-x2 x1 x3
-x2 x3 x1 not
-x3 x1 x2 not
-x3 x1 x2 not
-*/
-
 
     /**
      * @author Alessandro Fornara
@@ -389,8 +391,6 @@ x3 x1 x2 not
 
     /**
      * This method returns true if the column hasn't enough cells to cover the move
-     * @author Samuele Galli
-     * @author Alessandro Fornara
      * @author Donato Fiore
      * @param j column selected
      * @param n number of tiles to insert
@@ -400,8 +400,17 @@ x3 x1 x2 not
         return this.heights[j] + n > 6;
     }
 
+    public int maxTilesPick(){
+        int x=0;
+        for(int i=0; i<5; i++){
+            if(6-this.getHeights(i)>x)
+                x = 6 - this.getHeights(i);
+        }
+        return x;
+    }
+
     //"y" is the library column. The tile is placed on the first available row starting from the bottom.
-    private void insert(int y, ItemEnum tile){
+    public void insert(int y, ItemEnum tile){
             this.shelf[5-heights[y]][y] = tile;
             heights[y]++;
     }
