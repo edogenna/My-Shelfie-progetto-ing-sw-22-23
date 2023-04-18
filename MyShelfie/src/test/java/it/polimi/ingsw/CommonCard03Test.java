@@ -5,6 +5,10 @@ import it.polimi.ingsw.model.CommonCards.CommonCard03;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * This class is a test for the third common card
+ * @author Samuele Pietro Galli
+ */
 public class CommonCard03Test {
     private CommonCardStrategy c;
     private ItemEnum[][] matrix;

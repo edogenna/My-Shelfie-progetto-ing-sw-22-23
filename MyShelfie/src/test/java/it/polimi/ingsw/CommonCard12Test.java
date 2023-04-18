@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * This class is a test for the second common card
+ * This class is a test for the twelfth common card
  * @author Samuele Pietro Galli
  */
 public class CommonCard12Test {
