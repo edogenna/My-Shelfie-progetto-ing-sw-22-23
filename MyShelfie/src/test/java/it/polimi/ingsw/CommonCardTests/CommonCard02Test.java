@@ -1,7 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.CommonCardTests;
 
 
 
+import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.CommonCards.CommonCard02;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import org.junit.Assert;
