@@ -110,7 +110,7 @@ public class Match {
             if(moveOK) {
                 if(!players[curr].getCommonDone1() && board.getCommonCards()[0].checkBookshelf(players[curr].getMatrixBookshelf())) {
                     System.out.println(players[curr].getUsername() + " has completed the first common goal card");
-                    players[curr].calculateCommonPoints(commonPoints1, 1);
+                    players[curr].updateCommonPoints(commonPoints1, 1);
                     System.out.println(players[curr].getUsername() + " scored " + commonPoints1 + " points");
                     commonPoints1 = commonPoints1 -2;
                     System.out.println(commonPoints1 + " points will be awarded to the next player who completes this common goal card\n");
@@ -118,7 +118,7 @@ public class Match {
                 }
                 if(!players[curr].getCommonDone2() && board.getCommonCards()[1].checkBookshelf(players[curr].getMatrixBookshelf())) {
                     System.out.println(players[curr].getUsername() + " has completed the second common goal card");
-                    players[curr].calculateCommonPoints(commonPoints2, 2);
+                    players[curr].updateCommonPoints(commonPoints2, 2);
                     System.out.println(players[curr].getUsername() + " scored " + commonPoints2 + " points");
                     commonPoints2 = commonPoints2 -2;
                     System.out.println(commonPoints2 + " points will be awarded to the next player who completes this common goal card\n");

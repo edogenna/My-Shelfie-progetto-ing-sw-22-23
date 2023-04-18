@@ -47,6 +47,7 @@ public class Controller {
         return true;
     }
 
+    //return true if someone has filled the bookshelf
     public boolean finishTurn(){
         int points;
         boolean card;
@@ -60,7 +61,6 @@ public class Controller {
             points = model.getCommonCardsPoints(1);
             view.commonPoints(model.getActivePlayerName(), points, 1);
         }
-        //TODO: control the next statement;
         card = model.checkFullShelf();
         model.changeActivePlayer();
         return card;

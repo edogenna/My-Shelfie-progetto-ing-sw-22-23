@@ -378,7 +378,7 @@ public class Player {
      * @author Alessandro Fornara
      * @param p int value
      */
-    public void calculateCommonPoints(int p, int whichCard){
+    public void updateCommonPoints(int p, int whichCard){
         if(whichCard==1) {
             this.myCommonPoints += p;
             this.CommonDone1 = true;

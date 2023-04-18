@@ -118,7 +118,7 @@ public class Model {
         if(x>activePlayer.maxTilesPick())
             return false;
         return true;
-        //TODO: can i print here in the model? "you don't have enough space"
+        //TODO: "you don't have enough space"
     }
 
     public void insert(int x, int y, int z){
@@ -127,12 +127,18 @@ public class Model {
 
     public boolean controlCommonCards(int x){
         boolean done = false;
+        int y=0;
         if(x==1){
             done = this.activePlayer.getCommonDone1();
+            y = this.commonPoints1;
+            commonPoints1-=2;
         } else if (x==2) {
             done = this.activePlayer.getCommonDone2();
+            y = this.commonPoints2;
+            commonPoints2-=2;
         }
         if(!done && board.getCommonCards()[x-1].checkBookshelf(this.activePlayer.getMatrixBookshelf())){
+            this.activePlayer.updateCommonPoints(y,x);
             return true;
         }
         return false;
