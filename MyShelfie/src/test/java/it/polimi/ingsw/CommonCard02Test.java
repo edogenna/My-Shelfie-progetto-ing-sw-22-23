@@ -22,72 +22,27 @@ public class CommonCard02Test {
     }
 
     /**
-     * This method inserts an ItemEnum some colors in specified positions
-     * @author Samuele Pietro Galli
+     * This method inserts in a column of an ItemEnum matrix some colors
+     * @author Alessandro Fornara, Samuele Pietro Galli
+     * @param j Column
      * @param x1 First color
      * @param x2 Second color
      * @param x3 Third color
      * @param x4 Fourth color
      * @param x5 Fifth color
+     * @param x6 Sixth color
      */
-    public void insert1(ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5){
-        matrix[0][0]=x1;
-        matrix[1][1]=x2;
-        matrix[2][2]=x3;
-        matrix[3][3]=x4;
-        matrix[4][4]=x5;
+     public void insert(int j, ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5, ItemEnum x6){
+        matrix[0][j]=x1;
+        matrix[1][j]=x2;
+        matrix[2][j]=x3;
+        matrix[3][j]=x4;
+        matrix[4][j]=x5;
+        matrix[5][j]=x6;
     }
 
-    /**
-     * This method inserts an ItemEnum some colors in specified positions
-     * @author Samuele Pietro Galli
-     * @param x1 First color
-     * @param x2 Second color
-     * @param x3 Third color
-     * @param x4 Fourth color
-     * @param x5 Fifth color
-     */
-    public void insert2(ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5){
-        matrix[1][0]=x1;
-        matrix[2][1]=x2;
-        matrix[3][2]=x3;
-        matrix[4][3]=x4;
-        matrix[5][4]=x5;
-    }
 
-    /**
-     * This method inserts an ItemEnum some colors in specified positions
-     * @author Samuele Pietro Galli
-     * @param x1 First color
-     * @param x2 Second color
-     * @param x3 Third color
-     * @param x4 Fourth color
-     * @param x5 Fifth color
-     */
-    public void insert3(ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5){
-        matrix[0][4]=x1;
-        matrix[1][3]=x2;
-        matrix[2][2]=x3;
-        matrix[3][1]=x4;
-        matrix[4][0]=x5;
-    }
 
-    /**
-     * This method inserts an ItemEnum some colors in specified positions
-     * @author Samuele Pietro Galli
-     * @param x1 First color
-     * @param x2 Second color
-     * @param x3 Third color
-     * @param x4 Fourth color
-     * @param x5 Fifth color
-     */
-    public void insert4(ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5){
-        matrix[1][4]=x1;
-        matrix[2][3]=x2;
-        matrix[3][2]=x3;
-        matrix[4][1]=x4;
-        matrix[5][0]=x5;
-    }
 
     /**
      * This method tests if the method checkBookshelf is working correctly
@@ -95,86 +50,76 @@ public class CommonCard02Test {
      * */
     @Test
     public void Test(){
-        insert1(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        //ALL BLANK CASE
+        insert(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
+        insert(1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
+        insert(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
+        Assert.assertFalse(c.checkBookshelf(matrix));
+
+        //TRUE CASE
+        insert(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.PURPLE, ItemEnum.BLUE);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.PURPLE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(4, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.PURPLE, ItemEnum.WHITE);
         Assert.assertTrue(c.checkBookshelf(matrix));
 
-        insert2(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        //TRUE CASE
+        insert(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.PURPLE, ItemEnum.BLUE);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.PURPLE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(4, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.PURPLE, ItemEnum.WHITE);
         Assert.assertTrue(c.checkBookshelf(matrix));
 
-        insert3(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        //TRUE CASE
+        insert(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE);
+        insert(1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(4, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
         Assert.assertTrue(c.checkBookshelf(matrix));
 
-        insert4(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        //TRUE CASE
+        insert(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE);
+        insert(1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.PURPLE);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(4, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.PURPLE, ItemEnum.BLUE);
         Assert.assertTrue(c.checkBookshelf(matrix));
 
-        /*INIZIO FASE ASSERTFALSE*/
-
-        insert1(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE);
+        //WRONG COLOUR IN DIAGONAL
+        insert(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE);
+        insert(1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.PURPLE);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(4, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.PURPLE, ItemEnum.BLUE);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insert2(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE);
+        //WRONG COLOUR IN DIAGONAL
+        insert(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.GREEN);
+        insert(1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.PURPLE);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
+        insert(4, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.PURPLE, ItemEnum.BLUE);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insert3(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
+        //INCREASING DIAGONAL CASE
+        insert(0, ItemEnum.GREEN, ItemEnum.PURPLE, ItemEnum.AZURE, ItemEnum.PURPLE, ItemEnum.PURPLE, ItemEnum.PURPLE);
+        insert(1, ItemEnum.BLANK, ItemEnum.YELLOW, ItemEnum.PURPLE, ItemEnum.YELLOW, ItemEnum.PURPLE, ItemEnum.PURPLE);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW, ItemEnum.PURPLE, ItemEnum.AZURE, ItemEnum.WHITE);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.WHITE, ItemEnum.PURPLE, ItemEnum.PURPLE);
+        insert(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.PURPLE);
+        Assert.assertTrue(c.checkBookshelf(matrix));
 
-        insert4(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        /*
-        *
-        *
-        *
-        *
-        *
-        * */
-
-        insert1(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert2(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert3(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert4(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert1(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert2(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert3(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert4(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert1(ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert2(ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert3(ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert4(ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert1(ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert2(ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert3(ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        Assert.assertFalse(c.checkBookshelf(matrix));
-
-        insert4(ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        //INCREASING DIAGONAL CASE
+        insert(0, ItemEnum.GREEN, ItemEnum.PURPLE, ItemEnum.AZURE, ItemEnum.PURPLE, ItemEnum.PURPLE, ItemEnum.PURPLE);
+        insert(1, ItemEnum.BLANK, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.PURPLE, ItemEnum.PURPLE);
+        insert(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW, ItemEnum.PURPLE, ItemEnum.AZURE, ItemEnum.WHITE);
+        insert(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.WHITE, ItemEnum.PURPLE, ItemEnum.PURPLE);
+        insert(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.PURPLE);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
     }
