@@ -3,7 +3,6 @@ package it.polimi.ingsw;
 
 
 import it.polimi.ingsw.model.CommonCards.CommonCard02;
-import it.polimi.ingsw.model.CommonCards.CommonCard05;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import org.junit.Assert;
 import org.junit.Test;
