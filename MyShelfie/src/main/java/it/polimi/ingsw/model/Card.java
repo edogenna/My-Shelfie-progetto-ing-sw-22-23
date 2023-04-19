@@ -7,18 +7,18 @@ public class Card {
     private final Triplet[] dataTriad = new Triplet[6];
     private final ItemEnum[][] matrixPersonal = new ItemEnum[6][5];
 
-    Card(int idCard) {
+    public Card(int idCard) {
         this.idCard = idCard;
         for (int i = 0; i < 6; i++)
             for (int j = 0; j < 5; j++)
                 matrixPersonal[i][j] = ItemEnum.BLANK;
     }
 
-    Card() {
+    public Card() {
         idCard = -1;
     }
 
-    void addTriplet(int idTriplet, int x, int y, ItemEnum color) {
+    public void addTriplet(int idTriplet, int x, int y, ItemEnum color) {
         matrixPersonal[x][y] = color;
         dataTriad[idTriplet] = new Triplet(x, y, color);
     }
