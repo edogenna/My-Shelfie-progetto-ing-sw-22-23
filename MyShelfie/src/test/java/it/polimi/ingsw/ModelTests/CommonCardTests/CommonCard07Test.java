@@ -1,4 +1,4 @@
-package it.polimi.ingsw.CommonCardTests;
+package it.polimi.ingsw.ModelTests.CommonCardTests;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.CommonCards.CommonCard07;

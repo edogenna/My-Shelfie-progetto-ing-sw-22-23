@@ -1,4 +1,4 @@
-package it.polimi.ingsw.CommonCardTests;
+package it.polimi.ingsw.ModelTests.CommonCardTests;
 
 
 

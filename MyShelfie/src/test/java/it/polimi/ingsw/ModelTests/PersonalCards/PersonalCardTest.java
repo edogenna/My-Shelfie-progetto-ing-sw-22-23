@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PersonalCards;
+package it.polimi.ingsw.ModelTests.PersonalCards;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
