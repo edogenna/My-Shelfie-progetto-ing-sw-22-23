@@ -12,6 +12,7 @@ public class CliView implements Runnable {
     private PrintStream outputStream;
     private boolean done;
     private Controller controllerCli;
+    private ItemEnum[][] board;
 
 //it is temporary; later I will create an interface similar to the observers;
 
@@ -39,6 +40,8 @@ public class CliView implements Runnable {
         }
         controllerCli.setFirstPlayer();
         //TODO: print the board
+        this.board = controllerCli.getBoard();
+
         while (true) {
             outputStream.println("How many tiles do you want to pick?");
             i = scanner.nextInt();
@@ -96,6 +99,14 @@ public class CliView implements Runnable {
         outputStream.println(nickname + "has completed the "+ number + " common goal card");
         outputStream.println(nickname + "scored " + points + " points");
     }
+/*
+    private void printGame(){
+        ItemEnum.generateCharMatrix(board, Board.BOARD_SIZE, Board.BOARD_SIZE)
+                .addNumbering(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
+                .addOnRight(controllerCli.getCommonCards(0).printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
+                .addOnRight(controllerCli.getCommonCards(1).printCommonCardMatrix())
+                .printMatrix();
+    }*/
 
     @Override
     public void run() {

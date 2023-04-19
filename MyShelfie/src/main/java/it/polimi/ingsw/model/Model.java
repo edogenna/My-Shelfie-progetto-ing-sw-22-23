@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.ItemEnum;
+
 import java.util.Random;
 
 public class Model {
@@ -151,4 +153,12 @@ public class Model {
             return this.commonPoints2;
         return 0;
     }
+
+    public ItemEnum[][] getBoardMatrix(){
+        return this.board.getMatrix();
+    }
+/*
+    public ItemEnum[][] getCommonCards() {
+        return
+    }*/
 }

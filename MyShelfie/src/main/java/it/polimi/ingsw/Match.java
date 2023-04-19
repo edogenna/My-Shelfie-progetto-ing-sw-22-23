@@ -12,6 +12,7 @@ import java.util.Random;
  * This class is used to create and play a match
  * @author Alessandro Fornara
  */
+
 public class Match {
     private final Board board;
     private final int[] arrayId;

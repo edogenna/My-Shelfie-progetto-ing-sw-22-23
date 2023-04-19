@@ -17,8 +17,8 @@ public class CommonCard02Test {
     private CommonCardStrategy c;
     private ItemEnum[][] matrix;
     public CommonCard02Test(){
-        c=new CommonCard02();
-        matrix= new ItemEnum[6][5];
+        c = new CommonCard02();
+        matrix = new ItemEnum[6][5];
     }
 
     /**
@@ -33,12 +33,12 @@ public class CommonCard02Test {
      * @param x6 Sixth color
      */
      public void insert(int j, ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5, ItemEnum x6){
-        matrix[0][j]=x1;
-        matrix[1][j]=x2;
-        matrix[2][j]=x3;
-        matrix[3][j]=x4;
-        matrix[4][j]=x5;
-        matrix[5][j]=x6;
+        matrix[0][j] = x1;
+        matrix[1][j] = x2;
+        matrix[2][j] = x3;
+        matrix[3][j] = x4;
+        matrix[4][j] = x5;
+        matrix[5][j] = x6;
     }
 
 

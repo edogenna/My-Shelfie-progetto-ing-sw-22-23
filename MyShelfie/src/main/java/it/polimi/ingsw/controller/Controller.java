@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.view.CLI.CliView;
 
@@ -65,4 +66,12 @@ public class Controller {
         model.changeActivePlayer();
         return card;
     }
+
+    public ItemEnum[][] getBoard(){
+        return model.getBoardMatrix();
+    }
+
+//    public ItemEnum[][] getCommonCards(int x){
+//        return model.getCommonCards();
+//    }
 }
