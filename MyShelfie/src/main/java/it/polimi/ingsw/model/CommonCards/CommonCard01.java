@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.CommonCards;
 
 import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.model.Utils;
 
 /**
  * Contains the algorithms for the first common card:
@@ -24,12 +25,16 @@ public class CommonCard01 implements CommonCardStrategy{
     public boolean checkBookshelf(ItemEnum[][] b){
         int[][] m=new int[r][c];
         int[] groups=new int[15];
+        int[] groupsID=new int[15];
+        int[] tmp=new int[15];
         int counterGroups=0; //indice di vettore groups
         int counter=0;
         int i, j;
 
-        setMatrix(m, -1);
-        setArray(groups, 0);
+        Utils.setMatrix(m, -1);
+        Utils.setArray(groups, 0);
+        Utils.setArray(groupsID, 0);
+        Utils.setArray(tmp, 0);
 
         for(int k=4; k>-5; k--){
 
@@ -44,11 +49,18 @@ public class CommonCard01 implements CommonCardStrategy{
                         m[i][j-1] = counterGroups;
                         m[i][j] = counterGroups;
                         groups[counterGroups] = 2;
+                        groupsID[counterGroups]=counterGroups;
                         counterGroups++;
                     } else {
                         if(m[i][j]==-1) {
                             m[i][j] = m[i][j - 1];
                             groups[m[i][j]]++;
+                        }
+                        else {
+                            if(groupsID[m[i][j-1]] <= groupsID[m[i][j]])
+                                groupsID[m[i][j]]=groupsID[m[i][j-1]];
+                            else
+                                groupsID[m[i][j-1]]=groupsID[m[i][j]];
                         }
                     }
                 }
@@ -57,19 +69,40 @@ public class CommonCard01 implements CommonCardStrategy{
                         m[i+1][j] = counterGroups;
                         m[i][j] = counterGroups;
                         groups[counterGroups] = 2;
+                        groupsID[counterGroups]=counterGroups;
                         counterGroups++;
                     } else {
                         if(m[i][j]==-1) {
                             m[i][j] = m[i + 1][j];
                             groups[m[i][j]]++;
                         }
+                        else {
+                            if (groupsID[m[i + 1][j]] <= groupsID[m[i][j]])
+                                groupsID[m[i][j]] = groupsID[m[i + 1][j]];
+                            else
+                                groupsID[m[i + 1][j]] = groupsID[m[i][j]];
+                        }
                     }
                 }
                 i++; j++; //mi sposto in diagonale
             }
         }
+
+
+
         for(int k=0; k<15; k++)
-            if(groups[k]>=minTiles) {
+            tmp[groupsID[k]]=tmp[groupsID[k]]+groups[k];
+
+        /*Utils.printMatrix(m);
+        System.out.println();
+        Utils.printArray(groups);
+        System.out.println();
+        Utils.printArray(groupsID);
+        System.out.println();
+        Utils.printArray(tmp);*/
+
+        for(int k=0; k<15; k++)
+            if(tmp[k]>=minTiles) {
                 counter++;
                 if(counter== minGroups) return true;
             }
@@ -90,26 +123,5 @@ public class CommonCard01 implements CommonCardStrategy{
                 .appendAtBottom("   |=|   x6     2 tiles of the same type (non necessarily")
                 .appendAtBottom("                in the depicted shape). Tiles can be")
                 .appendAtBottom("                different between different groups.");
-    }
-
-    /**
-     * Sets all cells in a matrix to the indicated value
-     * @param m Matrix
-     * @param value Number to be assigned
-     */
-    private void setMatrix(int[][] m, int value){
-        for(int i=0; i<r; i++)
-            for (int j = 0; j < c; j++)
-                m[i][j]=value;
-    }
-
-    /**
-     * Sets all cells in an array to the indicated value
-     * @param a Array
-     * @param value Number to be assigned
-     */
-    private void setArray(int[] a, int value){
-        for(int i=0; i<a.length; i++)
-            a[i]=value;
     }
 }

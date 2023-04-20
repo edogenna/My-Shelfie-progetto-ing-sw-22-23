@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class BoardTest {
 
-    Board b;
+    private Board b;
     @Test
     public void Test(){
 

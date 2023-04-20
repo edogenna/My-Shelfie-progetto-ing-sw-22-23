@@ -148,7 +148,7 @@ public class Board {
     /**
      * It returns if the matrix need to be refilled following the rule of the game
      *
-     * @author Edordo Gennaretti
+     * @author Edoardo Gennaretti
      * @return true if the board need to be refilled, false otherwise
      */
     public boolean isRefillable(){

@@ -13,8 +13,8 @@ import org.junit.Test;
  */
 public class PersonalCardTest {
 
-    PersonalCard p = new PersonalCard();
-    Card c = new Card(0);
+    private PersonalCard p = new PersonalCard();
+    private Card c = new Card(0);
 
     /**
      * This method tests if the cards created with the PersonalCard constructor are as they should be
