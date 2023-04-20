@@ -175,7 +175,7 @@ public class Board {
      * @author Alessandro Fornara
      * @return Array of CommonCardStrategy
      */
-    //TODO: to fix the array's pointer;
+    //TODO: fix the array's pointer;
     public CommonCardStrategy[] getCommonCards(){
         return CommonCards;
     }

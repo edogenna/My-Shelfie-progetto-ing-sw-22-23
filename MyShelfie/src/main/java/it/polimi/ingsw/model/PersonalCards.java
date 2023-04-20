@@ -3,11 +3,11 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.ItemEnum;
 
 //TODO: change names to "PersonalCard" and "Card" classes; however it isn't important
-public final class PersonalCard {
+public final class PersonalCards {
      private final Card[] figure = new Card[12];
 
      //implementation of the 12 personal cards; each card has 6 triplets.
-     public PersonalCard(){
+     public PersonalCards(){
           for(int i =0; i <12; i++)
                this.figure[i] = new Card();
 

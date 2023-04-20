@@ -20,6 +20,7 @@ public class Player {
         myCommonPoints = 0;
         CommonDone1 = false;
         CommonDone2 = false;
+        myGoals = new Card();
         for(int i=0; i<6; i++){
             for(int j=0; j<5; j++)
                 shelf[i][j] = ItemEnum.BLANK;
@@ -43,8 +44,7 @@ public class Player {
     private int[] heights = new int[5];
 
     public void setPersonalCard(Card goals){
-        myGoals = new Card();
-        myGoals = goals;
+        this.myGoals = goals;
     }
 
     public String getUsername(){
@@ -182,7 +182,6 @@ public class Player {
     /**
      * This method checks if the bookshelf is full of tiles that are not BLANK.
      * @author Samuele Galli
-     * @author Donato Fiore
      * @return true if is full, false otherwise.
      */
     public boolean checkIfFull(){

@@ -19,11 +19,13 @@ public class CliView implements Runnable {
         scanner = new Scanner(System.in);
         outputStream = new PrintStream(System.out);
         controllerCli = new Controller(numPlayers, this);
+        done = false;
     }
 
     public void match(){
         int num, col, i, x1, y1;
         boolean done = false;
+        boolean win = false;
         String name, inputs;
         String[] tiles;
         num = controllerCli.getNumPlayers();
@@ -41,7 +43,7 @@ public class CliView implements Runnable {
         //TODO: print the board
         this.board = controllerCli.getBoard();
 
-        while (true) {
+        while (!win) {
             //TODO: change the input format: x1,y1,...,column
             while(!done) {
                 outputStream.println("Please insert the column of your bookshelf you want to put your tiles in and which tiles you would like to remove from the board.");
@@ -70,9 +72,11 @@ public class CliView implements Runnable {
                         break;
                 }
             }
-            done = controllerCli.finishTurn();
-            //TODO: now we have controlled the commonPoints and if someone has filled the bookshelf; finish the match
+            win = controllerCli.finishTurn();
         }
+        //TODO: controller calculate the winner; declare the winner
+        controllerCli.declareWinner();
+        this.done = true;
     }
 
     public void commonPoints(String nickname, int points, int number){
@@ -109,7 +113,7 @@ public class CliView implements Runnable {
 
     @Override
     public void run() {
-        while(!done){
+        while(!this.done){
             match();
         }
     }

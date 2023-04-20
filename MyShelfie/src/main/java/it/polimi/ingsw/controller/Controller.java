@@ -141,23 +141,26 @@ public class Controller {
         return true;
     }
 
-    //return true if someone has filled the bookshelf
+    //return true if the match is finished
     public boolean finishTurn(){
         int points;
         boolean card;
         card = model.controlCommonCards(0);
         if(card){
             points = model.getCommonCardsPoints(0);
-            view.commonPoints(model.getActivePlayerName(), points, 0);
+            view.commonPoints(model.getActivePlayerName(), points, 1);
         }
         card = model.controlCommonCards(1);
         if(card){
             points = model.getCommonCardsPoints(1);
-            view.commonPoints(model.getActivePlayerName(), points, 1);
+            view.commonPoints(model.getActivePlayerName(), points, 2);
         }
-        card = model.checkFullShelf();
-        model.changeActivePlayer();
+        card = model.finishTurn();
         return card;
+    }
+
+    public void declareWinner(){
+        //TODO: finish this method
     }
 
     public ItemEnum[][] getBoard(){
