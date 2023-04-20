@@ -24,7 +24,7 @@ public class CliView implements Runnable {
 
     public void match(){
         int x, z, i, j, k;
-        boolean done;
+        boolean done = false;
         String name, inputs;
         String[] tiles;
         x = controllerCli.getNumPlayers();
@@ -43,56 +43,39 @@ public class CliView implements Runnable {
         this.board = controllerCli.getBoard();
 
         while (true) {
-            outputStream.println("How many tiles do you want to pick?");
-            i = scanner.nextInt();
-            //control the space in the bookshelf;
-            while(controllerCli.enoughSpaceBookshelf(i)){
-                outputStream.println("You don't have enough space in your bookshelf");
-                i = scanner.nextInt();
-            }
-            outputStream.println("please enter the tiles' coordinates you want to remove in the order you want to put them in the bookshelf, from bottom to top.");
-            outputStream.println("example: x1,y1");
-            //TODO: complete the selection and insertion of the tiles!
-            switch (i){
-                case 1:
-                    inputs = scanner.next();
-                    tiles = inputs.split(",");
-                    done = controllerCli.isFeasibleMove(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]));
-                    while(!done){
-                        outputStream.println("the tile hasn't any free sides, so select another tile");
-                        inputs = scanner.next();
-                        tiles = inputs.split(",");
-                        done = controllerCli.isFeasibleMove(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]));
-                    }
-                    j = Integer.parseInt(tiles[0]);
-                    k = Integer.parseInt(tiles[1]);
-                    outputStream.println("in which column do you want to insert the tile?");
-                    z = scanner.nextInt();
-                    done = controllerCli.pickCard(j,k,z);
-                    while(!done){
-                        outputStream.println("the column selected hasn't enough space, select another one");
-                        z = scanner.nextInt();
-                        done = controllerCli.pickCard(j,k,z);
-                    }
-                    break;
-                case 2:
-                    input2Tiles();
-                    break;
-                case 3:
-                    input3Tiles();
-                    break;
+
+            //TODO: FINIRE CONTROLLI SULLA MOSSA
+            while(!done) {
+                outputStream.println("Please insert the column of your bookshelf you want to put your tiles in (the first one will go to the first position available on the bottom of the column and the others will pile up) and which tiles you would like to remove from the board. Example: column,x1,y1,x2,y2,x3,y3");
+                inputs = scanner.next();
+                tiles = inputs.split(",");
+                i = tiles.length;
+                switch (i) {
+                    case 3:
+                        done = controllerCli.isFeasibleMove(Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                        if (!done)
+                            outputStream.println("one of tiles hasn't any free sides, please make a new move (column,x1,y1,x2,y2,x3,y3)");
+
+                        z = Integer.parseInt(tiles[0]);
+                        j = Integer.parseInt(tiles[1]);
+                        k = Integer.parseInt(tiles[2]);
+
+                        done = controllerCli.pickCard(j, k, z);
+                        if (!done) {
+                            outputStream.println("the column selected hasn't enough space, select another one, please make a new move (column,x1,y1,x2,y2,x3,y3)");
+                        }
+                        break;
+                    case 5:
+
+                        break;
+                    case 7:
+
+                        break;
+                }
             }
             done = controllerCli.finishTurn();
             //TODO: now we have controlled the commonPoints and if someone has filled the bookshelf; finish the match
         }
-    }
-
-    private void input2Tiles(){
-        String s = scanner.next();
-    }
-
-    private void input3Tiles(){
-        String s = scanner.next();
     }
 
     public void commonPoints(String nickname, int points, int number){

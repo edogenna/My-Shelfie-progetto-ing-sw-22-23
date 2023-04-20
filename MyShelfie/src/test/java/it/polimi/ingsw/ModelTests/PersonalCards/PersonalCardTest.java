@@ -18,6 +18,7 @@ public class PersonalCardTest {
 
     /**
      * This method tests if the cards created with the PersonalCard constructor are as they should be
+     * @author Alessandro Fornara
      */
     @Test
     public void Test(){
