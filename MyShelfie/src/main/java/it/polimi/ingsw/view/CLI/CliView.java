@@ -42,8 +42,7 @@ public class CliView implements Runnable {
         this.board = controllerCli.getBoard();
 
         while (true) {
-
-            //TODO: FINIRE CONTROLLI SULLA MOSSA
+            //TODO: change the input format: x1,y1,...,column
             while(!done) {
                 outputStream.println("Please insert the column of your bookshelf you want to put your tiles in and which tiles you would like to remove from the board.");
                 outputStream.println("the first one will go to the first position available on the bottom of the column and the others will pile up");
@@ -66,7 +65,8 @@ public class CliView implements Runnable {
                         done = controllerCli.pickCard(Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]), Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]), Integer.parseInt(tiles[0]));
                         break;
                     case 7:
-
+                        //we have taken 3 tiles;
+                        done = controllerCli.pickCard(Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]), Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]), Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]), Integer.parseInt(tiles[0]));
                         break;
                 }
             }

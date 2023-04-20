@@ -156,6 +156,10 @@ public class Model {
         this.activePlayer.insert(z, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2));
     }
 
+    public void insert(int x1, int y1, int x2, int y2, int x3, int y3, int col) {
+        this.activePlayer.insert(col, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2), this.board.deleteItemEnum(x3,y3));
+    }
+
     public boolean controlCommonCards(int x){
         boolean done = false;
         int y=0;
@@ -186,6 +190,7 @@ public class Model {
     public ItemEnum[][] getBoardMatrix(){
         return this.board.getMatrix();
     }
+
 /*
     public ItemEnum[][] getCommonCards() {
         return

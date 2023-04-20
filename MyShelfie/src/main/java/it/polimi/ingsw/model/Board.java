@@ -187,5 +187,4 @@ public class Board {
 
         return freeSide;
     }
-
 }
