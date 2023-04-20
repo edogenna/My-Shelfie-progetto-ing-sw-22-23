@@ -30,7 +30,7 @@ public class CommonCard09Test {
      * @param x5 Fifth color
      * @param x6 Sixth color
      */
-    public void insertColumn(int j, ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5, ItemEnum x6){
+    private void insertColumn(int j, ItemEnum x1, ItemEnum x2, ItemEnum x3, ItemEnum x4, ItemEnum x5, ItemEnum x6){
         matrix[0][j]=x1;
         matrix[1][j]=x2;
         matrix[2][j]=x3;
