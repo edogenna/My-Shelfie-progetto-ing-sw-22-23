@@ -84,7 +84,7 @@ public class Model {
     private void GeneratePersonalCards(){
         int[] idPersonalCards = new int[numPlayers];
         Random rand = new Random();
-        PersonalCard p = new PersonalCard();
+        PersonalCard playerCard = new PersonalCard();
         this.personalCards = new Card[numPlayers];
 
         if(this.numPlayers==2) {
@@ -92,20 +92,20 @@ public class Model {
             idPersonalCards[1] = idPersonalCards[0];
             while (idPersonalCards[1] == idPersonalCards[0])
                 idPersonalCards[1] = rand.nextInt(12);
-            this.personalCards[0] = p.getCard(idPersonalCards[0]);
-            this.personalCards[1] = p.getCard(idPersonalCards[1]);
+            this.personalCards[0] = playerCard.getCard(idPersonalCards[0]);
+            this.personalCards[1] = playerCard.getCard(idPersonalCards[1]);
         }
         if(this.numPlayers==3){
             idPersonalCards[2] = idPersonalCards[0];
             while (idPersonalCards[2]==idPersonalCards[0] || idPersonalCards[2]==idPersonalCards[1])
                 idPersonalCards[2] = rand.nextInt(12);
-            this.personalCards[2] = p.getCard(idPersonalCards[2]);
+            this.personalCards[2] = playerCard.getCard(idPersonalCards[2]);
         }
         if(this.numPlayers==4){
             idPersonalCards[3] = idPersonalCards[0];
             while (idPersonalCards[3]==idPersonalCards[0] || idPersonalCards[3]==idPersonalCards[1] || idPersonalCards[3]==idPersonalCards[2])
                 idPersonalCards[3] = rand.nextInt(12);
-            this.personalCards[3] = p.getCard(idPersonalCards[3]);
+            this.personalCards[3] = playerCard.getCard(idPersonalCards[3]);
         }
     }
 
@@ -120,11 +120,40 @@ public class Model {
         if(x>activePlayer.maxTilesPick())
             return false;
         return true;
-        //TODO: "you don't have enough space"
+    }
+
+    public boolean enoughSpaceColumn(int y, int num){
+        return this.activePlayer.isColumnFull(y,num);
+    }
+
+    public boolean adjacentTiles(int x1, int y1, int x2, int y2){
+        boolean isAdjacent;
+
+        if(x1 == x2){
+            isAdjacent = (y1 == y2 + 1) || (y1 == y2 - 1);
+        }else if(y1 == y2){
+            isAdjacent = (x1 == x2 + 1) || (x1 == x2 - 1);
+        }else
+            isAdjacent = false;
+
+        return isAdjacent;
+    }
+
+    public boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
+        boolean isAdjacent;
+
+        isAdjacent = (x1 == x2 && x2 == x3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3)))) || (y1 == y2 && y2 == y3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3))));
+
+
+        return isAdjacent;
     }
 
     public void insert(int x, int y, int z){
-        this.activePlayer.insert(z,board.deleteItemEnum(x,y));
+        this.activePlayer.insert(z,this.board.deleteItemEnum(x,y));
+    }
+
+    public void insert(int x1, int y1, int x2, int y2, int z){
+        this.activePlayer.insert(z, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2));
     }
 
     public boolean controlCommonCards(int x){

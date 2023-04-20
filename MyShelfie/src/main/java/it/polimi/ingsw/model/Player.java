@@ -396,7 +396,7 @@ public class Player {
      * @param n number of tiles to insert
      * @return true if the column has enough cells, false otherwise
      */
-    private boolean isColumnFull(int j, int n){
+    public boolean isColumnFull(int j, int n){
         return this.heights[j] + n > 6;
     }
 
@@ -415,14 +415,14 @@ public class Player {
             heights[y]++;
     }
 
-    private void insert(int y, ItemEnum tile1, ItemEnum tile2){
+    public void insert(int y, ItemEnum tile1, ItemEnum tile2){
             this.shelf[5-heights[y]][y] = tile1;
             heights[y]++;
             this.shelf[5-heights[y]][y] = tile2;
             heights[y]++;
     }
 
-    private void insert(int y, ItemEnum tile1, ItemEnum tile2, ItemEnum tile3){
+    public void insert(int y, ItemEnum tile1, ItemEnum tile2, ItemEnum tile3){
         this.shelf[5-heights[y]][y] = tile1;
         heights[y]++;
         this.shelf[5-heights[y]][y] = tile2;

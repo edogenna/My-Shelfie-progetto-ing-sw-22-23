@@ -43,7 +43,7 @@ public class CharMatrix {
      */
     public void printLine(int l){
         if(l < 0 || l >= m.size()){
-            System.out.print("errore linea");
+            System.out.print("line error");
             return;
         }
         System.out.println(m.get(l));
