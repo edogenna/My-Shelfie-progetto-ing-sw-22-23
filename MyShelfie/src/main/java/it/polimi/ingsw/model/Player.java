@@ -51,10 +51,6 @@ public class Player {
         return new String(this.username);
     }
 
-    public int getId(){
-        return this.id;
-    }
-
     public int getHeights(int i){
         return this.heights[i];
     }
@@ -66,7 +62,7 @@ public class Player {
         return copy;
     }
 
-    //"calculatePoints" counts the points excluding the "common cards"
+    //"calculatePoints" counts the points including the "common cards"
     public int calculatePoints(){
         myPoints = pointPersonalCard();
         myPoints += adjacentTilesPoints();
@@ -87,6 +83,7 @@ public class Player {
             }
         }
 
+        //TODO: use a switch case? is it more beautiful?
         if(points == 3)
             points = 4;
         else if(points == 4)

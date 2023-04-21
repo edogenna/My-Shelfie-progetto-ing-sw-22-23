@@ -200,7 +200,44 @@ public class Model {
 
         return finish;
     }
+    //TODO: test this method
+    public void theWinnerIs(){
+        int i, x, max, id;
 
+        max = 0;
+        id = -1;
+        for(i=0; i<numPlayers; i++){
+            x = players[i].calculatePoints();
+            if(x > max){
+                max = x;
+                id = i;
+            }else if(x == max){
+                if(distancePlayer(this.idFirstPlayer,i) > distancePlayer(this.idFirstPlayer,id)){
+                    id = i;
+                    max = x;
+                }
+            }
+        }
+        this.idActivePlayer = id;
+    }
+
+    //TODO: test this method
+    private int distancePlayer(int x, int y){
+        if(y - x < 0){
+            y = y + this.numPlayers;
+        }
+        y = y - x;
+        return y;
+    }
+
+/* 0 - 1 - 2 - 3
+* inizia 1;
+* 2 e 0 a pari punti;
+* dist(1,2) = 2 - 1 = 1;
+* dist(1,0) = 0 - 1 = -1(mod 4) = -1 + 4 = 3;
+* dist(1,3) = 3 - 1 = 2;
+*
+*/
 /*
     public ItemEnum[][] getCommonCards() {
         return

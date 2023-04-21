@@ -161,6 +161,8 @@ public class Controller {
 
     public void declareWinner(){
         //TODO: finish this method
+        model.theWinnerIs();
+//        view.winnerPrint(model.getActivePlayerName(), );
     }
 
     public ItemEnum[][] getBoard(){

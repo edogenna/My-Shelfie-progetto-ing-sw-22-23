@@ -111,6 +111,10 @@ public class CliView implements Runnable {
         outputStream.println("the column "+y+ " hasn't enough space, please make a new move");
     }
 
+    public void winnerPrint(String username, int points){
+
+    }
+
     @Override
     public void run() {
         while(!this.done){
