@@ -12,6 +12,7 @@ public class Model {
     private Card[] personalCards;
     private int commonPoints1, commonPoints2;
     private int idFirstPlayer, idActivePlayer;
+    private boolean lastTurn;
 
     public Model(int numPlayers){
         this.numPlayers = numPlayers;
@@ -19,10 +20,11 @@ public class Model {
         this.personalCards = new Card[numPlayers];
         this.GeneratePersonalCards();
         this.players = new Player[numPlayers];
-        commonPoints1 = 8;
-        commonPoints2 = 8;
-        idFirstPlayer = -1;
-        idActivePlayer = 0;
+        this.commonPoints1 = 8;
+        this.commonPoints2 = 8;
+        this.idFirstPlayer = -1;
+        this.idActivePlayer = 0;
+        this.lastTurn = false;
     }
 
     public boolean isFeasiblePickMove(int x, int y){
@@ -182,12 +184,17 @@ public class Model {
         return this.board.getMatrix();
     }
 
+    //todo: test this method
     public boolean finishTurn(){
         boolean finish;
         int x;
 
         finish = this.activePlayer.checkIfFull();
-        if(finish){
+        if(finish)
+            this.lastTurn = true;
+
+        if(this.lastTurn){
+            finish = true;
             x = this.idActivePlayer+1;
             x %= this.numPlayers;
             if(x != this.idFirstPlayer)
@@ -200,14 +207,15 @@ public class Model {
 
         return finish;
     }
+
     //TODO: test this method
-    public void theWinnerIs(){
+    public int theWinnerIs(){
         int i, x, max, id;
 
         max = 0;
         id = -1;
-        for(i=0; i<numPlayers; i++){
-            x = players[i].calculatePoints();
+        for(i=0; i<this.numPlayers; i++){
+            x = this.players[i].calculatePoints();
             if(x > max){
                 max = x;
                 id = i;
@@ -219,15 +227,24 @@ public class Model {
             }
         }
         this.idActivePlayer = id;
+        this.setActivePlayer(id);
+
+        return this.activePlayer.getMyPoints();
     }
 
     //TODO: test this method
     private int distancePlayer(int x, int y){
-        if(y - x < 0){
-            y = y + this.numPlayers;
+        int z;
+
+        z = y - x;
+        if(z < 0){
+            z = z + this.numPlayers;
         }
-        y = y - x;
-        return y;
+        return z;
+    }
+
+    private void setActivePlayer(int id){
+        this.activePlayer = this.players[id];
     }
 
 /* 0 - 1 - 2 - 3

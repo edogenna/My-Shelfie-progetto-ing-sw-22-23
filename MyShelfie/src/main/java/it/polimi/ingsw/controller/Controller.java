@@ -160,9 +160,10 @@ public class Controller {
     }
 
     public void declareWinner(){
+        int x;
         //TODO: finish this method
-        model.theWinnerIs();
-//        view.winnerPrint(model.getActivePlayerName(), );
+        x = model.theWinnerIs();
+        view.winnerPrint(model.getActivePlayerName(), x);
     }
 
     public ItemEnum[][] getBoard(){
