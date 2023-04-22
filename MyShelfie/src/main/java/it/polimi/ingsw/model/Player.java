@@ -20,6 +20,7 @@ public class Player {
         myCommonPoints = 0;
         CommonDone1 = false;
         CommonDone2 = false;
+        myGoals = new Card();
         for(int i=0; i<6; i++){
             for(int j=0; j<5; j++)
                 shelf[i][j] = ItemEnum.BLANK;
@@ -43,16 +44,11 @@ public class Player {
     private int[] heights = new int[5];
 
     public void setPersonalCard(Card goals){
-        myGoals = new Card();
-        myGoals = goals;
+        this.myGoals = goals;
     }
 
     public String getUsername(){
         return new String(this.username);
-    }
-
-    public int getId(){
-        return this.id;
     }
 
     public int getHeights(int i){
@@ -66,7 +62,7 @@ public class Player {
         return copy;
     }
 
-    //"calculatePoints" counts the points excluding the "common cards"
+    //"calculatePoints" counts the points including the "common cards"
     public int calculatePoints(){
         myPoints = pointPersonalCard();
         myPoints += adjacentTilesPoints();
@@ -87,6 +83,7 @@ public class Player {
             }
         }
 
+        //TODO: use a switch case? is it more beautiful?
         if(points == 3)
             points = 4;
         else if(points == 4)
@@ -182,7 +179,6 @@ public class Player {
     /**
      * This method checks if the bookshelf is full of tiles that are not BLANK.
      * @author Samuele Galli
-     * @author Donato Fiore
      * @return true if is full, false otherwise.
      */
     public boolean checkIfFull(){
@@ -396,7 +392,7 @@ public class Player {
      * @param n number of tiles to insert
      * @return true if the column has enough cells, false otherwise
      */
-    private boolean isColumnFull(int j, int n){
+    public boolean isColumnFull(int j, int n){
         return this.heights[j] + n > 6;
     }
 
@@ -415,14 +411,14 @@ public class Player {
             heights[y]++;
     }
 
-    private void insert(int y, ItemEnum tile1, ItemEnum tile2){
+    public void insert(int y, ItemEnum tile1, ItemEnum tile2){
             this.shelf[5-heights[y]][y] = tile1;
             heights[y]++;
             this.shelf[5-heights[y]][y] = tile2;
             heights[y]++;
     }
 
-    private void insert(int y, ItemEnum tile1, ItemEnum tile2, ItemEnum tile3){
+    public void insert(int y, ItemEnum tile1, ItemEnum tile2, ItemEnum tile3){
         this.shelf[5-heights[y]][y] = tile1;
         heights[y]++;
         this.shelf[5-heights[y]][y] = tile2;

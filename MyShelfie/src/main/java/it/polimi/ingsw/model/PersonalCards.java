@@ -3,13 +3,13 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.ItemEnum;
 
 //TODO: change names to "PersonalCard" and "Card" classes; however it isn't important
-public final class PersonalCard {
+public final class PersonalCards {
      private final Card[] figure = new Card[12];
 
      //implementation of the 12 personal cards; each card has 6 triplets.
-     public PersonalCard(){
+     public PersonalCards(){
           for(int i =0; i <12; i++)
-               this.figure[i] = new Card(i);
+               this.figure[i] = new Card();
 
           figure[0].addTriplet(0,2,0, ItemEnum.AZURE);
           figure[0].addTriplet(1,4,1, ItemEnum.WHITE);
@@ -96,6 +96,7 @@ public final class PersonalCard {
           figure[11].addTriplet(5,1,1, ItemEnum.PURPLE);
      }
 
+     //TODO: fix the pointer return!
      public Card getCard(int i){
           return this.figure[i];
      }

@@ -2,7 +2,7 @@ package it.polimi.ingsw.ModelTests.PersonalCards;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
-import it.polimi.ingsw.model.PersonalCard;
+import it.polimi.ingsw.model.PersonalCards;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,10 +11,10 @@ import org.junit.Test;
  * getCard, PersonalCard constructor, Card contructor, addTriplet
  * @author Alessandro Fornara
  */
-public class PersonalCardTest {
+public class PersonalCardsTest {
 
-    private PersonalCard p = new PersonalCard();
-    private Card c = new Card(0);
+    private PersonalCards p = new PersonalCards();
+    private Card c = new Card();
 
     /**
      * This method tests if the cards created with the PersonalCard constructor are as they should be

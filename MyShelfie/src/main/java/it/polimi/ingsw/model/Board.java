@@ -175,7 +175,7 @@ public class Board {
      * @author Alessandro Fornara
      * @return Array of CommonCardStrategy
      */
-    //TODO: to fix the array's pointer;
+    //TODO: fix the array's pointer;
     public CommonCardStrategy[] getCommonCards(){
         return CommonCards;
     }
@@ -187,27 +187,4 @@ public class Board {
 
         return freeSide;
     }
-
-    private boolean adjacentTiles(int x1, int y1, int x2, int y2){
-        boolean isAdjacent;
-
-        if(x1 == x2){
-            isAdjacent = (y1 == y2 + 1) || (y1 == y2 - 1);
-        }else if(y1 == y2){
-            isAdjacent = (x1 == x2 + 1) || (x1 == x2 - 1);
-        }else
-            isAdjacent = false;
-
-        return isAdjacent;
-    }
-
-    private boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
-        boolean isAdjacent;
-
-        isAdjacent = (x1 == x2 && x2 == x3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3)))) || (y1 == y2 && y2 == y3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3))));
-
-
-        return isAdjacent;
-    }
-
 }

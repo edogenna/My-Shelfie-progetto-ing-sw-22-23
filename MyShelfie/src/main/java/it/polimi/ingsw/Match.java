@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Card;
-import it.polimi.ingsw.model.PersonalCard;
+import it.polimi.ingsw.model.PersonalCards;
 import it.polimi.ingsw.model.Player;
 
 import java.util.Scanner;
@@ -215,10 +215,10 @@ public class Match {
     private void GeneratePersonalCards(){
         int[] array=new int[numPlayers];
         Random rand=new Random();
-        PersonalCard p=new PersonalCard();
+        PersonalCards p=new PersonalCards();
         this.personalCards =new Card[numPlayers];
 
-        if(this.numPlayers==2) {
+        if(this.numPlayers>=2) {
             array[0] = rand.nextInt(12);
             array[1] = array[0];
             while (array[1] == array[0])
@@ -226,13 +226,13 @@ public class Match {
             this.personalCards[0]=p.getCard(array[0]);
             this.personalCards[1]=p.getCard(array[1]);
         }
-        if(this.numPlayers==3){
+        if(this.numPlayers>=3){
             array[2]=array[0];
             while (array[2]==array[0] || array[2]==array[1])
                 array[2] = rand.nextInt(12);
             this.personalCards[2]=p.getCard(array[2]);
         }
-        if(this.numPlayers==4){
+        if(this.numPlayers>=4){
             array[3]=array[0];
             while (array[3]==array[0] || array[3]==array[1] || array[3]==array[2])
                 array[3] = rand.nextInt(12);

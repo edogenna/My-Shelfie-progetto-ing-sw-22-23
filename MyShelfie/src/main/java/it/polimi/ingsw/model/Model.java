@@ -11,44 +11,30 @@ public class Model {
     private Player activePlayer;
     private Card[] personalCards;
     private int commonPoints1, commonPoints2;
-    private int idActivePlayer;
+    private int idFirstPlayer, idActivePlayer;
+    private boolean lastTurn;
 
     public Model(int numPlayers){
         this.numPlayers = numPlayers;
-        board = new Board(this.numPlayers);
-        personalCards = new Card[numPlayers];
-        GeneratePersonalCards();
-        for(int i=0; i<numPlayers; i++){
-            players[i].setPersonalCard(personalCards[i]);
-        }
-        commonPoints1 = 8;
-        commonPoints2 = 8;
-        idActivePlayer = -1;
+        this.board = new Board(this.numPlayers);
+        this.personalCards = new Card[numPlayers];
+        this.GeneratePersonalCards();
+        this.players = new Player[numPlayers];
+        this.commonPoints1 = 8;
+        this.commonPoints2 = 8;
+        this.idFirstPlayer = -1;
+        this.idActivePlayer = 0;
+        this.lastTurn = false;
     }
 
     public boolean isFeasiblePickMove(int x, int y){
         return this.board.tileFreeSide(x, y);
     }
 
-    public boolean checkFullShelf(){
-        for(int i=0; i<5; i++){
-            if(this.activePlayer.getHeights(i) != 6){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void changeActivePlayer(){
-        int i;
-        boolean stop = false;
-        for(i=0; i<this.numPlayers && !stop; i++) {
-            if (activePlayer.equals(this.players[i])) {
-                stop = true;
-            }
-        }
-        i %= this.numPlayers;
-        this.activePlayer = this.players[i];
+    private void changeActivePlayer(){
+        this.idActivePlayer++;
+        this.idActivePlayer %= this.numPlayers;
+        this.activePlayer = this.players[this.idActivePlayer];
     }
 
     public String getActivePlayerName(){
@@ -56,10 +42,9 @@ public class Model {
     }
 
     public void setUsernamePlayer(String username){
-        int i;
-        this.idActivePlayer++;
-        i = this.idActivePlayer;
-        this.players[i] = new Player(username);
+        this.idFirstPlayer++;
+        this.players[this.idFirstPlayer] = new Player(username);
+        this.players[this.idFirstPlayer].setPersonalCard(personalCards[this.idFirstPlayer]);
     }
 
     public int getNumPlayers(){
@@ -67,7 +52,7 @@ public class Model {
     }
 
     public boolean duplicatedUsername(String x){
-        int y = idActivePlayer;
+        int y = idFirstPlayer;
         if(y==-1)
             return false;
         for(int i=0; i<y; i++){
@@ -84,28 +69,28 @@ public class Model {
     private void GeneratePersonalCards(){
         int[] idPersonalCards = new int[numPlayers];
         Random rand = new Random();
-        PersonalCard p = new PersonalCard();
+        PersonalCards playerCard = new PersonalCards();
         this.personalCards = new Card[numPlayers];
 
-        if(this.numPlayers==2) {
-            idPersonalCards[0] = rand.nextInt(12);
-            idPersonalCards[1] = idPersonalCards[0];
-            while (idPersonalCards[1] == idPersonalCards[0])
-                idPersonalCards[1] = rand.nextInt(12);
-            this.personalCards[0] = p.getCard(idPersonalCards[0]);
-            this.personalCards[1] = p.getCard(idPersonalCards[1]);
-        }
-        if(this.numPlayers==3){
+        idPersonalCards[0] = rand.nextInt(12);
+        idPersonalCards[1] = idPersonalCards[0];
+        while (idPersonalCards[1] == idPersonalCards[0])
+            idPersonalCards[1] = rand.nextInt(12);
+        this.personalCards[0] = playerCard.getCard(idPersonalCards[0]);
+        this.personalCards[1] = playerCard.getCard(idPersonalCards[1]);
+
+        if(this.numPlayers >= 3){
             idPersonalCards[2] = idPersonalCards[0];
             while (idPersonalCards[2]==idPersonalCards[0] || idPersonalCards[2]==idPersonalCards[1])
                 idPersonalCards[2] = rand.nextInt(12);
-            this.personalCards[2] = p.getCard(idPersonalCards[2]);
+            this.personalCards[2] = playerCard.getCard(idPersonalCards[2]);
         }
-        if(this.numPlayers==4){
+
+        if(this.numPlayers == 4){
             idPersonalCards[3] = idPersonalCards[0];
             while (idPersonalCards[3]==idPersonalCards[0] || idPersonalCards[3]==idPersonalCards[1] || idPersonalCards[3]==idPersonalCards[2])
                 idPersonalCards[3] = rand.nextInt(12);
-            this.personalCards[3] = p.getCard(idPersonalCards[3]);
+            this.personalCards[3] = playerCard.getCard(idPersonalCards[3]);
         }
     }
 
@@ -113,6 +98,7 @@ public class Model {
         Random xyz = new Random();
         int i;
         i = xyz.nextInt(numPlayers);
+        this.idFirstPlayer = i;
         this.idActivePlayer = i;
     }
 
@@ -120,27 +106,59 @@ public class Model {
         if(x>activePlayer.maxTilesPick())
             return false;
         return true;
-        //TODO: "you don't have enough space"
+    }
+
+    public boolean enoughSpaceColumn(int y, int num){
+        return this.activePlayer.isColumnFull(y,num);
+    }
+
+    public boolean adjacentTiles(int x1, int y1, int x2, int y2){
+        boolean isAdjacent;
+
+        if(x1 == x2){
+            isAdjacent = (y1 == y2 + 1) || (y1 == y2 - 1);
+        }else if(y1 == y2){
+            isAdjacent = (x1 == x2 + 1) || (x1 == x2 - 1);
+        }else
+            isAdjacent = false;
+
+        return isAdjacent;
+    }
+
+    public boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
+        boolean isAdjacent;
+
+        isAdjacent = (x1 == x2 && x2 == x3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3)))) || (y1 == y2 && y2 == y3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3))));
+
+
+        return isAdjacent;
     }
 
     public void insert(int x, int y, int z){
-        this.activePlayer.insert(z,board.deleteItemEnum(x,y));
+        this.activePlayer.insert(z,this.board.deleteItemEnum(x,y));
+    }
+
+    public void insert(int x1, int y1, int x2, int y2, int z){
+        this.activePlayer.insert(z, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2));
+    }
+
+    public void insert(int x1, int y1, int x2, int y2, int x3, int y3, int col) {
+        this.activePlayer.insert(col, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2), this.board.deleteItemEnum(x3,y3));
     }
 
     public boolean controlCommonCards(int x){
         boolean done = false;
         int y=0;
-        if(x==1){
+        if(x == 1){
             done = this.activePlayer.getCommonDone1();
             y = this.commonPoints1;
-            commonPoints1-=2;
-        } else if (x==2) {
+        } else if (x == 2) {
             done = this.activePlayer.getCommonDone2();
             y = this.commonPoints2;
-            commonPoints2-=2;
         }
         if(!done && board.getCommonCards()[x-1].checkBookshelf(this.activePlayer.getMatrixBookshelf())){
             this.activePlayer.updateCommonPoints(y,x);
+            updateCommonPoints(x);
             return true;
         }
         return false;
@@ -154,9 +172,89 @@ public class Model {
         return 0;
     }
 
+    private void updateCommonPoints(int numCard){
+        if(numCard == 1){
+            this.commonPoints1 -= 2;
+        }else if(numCard == 2){
+            this.commonPoints2 -= 2;
+        }
+    }
+
     public ItemEnum[][] getBoardMatrix(){
         return this.board.getMatrix();
     }
+
+    //todo: test this method
+    public boolean finishTurn(){
+        boolean finish;
+        int x;
+
+        finish = this.activePlayer.checkIfFull();
+        if(finish)
+            this.lastTurn = true;
+
+        if(this.lastTurn){
+            finish = true;
+            x = this.idActivePlayer+1;
+            x %= this.numPlayers;
+            if(x != this.idFirstPlayer)
+                finish = false;
+        }
+
+        this.changeActivePlayer();
+        if(board.isRefillable())
+            board.refill();
+
+        return finish;
+    }
+
+    //TODO: test this method
+    public int theWinnerIs(){
+        int i, x, max, id;
+
+        max = 0;
+        id = -1;
+        for(i=0; i<this.numPlayers; i++){
+            x = this.players[i].calculatePoints();
+            if(x > max){
+                max = x;
+                id = i;
+            }else if(x == max){
+                if(distancePlayer(this.idFirstPlayer,i) > distancePlayer(this.idFirstPlayer,id)){
+                    id = i;
+                    max = x;
+                }
+            }
+        }
+        this.idActivePlayer = id;
+        this.setActivePlayer(id);
+
+        return this.activePlayer.getMyPoints();
+    }
+
+    //TODO: test this method
+    private int distancePlayer(int x, int y){
+        int z;
+
+        z = y - x;
+        if(z < 0){
+            z = z + this.numPlayers;
+        }
+        return z;
+    }
+
+    private void setActivePlayer(int id){
+        this.activePlayer = this.players[id];
+    }
+
+/* 0 - 1 - 2 - 3
+* inizia 1;
+* 2 e 0 a pari punti;
+* dist(1,2) = 2 - 1 = 1;
+* dist(1,0) = 0 - 1 = -1(mod 4) = -1 + 4 = 3;
+* dist(1,3) = 3 - 1 = 2;
+*
+*/
 /*
     public ItemEnum[][] getCommonCards() {
         return
