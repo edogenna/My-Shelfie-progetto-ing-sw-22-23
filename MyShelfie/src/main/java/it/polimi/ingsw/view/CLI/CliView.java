@@ -112,7 +112,10 @@ public class CliView implements Runnable {
     }
 
     public void winnerPrint(String username, int points){
-
+        outputStream.println("the match is finished");
+        outputStream.println("the winner is...");
+        outputStream.println(username);
+        outputStream.println("the player " + username + "has done " + points + " points");
     }
 
     @Override
