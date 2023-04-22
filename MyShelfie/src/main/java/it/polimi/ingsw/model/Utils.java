@@ -1,12 +1,10 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.ItemEnum;
-
 /**
  * This class contains methods that could be useful in many occasions.
  * @author Alessandro Fornara
  */
-public class Utils {
+public final class Utils {
 
     private Utils() {
     }

@@ -8,7 +8,7 @@ import org.junit.Test;
 
 /**
  * This class is a test for the third common card
- * @author Samuele Pietro Galli
+ * @author Samuele Pietro Galli, Alessandro Fornara
  */
 public class CommonCard03Test {
     private CommonCardStrategy c;
@@ -62,6 +62,27 @@ public class CommonCard03Test {
         insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.YELLOW, ItemEnum.YELLOW);
         insertColumn(4, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.YELLOW);
         Assert.assertTrue(c.checkBookshelf(matrix));
+
+        insertColumn(0, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.WHITE);
+        insertColumn(1, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.GREEN, ItemEnum.BLUE, ItemEnum.BLUE);
+        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.BLUE);
+        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertColumn(4, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        Assert.assertFalse(c.checkBookshelf(matrix));
+
+        insertColumn(0, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.WHITE);
+        insertColumn(1, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.BLUE);
+        insertColumn(3, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertColumn(4, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        Assert.assertFalse(c.checkBookshelf(matrix));
+
+        insertColumn(0, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.WHITE);
+        insertColumn(1, ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.WHITE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insertColumn(2, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.PURPLE, ItemEnum.PURPLE, ItemEnum.WHITE, ItemEnum.WHITE);
+        insertColumn(3, ItemEnum.AZURE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW);
+        insertColumn(4, ItemEnum.AZURE, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.PURPLE, ItemEnum.PURPLE, ItemEnum.YELLOW);
+        Assert.assertFalse(c.checkBookshelf(matrix));
     }
 
 }
