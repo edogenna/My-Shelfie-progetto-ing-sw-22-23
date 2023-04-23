@@ -2,6 +2,9 @@ package it.polimi.ingsw.view.CLI;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.model.Board;
+import it.polimi.ingsw.model.Card;
+import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -12,6 +15,9 @@ public class CliView implements Runnable {
     private boolean done;
     private Controller controllerCli;
     private ItemEnum[][] board;
+    private CommonCardStrategy[] CommonCards;
+    private Card personalCard;
+    private ItemEnum[][] shelf;
 
 //it is temporary; later I will create an interface similar to the observers;
 
@@ -44,11 +50,11 @@ public class CliView implements Runnable {
         this.board = controllerCli.getBoard();
 
         while (!win) {
-            //TODO: change the input format: x1,y1,...,column
+
             while(!done) {
-                outputStream.println("Please insert the column of your bookshelf you want to put your tiles in and which tiles you would like to remove from the board.");
+                outputStream.println("Please insert which tiles you would like to remove from the board and the column of your bookshelf you want to put your tiles in");
                 outputStream.println("the first one will go to the first position available on the bottom of the column and the others will pile up");
-                outputStream.println("Example: column,x1,y1,x2,y2,x3,y3");
+                outputStream.println("Example: x1,y1,x2,y2,x3,y3,column");
                 inputs = scanner.next();
                 tiles = inputs.split(",");
                 i = tiles.length;
@@ -56,19 +62,15 @@ public class CliView implements Runnable {
                 switch (i) {
                     case 3:
                         //we have taken 1 tile;
-//                        done = controllerCli.isFeasibleMove(Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
-                        col = Integer.parseInt(tiles[0]);
-                        x1 = Integer.parseInt(tiles[1]);
-                        y1 = Integer.parseInt(tiles[2]);
-                        done = controllerCli.pickCard(x1, y1, col);
+                        done = controllerCli.pickCard(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
                         break;
                     case 5:
                         //we have taken 2 tiles;
-                        done = controllerCli.pickCard(Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]), Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]), Integer.parseInt(tiles[0]));
+                        done = controllerCli.pickCard(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]), Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
                         break;
                     case 7:
                         //we have taken 3 tiles;
-                        done = controllerCli.pickCard(Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]), Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]), Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]), Integer.parseInt(tiles[0]));
+                        done = controllerCli.pickCard(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]), Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]), Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
                         break;
                 }
             }
@@ -84,13 +86,27 @@ public class CliView implements Runnable {
         outputStream.println(nickname + "scored " + points + " points");
     }
 
-/*    private void printGame(){
+    /**
+     * This method prints the board and common goal cards
+     * @author Alessandro Fornara
+     */
+    private void printGame(){
         ItemEnum.generateCharMatrix(board, Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addNumbering(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
-                .addOnRight(controllerCli.getCommonCards(0).printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
-                .addOnRight(controllerCli.getCommonCards(1).printCommonCardMatrix())
+                .addOnRight(CommonCards[0].printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
+                .addOnRight(CommonCards[1].printCommonCardMatrix())
                 .printMatrix();
-    }*/
+    }
+
+    /**
+     * This method prints a player's bookshelf and his personal card
+     * @author Alessandro Fornara
+     */
+    private void printBookshelfAndPersonal(){
+        ItemEnum.generateCharMatrix(shelf, 6, 5).appendToAllRows("   ")
+                .addOnRight(ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)).printMatrix();
+    }
+
 
     public void notEnoughSpaceBookshelfPrint(){
         outputStream.println("your bookshelf hasn't enough space, please make a new move taking less tiles");
