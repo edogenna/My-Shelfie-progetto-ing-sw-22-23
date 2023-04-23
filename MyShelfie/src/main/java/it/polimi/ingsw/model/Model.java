@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 import java.util.Random;
 
@@ -182,6 +183,10 @@ public class Model {
 
     public ItemEnum[][] getBoardMatrix(){
         return this.board.getMatrix();
+    }
+
+    public CommonCardStrategy[] getCommonCards(){
+        return board.getCommonCards();
     }
 
     //todo: test this method

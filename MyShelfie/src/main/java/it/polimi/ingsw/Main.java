@@ -1,6 +1,9 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.server.Server;
+import it.polimi.ingsw.view.CLI.CliView;
 
 public class Main {
     public static void main( String[] args ){
@@ -10,8 +13,14 @@ public class Main {
         m1.begin();
         */
 
-        Server s=new Server(1234);
+        /*Server s=new Server(1234);
         s.startServer();
+        */
+
+        CliView cliView = new CliView(4);
+        Controller controller = new Controller(4, cliView);
+        Thread thread = new Thread(cliView);
+        thread.start();
 
     }
 }

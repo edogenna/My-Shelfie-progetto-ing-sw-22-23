@@ -46,9 +46,9 @@ public class CliView implements Runnable {
             controllerCli.setUsernamePlayer(name);
         }
         controllerCli.setFirstPlayer();
-        //TODO: print the board
         this.board = controllerCli.getBoard();
-
+        CommonCards = controllerCli.getCommonCards();
+        printGame();
         while (!win) {
 
             while(!done) {
