@@ -18,7 +18,6 @@ public class Main {
         */
 
         CliView cliView = new CliView(4);
-        Controller controller = new Controller(4, cliView);
         Thread thread = new Thread(cliView);
         thread.start();
 

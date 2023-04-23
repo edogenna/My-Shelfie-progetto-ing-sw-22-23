@@ -126,7 +126,7 @@ public class Controller {
     public boolean pickCard(int x1, int y1, int x2, int y2, int x3, int y3, int col){
         boolean done;
 
-        done = enoughSpaceBookshelf(2);
+        done = enoughSpaceBookshelf(3);
         if(!done)
             return false;
 

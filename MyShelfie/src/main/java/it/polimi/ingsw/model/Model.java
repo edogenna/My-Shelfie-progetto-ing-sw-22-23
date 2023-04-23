@@ -101,6 +101,7 @@ public class Model {
         i = xyz.nextInt(numPlayers);
         this.idFirstPlayer = i;
         this.idActivePlayer = i;
+        this.activePlayer = players[i];
     }
 
     public boolean enoughSpaceBookshelf(int x){
@@ -110,7 +111,7 @@ public class Model {
     }
 
     public boolean enoughSpaceColumn(int y, int num){
-        return this.activePlayer.isColumnFull(y,num);
+        return !this.activePlayer.isColumnFull(y,num);
     }
 
     public boolean adjacentTiles(int x1, int y1, int x2, int y2){
@@ -150,14 +151,14 @@ public class Model {
     public boolean controlCommonCards(int x){
         boolean done = false;
         int y=0;
-        if(x == 1){
+        if(x == 0){
             done = this.activePlayer.getCommonDone1();
             y = this.commonPoints1;
-        } else if (x == 2) {
+        } else if (x == 1) {
             done = this.activePlayer.getCommonDone2();
             y = this.commonPoints2;
         }
-        if(!done && board.getCommonCards()[x-1].checkBookshelf(this.activePlayer.getMatrixBookshelf())){
+        if(!done && board.getCommonCards()[x].checkBookshelf(this.activePlayer.getMatrixBookshelf())){
             this.activePlayer.updateCommonPoints(y,x);
             updateCommonPoints(x);
             return true;

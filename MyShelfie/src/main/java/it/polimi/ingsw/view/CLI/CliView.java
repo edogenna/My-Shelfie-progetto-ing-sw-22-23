@@ -125,6 +125,7 @@ public class CliView implements Runnable {
     
     public void notEnoughSpaceBookshelfColPrint(int y){
         outputStream.println("the column "+y+ " hasn't enough space, please make a new move");
+        outputStream.println();
     }
 
     public void winnerPrint(String username, int points){
