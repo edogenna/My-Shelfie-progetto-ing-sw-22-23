@@ -39,6 +39,12 @@ public class CommonCard11 implements CommonCardStrategy {
         System.out.println(constant11);
     }
 
+    /**
+     * This method hashes an ItemEnum colour with a number.
+     * @author Samuele Pietro Galli
+     * @param b ItemEnum
+     * @return an integer between 0 and 5
+     */
     private int enumToInt(ItemEnum b) { //hash per array occorrenze
         int value=0;
 
