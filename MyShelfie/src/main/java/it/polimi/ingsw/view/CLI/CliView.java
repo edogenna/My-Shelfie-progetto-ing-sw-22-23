@@ -75,6 +75,7 @@ public class CliView implements Runnable {
                 }
             }
             win = controllerCli.finishTurn();
+            done = false;
         }
         //TODO: controller calculate the winner; declare the winner
         controllerCli.declareWinner();
