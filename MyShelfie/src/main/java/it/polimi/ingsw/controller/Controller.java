@@ -160,9 +160,9 @@ public class Controller {
         return card;
     }
 
+    //TODO: finish this method
     public void declareWinner(){
         int x;
-        //TODO: finish this method
         x = model.theWinnerIs();
         view.winnerPrint(model.getActivePlayerName(), x);
     }

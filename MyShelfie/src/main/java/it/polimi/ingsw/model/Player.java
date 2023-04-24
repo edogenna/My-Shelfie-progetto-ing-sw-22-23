@@ -2,11 +2,9 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.ItemEnum;
 
-import java.util.Scanner;
 import java.util.Stack;
 
 public class Player {
-    private final int id;
     private int myPoints;
     private int myCommonPoints;
     private final String username;
@@ -15,8 +13,7 @@ public class Player {
     private ItemEnum[][] shelf = new ItemEnum[6][5];
     private int[] heights = new int[5];
 
-    public Player(int id, String username){
-        this.id = id;
+    public Player(String username){
         this.username = username;
         myPoints = 0;
         myCommonPoints = 0;
@@ -29,20 +26,6 @@ public class Player {
         }
         for(int i=0; i<5; i++)
             heights[i] = 0;
-    }
-
-    public Player(String username){
-        //todo: after cleaned the match class, remove the id
-        this.id = -2;
-        this.username = username;
-        myPoints = 0;
-        myCommonPoints = 0;
-        CommonDone1 = false;
-        CommonDone2 = false;
-        for(int i=0; i<6; i++){
-            for(int j=0; j<5; j++)
-                shelf[i][j] = ItemEnum.BLANK;
-        }
     }
 
     public void setPersonalCard(Card goals){
@@ -194,160 +177,6 @@ public class Player {
         return true;
     }
 
-    public boolean checkIfFull2(){
-        for(int i=0; i<5; i++) {
-            if(this.heights[i] < 6)
-                return false;
-        }
-        return true;
-    }
-
-    public boolean pickCard(Board tileBoard, int x1, int y1){
-        boolean readAgain;
-        Scanner readCoordinates = new Scanner(System.in);
-        int j;
-        ItemEnum removed;
-
-        if(tileBoard.getMatrix()[x1][y1] == ItemEnum.BLANK){
-            readAgain = true;
-            System.out.println("you have selected an empty position.");
-        }else if(tileFreeSide(tileBoard.getMatrix(),x1,y1)){
-            //the tile has a free side
-            readAgain = false;
-        }else{
-            System.out.println("one of the selected tiles hasn't a free side.");
-            readAgain = true;
-        }
-        if(!readAgain){
-            removed = tileBoard.deleteItemEnum(x1, y1);
-            System.out.println("Decide the column of your shelf");
-            j = readCoordinates.nextInt();
-            while(isColumnFull(j,1)){
-                System.out.println("The column " +j+ "hasn't enough space, select another column");
-                j = readCoordinates.nextInt();
-            }
-            insert(j, removed);
-        }
-        return !readAgain;
-    }
-
-    public boolean pickCard(Board tileBoard, int x1, int y1, int x2, int y2){
-        int j;
-        boolean readAgain;
-        Scanner readCoordinates = new Scanner(System.in);
-        ItemEnum removed1, removed2;
-
-        if(tileBoard.getMatrix()[x1][y1] == ItemEnum.BLANK || tileBoard.getMatrix()[x2][y2] == ItemEnum.BLANK){
-            System.out.println("you have selected an empty position.");
-            readAgain = true;
-        }else{
-            //the selected tiles aren't adjacent
-            if(!adjacentTiles(x1, y1, x2, y2)){
-                readAgain = true;
-                System.out.println("The tiles aren't adjacent.");
-            }else{
-                readAgain = false;
-            }
-        }
-        if(!readAgain){
-            if(!(tileFreeSide(tileBoard.getMatrix(),x1,y1) && tileFreeSide(tileBoard.getMatrix(),x2,y2))){
-                readAgain = true;
-                System.out.println("one of the selected tiles hasn't a free side.");
-            }
-        }
-        if(!readAgain){
-            removed1 = tileBoard.deleteItemEnum(x1,y1);
-            removed2 = tileBoard.deleteItemEnum(x2,y2);
-            System.out.println("Decide the column of your shelf");
-            j = readCoordinates.nextInt();
-            while(isColumnFull(j,2)){
-                System.out.println("The column " +j+ " hasn't enough space, select another column");
-                j = readCoordinates.nextInt();
-            }
-            insert(j, removed1, removed2);
-        }
-        return !readAgain;
-    }
-
-    public boolean pickCard(Board tileBoard, int x1, int y1, int x2, int y2, int x3, int y3){
-        int j;
-        boolean readAgain;
-        Scanner readCoordinates = new Scanner(System.in);
-        ItemEnum removed1, removed2, removed3;
-
-        if(tileBoard.getMatrix()[x1][y1] == ItemEnum.BLANK || tileBoard.getMatrix()[x2][y2] == ItemEnum.BLANK || tileBoard.getMatrix()[x3][y3] == ItemEnum.BLANK){
-            System.out.println("you have selected an empty position.");
-            readAgain = true;
-        }else{
-            //the selected tiles aren't adjacent
-            if(!adjacentTiles(x1,y1,x2,y2,x3,y3)){
-                readAgain = true;
-                System.out.println("The tiles aren't adjacent.");
-            }else{
-                readAgain = false;
-            }
-        }
-        if(!readAgain){
-            //control no free side of the tiles
-            if(!(tileFreeSide(tileBoard.getMatrix(),x1,y1) && tileFreeSide(tileBoard.getMatrix(),x2,y2) && tileFreeSide(tileBoard.getMatrix(),x3,y3))){
-                readAgain = true;
-                System.out.println("one of the selected tiles hasn't a free side.");
-            }
-        }
-/*            if(readAgain){
-            System.out.println("Select another 3 tiles: x1 y1; x2 y2; x3 y3");
-            x1 = readCoordinates.nextInt();
-            y1 = readCoordinates.nextInt();
-            x2 = readCoordinates.nextInt();
-            y2 = readCoordinates.nextInt();
-            x3 = readCoordinates.nextInt();
-            y3 = readCoordinates.nextInt();
-        }*/
-        if(!readAgain){
-            removed1 = tileBoard.deleteItemEnum(x1, y1);
-            removed2 = tileBoard.deleteItemEnum(x2, y2);
-            removed3 = tileBoard.deleteItemEnum(x3, y3);
-            System.out.println("Decide the column of your shelf");
-            j = readCoordinates.nextInt();
-            while(isColumnFull(j,3)){
-                System.out.println("The column "+ j + " hasn't enough space, select another column");
-                j = readCoordinates.nextInt();
-            }
-            insert(j, removed1, removed2, removed3);
-        }
-        return !readAgain;
-    }
-
-    //TODO: the private method "tileFreeSide", move this method in Board class
-    private boolean tileFreeSide(ItemEnum[][] boardTest, int x, int y){
-        boolean freeSide;
-
-        freeSide = (x>0 && boardTest[x-1][y] == ItemEnum.BLANK) || (x<8 && boardTest[x+1][y] == ItemEnum.BLANK) || (y>0 && boardTest[x][y-1] == ItemEnum.BLANK) || (y<8 && boardTest[x][y+1] == ItemEnum.BLANK) || x==0 || y==0 || x==8 || y==8;
-
-        return freeSide;
-    }
-
-    private boolean adjacentTiles(int x1, int y1, int x2, int y2){
-        boolean isAdjacent;
-
-        if(x1 == x2){
-            isAdjacent = (y1 == y2 + 1) || (y1 == y2 - 1);
-        }else if(y1 == y2){
-            isAdjacent = (x1 == x2 + 1) || (x1 == x2 - 1);
-        }else
-            isAdjacent = false;
-
-        return isAdjacent;
-    }
-
-    private boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
-        boolean isAdjacent;
-
-        isAdjacent = (x1 == x2 && x2 == x3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3)))) || (y1 == y2 && y2 == y3 && ((adjacentTiles(x1, y1, x2, y2) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x1, y1, x3, y3) && adjacentTiles(x2, y2, x3, y3)) || (adjacentTiles(x2, y2, x1, y1) && adjacentTiles(x1, y1, x3, y3))));
-
-
-        return isAdjacent;
-    }
 
     /**
      * @author Alessandro Fornara
