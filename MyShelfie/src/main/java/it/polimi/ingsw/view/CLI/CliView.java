@@ -46,11 +46,11 @@ public class CliView implements Runnable {
             controllerCli.setUsernamePlayer(name);
         }
         controllerCli.setFirstPlayer();
-        this.board = controllerCli.getBoard();
-        CommonCards = controllerCli.getCommonCards();
-        printGame();
-        while (!win) {
 
+        while (!win) {
+            this.board = controllerCli.getBoard();
+            CommonCards = controllerCli.getCommonCards();
+            printGame();
             while(!done) {
                 outputStream.println("Please insert which tiles you would like to remove from the board and the column of your bookshelf you want to put your tiles in");
                 outputStream.println("the first one will go to the first position available on the bottom of the column and the others will pile up");

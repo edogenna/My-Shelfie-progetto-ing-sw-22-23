@@ -17,7 +17,7 @@ public class Main {
         s.startServer();
         */
 
-        CliView cliView = new CliView(4);
+        CliView cliView = new CliView(2);
         Thread thread = new Thread(cliView);
         thread.start();
 
