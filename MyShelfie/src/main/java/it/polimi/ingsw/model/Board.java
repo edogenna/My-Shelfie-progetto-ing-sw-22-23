@@ -25,22 +25,23 @@ public class Board {
             {1, 0}, {1, 1}, {1, 2},
             {2, 0}, {2, 1},
             {3, 0}};
-    private final static int numPosAlwaysForbidden = 9;
     private final static int[][] positionValid3Players = new int[][]{{0, 3}, {2, 2}};
-    private final static int numPosValid3Players = 2;
     private final static int[][] positionValid4Players = new int[][]{{4, 0}, {3, 1}};
-    private final static int numPosValid4Players = 2;
-    private int[][] forbiddenPositions;
     private CommonCardStrategy[] CommonCards;
 
     public Board(int numPlayers) {
         matrix = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
 
+        if(numPlayers <= 1 || numPlayers > 4){
+            System.out.println("ERROR: The number of players must be between 2 and 4. It has been set to 2.");
+            numPlayers = 2;
+        }
+        this.numPlayers = numPlayers;
+
         for(int i = 0; i < ItemEnum.NUM_ITEMENUM; i++)
             numItemRemained[i] = INITIAL_NUMBER_ITEMENUM;
-        refill();
 
-        this.numPlayers = numPlayers;
+        refill();
 
         //Generating Common Goal Cards
         CommonCards =new CommonCardStrategy[2];
@@ -62,14 +63,49 @@ public class Board {
         return copy;
     }
 
+    /**
+     * Determines if a position is valid for filling
+     *
+     * @param r row
+     * @param c column
+     * @return true if the position is valid, false otherwise
+     */
     private boolean isPositionValid(int r, int c) {
-        for (int i = 0; i < numPosAlwaysForbidden; i++) {
-            if (arePositionsEqual4Square(positionsAlwaysForbidden[i][0], positionsAlwaysForbidden[i][1], r, c))
+        //excluding positions always forbidden
+        for (int[] ints : positionsAlwaysForbidden) {
+            if (arePositionsEqual4Square(ints[0], ints[1], r, c))
                 return false;
         }
+
+        //excluding positions valid only for 4 players
+        if(this.numPlayers == 2 || this.numPlayers == 3){
+            for (int[] ints : positionValid4Players) {
+                if (arePositionsEqual4Square(ints[0], ints[1], r, c))
+                    return false;
+            }
+        }
+
+        //excluding positions valid for 3 players
+        if(numPlayers == 2){
+            for (int[] ints : positionValid3Players) {
+                if (arePositionsEqual4Square(ints[0], ints[1], r, c))
+                    return false;
+            }
+        }
         return true;
+
+
     }
 
+    /**
+     * Compare the two positions, specularly in the 4 quadrants
+     *
+     * @param r1 first row
+     * @param c1 first column
+     * @param r2 second row
+     * @param c2 second column
+     * @return true if the positions are equal, false otherwise
+     */
     private boolean arePositionsEqual4Square(int r1, int c1, int r2, int c2) {
         return (r1 == r2 && c1 == c2) ||
                 (r1 == BOARD_SIZE - 1 - c2 && c1 == r2) ||
@@ -122,6 +158,7 @@ public class Board {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (isPositionValid(i, j)) {
                     n = rand.nextInt(ItemEnum.NUM_ITEMENUM); //blank is excluded
+
                     while (numItemRemained[n] == 0)
                         n = rand.nextInt(ItemEnum.NUM_ITEMENUM);
 
@@ -180,11 +217,16 @@ public class Board {
         return CommonCards;
     }
 
-    public boolean tileFreeSide(int x, int y){
-        boolean freeSide;
-
-        freeSide = (x>0 && this.matrix[x-1][y] == ItemEnum.BLANK) || (x<8 && this.matrix[x+1][y] == ItemEnum.BLANK) || (y>0 && this.matrix[x][y-1] == ItemEnum.BLANK) || (y<8 && this.matrix[x][y+1] == ItemEnum.BLANK) || x==0 || y==0 || x==8 || y==8;
-
-        return freeSide;
-    }
+    /**
+     * Check if a tile has a free side
+     *
+     * @param r row of the tile
+     * @param c column of the tile
+     * @return true if the tile has a free side, false otherwise
+     */
+    public boolean tileFreeSide(int r, int c){
+        return (r>0 && this.matrix[r-1][c] == ItemEnum.BLANK) || (r<8 && this.matrix[r+1][c] == ItemEnum.BLANK) ||
+                (c>0 && this.matrix[r][c-1] == ItemEnum.BLANK) || (c<8 && this.matrix[r][c+1] == ItemEnum.BLANK) ||
+                r==0 || c==0 || r==8 || c==8;
+        }
 }
