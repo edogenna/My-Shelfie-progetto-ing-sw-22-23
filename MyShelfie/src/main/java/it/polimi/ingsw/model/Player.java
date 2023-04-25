@@ -32,6 +32,16 @@ public class Player {
         this.myGoals = goals;
     }
 
+    /**
+     * @author Alessandro Fornara
+     * @return This player's personal card
+     */
+    public Card getPersonalCard(){ return this.myGoals; }
+
+    /**
+     * @author Donato Fiore
+     * @return This player's username
+     */
     public String getUsername(){
         return new String(this.username);
     }

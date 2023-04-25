@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.view.CLI.CliView;
@@ -171,9 +172,31 @@ public class Controller {
         return model.getBoardMatrix();
     }
 
+    /**
+     * @author Alessandro Fornara
+     * @return 2 Common Cards
+     */
     public CommonCardStrategy[] getCommonCards(){
         return model.getCommonCards();
     }
+
+    /**
+     * @author Alessandro Fornara
+     * @return The active player's personal card
+     */
+    public Card getActivePlayerPersonalCard(){return model.getPersonalCard();}
+
+    /**
+     * @author Alessandro Fornara
+     * @return The active player's username
+     */
+    public String getActivePlayerUsername(){return model.getActivePlayerName();}
+
+    /**
+     * @author Alessandro Fornara
+     * @return the active player's bookshelf
+     */
+    public ItemEnum[][] getActivePlayershelf(){return model.getShelf();}
 
 //    public ItemEnum[][] getCommonCards(int x){
 //        return model.getCommonCards();

@@ -186,9 +186,25 @@ public class Model {
         return this.board.getMatrix();
     }
 
+    /**
+     * @author Alessandro Fornara
+     * @return 2 Common Cards
+     */
     public CommonCardStrategy[] getCommonCards(){
         return board.getCommonCards();
     }
+
+    /**
+     * @author Alessandro Fornara
+     * @return the active player's bookshelf
+     */
+    public ItemEnum[][] getShelf(){return activePlayer.getMatrixBookshelf();}
+
+    /**
+     * @author Alessandro Fornara
+     * @return The active player's personal card
+     */
+    public Card getPersonalCard(){return activePlayer.getPersonalCard();}
 
     //todo: test this method
     public boolean finishTurn(){
