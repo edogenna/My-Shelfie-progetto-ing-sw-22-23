@@ -31,6 +31,7 @@ public class Player {
     public void setPersonalCard(Card goals){
         this.myGoals = goals;
     }
+    public Card getPersonalCard(){ return this.myGoals; }
 
     public String getUsername(){
         return new String(this.username);

@@ -52,6 +52,10 @@ public class CliView implements Runnable {
             CommonCards = controllerCli.getCommonCards();
             printGame();
             while(!done) {
+                personalCard = controllerCli.getActivePlayerPersonalCard();
+                shelf = controllerCli.getActivePlayershelf();
+                printBookshelfAndPersonal();
+                outputStream.println("\n" + controllerCli.getActivePlayerUsername() + " it's your turn.");
                 outputStream.println("Please insert which tiles you would like to remove from the board and the column of your bookshelf you want to put your tiles in");
                 outputStream.println("the first one will go to the first position available on the bottom of the column and the others will pile up");
                 outputStream.println("Example: x1,y1,x2,y2,x3,y3,column");
@@ -104,6 +108,7 @@ public class CliView implements Runnable {
      * @author Alessandro Fornara
      */
     private void printBookshelfAndPersonal(){
+        outputStream.println("\n" + "Your Bookshelf:   Your Personal Card:");
         ItemEnum.generateCharMatrix(shelf, 6, 5).appendToAllRows("   ")
                 .addOnRight(ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)).printMatrix();
     }

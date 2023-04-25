@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.view.CLI.CliView;
@@ -174,6 +175,12 @@ public class Controller {
     public CommonCardStrategy[] getCommonCards(){
         return model.getCommonCards();
     }
+
+    public Card getActivePlayerPersonalCard(){return model.getPersonalCard();}
+
+    public String getActivePlayerUsername(){return model.getActivePlayerName();}
+
+    public ItemEnum[][] getActivePlayershelf(){return model.getShelf();}
 
 //    public ItemEnum[][] getCommonCards(int x){
 //        return model.getCommonCards();

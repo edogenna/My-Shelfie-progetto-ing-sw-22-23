@@ -190,6 +190,10 @@ public class Model {
         return board.getCommonCards();
     }
 
+    public ItemEnum[][] getShelf(){return activePlayer.getMatrixBookshelf();}
+
+    public Card getPersonalCard(){return activePlayer.getPersonalCard();}
+
     //todo: test this method
     public boolean finishTurn(){
         boolean finish;
