@@ -13,13 +13,13 @@ public class Main {
         m1.begin();
         */
 
-        /*Server s=new Server(1234);
+        Server s=new Server(1234);
         s.startServer();
-        */
 
-        CliView cliView = new CliView(2);
+
+        /*CliView cliView = new CliView(2);
         Thread thread = new Thread(cliView);
         thread.start();
-
+        */
     }
 }

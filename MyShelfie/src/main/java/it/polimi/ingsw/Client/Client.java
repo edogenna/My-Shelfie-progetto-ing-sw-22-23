@@ -24,16 +24,19 @@ public class Client {
         int portNumber = Integer.parseInt(args[1]);
         */
         try (
-                Socket Socket = new Socket(hostName, portNumber);
-                PrintWriter out = new PrintWriter(Socket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(Socket.getInputStream()));
-                BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
+            Socket Socket = new Socket(hostName, portNumber);
+            PrintWriter out = new PrintWriter(Socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(Socket.getInputStream()));
+            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
         ) {
             String userInput;
-
-            while ((userInput = stdIn.readLine()) != null) {
-                out.println(userInput);
-                System.out.println(in.readLine());
+            while (true) {
+                String message = in.readLine();
+                System.out.println(message);
+                if(message.equals("You are the first player to connect, please submit the number of players for the next game:")) {
+                    userInput = stdIn.readLine();
+                    out.println(userInput);
+                }
             }
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
