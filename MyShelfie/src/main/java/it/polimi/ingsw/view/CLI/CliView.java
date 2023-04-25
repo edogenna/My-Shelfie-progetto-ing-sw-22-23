@@ -29,7 +29,7 @@ public class CliView implements Runnable {
     }
 
     public void match(){
-        int num, col, i, x1, y1;
+        int num, i, x;
         boolean done = false;
         boolean win = false;
         String name, inputs;
@@ -59,22 +59,26 @@ public class CliView implements Runnable {
                 outputStream.println("Please insert which tiles you would like to remove from the board and the column of your bookshelf you want to put your tiles in");
                 outputStream.println("the first one will go to the first position available on the bottom of the column and the others will pile up");
                 outputStream.println("Example: x1,y1,x2,y2,x3,y3,column");
+                outputStream.println("Example: a,3,a,4,a,5,column");
                 inputs = scanner.next();
+                while(controllerCli.dummyInput(inputs)){
+                    inputs = scanner.next();
+                }
                 tiles = inputs.split(",");
                 i = tiles.length;
                 //i = number of tiles * 2 + 1;
                 switch (i) {
                     case 3:
                         //we have taken 1 tile;
-                        done = controllerCli.pickCard(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                        done = controllerCli.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
                         break;
                     case 5:
                         //we have taken 2 tiles;
-                        done = controllerCli.pickCard(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]), Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
+                        done = controllerCli.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
                         break;
                     case 7:
                         //we have taken 3 tiles;
-                        done = controllerCli.pickCard(Integer.parseInt(tiles[0]), Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]), Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]), Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
+                        done = controllerCli.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
                         break;
                 }
             }
@@ -113,6 +117,9 @@ public class CliView implements Runnable {
                 .addOnRight(ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)).printMatrix();
     }
 
+    public void dummyInputPrint(){
+        outputStream.println("please write the input with the correct format");
+    }
 
     public void notEnoughSpaceBookshelfPrint(){
         outputStream.println("your bookshelf hasn't enough space, please make a new move taking less tiles");

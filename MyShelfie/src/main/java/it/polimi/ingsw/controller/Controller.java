@@ -35,6 +35,50 @@ public class Controller {
         model.setFirstPlayer();
     }
 
+    public boolean dummyInput(String input){
+        String[] coordinates;
+        int len, i;
+
+        len = input.length();
+        if(len != 5 && len != 9 && len != 13) {
+            view.dummyInputPrint();
+            return true;
+        }
+        for(i=1; i<len; i+=2){
+            if(input.charAt(i) != ','){
+                view.dummyInputPrint();
+                return true;
+            }
+        }
+//  x,y,x,y,x,y,c
+//  0123456789012
+
+        coordinates = input.split(",");
+        for(i=0; i<coordinates.length; i++){
+            if(i==coordinates.length-1){
+                //the character must be between '0' and '4', this is the column of bookshelf
+                if(coordinates[i].charAt(0) < '0' || coordinates[i].charAt(0) > '4'){
+                    view.dummyInputPrint();
+                    return true;
+                }
+            }else if(i%2 == 0){
+                //the character must be between 'a' and 'z'
+                if(coordinates[i].charAt(0) < 'a' || coordinates[i].charAt(0) > 'z'){
+                    view.dummyInputPrint();
+                    return true;
+                }
+            }else if(i%2 != 0){
+                //the character must be between '0' and '8'
+                if(coordinates[i].charAt(0) < '0' || coordinates[i].charAt(0) > '8'){
+                    view.dummyInputPrint();
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public boolean enoughSpaceBookshelf(int x){
         boolean done;
 
