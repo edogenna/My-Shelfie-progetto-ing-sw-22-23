@@ -136,12 +136,12 @@ public class Model {
         return isAdjacent;
     }
 
-    public void insert(int x, int y, int z){
-        this.activePlayer.insert(z,this.board.deleteItemEnum(x,y));
+    public void insert(int x, int y, int col){
+        this.activePlayer.insert(col,this.board.deleteItemEnum(x,y));
     }
 
-    public void insert(int x1, int y1, int x2, int y2, int z){
-        this.activePlayer.insert(z, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2));
+    public void insert(int x1, int y1, int x2, int y2, int col){
+        this.activePlayer.insert(col, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2));
     }
 
     public void insert(int x1, int y1, int x2, int y2, int x3, int y3, int col) {
@@ -167,17 +167,17 @@ public class Model {
     }
 
     public int getCommonCardsPoints(int card){
-        if(card == 1)
+        if(card == 0)
             return this.commonPoints1;
-        else if(card == 2)
+        else if(card == 1)
             return this.commonPoints2;
         return 0;
     }
 
     private void updateCommonPoints(int numCard){
-        if(numCard == 1){
+        if(numCard == 0){
             this.commonPoints1 -= 2;
-        }else if(numCard == 2){
+        }else if(numCard == 1){
             this.commonPoints2 -= 2;
         }
     }
@@ -270,8 +270,8 @@ public class Model {
     }
 
 /* 0 - 1 - 2 - 3
-* inizia 1;
-* 2 e 0 a pari punti;
+* start 1;
+* '2' e '0' same points;
 * dist(1,2) = 2 - 1 = 1;
 * dist(1,0) = 0 - 1 = -1(mod 4) = -1 + 4 = 3;
 * dist(1,3) = 3 - 1 = 2;
