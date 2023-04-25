@@ -121,6 +121,10 @@ public class CliView implements Runnable {
         outputStream.println("please write the input with the correct format");
     }
 
+    public void blankTilesSelected(int x, int y){
+        outputStream.println("the tile " + x + ","+ y + " is a blank tile, please make a new move");
+    }
+
     public void notEnoughSpaceBookshelfPrint(){
         outputStream.println("your bookshelf hasn't enough space, please make a new move taking less tiles");
     }

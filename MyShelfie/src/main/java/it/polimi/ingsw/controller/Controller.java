@@ -89,6 +89,36 @@ public class Controller {
         return done;
     }
 
+    //return true if the tile is blank
+    private boolean blankTiles(int x, int y){
+        boolean blank;
+        ItemEnum[][] board;
+
+        board = model.getBoardMatrix();
+        blank = board[x][y].equals(ItemEnum.BLANK);
+        if(blank)
+            view.blankTilesSelected(x,y);
+
+        return blank;
+    }
+
+    private boolean blankTiles(int x1, int y1, int x2, int y2){
+        boolean done;
+        done = blankTiles(x1,y1);
+        if(done)
+            return true;
+        done = blankTiles(x2, y2);
+        return done;
+    }
+    private boolean blankTiles(int x1, int y1, int x2, int y2, int x3, int y3){
+        boolean done;
+        done = blankTiles(x1,y1,x2,y2);
+        if(done)
+            return true;
+        done = blankTiles(x3,y3);
+        return done;
+    }
+
     private boolean isFeasiblePickMove(int x, int y){
         boolean done;
         done = model.isFeasiblePickMove(x,y);
@@ -133,6 +163,11 @@ public class Controller {
     public boolean pickCard(int x, int y, int col){
         boolean done;
 
+        done = blankTiles(x,y);
+        if(done){
+            return false;
+        }
+
         done = enoughSpaceBookshelf(1);
         if(!done)
             return false;
@@ -152,6 +187,11 @@ public class Controller {
     public boolean pickCard(int x1, int y1, int x2, int y2, int col){
         boolean done;
 
+        done = blankTiles(x1,y1,x2,y2);
+        if(done){
+            return false;
+        }
+
         done = enoughSpaceBookshelf(2);
         if(!done)
             return false;
@@ -170,6 +210,11 @@ public class Controller {
 
     public boolean pickCard(int x1, int y1, int x2, int y2, int x3, int y3, int col){
         boolean done;
+
+        done = blankTiles(x1,y1,x2,y2,x3,y3);
+        if(done){
+            return false;
+        }
 
         done = enoughSpaceBookshelf(3);
         if(!done)
