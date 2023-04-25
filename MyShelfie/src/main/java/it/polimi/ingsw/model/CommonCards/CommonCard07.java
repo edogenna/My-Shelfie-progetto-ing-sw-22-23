@@ -21,7 +21,7 @@ public class CommonCard07 implements CommonCardStrategy {
         for (int i=0; i<5; i++){ //scorro la matrice fino alla penultima riga e penultima colonna dati i controlli
             for (int j=0; j<4; j++){
                 //if che controlla a destra, poi sotto, poi in diagonale
-                if((b[i][j].equals(b[i][j+1]) && (b[i][j].equals(b[i+1][j])) && (b[i][j].equals(b[i+1][j+1])))){
+                if((b[i][j].equals(b[i][j+1]) && (!b[i][j].equals(ItemEnum.BLANK)) && (b[i][j].equals(b[i+1][j])) && (b[i][j].equals(b[i+1][j+1])))){
                     count++;
                 }
                 if(count == 2)
