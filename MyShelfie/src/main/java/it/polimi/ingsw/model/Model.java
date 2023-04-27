@@ -137,7 +137,7 @@ public class Model {
 
         return isAdjacent;
     }
-
+//istanzio il model, creo una board, inserisco nella shelf, getactiveboard e le confronto
     public void insert(int x, int y, int col){
         this.activePlayer.insert(col,this.board.deleteItemEnum(x,y));
     }
