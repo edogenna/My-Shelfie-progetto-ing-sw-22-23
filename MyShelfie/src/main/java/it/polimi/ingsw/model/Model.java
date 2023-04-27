@@ -52,6 +52,8 @@ public class Model {
         return this.numPlayers;
     }
 
+
+    //TODO: DOESN'T WORK (la seconda volta che viene richiamata y è uguale a 0 e quindi non entra nel ciclo e non fa il controllo)
     public boolean duplicatedUsername(String x){
         int y = idFirstPlayer;
         if(y==-1)
