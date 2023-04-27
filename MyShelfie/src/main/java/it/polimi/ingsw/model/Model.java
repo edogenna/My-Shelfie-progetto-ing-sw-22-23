@@ -232,6 +232,10 @@ public class Model {
         return finish;
     }
 
+    public Player[] getPlayers() {
+        return this.players;
+    }
+
     //TODO: test this method
     public int theWinnerIs(){
         int i, x, max, id;
