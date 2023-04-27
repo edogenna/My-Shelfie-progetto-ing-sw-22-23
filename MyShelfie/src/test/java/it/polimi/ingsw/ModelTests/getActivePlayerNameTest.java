@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ModelTests.CommonCardTests;
+package it.polimi.ingsw.ModelTests;
 
 import it.polimi.ingsw.model.Player;
 import org.junit.Assert;
@@ -20,7 +20,6 @@ public class getActivePlayerNameTest {
         Assert.assertEquals("S9so", p1.getUsername());
         Assert.assertEquals("pluto", p2.getUsername());
         Assert.assertEquals("puppo", p3.getUsername());
-
     }
 
 }

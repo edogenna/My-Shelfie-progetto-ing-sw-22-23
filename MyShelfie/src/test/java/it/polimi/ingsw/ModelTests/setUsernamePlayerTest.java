@@ -5,6 +5,11 @@ import org.junit.Assert;
 import it.polimi.ingsw.model.Model;
 import org.junit.Test;
 
+/**
+ * Test method to check if setUsernamePlayer works
+ * @author Samuele Pietro Galli
+ */
+
 public class setUsernamePlayerTest {
     Model m = new Model(3);
     private String x = "pippo";
