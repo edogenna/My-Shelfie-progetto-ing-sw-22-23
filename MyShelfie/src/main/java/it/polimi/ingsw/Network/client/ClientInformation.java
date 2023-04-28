@@ -8,22 +8,26 @@ public class ClientInformation {
     private Socket socket;
     private PrintWriter out;
     private Scanner in;
+    private int ID;
 
-    public ClientInformation(Socket socket, PrintWriter out, Scanner in){
+    public ClientInformation(Socket socket, PrintWriter out, Scanner in, int id){
         this.socket = socket;
         this.out = out;
         this.in = in;
+        this.ID = id;
     }
 
     public Socket getSocket() {
-        return socket;
+        return this.socket;
     }
 
     public PrintWriter getOut() {
-        return out;
+        return this.out;
     }
 
     public Scanner getIn() {
-        return in;
+        return this.in;
     }
+
+    public int getID() {return this.ID;}
 }

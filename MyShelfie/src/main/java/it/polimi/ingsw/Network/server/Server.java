@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.server;
 import it.polimi.ingsw.Network.client.ClientInformation;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.controller.Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +23,7 @@ public class Server {
     private ArrayList<ClientInformation> connectedClients;
     private Observable observable;
     private int numberOfPlayers;
+    private String str = "";
     public static Lock lock;
 
     public Server(int port){
@@ -43,9 +45,7 @@ public class Server {
         }
         System.out.println("Server ready");
 
-        while(true) {
-            LobbyPhase();
-        }
+        LobbyPhase();
     }
 
     private void sendMessageToObservers(Message message) {
@@ -55,38 +55,49 @@ public class Server {
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
+    public void setStr(String s) {this.str = s;}
 
     private ArrayList<ClientInformation> acceptConnection(ServerSocket serverSocket) throws IOException {
         Socket clientSocket;
         clientSocket = serverSocket.accept();
-        ClientInformation inf = new ClientInformation(clientSocket, new PrintWriter(clientSocket.getOutputStream(), true), new Scanner(clientSocket.getInputStream()));
+        ClientInformation inf = new ClientInformation(clientSocket, new PrintWriter(clientSocket.getOutputStream(), true), new Scanner(clientSocket.getInputStream()), connectedClients.size()-1);
         connectedClients.add(inf);
         return connectedClients;
     }
 
     private void LobbyPhase() throws IOException {
-        connectedClients = acceptConnection(serverSocket);
-        executor.submit(new ClientHandler(this ,connectedClients.get(connectedClients.size()-1), observable));
-        System.out.println("User connected");
 
-        if(connectedClients.size() == 1) {
+        while (true) {
+            connectedClients = acceptConnection(serverSocket);
+            executor.submit(new ClientHandler(this, connectedClients.get(connectedClients.size() - 1), observable));
+            System.out.println("User connected");
 
-            sendMessageToObservers(new FirstPlayerMessage());
+            if (connectedClients.size() == 1) {
 
-            while(!lock.tryLock());
+                sendMessageToObservers(new FirstPlayerMessage());
 
-            sendMessageToObservers(new LobbyMessage(1, numberOfPlayers));
-            sendMessageToObservers(new WaitingMessage());
-        }
-        else {
-            sendMessageToObservers(new LobbyMessage(connectedClients.size(), numberOfPlayers));
+                while (!lock.tryLock()) ;
 
-            if(connectedClients.size() < numberOfPlayers)
+                sendMessageToObservers(new LobbyMessage(1, numberOfPlayers));
                 sendMessageToObservers(new WaitingMessage());
+            } else {
+                sendMessageToObservers(new LobbyMessage(connectedClients.size(), numberOfPlayers));
 
+                if (connectedClients.size() < numberOfPlayers)
+                    sendMessageToObservers(new WaitingMessage());
+
+            }
+
+            if (connectedClients.size() == numberOfPlayers) {
+                sendMessageToObservers(new StartingGameMessage());
+                break;
+            }
         }
+    }
 
-        if(connectedClients.size() == numberOfPlayers)
-            sendMessageToObservers(new StartingGameMessage());
+    private void GamePhase(){
+        Controller controller = new Controller(numberOfPlayers);
+        //TODO: implementation coming soon
+
     }
 }

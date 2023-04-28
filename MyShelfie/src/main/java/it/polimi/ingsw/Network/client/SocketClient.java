@@ -11,7 +11,6 @@ import java.net.Socket;
 import java.rmi.UnknownHostException;
 
 public class SocketClient {
-    private Converter c = new Converter();
     public void startSocketClient() throws IOException {
 
         String hostName = "127.0.0.1";
