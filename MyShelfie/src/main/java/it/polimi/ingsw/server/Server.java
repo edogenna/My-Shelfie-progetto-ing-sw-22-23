@@ -9,11 +9,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Server {
     private ServerSocket serverSocket = null;
@@ -22,7 +22,7 @@ public class Server {
     private ArrayList<ClientInformation> connectedClients;
     private Observable observable;
     private int numberOfPlayers;
-    public static Semaphore simophore;
+    public static Lock lock;
 
     public Server(int port){
         this.portNumber=port;
@@ -30,7 +30,7 @@ public class Server {
         this.connectedClients = new ArrayList<ClientInformation>();
         this.executor = Executors.newCachedThreadPool();
         this.numberOfPlayers = 0;
-        simophore = new Semaphore(1);
+        lock = new ReentrantLock();
     }
 
     public void startServer() throws IOException {
@@ -73,7 +73,7 @@ public class Server {
 
             sendMessageToObservers(new FirstPlayerMessage());
 
-            while(!simophore.tryAcquire());
+            while(!lock.tryLock());
 
             sendMessageToObservers(new LobbyMessage(1, numberOfPlayers));
             sendMessageToObservers(new WaitingMessage());
@@ -89,8 +89,4 @@ public class Server {
         if(connectedClients.size() == numberOfPlayers)
             sendMessageToObservers(new StartingGameMessage());
     }
-
-    /*public Semaphore getSimophore() {
-        return simophore;
-    }*/
 }

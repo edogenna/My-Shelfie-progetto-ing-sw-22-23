@@ -26,19 +26,21 @@ public class ClientHandler implements Runnable, Observer {
     @Override
     public void run() {
         try {
-
+            int i = 1;
             //Leggo e scrivo nella connessione finche' non ricevo "quit"
             while (true) {
-                server.simophore.acquire();
+                if(i == 1){
+                    Server.lock.lock();
+                }
                 String line = clientInformation.getIn().nextLine();
 
-                System.out.println(line);
                 if (line.equals("quit")) {
                     break;
                 } else {
                     Message m = c.convertFromJSON(line);
                     server.setNumberOfPlayers(((NumberOfPlayersAnswer) m).getNum());
-                    server.simophore.release();
+                    Server.lock.unlock();
+                    i--;
                 }
             }
             //Chiudo gli stream e il socket
@@ -48,8 +50,6 @@ public class ClientHandler implements Runnable, Observer {
             System.out.println("User disconnected");
         } catch (IOException e) {
             System.err.println(e.getMessage());
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 
