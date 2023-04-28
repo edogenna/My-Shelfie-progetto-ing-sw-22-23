@@ -1,28 +1,39 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.Client.ClientInformation;
+import it.polimi.ingsw.Observer.Observable;
+import it.polimi.ingsw.controller.messages.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 
 public class Server {
+    private ServerSocket serverSocket = null;
+    private ExecutorService executor;
     private int portNumber;
-    ArrayList<Socket> connectedClients = new ArrayList<>();
+    private ArrayList<ClientInformation> connectedClients;
+    private Observable observable;
+    private int numberOfPlayers;
+    public static Semaphore simophore;
 
     public Server(int port){
         this.portNumber=port;
+        this.observable = new Observable();
+        this.connectedClients = new ArrayList<ClientInformation>();
+        this.executor = Executors.newCachedThreadPool();
+        this.numberOfPlayers = 0;
+        simophore = new Semaphore(1);
     }
 
-    public void startServer() {
-        //ExecutorService executor= Executors.newCachedThreadPool();
-        ServerSocket serverSocket;
-        PrintWriter out=null;
-        int numberOfPlayers=0;
-
+    public void startServer() throws IOException {
         try {
             serverSocket = new ServerSocket(portNumber);
             System.out.println("Server started..");
@@ -33,41 +44,53 @@ public class Server {
         System.out.println("Server ready");
 
         while(true) {
-            try {
-                Socket clientSocket;
-                clientSocket = serverSocket.accept();
-                System.out.println("User connected" + clientSocket);
-                connectedClients.add(clientSocket);
-
-                for(Socket s: connectedClients) {
-                    if(connectedClients.size() == 1) {
-                        out = new PrintWriter(s.getOutputStream(), true);
-                        out.println("You are the first player to connect, please submit the number of players for the next game:");
-                        Scanner in = new Scanner(s.getInputStream());
-                        numberOfPlayers = in.nextInt();
-                        out.println("1 / " + numberOfPlayers + " Clients Connected...");
-                        out.println("Waiting for more players...");
-                    }
-                    else {
-                        out = new PrintWriter(s.getOutputStream(), true);
-                        out.println(connectedClients.size() + " / " + numberOfPlayers + " Clients Connected...");
-
-                        if(connectedClients.size() < numberOfPlayers)
-                            out.println("Waiting for more players...");
-                    }
-                }
-
-                if(connectedClients.size() == numberOfPlayers) {
-                    for(Socket s: connectedClients){
-                        out = new PrintWriter(s.getOutputStream(), true);
-                        out.println("Starting game...");
-                    }
-                }
-                //executor.submit(new ClientHandler(clientSocket));
-            } catch (IOException e) {
-                break;
-            }
+            LobbyPhase();
         }
     }
 
+    private void sendMessageToObservers(Message message) {
+        observable.notifyObservers(message);
+    }
+
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
+
+    private ArrayList<ClientInformation> acceptConnection(ServerSocket serverSocket) throws IOException {
+        Socket clientSocket;
+        clientSocket = serverSocket.accept();
+        ClientInformation inf = new ClientInformation(clientSocket, new PrintWriter(clientSocket.getOutputStream(), true), new Scanner(clientSocket.getInputStream()));
+        connectedClients.add(inf);
+        return connectedClients;
+    }
+
+    private void LobbyPhase() throws IOException {
+        connectedClients = acceptConnection(serverSocket);
+        executor.submit(new ClientHandler(this ,connectedClients.get(connectedClients.size()-1), observable));
+        System.out.println("User connected");
+
+        if(connectedClients.size() == 1) {
+
+            sendMessageToObservers(new FirstPlayerMessage());
+
+            while(!simophore.tryAcquire());
+
+            sendMessageToObservers(new LobbyMessage(1, numberOfPlayers));
+            sendMessageToObservers(new WaitingMessage());
+        }
+        else {
+            sendMessageToObservers(new LobbyMessage(connectedClients.size(), numberOfPlayers));
+
+            if(connectedClients.size() < numberOfPlayers)
+                sendMessageToObservers(new WaitingMessage());
+
+        }
+
+        if(connectedClients.size() == numberOfPlayers)
+            sendMessageToObservers(new StartingGameMessage());
+    }
+
+    /*public Semaphore getSimophore() {
+        return simophore;
+    }*/
 }

@@ -5,8 +5,10 @@ import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.server.Server;
 import it.polimi.ingsw.view.CLI.CliView;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main( String[] args ){
+    public static void main( String[] args ) throws IOException {
         /*Match m1;
 
         m1=new Match(2);

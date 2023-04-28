@@ -1,8 +1,8 @@
 package it.polimi.ingsw.controller.messages;
-public final class NumberOfPlayersMessage extends Message{
+public final class NumberOfPlayersAnswer extends Message{
     private final int num;
 
-    public NumberOfPlayersMessage(int num){
+    public NumberOfPlayersAnswer(int num){
         super("NumberOfPlayers");
         this.num = num;
     }

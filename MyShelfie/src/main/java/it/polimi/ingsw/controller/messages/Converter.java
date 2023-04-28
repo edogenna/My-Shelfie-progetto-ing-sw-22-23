@@ -12,8 +12,10 @@ public class Converter {
         switch(type) {
             case "FirstPlayer":
                 return gson.fromJson(message, FirstPlayerMessage.class);
+            case "Waiting":
+                return gson.fromJson(message, WaitingMessage.class);
             case "NumberOfPlayers":
-                return gson.fromJson(message, NumberOfPlayersMessage.class);
+                return gson.fromJson(message, NumberOfPlayersAnswer.class);
             case "Lobby":
                 return gson.fromJson(message, LobbyMessage.class);
             case "StartingGame":
@@ -22,6 +24,8 @@ public class Converter {
                 return gson.fromJson(message, ChooseUsernameMessage.class);
             case "GameInformation":
                 return gson.fromJson(message, GameInformation.class);
+            case "UsernameAnswer":
+                return gson.fromJson(message, UsernameAnswer.class);
 
         }
         return null;

@@ -2,21 +2,20 @@ package it.polimi.ingsw.controller.messages;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
-import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 public final class GameInformation extends Message {
 
     private final ItemEnum[][] board;
-    public ItemEnum[][] shelf;
-    public Card personalCard;
-    public CommonCardStrategy[] commonCards;
+    private final ItemEnum[][] shelf;
+    private final Card personalCard;
+    //private final String[] commonCards;
 
-    public GameInformation(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard, CommonCardStrategy[] commonCard) {
+    public GameInformation(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard/*, String[] commonCards*/) {
         super("GameInformation");
         this.board = board;
         this.shelf = shelf;
         this.personalCard = personalCard;
-        this.commonCards = commonCard;
+        //this.commonCards = commonCards;
     }
 
     public ItemEnum[][] getBoard() {
@@ -31,7 +30,7 @@ public final class GameInformation extends Message {
         return this.personalCard;
     }
 
-    public CommonCardStrategy[] getCommonCards(){
+    /*public String[] getCommonCards(){
         return this.commonCards;
-    }
+    }*/
 }

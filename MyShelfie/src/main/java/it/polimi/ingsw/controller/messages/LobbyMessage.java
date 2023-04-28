@@ -7,7 +7,7 @@ public final class LobbyMessage extends Message{
         super("Lobby");
         this.totalNum = totalNum;
         this.actualNum = actualNum;
-        s = actualNum + " / " + totalNum + " Clients Connected...\nWaiting for more players...";
+        s = actualNum + " / " + totalNum + " Clients Connected...";
     }
     public String getS() {
         return s;
