@@ -18,6 +18,8 @@ public class insert3Test {
     private int y3, y2, y1;
     private int col;
     private ItemEnum tile1, tile2, tile3;
+
+    //seleziono tre tessere e le metto dentro
     @Test
     public void Test(){
         m.setUsernamePlayer("pollo");
@@ -25,19 +27,20 @@ public class insert3Test {
         m.setFirstPlayer();
         x1=4;
         y1=6;
-        x2=4;
+        x2=5;
         y2=7;
-        x3=4;
+        x3=6;
         y3=8;
         col=0;
         tile1 = m.getBoardMatrix()[x1][y1];
         tile2 = m.getBoardMatrix()[x2][y2];
         tile3 = m.getBoardMatrix()[x3][y3];
         s=m.getShelf();
-        //insert da rivedere
+        //TODO: riguardare le coordinate delle tre tessere
         m.insert(x1,y1,col);
         Assert.assertEquals(m.getBoardMatrix()[x1][y1], ItemEnum.BLANK);
         Assert.assertEquals(tile1, s[5][0]);
         Assert.assertEquals(tile2, s[4][0]);
+        Assert.assertEquals(tile3, s[3][0]);
     }
 }
