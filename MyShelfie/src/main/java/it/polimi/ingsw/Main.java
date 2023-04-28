@@ -1,9 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.server.Server;
-import it.polimi.ingsw.view.CLI.CliView;
+import it.polimi.ingsw.Network.server.Server;
 
 import java.io.IOException;
 

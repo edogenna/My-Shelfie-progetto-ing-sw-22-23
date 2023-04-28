@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller.messages;
+package it.polimi.ingsw.Network.messages;
 
 public class WaitingMessage extends Message{
 

@@ -1,8 +1,8 @@
-package it.polimi.ingsw.server;
+package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Client.ClientInformation;
+import it.polimi.ingsw.Network.client.ClientInformation;
+import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
-import it.polimi.ingsw.controller.messages.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller.messages;
+package it.polimi.ingsw.Network.messages;
 public final class NumberOfPlayersAnswer extends Message{
     private final int num;
 

@@ -1,8 +1,8 @@
-package it.polimi.ingsw.Client;
+package it.polimi.ingsw.Network.client;
 
 
-import it.polimi.ingsw.controller.messages.*;
-import it.polimi.ingsw.view.CLI.CliView;
+import it.polimi.ingsw.Network.messages.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

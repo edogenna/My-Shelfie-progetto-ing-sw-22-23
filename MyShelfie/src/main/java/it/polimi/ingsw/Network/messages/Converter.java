@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller.messages;
+package it.polimi.ingsw.Network.messages;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

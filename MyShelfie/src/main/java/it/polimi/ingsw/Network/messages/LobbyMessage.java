@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller.messages;
+package it.polimi.ingsw.Network.messages;
 
 public final class LobbyMessage extends Message{
     private final int actualNum, totalNum;

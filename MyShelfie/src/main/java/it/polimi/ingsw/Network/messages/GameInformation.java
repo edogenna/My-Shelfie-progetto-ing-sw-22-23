@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller.messages;
+package it.polimi.ingsw.Network.messages;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
