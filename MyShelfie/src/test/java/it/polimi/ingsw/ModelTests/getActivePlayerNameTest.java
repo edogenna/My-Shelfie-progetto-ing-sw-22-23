@@ -19,8 +19,8 @@ public class getActivePlayerNameTest {
     @Test
     public void Test(){
         m.setUsernamePlayer("pippo");
+        m.setFirstPlayer();
         m.setUsernamePlayer("S9so");
-        //m.setFirstPlayer();
         Assert.assertEquals(p.getUsername(), m.getPlayers()[0].getUsername());
         Assert.assertEquals(p1.getUsername(), m.getPlayers()[1].getUsername());
 
