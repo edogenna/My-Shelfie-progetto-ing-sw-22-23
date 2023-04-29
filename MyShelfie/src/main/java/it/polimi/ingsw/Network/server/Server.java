@@ -89,7 +89,7 @@ public class Server {
             }
 
             if (connectedClients.size() == numberOfPlayers) {
-                sendMessageToObservers(new StartingGameMessage());
+                sendMessageToObservers(new GameStartMessage());
                 break;
             }
         }

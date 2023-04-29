@@ -48,7 +48,7 @@ public class SocketClient {
                     }
                     case "Lobby" -> System.out.println(((LobbyMessage) m).getS());
                     case "StartingGame" -> {
-                        System.out.println(((StartingGameMessage) m).getS());
+                        System.out.println(((GameStartMessage) m).getS());
                     }
                     case "ChooseUsername" -> {
                         System.out.println(((ChooseUsernameMessage) m).getS());
