@@ -40,6 +40,8 @@ public class Converter {
                 return gson.fromJson(message, GraphicalGameInfo.class);
             case "NotValidMove":
                 return gson.fromJson(message, NotValidMove.class);
+            case "ListOfLobbies":
+                return gson.fromJson(message, ListOfLobbies.class);
         }
         return null;
     }
