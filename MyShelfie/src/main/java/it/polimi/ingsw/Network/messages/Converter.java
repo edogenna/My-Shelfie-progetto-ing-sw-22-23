@@ -33,8 +33,10 @@ public class Converter {
                 return gson.fromJson(message, NotValidNumberofPlayersMessage.class);
             case "NotValidUsername":
                 return gson.fromJson(message, NotValidUsernameError.class);
-             case "NotValidGameId":
+            case "NotValidGameId":
                 return gson.fromJson(message, NotValidGameIdError.class);
+            case "GraphicalGameInformation":
+                return gson.fromJson(message, GraphicalGameInformation.class);
         }
         return null;
     }
