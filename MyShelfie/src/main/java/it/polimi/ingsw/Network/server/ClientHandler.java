@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network.server;
 
 import it.polimi.ingsw.Network.client.ClientInformation;
 import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMove;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
@@ -53,8 +54,11 @@ public class ClientHandler implements Runnable, Observer {
                             Server.numOfPlayersLock.release();
                         }
                         case "Move" -> {
-                            server.getController().dummyInput(((MoveMessage) m).getS());
-                            //TODO: change dummyInput method
+                            /*while (server..dummyInput(((MoveMessage) m).getS())){
+                                System.out.println("ciao");
+                                sendMessage(new NotValidMove(), clientInformation.getOut());
+                            }*/
+
                             //TODO: create handleMessage method in serve
                         }
                     }

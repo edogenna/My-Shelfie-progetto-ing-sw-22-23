@@ -30,6 +30,8 @@ public class Converter {
                 return gson.fromJson(message, GameInformation.class);
             case "UsernameAnswer":
                 return gson.fromJson(message, UsernameAnswer.class);
+            case "Move":
+                return gson.fromJson(message, MoveMessage.class);
             case "NotValidNumber":
                 return gson.fromJson(message, NotValidNumberofPlayersMessage.class);
             case "NotValidUsername":

@@ -131,8 +131,4 @@ public class Server {
         sendMessageToObservers(new GameInformation(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getActivePlayerUsername()));
 
     }
-
-    public Controller getController() {
-        return controller;
-    }
 }

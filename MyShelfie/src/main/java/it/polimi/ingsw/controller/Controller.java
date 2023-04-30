@@ -41,12 +41,12 @@ public class Controller {
 
         len = input.length();
         if(len != 5 && len != 9 && len != 13) {
-            view.dummyInputPrint();
+            //view.dummyInputPrint();
             return true;
         }
         for(i=1; i<len; i+=2){
             if(input.charAt(i) != ','){
-                view.dummyInputPrint();
+                //view.dummyInputPrint();
                 return true;
             }
         }
@@ -58,19 +58,19 @@ public class Controller {
             if(i==coordinates.length-1){
                 //the character must be between '0' and '4', this is the column of bookshelf
                 if(coordinates[i].charAt(0) < '0' || coordinates[i].charAt(0) > '4'){
-                    view.dummyInputPrint();
+                    //view.dummyInputPrint();
                     return true;
                 }
             }else if(i%2 == 0){
                 //the character must be between 'a' and 'z'
                 if(coordinates[i].charAt(0) < 'a' || coordinates[i].charAt(0) > 'z'){
-                    view.dummyInputPrint();
+                    //view.dummyInputPrint();
                     return true;
                 }
             }else if(i%2 != 0){
                 //the character must be between '0' and '8'
                 if(coordinates[i].charAt(0) < '0' || coordinates[i].charAt(0) > '8'){
-                    view.dummyInputPrint();
+                    //view.dummyInputPrint();
                     return true;
                 }
             }

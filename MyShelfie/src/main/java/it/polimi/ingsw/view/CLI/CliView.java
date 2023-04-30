@@ -159,12 +159,12 @@ public class CliView{
         if(gameInformation.getActivePlayerUsername().equals(this.myUsername)){
             this.personalCard = gameInformation.getPersonalCard();
             this.shelf = gameInformation.getShelf();
+            printBookshelfAndPersonal();
             outputStream.println(gameInformation.getS());
             userInput = in.readLine();
             out.println(new MoveMessage(userInput));
         } else {
             outputStream.println(gameInformation.getActivePlayerUsername() + " is making his move...");
-            printBookshelfAndPersonal();
         }
     }
 
