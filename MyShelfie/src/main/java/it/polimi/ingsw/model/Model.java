@@ -28,20 +28,36 @@ public class Model {
         this.lastTurn = false;
     }
 
+    /*
+    * @return true if the tile has a free side
+    * @author Donato Fiore
+    * */
     public boolean isFeasiblePickMove(int x, int y){
         return this.board.tileFreeSide(x, y);
     }
 
+    /*
+    * it upgrades the player who will play the turn
+    * @author Donato Fiore
+    * */
     private void changeActivePlayer(){
         this.idActivePlayer++;
         this.idActivePlayer %= this.numPlayers;
         this.activePlayer = this.players[this.idActivePlayer];
     }
 
+    /*
+    * it returns the username of the player that will play the turn
+    * @author Donato Fiore
+    * */
     public String getActivePlayerName(){
         return new String(this.activePlayer.getUsername());
     }
 
+    /*
+    * it implements the player class setting the username of the player; it also set the PersonalCard of the player
+    * @author Donato Fiore
+    */
     public void setUsernamePlayer(String username){
         this.idFirstPlayer++;
         this.players[this.idFirstPlayer] = new Player(username);
@@ -53,11 +69,16 @@ public class Model {
     }
 
 
-    //TODO: DOESN'T WORK (la seconda volta che viene richiamata y è uguale a 0 e quindi non entra nel ciclo e non fa il controllo)
+    //TODO: TEST AGAIN (la seconda volta che viene richiamata y è uguale a 0 e quindi non entra nel ciclo e non fa il controllo)
+    /*
+    * @return true if there is another player with the same username
+    * @author Donato Fiore
+    * */
     public boolean duplicatedUsername(String x){
         int y = idFirstPlayer;
         if(y==-1)
             return false;
+        y = y + 1;
         for(int i=0; i<y; i++){
             if(x.equals(players[i].getUsername()))
                 return true;
@@ -97,6 +118,10 @@ public class Model {
         }
     }
 
+    /*
+    * it sets casually the first player of the match
+    * @author Donato Fiore
+    * */
     public void setFirstPlayer(){
         Random xyz = new Random();
         int i;
