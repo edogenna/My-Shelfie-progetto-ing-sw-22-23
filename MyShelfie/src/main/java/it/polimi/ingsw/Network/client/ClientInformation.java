@@ -9,12 +9,14 @@ public class ClientInformation {
     private PrintWriter out;
     private Scanner in;
     private int ID;
+    private String username;
 
     public ClientInformation(Socket socket, PrintWriter out, Scanner in, int id){
         this.socket = socket;
         this.out = out;
         this.in = in;
         this.ID = id;
+        this.username = null;
     }
 
     public Socket getSocket() {
@@ -30,4 +32,8 @@ public class ClientInformation {
     }
 
     public int getID() {return this.ID;}
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

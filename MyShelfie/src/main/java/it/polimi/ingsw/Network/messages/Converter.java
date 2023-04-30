@@ -22,7 +22,7 @@ public class Converter {
             case "Lobby":
                 return gson.fromJson(message, LobbyMessage.class);
             case "StartingGame":
-                return gson.fromJson(message, GameStartMessage.class);
+                return gson.fromJson(message, StartingGameMessage.class);
             case "ChooseUsername":
                 return gson.fromJson(message, ChooseUsernameMessage.class);
             case "GameInformation":

@@ -2,6 +2,8 @@ package it.polimi.ingsw.Network.client;
 
 
 import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,15 +45,24 @@ public class SocketClient {
                     case "FirstPlayer" -> {
                         System.out.println(((FirstPlayerMessage) m).getS());
                         userInput = stdIn.readLine();
+                        while(Integer.parseInt(userInput)<2 || Integer.parseInt(userInput)>4){
+                            System.out.println(new NotValidNumberofPlayersMessage().getS());
+                            userInput = stdIn.readLine();
+                        }
                         m = new NumberOfPlayersAnswer(Integer.parseInt(userInput));
                         out.println(c.convertToJSON(m));
                     }
                     case "Lobby" -> System.out.println(((LobbyMessage) m).getS());
                     case "StartingGame" -> {
-                        System.out.println(((GameStartMessage) m).getS());
+                        System.out.println(((StartingGameMessage) m).getS());
                     }
                     case "ChooseUsername" -> {
                         System.out.println(((ChooseUsernameMessage) m).getS());
+                        userInput = stdIn.readLine();
+                        out.println(c.convertToJSON(new UsernameAnswer(userInput)));
+                    }
+                    case "NotValidUsername" -> {
+                        System.out.println(((NotValidUsernameError) m).getS());
                         userInput = stdIn.readLine();
                         out.println(c.convertToJSON(new UsernameAnswer(userInput)));
                     }
@@ -73,14 +84,4 @@ public class SocketClient {
             System.exit(1);
         }
     }
-
-    /*public Message receiveMessage() {
-        try {
-            String jsonString = in.nextLine();
-            return c.convertFromJSON(jsonString);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
 }

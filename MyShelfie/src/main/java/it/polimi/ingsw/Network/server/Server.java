@@ -13,29 +13,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.Semaphore;
 
 public class Server {
     private ServerSocket serverSocket = null;
     private ExecutorService executor;
     private int portNumber;
     private ArrayList<ClientInformation> connectedClients;
+    private ArrayList<String> usernames;
     private Observable observable;
     private int numberOfPlayers;
     private String str = "";
-    public static Lock lock;
+    public static Semaphore numOfPlayersLock;
+    public static Semaphore usernameChosen;
 
     public Server(int port){
         this.portNumber=port;
         this.observable = new Observable();
-        this.connectedClients = new ArrayList<ClientInformation>();
+        this.connectedClients = new ArrayList<>();
+        this.usernames = new ArrayList<>();
         this.executor = Executors.newCachedThreadPool();
         this.numberOfPlayers = 0;
-        lock = new ReentrantLock();
+        this.numOfPlayersLock = new Semaphore(1);
+        this.usernameChosen = new Semaphore(1);;
     }
 
-    public void startServer() throws IOException {
+    public void startServer() throws IOException, InterruptedException {
         try {
             serverSocket = new ServerSocket(portNumber);
             System.out.println("Server started..");
@@ -65,31 +68,53 @@ public class Server {
         return connectedClients;
     }
 
-    private void LobbyPhase() throws IOException {
+    public boolean isUsernameTaken(String usrn){
+        for(String s: usernames){
+            if(usrn.equals(s)){
+                return false;
+            }
+        }
+        usernames.add(usrn);
+        connectedClients.get(connectedClients.size()-1).setUsername(usrn);
+        return true;
+    }
+
+    private void LobbyPhase() throws IOException, InterruptedException {
 
         while (true) {
+            Server.numOfPlayersLock.acquire();
+            Server.usernameChosen.acquire();
+            System.out.println("Ready to accept new connection");
             connectedClients = acceptConnection(serverSocket);
             executor.submit(new ClientHandler(this, connectedClients.get(connectedClients.size() - 1), observable));
             System.out.println("User connected");
+
+            while (!Server.usernameChosen.tryAcquire());
+            Server.usernameChosen.release();
+
+            if(connectedClients.size() > 1)
+                Server.numOfPlayersLock.release();
 
             if (connectedClients.size() == 1) {
 
                 sendMessageToObservers(new FirstPlayerMessage());
 
-                while (!lock.tryLock()) ;
+                while (!Server.numOfPlayersLock.tryAcquire()) ;
 
                 sendMessageToObservers(new LobbyMessage(1, numberOfPlayers));
                 sendMessageToObservers(new WaitingMessage());
+                Server.numOfPlayersLock.release();
+
             } else {
                 sendMessageToObservers(new LobbyMessage(connectedClients.size(), numberOfPlayers));
 
                 if (connectedClients.size() < numberOfPlayers)
                     sendMessageToObservers(new WaitingMessage());
-
             }
 
             if (connectedClients.size() == numberOfPlayers) {
-                sendMessageToObservers(new GameStartMessage());
+                sendMessageToObservers(new StartingGameMessage());
+                System.out.println("Starting Game...");
                 break;
             }
         }

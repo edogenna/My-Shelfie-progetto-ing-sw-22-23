@@ -1,12 +1,10 @@
 package it.polimi.ingsw.Network.server;
 
 import it.polimi.ingsw.Network.client.ClientInformation;
-import it.polimi.ingsw.Network.messages.UsernameAnswer;
+import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
-import it.polimi.ingsw.Network.messages.Converter;
-import it.polimi.ingsw.Network.messages.Message;
-import it.polimi.ingsw.Network.messages.NumberOfPlayersAnswer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,25 +25,32 @@ public class ClientHandler implements Runnable, Observer {
     @Override
     public void run() {
         try {
-            int i = 1;
+
+            sendMessage(new ChooseUsernameMessage(), clientInformation.getOut());
+            String line = clientInformation.getIn().nextLine();
+
+            Message m = c.convertFromJSON(line);
+
+            while(!server.isUsernameTaken(((UsernameAnswer) m).getS())){
+                sendMessage(new NotValidUsernameError(), clientInformation.getOut());
+                line = clientInformation.getIn().nextLine();
+                m = c.convertFromJSON(line);
+            }
+
+            Server.usernameChosen.release();
+
             while (true) {
-                if(i == 1){
-                    Server.lock.lock();
-                }
-                String line = clientInformation.getIn().nextLine();
+
+                line = clientInformation.getIn().nextLine();
 
                 if (line.equals("quit")) {
                     break;
                 } else {
-                    Message m = c.convertFromJSON(line);
+                    m = c.convertFromJSON(line);
                     switch (m.getType()){
                         case "NumberOfPlayers" -> {
                             server.setNumberOfPlayers(((NumberOfPlayersAnswer) m).getNum());
-                            Server.lock.unlock();
-                            i--;
-                        }
-                        case "UsernameAnswer" -> {
-                            server.setStr(((UsernameAnswer) m).getS());
+                            Server.numOfPlayersLock.release();
                         }
                     }
                 }

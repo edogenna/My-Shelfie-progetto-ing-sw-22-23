@@ -5,7 +5,7 @@ import it.polimi.ingsw.Network.server.Server;
 import java.io.IOException;
 
 public class Main {
-    public static void main( String[] args ) throws IOException {
+    public static void main( String[] args ) throws IOException, InterruptedException {
         /*Match m1;
 
         m1=new Match(2);
