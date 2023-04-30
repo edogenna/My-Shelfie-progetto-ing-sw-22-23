@@ -3,6 +3,7 @@ package it.polimi.ingsw.Network.messages;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidGameIdError;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMove;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 
@@ -33,8 +34,14 @@ public class Converter {
                 return gson.fromJson(message, NotValidNumberofPlayersMessage.class);
             case "NotValidUsername":
                 return gson.fromJson(message, NotValidUsernameError.class);
-             case "NotValidGameId":
+            case "NotValidGameId":
                 return gson.fromJson(message, NotValidGameIdError.class);
+            case "GraphicalGameInformation":
+                return gson.fromJson(message, GraphicalGameInfo.class);
+            case "NotValidMove":
+                return gson.fromJson(message, NotValidMove.class);
+            case "ListOfLobbies":
+                return gson.fromJson(message, ListOfLobbies.class);
         }
         return null;
     }
