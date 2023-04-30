@@ -1,15 +1,18 @@
 package it.polimi.ingsw.view.CLI;
 
 import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
-import java.io.PrintStream;
+import java.io.*;
 import java.util.Scanner;
 
-public class CliView implements Runnable {
+public class CliView{
     private Scanner scanner;
     private PrintStream outputStream;
     private boolean done;
@@ -18,9 +21,14 @@ public class CliView implements Runnable {
     private CommonCardStrategy[] CommonCards;
     private Card personalCard;
     private ItemEnum[][] shelf;
+    private PrintWriter out;
+    private BufferedReader in;
+    private BufferedReader stdIn;
+    private Converter c;
+    private String myUsername;
+    private String userInput;
 
-//it is temporary; later I will create an interface similar to the observers;
-
+    @Deprecated
     public CliView(int numPlayers){
         scanner = new Scanner(System.in);
         outputStream = new PrintStream(System.out);
@@ -28,6 +36,21 @@ public class CliView implements Runnable {
         done = false;
     }
 
+    public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn){
+        this.out = out;
+        this.in = in;
+        this.stdIn = stdIn;
+        this.outputStream = new PrintStream(System.out);
+        this.personalCard = null;
+        this.CommonCards = null;
+        this.board = null;
+        this.shelf = null;
+        this.c = new Converter();
+        this.myUsername = null;
+        this.userInput = null;
+    }
+
+    @Deprecated
     public void match(){
         int num, i, x;
         boolean done = false;
@@ -90,6 +113,61 @@ public class CliView implements Runnable {
         this.done = true;
     }
 
+    public void actionHandler(Message m) throws IOException {
+
+        switch (m.getType()) {
+            case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
+            case "Lobby" -> outputStream.println(((LobbyMessage) m).getS());
+            case "StartingGame" -> {outputStream.println(((StartingGameMessage) m).getS());}
+            case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
+            case "NotValidUsername" -> {handleNotValidUsernameMessage(m);}
+            case "GameInformation" -> {handleGameInformationMessage(m);}
+            case "Waiting" -> outputStream.println(((WaitingMessage) m).getS());
+        }
+    }
+
+    private void handleFirstPlayerMessage(Message m) throws IOException {
+        outputStream.println(((FirstPlayerMessage) m).getS());
+        userInput = stdIn.readLine();
+        while(Integer.parseInt(userInput)<2 || Integer.parseInt(userInput)>4){
+            outputStream.println(new NotValidNumberofPlayersMessage().getS());
+            userInput = stdIn.readLine();
+        }
+        m = new NumberOfPlayersAnswer(Integer.parseInt(userInput));
+        out.println(c.convertToJSON(m));
+    }
+
+    private void handleChooseUsernameMessage(Message m) throws IOException {
+        outputStream.println(((ChooseUsernameMessage) m).getS());
+        userInput = stdIn.readLine();
+        this.myUsername = userInput;
+        out.println(c.convertToJSON(new UsernameAnswer(userInput)));
+    }
+
+    private void handleNotValidUsernameMessage(Message m) throws IOException {
+        outputStream.println(((NotValidUsernameError) m).getS());
+        userInput = stdIn.readLine();
+        this.myUsername = userInput;
+        out.println(c.convertToJSON(new UsernameAnswer(userInput)));
+    }
+
+    private void handleGameInformationMessage(Message m) throws IOException {
+        GameInformation gameInformation = (GameInformation) m;
+        this.board = gameInformation.getBoard();
+        //TODO: CommonCards
+        printGame();
+        if(gameInformation.getActivePlayerUsername().equals(this.myUsername)){
+            this.personalCard = gameInformation.getPersonalCard();
+            this.shelf = gameInformation.getShelf();
+            outputStream.println(gameInformation.getS());
+            userInput = in.readLine();
+            out.println(new MoveMessage(userInput));
+        } else {
+            outputStream.println(gameInformation.getActivePlayerUsername() + " is making his move...");
+            printBookshelfAndPersonal();
+        }
+    }
+
     public void commonPoints(String nickname, int points, int number){
         outputStream.println(nickname + "has completed the "+ number + " common goal card");
         outputStream.println(nickname + "scored " + points + " points");
@@ -102,8 +180,8 @@ public class CliView implements Runnable {
     private void printGame(){
         ItemEnum.generateCharMatrix(board, Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addNumbering(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
-                .addOnRight(CommonCards[0].printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
-                .addOnRight(CommonCards[1].printCommonCardMatrix())
+                /*.addOnRight(CommonCards[0].printCommonCardMatrix()).appendToAllRows("   ").alignColumn()
+                .addOnRight(CommonCards[1].printCommonCardMatrix())*/
                 .printMatrix();
     }
 
@@ -150,12 +228,5 @@ public class CliView implements Runnable {
         outputStream.println("the winner is...");
         outputStream.println(username);
         outputStream.println("the player " + username + "has done " + points + " points");
-    }
-
-    @Override
-    public void run() {
-        while(!this.done){
-            match();
-        }
     }
 }

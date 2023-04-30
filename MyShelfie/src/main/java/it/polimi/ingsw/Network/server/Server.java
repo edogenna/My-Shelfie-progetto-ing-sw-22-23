@@ -23,9 +23,9 @@ public class Server {
     private ArrayList<String> usernames;
     private Observable observable;
     private int numberOfPlayers;
-    private String str = "";
     public static Semaphore numOfPlayersLock;
     public static Semaphore usernameChosen;
+    private Controller controller;
 
     public Server(int port){
         this.portNumber=port;
@@ -35,7 +35,8 @@ public class Server {
         this.executor = Executors.newCachedThreadPool();
         this.numberOfPlayers = 0;
         this.numOfPlayersLock = new Semaphore(1);
-        this.usernameChosen = new Semaphore(1);;
+        this.usernameChosen = new Semaphore(1);
+        this.controller = null;
     }
 
     public void startServer() throws IOException, InterruptedException {
@@ -49,6 +50,7 @@ public class Server {
         System.out.println("Server ready");
 
         LobbyPhase();
+        GamePhase();
     }
 
     private void sendMessageToObservers(Message message) {
@@ -58,7 +60,6 @@ public class Server {
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
-    public void setStr(String s) {this.str = s;}
 
     private ArrayList<ClientInformation> acceptConnection(ServerSocket serverSocket) throws IOException {
         Socket clientSocket;
@@ -121,8 +122,17 @@ public class Server {
     }
 
     private void GamePhase(){
-        Controller controller = new Controller(numberOfPlayers);
-        //TODO: implementation coming soon
+        controller = new Controller(numberOfPlayers);
+        for(ClientInformation s: connectedClients){
+            controller.setUsernamePlayer(s.getUsername());
+        }
+        controller.setFirstPlayer();
 
+        sendMessageToObservers(new GameInformation(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getActivePlayerUsername()));
+
+    }
+
+    public Controller getController() {
+        return controller;
     }
 }

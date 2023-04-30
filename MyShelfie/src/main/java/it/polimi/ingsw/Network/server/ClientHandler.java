@@ -52,6 +52,11 @@ public class ClientHandler implements Runnable, Observer {
                             server.setNumberOfPlayers(((NumberOfPlayersAnswer) m).getNum());
                             Server.numOfPlayersLock.release();
                         }
+                        case "Move" -> {
+                            server.getController().dummyInput(((MoveMessage) m).getS());
+                            //TODO: change dummyInput method
+                            //TODO: create handleMessage method in serve
+                        }
                     }
                 }
             }
