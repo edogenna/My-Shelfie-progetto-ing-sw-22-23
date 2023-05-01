@@ -38,7 +38,7 @@ public class ClientHandler implements Runnable, Observer {
                 m = c.convertFromJSON(line);
             }
 
-            Server.usernameChosen.release();
+            Server.Lock2.release();
 
             while (true) {
 
@@ -51,13 +51,39 @@ public class ClientHandler implements Runnable, Observer {
                     switch (m.getType()){
                         case "NumberOfPlayers" -> {
                             server.setNumberOfPlayers(((NumberOfPlayersAnswer) m).getNum());
-                            Server.numOfPlayersLock.release();
+                            Server.Lock1.release();
                         }
                         case "Move" -> {
-                            /*while (server..dummyInput(((MoveMessage) m).getS())){
-                                System.out.println("ciao");
+                            if (server.controller.dummyInput(((MoveMessage) m).getS())){
                                 sendMessage(new NotValidMove(), clientInformation.getOut());
-                            }*/
+                            }
+                            else {
+                                String[] tiles = ((MoveMessage) m).getS().split(",");
+                                int i = tiles.length;
+                                boolean done = false;
+                                //i = number of tiles * 2 + 1;
+                                switch (i) {
+                                    case 3:
+                                        //we have taken 1 tile;
+                                        done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                                        break;
+                                    case 5:
+                                        //we have taken 2 tiles;
+                                        done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
+                                        break;
+                                    case 7:
+                                        //we have taken 3 tiles;
+                                        done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
+                                        break;
+                                }
+
+                                if(!done){
+                                    sendMessage(new NotValidMove(), clientInformation.getOut());
+                                }else{
+                                    server.controller.finishTurn();
+                                    Server.Lock1.release();
+                                }
+                            }
 
                             //TODO: create handleMessage method in serve
                         }

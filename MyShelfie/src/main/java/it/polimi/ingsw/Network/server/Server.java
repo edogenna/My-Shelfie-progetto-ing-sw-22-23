@@ -15,10 +15,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
-import java.rmi.*;
+/*import java.rmi.*;
 import java.rmi.registry.*;
-import java.rmi.server.*;
-public class Server extends UnicastRemoteObject{
+import java.rmi.server.*;*/
+public class Server /*extends unicastRemoteObject*/{
     private ServerSocket serverSocket = null;
     private ExecutorService executor;
     private int portNumber;
@@ -26,9 +26,9 @@ public class Server extends UnicastRemoteObject{
     private ArrayList<String> usernames;
     private Observable observable;
     private int numberOfPlayers;
-    public static Semaphore numOfPlayersLock;
-    public static Semaphore usernameChosen;
-    private Controller controller;
+    public static Semaphore Lock1;
+    public static Semaphore Lock2;
+    protected Controller controller;
 
     public Server(int port){
         this.portNumber=port;
@@ -37,8 +37,8 @@ public class Server extends UnicastRemoteObject{
         this.usernames = new ArrayList<>();
         this.executor = Executors.newCachedThreadPool();
         this.numberOfPlayers = 0;
-        this.numOfPlayersLock = new Semaphore(1);
-        this.usernameChosen = new Semaphore(1);
+        this.Lock1 = new Semaphore(1);
+        this.Lock2 = new Semaphore(1);
         this.controller = null;
     }
 
@@ -86,28 +86,28 @@ public class Server extends UnicastRemoteObject{
     private void LobbyPhase() throws IOException, InterruptedException {
 
         while (true) {
-            Server.numOfPlayersLock.acquire();
-            Server.usernameChosen.acquire();
+            Server.Lock1.acquire();
+            Server.Lock2.acquire();
             System.out.println("Ready to accept new connection");
             connectedClients = acceptConnection(serverSocket);
             executor.submit(new ClientHandler(this, connectedClients.get(connectedClients.size() - 1), observable));
             System.out.println("User connected");
 
-            while (!Server.usernameChosen.tryAcquire());
-            Server.usernameChosen.release();
+            while (!Server.Lock2.tryAcquire());
+            Server.Lock2.release();
 
             if(connectedClients.size() > 1)
-                Server.numOfPlayersLock.release();
+                Server.Lock1.release();
 
             if (connectedClients.size() == 1) {
 
                 sendMessageToObservers(new FirstPlayerMessage());
 
-                while (!Server.numOfPlayersLock.tryAcquire()) ;
+                while (!Server.Lock1.tryAcquire()) ;
 
                 sendMessageToObservers(new LobbyMessage(1, numberOfPlayers));
                 sendMessageToObservers(new WaitingMessage());
-                Server.numOfPlayersLock.release();
+                Server.Lock1.release();
 
             } else {
                 sendMessageToObservers(new LobbyMessage(connectedClients.size(), numberOfPlayers));
@@ -124,14 +124,19 @@ public class Server extends UnicastRemoteObject{
         }
     }
 
-    private void GamePhase(){
+    private void GamePhase() throws InterruptedException {
         controller = new Controller(numberOfPlayers);
         for(ClientInformation s: connectedClients){
             controller.setUsernamePlayer(s.getUsername());
         }
         controller.setFirstPlayer();
 
-        sendMessageToObservers(new GameInformation(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getActivePlayerUsername()));
+        //Server.Lock1.acquire();
+        while (true) {
+            sendMessageToObservers(new GameInformation(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getActivePlayerUsername()));
+            //while (!Server.Lock1.tryAcquire()) ;
+
+        }
 
     }
 }

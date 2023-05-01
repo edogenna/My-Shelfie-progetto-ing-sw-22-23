@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.CLI;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMove;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.controller.Controller;
@@ -123,6 +124,7 @@ public class CliView{
             case "NotValidUsername" -> {handleNotValidUsernameMessage(m);}
             case "GameInformation" -> {handleGameInformationMessage(m);}
             case "Waiting" -> outputStream.println(((WaitingMessage) m).getS());
+            case "NotValidMove" -> handleNotValidMove(m);
         }
     }
 
@@ -161,11 +163,17 @@ public class CliView{
             this.shelf = gameInformation.getShelf();
             printBookshelfAndPersonal();
             outputStream.println(gameInformation.getS());
-            userInput = in.readLine();
-            out.println(new MoveMessage(userInput));
+            userInput = stdIn.readLine();
+            out.println(c.convertToJSON(new MoveMessage(userInput)));
         } else {
             outputStream.println(gameInformation.getActivePlayerUsername() + " is making his move...");
         }
+    }
+
+    private void handleNotValidMove(Message m) throws IOException {
+        outputStream.println(((NotValidMove) m).getS());
+        userInput = stdIn.readLine();
+        out.println(c.convertToJSON(new MoveMessage(userInput)));
     }
 
     public void commonPoints(String nickname, int points, int number){

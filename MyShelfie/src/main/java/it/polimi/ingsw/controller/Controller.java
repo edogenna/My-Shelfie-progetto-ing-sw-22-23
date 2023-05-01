@@ -137,7 +137,7 @@ public class Controller {
             return false;
         done = model.adjacentTiles(x1,y1,x2,y2);
             if(!done){
-                view.notAdjacentTilesPrint();
+                //view.notAdjacentTilesPrint();
             }
         return done;
     }
@@ -155,7 +155,7 @@ public class Controller {
             return false;
         done = model.adjacentTiles(x1,y1,x2,y2,x3,y3);
         if(!done){
-            view.notAdjacentTilesPrint();
+            //view.notAdjacentTilesPrint();
         }
         return done;
     }
@@ -177,7 +177,7 @@ public class Controller {
             return false;
 
         if(!model.enoughSpaceColumn(col, 1)){
-            view.notEnoughSpaceBookshelfColPrint(col);
+            //view.notEnoughSpaceBookshelfColPrint(col);
             return false;
         }
         model.insert(x,y,col);
@@ -201,7 +201,7 @@ public class Controller {
             return false;
 
         if(!model.enoughSpaceColumn(col, 2)){
-            view.notEnoughSpaceBookshelfColPrint(col);
+            //view.notEnoughSpaceBookshelfColPrint(col);
             return false;
         }
         model.insert(x1,y1,x2,y2,col);
