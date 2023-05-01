@@ -224,6 +224,11 @@ public class Model {
         this.activePlayer.insert(col, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2), this.board.deleteItemEnum(x3,y3));
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x it is the number of the CommonCard; it can be 0 or 1
+     * @return true if the player has achieved the goal
+     * */
     public boolean controlCommonCards(int x){
         boolean done = false;
         int y=0;
@@ -242,6 +247,11 @@ public class Model {
         return false;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param card it is the number of the CommonCard; it can be 0 or 1
+     * @return the available points of the selected CommonCard
+     * */
     public int getCommonCardsPoints(int card){
         if(card == 0)
             return this.commonPoints1;
@@ -250,12 +260,46 @@ public class Model {
         return 0;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param numCard it is the number of the CommonCard; it can be 0 or 1
+     * it updates the available points of the CommonCards
+     * */
     private void updateCommonPoints(int numCard){
-        if(numCard == 0){
-            this.commonPoints1 -= 2;
-        }else if(numCard == 1){
-            this.commonPoints2 -= 2;
+        switch (this.numPlayers){
+            case 4:
+                if(numCard == 0){
+                    if(this.commonPoints1 > 0)
+                        this.commonPoints1 -= 2;
+                }else if(numCard == 1){
+                    if(this.commonPoints2 > 0)
+                        this.commonPoints2 -= 2;
+                }
+                break;
+            case 3:
+                if(numCard == 0){
+                    if(this.commonPoints1 == 4)
+                        this.commonPoints1 -= 4;
+                    else if(this.commonPoints1 > 0)
+                        this.commonPoints1 -= 2;
+                }else if(numCard == 1){
+                    if(this.commonPoints2 == 4)
+                        this.commonPoints2 -= 4;
+                    else if(this.commonPoints2 > 0)
+                        this.commonPoints2 -= 2;
+                }
+                break;
+            case 2:
+                if(numCard == 0){
+                    if(this.commonPoints1 > 0)
+                        this.commonPoints1 -= 4;
+                }else if(numCard == 1){
+                    if(this.commonPoints2 > 0)
+                        this.commonPoints2 -= 4;
+                }
+                break;
         }
+
     }
 
     public ItemEnum[][] getBoardMatrix(){
