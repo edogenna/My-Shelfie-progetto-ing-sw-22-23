@@ -15,7 +15,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
-public class Server {
+import java.rmi.*;
+import java.rmi.registry.*;
+import java.rmi.server.*;
+public class Server extends UnicastRemoteObject{
     private ServerSocket serverSocket = null;
     private ExecutorService executor;
     private int portNumber;
