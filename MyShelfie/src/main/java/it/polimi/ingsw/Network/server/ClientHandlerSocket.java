@@ -109,8 +109,8 @@ public class ClientHandlerSocket implements Runnable, Observer {
 
     /**
      * This method sends a message to a client
-     * @param m message
-     * @param out the output stream to send a message to the client
+     * @param m {@link Message}
+     * @param out the output stream to send a message to the {@link it.polimi.ingsw.Network.client.SocketClient}
      */
     public void sendMessage(Message m, PrintWriter out){
         String jsonString = c.convertToJSON(m);

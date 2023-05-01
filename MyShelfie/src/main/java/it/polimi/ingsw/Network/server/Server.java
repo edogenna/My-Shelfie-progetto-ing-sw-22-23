@@ -87,7 +87,7 @@ public class Server /*extends unicastRemoteObject*/{
     }
 
     /**
-     * This method accepts a socket connection and adds the connected client to a list of ClientInformation {@link ClientInformation}
+     * This method accepts a socket connection and adds the connected client to a list of {@link ClientInformation}
      * @author Alessandro Fornara
      * @param serverSocket
      * @return list of connected clients
@@ -102,7 +102,7 @@ public class Server /*extends unicastRemoteObject*/{
     }
 
     /**
-     * This method check if a username has already been taken by another client, if not it is added to a list of usernames and to the client's information {@link ClientInformation}
+     * This method check if a username has already been taken by another client, if not it is added to a list of usernames and to the client's information
      * @author Alessandro Fornara
      * @param usrn username
      * @return false if the username has already been taken, true otherwise
@@ -177,7 +177,7 @@ public class Server /*extends unicastRemoteObject*/{
         }
         controller.setFirstPlayer();
 
-        //TODO: COMMONCARDS, IN BOTH VIEW AND SERVER
+        //TODO: CHECK COMMONCARDS
         Server.Lock1.acquire();
         while (!win) {
             sendMessageToObservers(new GameInformation(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));

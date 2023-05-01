@@ -31,7 +31,6 @@ public interface CommonCardStrategy {
      * Returns the design of a common goal card as a String
      * @return Common Card Design
      */
-
     String getCommonCardDesign();
 }
 

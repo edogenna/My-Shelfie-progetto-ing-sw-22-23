@@ -9,7 +9,7 @@ public class CommonCardGenerator {
     /**
      * Generates two random common goal cards (different from one another).
      * @author Alessandro Fornara
-     * @return An array that contains the first card in position number 0 and the second card in position number 1.
+     * @return An array of {@link CommonCardStrategy} that contains the first card in position number 0 and the second card in position number 1.
      */
     public CommonCardStrategy[] GenerateCommonCards(){
         int[] array=new int[2];
