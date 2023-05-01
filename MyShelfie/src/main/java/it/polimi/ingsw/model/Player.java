@@ -259,6 +259,10 @@ public class Player {
         return this.heights[j] + n > 6;
     }
 
+    /**
+     * @author Donato Fiore
+     * @return the maximum number of tiles that can be inserted in a column
+     * */
     public int maxTilesPick(){
         int x=0;
         for(int i=0; i<5; i++){
@@ -268,12 +272,24 @@ public class Player {
         return x;
     }
 
-    //"y" is the library column. The tile is placed on the first available row starting from the bottom.
+    /**
+     * @author Donato Fiore
+     * @param y the library column
+     * @param tile the tile he wants to insert
+     * The tile is placed on the first available row starting from the bottom
+     * */
     public void insert(int y, ItemEnum tile){
             this.shelf[5-heights[y]][y] = tile;
             heights[y]++;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param y the library column
+     * @param tile1 the first tile he wants to insert
+     * @param tile2 the second tile he wants to insert
+     * The tiles are placed on the first available row starting from the bottom
+     * */
     public void insert(int y, ItemEnum tile1, ItemEnum tile2){
             this.shelf[5-heights[y]][y] = tile1;
             heights[y]++;
@@ -281,6 +297,14 @@ public class Player {
             heights[y]++;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param y the library column
+     * @param tile1 the first tile he wants to insert
+     * @param tile2 the second tile he wants to insert
+     * @param tile3 the third tile he wants to insert
+     * The tiles are placed on the first available row starting from the bottom
+     * */
     public void insert(int y, ItemEnum tile1, ItemEnum tile2, ItemEnum tile3){
         this.shelf[5-heights[y]][y] = tile1;
         heights[y]++;
