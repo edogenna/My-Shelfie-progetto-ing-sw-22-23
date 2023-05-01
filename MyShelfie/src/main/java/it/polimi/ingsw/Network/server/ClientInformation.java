@@ -1,9 +1,13 @@
-package it.polimi.ingsw.Network.client;
+package it.polimi.ingsw.Network.server;
 
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * This class contains the information of a client
+ * @author Alessandro Fornara
+ */
 public class ClientInformation {
     private Socket socket;
     private PrintWriter out;
@@ -19,24 +23,43 @@ public class ClientInformation {
         this.username = null;
     }
 
+    /**
+     * @return this client's socket
+     */
     public Socket getSocket() {
         return this.socket;
     }
 
+    /**
+     * @return the output stream to send this client a message
+     */
     public PrintWriter getOut() {
         return this.out;
     }
 
+    /**
+     * @return the input stream to receive a message from this client
+     */
     public Scanner getIn() {
         return this.in;
     }
 
+    /**
+     * @return this client's ID
+     */
     public int getID() {return this.ID;}
 
+    /**
+     * Sets this client's username to a value
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * @return this client's username
+     */
     public String getUsername() {
         return username;
     }

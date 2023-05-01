@@ -6,6 +6,10 @@ import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * This class is a test for the first common card
+ * @author Alessandro Fornara
+ */
 public class CommonCard01Test {
     private CommonCardStrategy c;
     private ItemEnum[][] matrix;

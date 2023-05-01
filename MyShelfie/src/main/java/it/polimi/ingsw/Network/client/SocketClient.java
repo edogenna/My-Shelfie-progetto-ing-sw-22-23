@@ -1,15 +1,14 @@
 package it.polimi.ingsw.Network.client;
 
 import it.polimi.ingsw.Network.messages.*;
-import it.polimi.ingsw.Network.messages.ErrorMessages.*;;
-import it.polimi.ingsw.view.CLI.CliView;
+;
+import it.polimi.ingsw.view.CliView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.rmi.UnknownHostException;
 
 public class SocketClient {
     public void startSocketClient() throws IOException {

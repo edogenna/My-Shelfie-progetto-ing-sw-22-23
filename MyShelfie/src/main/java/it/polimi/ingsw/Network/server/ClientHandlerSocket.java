@@ -1,8 +1,7 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Network.client.ClientInformation;
 import it.polimi.ingsw.Network.messages.*;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMove;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMoveError;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
@@ -10,6 +9,10 @@ import it.polimi.ingsw.Observer.Observer;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * This class is used to respond to requests from a specific socket client
+ * @author Alessandro Fornara
+ */
 public class ClientHandlerSocket implements Runnable, Observer {
     private Server server;
     private Observable observable;
@@ -55,7 +58,7 @@ public class ClientHandlerSocket implements Runnable, Observer {
                         }
                         case "Move" -> {
                             if (server.controller.dummyInput(((MoveMessage) m).getS())){
-                                sendMessage(new NotValidMove(), clientInformation.getOut());
+                                sendMessage(new NotValidMoveError(), clientInformation.getOut());
                             }
                             else {
                                 String[] tiles = ((MoveMessage) m).getS().split(",");
@@ -79,7 +82,7 @@ public class ClientHandlerSocket implements Runnable, Observer {
                                 }
 
                                 if(!done){
-                                    sendMessage(new NotValidMove(), clientInformation.getOut());
+                                    sendMessage(new NotValidMoveError(), clientInformation.getOut());
                                 }else{
                                     server.win = server.controller.finishTurn();
                                     Server.Lock1.release();
@@ -104,6 +107,11 @@ public class ClientHandlerSocket implements Runnable, Observer {
         sendMessage(message, clientInformation.getOut());
     }
 
+    /**
+     * This method sends a message to a client
+     * @param m message
+     * @param out the output stream to send a message to the client
+     */
     public void sendMessage(Message m, PrintWriter out){
         String jsonString = c.convertToJSON(m);
         out.println(jsonString);

@@ -1,8 +1,8 @@
-package it.polimi.ingsw.view.CLI;
+package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMove;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMoveError;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.model.Board;
@@ -10,6 +10,11 @@ import it.polimi.ingsw.model.Card;
 
 import java.io.*;
 
+/**
+ * This class offers a User Interface to the user via terminal
+ * @author Alessandro Fornara
+ * @author Donato Fiore
+ */
 public class CliView{
     private PrintStream outputStream;
     private ItemEnum[][] board;
@@ -37,6 +42,12 @@ public class CliView{
         this.userInput = null;
     }
 
+    /**
+     * This method decides how to handle a certain message received by the client
+     * @author Alessandro Fornara
+     * @param m message
+     * @throws IOException
+     */
     public void actionHandler(Message m) throws IOException {
 
         switch (m.getType()) {
@@ -44,13 +55,20 @@ public class CliView{
             case "Lobby" -> outputStream.println(((LobbyMessage) m).getS());
             case "StartingGame" -> {outputStream.println(((StartingGameMessage) m).getS());}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
-            case "NotValidUsername" -> {handleNotValidUsernameMessage(m);}
+            case "NotValidUsername" -> {
+                handleNotValidUsernameError(m);}
             case "GameInformation" -> {handleGameInformationMessage(m);}
             case "Waiting" -> outputStream.println(((WaitingMessage) m).getS());
             case "NotValidMove" -> handleNotValidMove(m);
         }
     }
 
+    /**
+     * This method handles the FirstPlayerMessage {@link FirstPlayerMessage}
+     * @author Alessandro Fornara
+     * @param m message
+     * @throws IOException
+     */
     private void handleFirstPlayerMessage(Message m) throws IOException {
         outputStream.println(((FirstPlayerMessage) m).getS());
         userInput = stdIn.readLine();
@@ -62,6 +80,12 @@ public class CliView{
         out.println(c.convertToJSON(m));
     }
 
+    /**
+     * This method handles the ChooseUsernameMessage {@link ChooseUsernameMessage}
+     * @author Alessandro Fornara
+     * @param m message
+     * @throws IOException
+     */
     private void handleChooseUsernameMessage(Message m) throws IOException {
         outputStream.println(((ChooseUsernameMessage) m).getS());
         userInput = stdIn.readLine();
@@ -69,13 +93,25 @@ public class CliView{
         out.println(c.convertToJSON(new UsernameAnswer(userInput)));
     }
 
-    private void handleNotValidUsernameMessage(Message m) throws IOException {
+    /**
+     * This method handles the NotValidUsernameError {@link NotValidUsernameError}
+     * @author Alessandro Fornara
+     * @param m message
+     * @throws IOException
+     */
+    private void handleNotValidUsernameError(Message m) throws IOException {
         outputStream.println(((NotValidUsernameError) m).getS());
         userInput = stdIn.readLine();
         this.myUsername = userInput;
         out.println(c.convertToJSON(new UsernameAnswer(userInput)));
     }
 
+    /**
+     * This method handles the GameInformationMessage {@link GameInformation}
+     * @author Alessandro Fornara
+     * @param m message
+     * @throws IOException
+     */
     private void handleGameInformationMessage(Message m) throws IOException {
         GameInformation gameInformation = (GameInformation) m;
         this.board = gameInformation.getBoard();
@@ -93,8 +129,14 @@ public class CliView{
         }
     }
 
+    /**
+     * This method handles the NotValidMoveError {@link NotValidMoveError}
+     * @author Alessandro Fornara
+     * @param m message
+     * @throws IOException
+     */
     private void handleNotValidMove(Message m) throws IOException {
-        outputStream.println(((NotValidMove) m).getS());
+        outputStream.println(((NotValidMoveError) m).getS());
         userInput = stdIn.readLine();
         out.println(c.convertToJSON(new MoveMessage(userInput)));
     }

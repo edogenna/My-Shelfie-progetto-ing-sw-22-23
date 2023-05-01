@@ -38,7 +38,7 @@ public class Converter {
             case "GraphicalGameInformation":
                 return gson.fromJson(message, GraphicalGameInfo.class);
             case "NotValidMove":
-                return gson.fromJson(message, NotValidMove.class);
+                return gson.fromJson(message, NotValidMoveError.class);
             case "ListOfLobbies":
                 return gson.fromJson(message, ListOfLobbies.class);
             case "NotEnoughSpaceMove":

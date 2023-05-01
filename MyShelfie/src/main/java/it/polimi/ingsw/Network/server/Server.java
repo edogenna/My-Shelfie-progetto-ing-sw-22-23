@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Network.client.ClientInformation;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.controller.Controller;
@@ -18,6 +17,11 @@ import java.util.concurrent.Semaphore;
 /*import java.rmi.*;
 import java.rmi.registry.*;
 import java.rmi.server.*;*/
+
+/**
+ * Main server class that starts a socket server.
+ * @author Alessandro Fornara
+ */
 public class Server /*extends unicastRemoteObject*/{
     private ServerSocket serverSocket = null;
     private ExecutorService executor;
@@ -44,6 +48,12 @@ public class Server /*extends unicastRemoteObject*/{
         this.win = false;
     }
 
+    /**
+     * This method starts the server
+     * @author Alessandro Fornara
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void startServer() throws IOException, InterruptedException {
         try {
             serverSocket = new ServerSocket(portNumber);
@@ -58,14 +68,31 @@ public class Server /*extends unicastRemoteObject*/{
         GamePhase();
     }
 
+    /**
+     * This method sends a message to all observers
+     * @author Alessandro Fornara
+     * @param message
+     */
     private void sendMessageToObservers(Message message) {
         observable.notifyObservers(message);
     }
 
+    /**
+     * This method sets the number of players for the game
+     * @author Alessandro Fornara
+     * @param numberOfPlayers
+     */
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
     }
 
+    /**
+     * This method accepts a socket connection and adds the connected client to a list of ClientInformation {@link ClientInformation}
+     * @author Alessandro Fornara
+     * @param serverSocket
+     * @return list of connected clients
+     * @throws IOException
+     */
     private ArrayList<ClientInformation> acceptConnection(ServerSocket serverSocket) throws IOException {
         Socket clientSocket;
         clientSocket = serverSocket.accept();
@@ -74,6 +101,12 @@ public class Server /*extends unicastRemoteObject*/{
         return connectedClients;
     }
 
+    /**
+     * This method check if a username has already been taken by another client, if not it is added to a list of usernames and to the client's information {@link ClientInformation}
+     * @author Alessandro Fornara
+     * @param usrn username
+     * @return false if the username has already been taken, true otherwise
+     */
     public boolean isUsernameTaken(String usrn){
         for(String s: usernames){
             if(usrn.equals(s)){
@@ -85,6 +118,12 @@ public class Server /*extends unicastRemoteObject*/{
         return true;
     }
 
+    /**
+     * This method is used for the lobby phase (pre-game)
+     * @author Alessandro Fornara
+     * @throws IOException
+     * @throws InterruptedException
+     */
     private void LobbyPhase() throws IOException, InterruptedException {
 
         while (true) {
@@ -126,6 +165,11 @@ public class Server /*extends unicastRemoteObject*/{
         }
     }
 
+    /**
+     * This method is used for the game phase (in-game)
+     * @author Alessandro Fornara
+     * @throws InterruptedException
+     */
     private void GamePhase() throws InterruptedException {
         controller = new Controller(numberOfPlayers);
         for(ClientInformation s: connectedClients){

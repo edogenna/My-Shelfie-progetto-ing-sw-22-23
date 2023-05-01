@@ -22,7 +22,7 @@ public interface CommonCardStrategy {
     void printCommonCard();
 
     /**
-     * Returns the design of a common goal card as a CharMatrix
+     * Returns the design of a common goal card as a {@link CharMatrix}
      * @return Common Card design
      */
     CharMatrix printCommonCardMatrix();

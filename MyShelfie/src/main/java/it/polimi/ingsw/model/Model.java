@@ -362,6 +362,11 @@ public class Model {
         return finish;
     }
 
+    /**
+     * This method returns the players of the game
+     * @author Samuele Pietro Galli
+     * @return an array of players {@link Player}
+     */
     public Player[] getPlayers() {
         return this.players;
     }

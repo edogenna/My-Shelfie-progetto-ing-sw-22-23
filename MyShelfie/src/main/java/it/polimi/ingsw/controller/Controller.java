@@ -4,7 +4,7 @@ import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.view.CLI.CliView;
+import it.polimi.ingsw.view.CliView;
 
 public class Controller {
     private CliView view;
