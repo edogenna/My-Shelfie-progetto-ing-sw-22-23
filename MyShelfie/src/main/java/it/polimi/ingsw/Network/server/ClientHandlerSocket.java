@@ -71,7 +71,6 @@ public class ClientHandlerSocket implements Runnable, Observer {
                                 switch (i) {
                                     case 3:
                                         //we have taken 1 tile;
-                                        System.out.println(tiles[0] +" " + tiles[1] + " " + tiles[2]);
                                         done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
                                         break;
                                     case 5:
