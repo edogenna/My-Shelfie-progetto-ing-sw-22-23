@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Network.messages;
 
+/**
+ * Message notify tells the players who won the game
+ * @author Alessandro Fornara
+ */
 public final class WinMessage extends Message{
     private final String s;
     public WinMessage(String s, int points){

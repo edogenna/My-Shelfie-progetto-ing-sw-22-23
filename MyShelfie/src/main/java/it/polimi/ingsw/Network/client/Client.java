@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Main client class that starts a socket client or a RMI client.
+ */
 public class Client {
 
     public static void main(String[] args) throws IOException {

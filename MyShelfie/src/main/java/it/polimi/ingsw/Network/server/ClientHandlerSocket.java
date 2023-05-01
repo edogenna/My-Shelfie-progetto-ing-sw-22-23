@@ -1,6 +1,9 @@
 package it.polimi.ingsw.Network.server;
 
 import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
+import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
+import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMoveError;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.Observer.Observable;
@@ -57,11 +60,11 @@ public class ClientHandlerSocket implements Runnable, Observer {
                             Server.Lock1.release();
                         }
                         case "Move" -> {
-                            if (server.controller.dummyInput(((MoveMessage) m).getS())){
+                            if (server.controller.dummyInput(((MoveAnswer) m).getS())){
                                 sendMessage(new NotValidMoveError(), clientInformation.getOut());
                             }
                             else {
-                                String[] tiles = ((MoveMessage) m).getS().split(",");
+                                String[] tiles = ((MoveAnswer) m).getS().split(",");
                                 int i = tiles.length;
                                 boolean done = false;
                                 //i = number of tiles * 2 + 1;

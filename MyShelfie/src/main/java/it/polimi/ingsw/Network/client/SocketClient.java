@@ -10,6 +10,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * This class represents a socket client implementation
+ * @author Alessandro Fornara
+ */
 public class SocketClient {
     public void startSocketClient() throws IOException {
 

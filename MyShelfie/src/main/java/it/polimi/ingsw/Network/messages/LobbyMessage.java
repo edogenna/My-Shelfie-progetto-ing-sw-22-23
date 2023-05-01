@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Network.messages;
 
+/**
+ * Message to send generic information about the connected clients to the user
+ * @author Alessandro Fornara
+ */
 public final class LobbyMessage extends Message{
     private final int actualNum, totalNum;
     private final String s;

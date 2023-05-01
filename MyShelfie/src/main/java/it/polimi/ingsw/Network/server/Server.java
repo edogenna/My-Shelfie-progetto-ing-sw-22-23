@@ -180,7 +180,7 @@ public class Server /*extends unicastRemoteObject*/{
         //TODO: CHECK COMMONCARDS
         Server.Lock1.acquire();
         while (!win) {
-            sendMessageToObservers(new GameInformation(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
+            sendMessageToObservers(new GameInformationMessage(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
             while (!Server.Lock1.tryAcquire()) ;
             if(win){
                 int points = controller.declareWinner();

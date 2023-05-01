@@ -2,10 +2,23 @@ package it.polimi.ingsw.Network.messages;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
+import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
+import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 
+/**
+ * This class is used to convert a {@link Message} using JSON
+ * @author Alessandro Fornara
+ */
 public class Converter {
 
+    /**
+     * This method converts a message from a JSON string to a {@link Message}
+     * @author Alessandro Fornara
+     * @param message
+     * @return a {@link Message} object
+     */
     public Message convertFromJSON(String message){
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
@@ -24,11 +37,11 @@ public class Converter {
             case "ChooseUsername":
                 return gson.fromJson(message, ChooseUsernameMessage.class);
             case "GameInformation":
-                return gson.fromJson(message, GameInformation.class);
+                return gson.fromJson(message, GameInformationMessage.class);
             case "UsernameAnswer":
                 return gson.fromJson(message, UsernameAnswer.class);
             case "Move":
-                return gson.fromJson(message, MoveMessage.class);
+                return gson.fromJson(message, MoveAnswer.class);
             case "NotValidNumber":
                 return gson.fromJson(message, NotValidNumberofPlayersMessage.class);
             case "NotValidUsername":
@@ -53,6 +66,12 @@ public class Converter {
         return null;
     }
 
+    /**
+     * This method converts a {@link Message} to a JSON string
+     * @author Alessandro Fornara
+     * @param m message
+     * @return a string
+     */
     public String convertToJSON(Message m){
         Gson gson = new Gson();
         return gson.toJson(m);

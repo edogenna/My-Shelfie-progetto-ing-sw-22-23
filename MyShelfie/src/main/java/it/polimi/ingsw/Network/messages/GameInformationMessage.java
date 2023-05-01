@@ -3,7 +3,11 @@ package it.polimi.ingsw.Network.messages;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
 
-public final class GameInformation extends Message {
+/**
+ * Message to send generic information about the game to the user and ask for a player's move
+ * @author Alessandro Fornara
+ */
+public final class GameInformationMessage extends Message {
 
     private final ItemEnum[][] board;
     private final ItemEnum[][] shelf;
@@ -17,7 +21,7 @@ public final class GameInformation extends Message {
                              "Example: x1,y1,x2,y2,x3,y3,column\n" +
                              "Example: a,3,a,4,a,5,column";
 
-    public GameInformation(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard, String[] commonCards, String usrn) {
+    public GameInformationMessage(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard, String[] commonCards, String usrn) {
         super("GameInformation");
         this.board = board;
         this.shelf = shelf;

@@ -2,6 +2,9 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
+import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
+import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMoveError;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
@@ -107,13 +110,13 @@ public class CliView{
     }
 
     /**
-     * This method handles the GameInformationMessage {@link GameInformation}
+     * This method handles the GameInformationMessage {@link GameInformationMessage}
      * @author Alessandro Fornara
      * @param m message
      * @throws IOException
      */
     private void handleGameInformationMessage(Message m) throws IOException {
-        GameInformation gameInformation = (GameInformation) m;
+        GameInformationMessage gameInformation = (GameInformationMessage) m;
         this.board = gameInformation.getBoard();
         this.CommonCards = gameInformation.getCommonCards();
         printGame();
@@ -123,7 +126,7 @@ public class CliView{
             printBookshelfAndPersonal();
             outputStream.println(gameInformation.getS());
             userInput = stdIn.readLine();
-            out.println(c.convertToJSON(new MoveMessage(userInput)));
+            out.println(c.convertToJSON(new MoveAnswer(userInput)));
         } else {
             outputStream.println(gameInformation.getActivePlayerUsername() + " is making his move...");
         }
@@ -138,7 +141,7 @@ public class CliView{
     private void handleNotValidMove(Message m) throws IOException {
         outputStream.println(((NotValidMoveError) m).getS());
         userInput = stdIn.readLine();
-        out.println(c.convertToJSON(new MoveMessage(userInput)));
+        out.println(c.convertToJSON(new MoveAnswer(userInput)));
     }
 
     /**

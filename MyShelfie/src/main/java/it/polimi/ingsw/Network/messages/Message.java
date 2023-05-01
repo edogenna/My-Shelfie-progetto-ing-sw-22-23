@@ -3,6 +3,10 @@ package it.polimi.ingsw.Network.messages;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * This class represents a generic message
+ * @author Alessandro Fornara
+ */
 public abstract class Message implements Serializable {
 
     @Serial
@@ -14,6 +18,10 @@ public abstract class Message implements Serializable {
         this.type = type;
     }
 
+    /**
+     * @author Alessandro Fornara
+     * @return returns a message's type
+     */
     public String getType(){
         return this.type;
     }
