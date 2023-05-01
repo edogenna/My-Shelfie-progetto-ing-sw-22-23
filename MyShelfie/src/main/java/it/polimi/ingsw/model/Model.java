@@ -28,7 +28,7 @@ public class Model {
         this.lastTurn = false;
     }
 
-    /*
+    /**
     * @return true if the tile has a free side
     * @author Donato Fiore
     * */
@@ -36,7 +36,7 @@ public class Model {
         return this.board.tileFreeSide(x, y);
     }
 
-    /*
+    /**
     * it upgrades the player who will play the turn
     * @author Donato Fiore
     * */
@@ -46,7 +46,7 @@ public class Model {
         this.activePlayer = this.players[this.idActivePlayer];
     }
 
-    /*
+    /**
     * it returns the username of the player that will play the turn
     * @author Donato Fiore
     * */
@@ -54,7 +54,7 @@ public class Model {
         return new String(this.activePlayer.getUsername());
     }
 
-    /*
+    /**
     * it implements the player class setting the username of the player; it also set the PersonalCard of the player
     * @author Donato Fiore
     */
@@ -70,7 +70,7 @@ public class Model {
 
 
     //TODO: TEST AGAIN (la seconda volta che viene richiamata y è uguale a 0 e quindi non entra nel ciclo e non fa il controllo)
-    /*
+    /**
     * @return true if there is another player with the same username
     * @author Donato Fiore
     * */
@@ -118,7 +118,7 @@ public class Model {
         }
     }
 
-    /*
+    /**
     * it sets casually the first player of the match
     * @author Donato Fiore
     * */
@@ -131,16 +131,31 @@ public class Model {
         this.activePlayer = players[i];
     }
 
+    /**
+    * @author Donato Fiore
+    * @param x is the number of tiles you want to insert in the bookshelf
+    * @return true if the maximum number of tiles that can be inserted is >= than x
+    */
     public boolean enoughSpaceBookshelf(int x){
         if(x>activePlayer.maxTilesPick())
             return false;
         return true;
     }
 
+    /**
+    * @param y column selected
+    * @param num number of tiles to insert
+    * @return true if the selected column has enough space to insert the 'num' tiles
+    * @author Donato Fiore
+    * */
     public boolean enoughSpaceColumn(int y, int num){
         return !this.activePlayer.isColumnFull(y,num);
     }
 
+    /**
+     * @author Donato Fiore
+     * @return true if the two tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates
+     * */
     public boolean adjacentTiles(int x1, int y1, int x2, int y2){
         boolean isAdjacent;
 
@@ -154,6 +169,10 @@ public class Model {
         return isAdjacent;
     }
 
+    /**
+     * @author Donato Fiore
+     * @return true if the three tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates
+     * */
     public boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
         boolean isAdjacent;
 
@@ -162,15 +181,45 @@ public class Model {
 
         return isAdjacent;
     }
-//istanzio il model, creo una board, inserisco nella shelf, getactiveboard e le confronto
+
+    //todo: eliminare questo commento se non serve più
+    //istanzio il model, creo una board, inserisco nella shelf, getactiveboard e le confronto
+
+    /**
+     * @author Donato Fiore
+     * @param x coordinate of the tile in the board
+     * @param y coordinate of the tile in the board
+     * @param col column of the bookshelf
+     * it inserts the selected tile in the lowest position of the bookshelf's column removing it from the board
+     * */
     public void insert(int x, int y, int col){
         this.activePlayer.insert(col,this.board.deleteItemEnum(x,y));
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x1 coordinate of the first selected tile in the board
+     * @param y1 coordinate of the first selected tile in the board
+     * @param x2 coordinate of the second selected tile in the board
+     * @param y2 coordinate of the second selected tile in the board
+     * @param col column of the bookshelf
+     * it inserts the selected tiles in the lowest position of the bookshelf's column removing them from the board
+     * */
     public void insert(int x1, int y1, int x2, int y2, int col){
         this.activePlayer.insert(col, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2));
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x1 coordinate of the first selected tile in the board
+     * @param y1 coordinate of the first selected tile in the board
+     * @param x2 coordinate of the second selected tile in the board
+     * @param y2 coordinate of the second selected tile in the board
+     * @param x3 coordinate of the third selected tile in the board
+     * @param y3 coordinate of the third selected tile in the board
+     * @param col column of the bookshelf
+     * it inserts the selected tiles in the lowest position of the bookshelf's column removing them from the board
+     * */
     public void insert(int x1, int y1, int x2, int y2, int x3, int y3, int col) {
         this.activePlayer.insert(col, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2), this.board.deleteItemEnum(x3,y3));
     }
