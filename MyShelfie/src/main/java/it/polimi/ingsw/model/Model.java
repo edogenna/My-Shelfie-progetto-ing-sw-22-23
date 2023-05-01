@@ -302,6 +302,10 @@ public class Model {
 
     }
 
+    /**
+     * @author Donato Fiore
+     * @return a matrix of ItemEnum representing the board
+     * */
     public ItemEnum[][] getBoardMatrix(){
         return this.board.getMatrix();
     }
@@ -327,6 +331,12 @@ public class Model {
     public Card getPersonalCard(){return activePlayer.getPersonalCard();}
 
     //todo: test this method
+    /**
+     * @author Donato Fiore
+     * @return true if match is finished
+     * it controls if the activePlayer has filled his bookshelf, changes the activePlayer and refills the board if it is
+     * necessary
+     * */
     public boolean finishTurn(){
         boolean finish;
         int x;
@@ -355,6 +365,11 @@ public class Model {
     }
 
     //TODO: test this method
+    /**
+     * @author Donato Fiore
+     * @return the points of the winner player
+     * it calculates the winner player and sets him as the activePlayer
+     * */
     public int theWinnerIs(){
         int i, x, max, id;
 
@@ -379,6 +394,12 @@ public class Model {
     }
 
     //TODO: test this method
+    /**
+     * @author Donato Fiore
+     * @param x the position of the first player
+     * @param y the position of the interested player
+     * @return the distance (mod numPlayers) between the 2 players
+     * */
     private int distancePlayer(int x, int y){
         int z;
 
@@ -389,11 +410,17 @@ public class Model {
         return z;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param id index of the selected player
+     * it sets the selected player as activePlayer
+     */
     private void setActivePlayer(int id){
         this.activePlayer = this.players[id];
     }
 
-/* 0 - 1 - 2 - 3
+/*
+* 0 - 1 - 2 - 3
 * start 1;
 * '2' e '0' same points;
 * dist(1,2) = 2 - 1 = 1;
@@ -401,8 +428,4 @@ public class Model {
 * dist(1,3) = 3 - 1 = 2;
 *
 */
-/*
-    public ItemEnum[][] getCommonCards() {
-        return
-    }*/
 }
