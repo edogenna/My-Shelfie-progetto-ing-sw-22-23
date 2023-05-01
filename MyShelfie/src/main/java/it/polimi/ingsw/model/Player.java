@@ -28,6 +28,10 @@ public class Player {
             heights[i] = 0;
     }
 
+    /**
+     * @author Donato Fiore
+     * it sets the personalCard of the player
+     * */
     public void setPersonalCard(Card goals){
         this.myGoals = goals;
     }
@@ -46,10 +50,19 @@ public class Player {
         return new String(this.username);
     }
 
+    /**
+     * @author Donato Fiore
+     * @param i column of the bookshelf
+     * @return the number of tiles present in the column
+     * */
     public int getHeights(int i){
         return this.heights[i];
     }
 
+    /**
+     * @author Donato Fiore
+     * @return a matrix of ItemEnum representing the player's bookshelf
+     * */
     public ItemEnum[][] getMatrixBookshelf() {
         ItemEnum[][] copy = new ItemEnum[6][5];
         for(int i = 0; i < 6; i++)
@@ -57,7 +70,10 @@ public class Player {
         return copy;
     }
 
-    //"calculatePoints" counts the points including the "common cards"
+    /**
+     * @author Donato Fiore
+     * @return the total points earned by the player: personalCard points, commonCard points and adjacentTiles points
+     * */
     public int calculatePoints(){
         myPoints = pointPersonalCard();
         myPoints += adjacentTilesPoints();
@@ -65,7 +81,10 @@ public class Player {
         return myPoints;
     }
 
-    //this method calculates the points achieved with the own PersonalCard
+    /**
+     * @author Donato Fiore
+     * @return the personalCard points achieved
+     * */
     private int pointPersonalCard(){
         int i, points;
         Triplet control;
@@ -91,6 +110,10 @@ public class Player {
         return points;
     }
 
+    /**
+     * @author Donato Fiore
+     * @return the points earned by placing tiles of the same color adjacent to each other
+     * */
     private int adjacentTilesPoints(){
         int points, near, i, j, x, y;
         int[][] visited = new int[6][5];
@@ -99,7 +122,6 @@ public class Player {
         boolean stop;
 
         points = 0;
-        near = 0;
 
         for(i=0; i<6; i++){
             for(j=0; j<5; j++){
@@ -187,7 +209,6 @@ public class Player {
         return true;
     }
 
-
     /**
      * @author Alessandro Fornara
      * @return Returns the boolean value CommonDone1
@@ -195,6 +216,7 @@ public class Player {
     public boolean getCommonDone1(){
         return this.CommonDone1;
     }
+
     /**
      * @author Alessandro Fornara
      * @return Returns the boolean value CommonDone2
