@@ -90,4 +90,9 @@ public class CommonCard02 implements CommonCardStrategy {
     public void printCommonCard() {
         System.out.println(constant2);
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant2;
+    }
 }

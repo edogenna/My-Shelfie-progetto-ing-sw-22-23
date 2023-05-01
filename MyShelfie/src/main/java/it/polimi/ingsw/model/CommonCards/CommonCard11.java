@@ -72,4 +72,9 @@ public class CommonCard11 implements CommonCardStrategy {
                 .appendAtBottom("|=| |=| |=|     no restriction about the positions")
                 .appendAtBottom("|=| |=| |=|     of these tiles.");
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant11;
+    }
 }

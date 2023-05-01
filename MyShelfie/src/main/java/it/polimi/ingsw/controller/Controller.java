@@ -14,6 +14,7 @@ public class Controller {
         model = new Model(x);
     }
 
+    @Deprecated
     public Controller(int x, CliView view){
         this.model = new Model(x);
         this.view = view;
@@ -23,6 +24,7 @@ public class Controller {
         return this.model.getNumPlayers();
     }
 
+    @Deprecated
     public boolean duplicatedUsername(String x){
         return this.model.duplicatedUsername(x);
     }
@@ -83,8 +85,8 @@ public class Controller {
         boolean done;
 
         done = model.enoughSpaceBookshelf(x);
-        if(!done)
-            view.notEnoughSpaceBookshelfPrint();
+        /*if(!done)
+            view.notEnoughSpaceBookshelfPrint();*/
 
         return done;
     }
@@ -96,8 +98,8 @@ public class Controller {
 
         board = model.getBoardMatrix();
         blank = board[x][y].equals(ItemEnum.BLANK);
-        if(blank)
-            view.blankTilesSelected(x,y);
+        /*if(blank)
+            view.blankTilesSelected(x,y);*/
 
         return blank;
     }
@@ -122,8 +124,8 @@ public class Controller {
     private boolean isFeasiblePickMove(int x, int y){
         boolean done;
         done = model.isFeasiblePickMove(x,y);
-        if(!done)
-            view.noFreeSidesPrint(x,y);
+        /*if(!done)
+            view.noFreeSidesPrint(x,y);*/
         return done;
     }
 
@@ -225,7 +227,7 @@ public class Controller {
             return false;
 
         if(!model.enoughSpaceColumn(col, 3)){
-            view.notEnoughSpaceBookshelfColPrint(col);
+            //view.notEnoughSpaceBookshelfColPrint(col);
             return false;
         }
         model.insert(x1,y1,x2,y2,x3,y3,col);
@@ -239,22 +241,23 @@ public class Controller {
         card = model.controlCommonCards(0);
         if(card){
             points = model.getCommonCardsPoints(0);
-            view.commonPoints(model.getActivePlayerName(), points, 1);
+            //view.commonPoints(model.getActivePlayerName(), points, 1);
         }
         card = model.controlCommonCards(1);
         if(card){
             points = model.getCommonCardsPoints(1);
-            view.commonPoints(model.getActivePlayerName(), points, 2);
+            //view.commonPoints(model.getActivePlayerName(), points, 2);
         }
         card = model.finishTurn();
         return card;
     }
 
     //TODO: finish this method
-    public void declareWinner(){
+    public int declareWinner(){
         int x;
         x = model.theWinnerIs();
-        view.winnerPrint(model.getActivePlayerName(), x);
+        return x;
+        //view.winnerPrint(model.getActivePlayerName(), x);
     }
 
     public ItemEnum[][] getBoard(){
@@ -267,6 +270,10 @@ public class Controller {
      */
     public CommonCardStrategy[] getCommonCards(){
         return model.getCommonCards();
+    }
+
+    public String[] getCommonCardsDesigns(){
+        return model.getCommonCardsDesigns();
     }
 
     /**
@@ -286,8 +293,4 @@ public class Controller {
      * @return the active player's bookshelf
      */
     public ItemEnum[][] getActivePlayershelf(){return model.getShelf();}
-
-//    public ItemEnum[][] getCommonCards(int x){
-//        return model.getCommonCards();
-//    }
 }

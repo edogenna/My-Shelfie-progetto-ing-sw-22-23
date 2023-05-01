@@ -10,13 +10,13 @@ import it.polimi.ingsw.Observer.Observer;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class ClientHandler implements Runnable, Observer {
+public class ClientHandlerSocket implements Runnable, Observer {
     private Server server;
     private Observable observable;
     private ClientInformation clientInformation;
     private final Converter c = new Converter();
 
-    public ClientHandler(Server server, ClientInformation client, Observable observable) {
+    public ClientHandlerSocket(Server server, ClientInformation client, Observable observable) {
         this.server = server;
         this.clientInformation = client;
         this.observable = observable;
@@ -65,6 +65,7 @@ public class ClientHandler implements Runnable, Observer {
                                 switch (i) {
                                     case 3:
                                         //we have taken 1 tile;
+                                        System.out.println(tiles[0] +" " + tiles[1] + " " + tiles[2]);
                                         done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
                                         break;
                                     case 5:
@@ -80,12 +81,10 @@ public class ClientHandler implements Runnable, Observer {
                                 if(!done){
                                     sendMessage(new NotValidMove(), clientInformation.getOut());
                                 }else{
-                                    server.controller.finishTurn();
+                                    server.win = server.controller.finishTurn();
                                     Server.Lock1.release();
                                 }
                             }
-
-                            //TODO: create handleMessage method in serve
                         }
                     }
                 }
@@ -108,10 +107,6 @@ public class ClientHandler implements Runnable, Observer {
     public void sendMessage(Message m, PrintWriter out){
         String jsonString = c.convertToJSON(m);
         out.println(jsonString);
-    }
-
-    public ClientInformation getClientInformation() {
-        return clientInformation;
     }
 }
 

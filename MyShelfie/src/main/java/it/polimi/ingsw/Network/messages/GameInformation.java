@@ -8,7 +8,7 @@ public final class GameInformation extends Message {
     private final ItemEnum[][] board;
     private final ItemEnum[][] shelf;
     private final Card personalCard;
-    //private final String[] commonCards;
+    private final String[] commonCards;
     private String activePlayerUsername;
 
     private final String s = "it's your turn." +
@@ -17,13 +17,13 @@ public final class GameInformation extends Message {
                              "Example: x1,y1,x2,y2,x3,y3,column\n" +
                              "Example: a,3,a,4,a,5,column";
 
-    public GameInformation(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard/*, String[] commonCards*/, String usrn) {
+    public GameInformation(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard, String[] commonCards, String usrn) {
         super("GameInformation");
         this.board = board;
         this.shelf = shelf;
         this.personalCard = personalCard;
         this.activePlayerUsername = usrn;
-        //this.commonCards = commonCards;
+        this.commonCards = commonCards;
     }
 
     public ItemEnum[][] getBoard() {
@@ -38,9 +38,9 @@ public final class GameInformation extends Message {
         return this.personalCard;
     }
 
-    /*public String[] getCommonCards(){
+    public String[] getCommonCards(){
         return this.commonCards;
-    }*/
+    }
 
     public String getActivePlayerUsername() {
         return activePlayerUsername;

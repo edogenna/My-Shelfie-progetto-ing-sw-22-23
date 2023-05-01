@@ -217,6 +217,14 @@ public class Board {
         return CommonCards;
     }
 
+    public String[] getCommonCardDesigns(){
+        String[] array = new String[2];
+        for(int i=0; i<2; i++){
+            array[i] = CommonCards[i].getCommonCardDesign();
+        }
+        return array;
+    }
+
     /**
      * Check if a tile has a free side
      *

@@ -68,12 +68,14 @@ public class Model {
         return this.numPlayers;
     }
 
-
-    //TODO: TEST AGAIN (la seconda volta che viene richiamata y è uguale a 0 e quindi non entra nel ciclo e non fa il controllo)
+    public String[] getCommonCardsDesigns(){
+        return board.getCommonCardDesigns();
+    }
     /**
     * @return true if there is another player with the same username
     * @author Donato Fiore
     * */
+    @Deprecated
     public boolean duplicatedUsername(String x){
         int y = idFirstPlayer;
         if(y==-1)

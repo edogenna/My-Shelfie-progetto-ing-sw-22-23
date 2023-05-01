@@ -83,5 +83,10 @@ public class CommonCard12 implements CommonCardStrategy{
                 .appendAtBottom(" |=|=|=|=|      exactly one more tile. Tiles can be of any type.")
                 .appendAtBottom(" |=|=|=|=|=| ");
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant12;
+    }
 }
 

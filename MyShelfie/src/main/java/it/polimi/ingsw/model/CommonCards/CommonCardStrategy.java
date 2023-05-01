@@ -26,5 +26,12 @@ public interface CommonCardStrategy {
      * @return Common Card design
      */
     CharMatrix printCommonCardMatrix();
+
+    /**
+     * Returns the design of a common goal card as a String
+     * @return Common Card Design
+     */
+
+    String getCommonCardDesign();
 }
 

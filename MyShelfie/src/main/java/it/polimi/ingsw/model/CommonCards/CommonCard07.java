@@ -49,4 +49,9 @@ public class CommonCard07 implements CommonCardStrategy {
     public void printCommonCard() {
         System.out.println(constant7);
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant7;
+    }
 }

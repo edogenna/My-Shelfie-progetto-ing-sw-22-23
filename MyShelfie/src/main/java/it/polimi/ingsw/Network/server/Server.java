@@ -29,6 +29,7 @@ public class Server /*extends unicastRemoteObject*/{
     public static Semaphore Lock1;
     public static Semaphore Lock2;
     protected Controller controller;
+    protected boolean win;
 
     public Server(int port){
         this.portNumber=port;
@@ -40,6 +41,7 @@ public class Server /*extends unicastRemoteObject*/{
         this.Lock1 = new Semaphore(1);
         this.Lock2 = new Semaphore(1);
         this.controller = null;
+        this.win = false;
     }
 
     public void startServer() throws IOException, InterruptedException {
@@ -90,7 +92,7 @@ public class Server /*extends unicastRemoteObject*/{
             Server.Lock2.acquire();
             System.out.println("Ready to accept new connection");
             connectedClients = acceptConnection(serverSocket);
-            executor.submit(new ClientHandler(this, connectedClients.get(connectedClients.size() - 1), observable));
+            executor.submit(new ClientHandlerSocket(this, connectedClients.get(connectedClients.size() - 1), observable));
             System.out.println("User connected");
 
             while (!Server.Lock2.tryAcquire());
@@ -131,12 +133,15 @@ public class Server /*extends unicastRemoteObject*/{
         }
         controller.setFirstPlayer();
 
-        //Server.Lock1.acquire();
-        while (true) {
-            sendMessageToObservers(new GameInformation(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getActivePlayerUsername()));
-            //while (!Server.Lock1.tryAcquire()) ;
-
+        //TODO: COMMONCARDS, IN BOTH VIEW AND SERVER
+        Server.Lock1.acquire();
+        while (!win) {
+            sendMessageToObservers(new GameInformation(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
+            while (!Server.Lock1.tryAcquire()) ;
+            if(win){
+                int points = controller.declareWinner();
+                sendMessageToObservers(new WinMessage(controller.getActivePlayerUsername(), points));
+            }
         }
-
     }
 }

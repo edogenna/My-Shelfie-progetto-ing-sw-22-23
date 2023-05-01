@@ -110,4 +110,9 @@ public class CommonCard08 implements CommonCardStrategy {
                 .appendAtBottom("                     the same or a different combination")
                 .appendAtBottom("                     of another line.");
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant8;
+    }
 }
