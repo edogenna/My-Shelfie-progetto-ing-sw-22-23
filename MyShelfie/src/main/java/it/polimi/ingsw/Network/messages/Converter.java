@@ -2,10 +2,7 @@ package it.polimi.ingsw.Network.messages;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidGameIdError;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMove;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
+import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 
 public class Converter {
 
@@ -44,6 +41,14 @@ public class Converter {
                 return gson.fromJson(message, NotValidMove.class);
             case "ListOfLobbies":
                 return gson.fromJson(message, ListOfLobbies.class);
+            case "NotEnoughSpaceMove":
+                return gson.fromJson(message, NotEnoughSpaceMoveError.class);
+            case "InvalidColumn":
+                return gson.fromJson(message, InvalidColumnError.class);
+            case "EmptyPosition":
+                return gson.fromJson(message, EmptyPositionError.class);
+            case "NotAdjTiles":
+                return gson.fromJson(message, NotAdjacTiles.class);
         }
         return null;
     }
