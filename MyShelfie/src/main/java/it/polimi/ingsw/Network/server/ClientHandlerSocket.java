@@ -15,7 +15,7 @@ import java.io.IOException;
  * This class is used to respond to requests from a specific socket client
  * @author Alessandro Fornara
  */
-public class ClientHandlerSocket implements Runnable, Observer {
+public class ClientHandlerSocket implements Runnable, Observer, Connection {
     private Server server;
     private Observable observable;
     private ClientInformation clientInformation;
@@ -68,6 +68,7 @@ public class ClientHandlerSocket implements Runnable, Observer {
      * This method sends a message to a client
      * @param m {@link Message}
      */
+    @Override
     public void sendMessage(Message m){
         String jsonString = c.convertToJSON(m);
         clientInformation.getOut().println(jsonString);
