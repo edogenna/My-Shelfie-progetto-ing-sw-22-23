@@ -116,6 +116,7 @@ public class ClientHandlerSocket implements Runnable, Observer, Connection {
             if(!done){
                 sendMessage(new NotValidMoveError());
             }else{
+                //TODO: common cards
                 server.win = server.controller.finishTurn();
                 Server.Lock1.release();
             }

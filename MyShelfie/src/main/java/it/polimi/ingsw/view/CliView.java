@@ -58,16 +58,20 @@ public class CliView{
             case "Lobby" -> outputStream.println(((LobbyMessage) m).getS());
             case "StartingGame" -> {outputStream.println(((StartingGameMessage) m).getS());}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
-            case "NotValidUsername" -> {
-                handleNotValidUsernameError(m);}
+            case "NotValidUsername" -> {handleNotValidUsernameError(m);}
             case "GameInformation" -> {handleGameInformationMessage(m);}
             case "Waiting" -> outputStream.println(((WaitingMessage) m).getS());
             case "NotValidMove" -> handleNotValidMove(m);
+            case "Winner" -> handleWinMessage(m);
+            case "NotEnoughSpaceMove" -> {}
+            case "InvalidColumn" -> {}
+            case "EmptyPosition" -> {}
+            case "NotAdjTiles" -> {}
         }
     }
 
     /**
-     * This method handles the FirstPlayerMessage {@link FirstPlayerMessage}
+     * This method handles the {@link FirstPlayerMessage}
      * @author Alessandro Fornara
      * @param m message
      * @throws IOException
@@ -79,12 +83,11 @@ public class CliView{
             outputStream.println(new NotValidNumberofPlayersMessage().getS());
             userInput = stdIn.readLine();
         }
-        m = new NumberOfPlayersAnswer(Integer.parseInt(userInput));
-        out.println(c.convertToJSON(m));
+        sendMessageToServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
     }
 
     /**
-     * This method handles the ChooseUsernameMessage {@link ChooseUsernameMessage}
+     * This method handles the {@link ChooseUsernameMessage}
      * @author Alessandro Fornara
      * @param m message
      * @throws IOException
@@ -93,11 +96,11 @@ public class CliView{
         outputStream.println(((ChooseUsernameMessage) m).getS());
         userInput = stdIn.readLine();
         this.myUsername = userInput;
-        out.println(c.convertToJSON(new UsernameAnswer(userInput)));
+        sendMessageToServer(new UsernameAnswer(userInput));
     }
 
     /**
-     * This method handles the NotValidUsernameError {@link NotValidUsernameError}
+     * This method handles the {@link NotValidUsernameError}
      * @author Alessandro Fornara
      * @param m message
      * @throws IOException
@@ -106,11 +109,11 @@ public class CliView{
         outputStream.println(((NotValidUsernameError) m).getS());
         userInput = stdIn.readLine();
         this.myUsername = userInput;
-        out.println(c.convertToJSON(new UsernameAnswer(userInput)));
+        sendMessageToServer(new UsernameAnswer(userInput));
     }
 
     /**
-     * This method handles the GameInformationMessage {@link GameInformationMessage}
+     * This method handles the {@link GameInformationMessage}
      * @author Alessandro Fornara
      * @param m message
      * @throws IOException
@@ -126,22 +129,30 @@ public class CliView{
             printBookshelfAndPersonal();
             outputStream.println(gameInformation.getS());
             userInput = stdIn.readLine();
-            out.println(c.convertToJSON(new MoveAnswer(userInput)));
+            sendMessageToServer(new MoveAnswer(userInput));
         } else {
             outputStream.println(gameInformation.getActivePlayerUsername() + " is making his move...");
         }
     }
 
     /**
-     * This method handles the NotValidMoveError {@link NotValidMoveError}
+     * This method handles the {@link NotValidMoveError}
      * @author Alessandro Fornara
      * @param m message
      * @throws IOException
      */
     private void handleNotValidMove(Message m) throws IOException {
-        outputStream.println(((NotValidMoveError) m).getS());
+        dummyInputPrint(m);
         userInput = stdIn.readLine();
-        out.println(c.convertToJSON(new MoveAnswer(userInput)));
+        sendMessageToServer(new MoveAnswer(userInput));
+    }
+
+    /**
+     * This method handles the {@link WinMessage}
+     * @param m message
+     */
+    private void handleWinMessage(Message m){
+        outputStream.println(((WinMessage) m).getS());
     }
 
     /**
@@ -152,8 +163,8 @@ public class CliView{
         ItemEnum.generateCharMatrix(board, Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addNumbering(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
                 .printMatrix();
-        System.out.println(CommonCards[0]);
-        System.out.println(CommonCards[1]);
+        outputStream.println(CommonCards[0]);
+        outputStream.println(CommonCards[1]);
     }
 
     /**
@@ -164,6 +175,20 @@ public class CliView{
         outputStream.println("\n" + "Your Bookshelf:   Your Personal Card:");
         ItemEnum.generateCharMatrix(shelf, 6, 5).appendToAllRows("   ")
                 .addOnRight(ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)).printMatrix();
+    }
+
+    public void dummyInputPrint(Message m){
+        outputStream.println(((NotValidMoveError) m).getS());
+    }
+
+    /**
+     * This method sends a message to the server
+     * @author Alessandro Fornara
+     * @param m {@link Message}
+     */
+    private void sendMessageToServer(Message m){
+        String jsonString = c.convertToJSON(m);
+        out.println(jsonString);
     }
 
     @Deprecated
