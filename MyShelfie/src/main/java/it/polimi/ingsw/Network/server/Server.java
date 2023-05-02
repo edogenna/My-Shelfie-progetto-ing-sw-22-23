@@ -1,9 +1,11 @@
 package it.polimi.ingsw.Network.server;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.controller.Controller;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -170,7 +172,7 @@ public class Server /*extends unicastRemoteObject*/{
      * @author Alessandro Fornara
      * @throws InterruptedException
      */
-    private void GamePhase() throws InterruptedException {
+    private void GamePhase() throws InterruptedException, IOException {
         controller = new Controller(numberOfPlayers);
         for(ClientInformation s: connectedClients){
             controller.setUsernamePlayer(s.getUsername());
@@ -179,8 +181,16 @@ public class Server /*extends unicastRemoteObject*/{
 
         Server.Lock1.acquire();
         while (!win) {
+            String save = controller.getModelSave();
+            /*
+            String filePath = "C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt";
+            FileWriter fileWriter = new FileWriter(filePath);
+            fileWriter.write(save);
+            fileWriter.close();*/
+            System.out.println("Game has been saved");
+            //System.out.println(save);
             sendMessageToObservers(new GameInformationMessage(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
-            while (!Server.Lock1.tryAcquire()) ;
+            while (!Server.Lock1.tryAcquire());
             if(win){
                 int points = controller.declareWinner();
                 sendMessageToObservers(new WinMessage(controller.getActivePlayerUsername(), points));

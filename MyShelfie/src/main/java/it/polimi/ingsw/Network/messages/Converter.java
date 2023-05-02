@@ -6,6 +6,7 @@ import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
+import it.polimi.ingsw.model.Model;
 
 /**
  * This class is used to convert a {@link Message} using JSON
@@ -75,5 +76,15 @@ public class Converter {
     public String convertToJSON(Message m){
         Gson gson = new Gson();
         return gson.toJson(m);
+    }
+
+    public String convertModelToJSON(Model model){
+        Gson gson = new Gson();
+        return gson.toJson(model);
+    }
+
+    public Model convertModelFromJSON(String model){
+        Gson gson = new Gson();
+        return gson.fromJson(model, Model.class);
     }
 }

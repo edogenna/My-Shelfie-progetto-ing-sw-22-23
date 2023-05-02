@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 import java.util.Random;
@@ -426,6 +427,10 @@ public class Model {
         this.activePlayer = this.players[id];
     }
 
+    public String saveModel(){
+        Converter c = new Converter();
+        return c.convertModelToJSON(this);
+    }
 /*
 * 0 - 1 - 2 - 3
 * start 1;

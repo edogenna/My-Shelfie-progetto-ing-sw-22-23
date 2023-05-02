@@ -293,4 +293,8 @@ public class Controller {
      * @return the active player's bookshelf
      */
     public ItemEnum[][] getActivePlayershelf(){return model.getShelf();}
+
+    public String getModelSave(){
+        return model.saveModel();
+    }
 }
