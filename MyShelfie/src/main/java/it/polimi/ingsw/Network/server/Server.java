@@ -4,10 +4,9 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.model.Model;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -173,6 +172,8 @@ public class Server /*extends unicastRemoteObject*/{
      * @throws InterruptedException
      */
     private void GamePhase() throws InterruptedException, IOException {
+
+        //TODO: checks if there is a game saved on disk and creates the controller using the other constructor if true
         controller = new Controller(numberOfPlayers);
         for(ClientInformation s: connectedClients){
             controller.setUsernamePlayer(s.getUsername());
@@ -181,14 +182,10 @@ public class Server /*extends unicastRemoteObject*/{
 
         Server.Lock1.acquire();
         while (!win) {
-            String save = controller.getModelSave();
-            /*
-            String filePath = "C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt";
-            FileWriter fileWriter = new FileWriter(filePath);
-            fileWriter.write(save);
-            fileWriter.close();*/
+
+            saveGame();
             System.out.println("Game has been saved");
-            //System.out.println(save);
+
             sendMessageToObservers(new GameInformationMessage(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
             while (!Server.Lock1.tryAcquire());
             if(win){
@@ -196,5 +193,40 @@ public class Server /*extends unicastRemoteObject*/{
                 sendMessageToObservers(new WinMessage(controller.getActivePlayerUsername(), points));
             }
         }
+    }
+
+    /**
+     * This method saves the game
+     * @author Alessandro Fornara
+     * @throws IOException
+     */
+    private void saveGame() throws IOException {
+        String save = controller.getModelSave();
+
+        String filePath = "C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt";
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(save);
+        fileWriter.close();
+    }
+
+    /**
+     * This method loads a game that has been saved in file
+     * @return game {@link Model}
+     * @throws IOException
+     */
+    private Model loadGame() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt"));
+        StringBuilder stringBuilder = new StringBuilder();
+        Converter c = new Converter();
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+
+        String content = stringBuilder.toString();
+
+        return c.convertModelFromJSON(content);
+
     }
 }

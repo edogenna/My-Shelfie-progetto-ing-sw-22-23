@@ -11,8 +11,9 @@ public class Controller {
     private Model model;
 
     public Controller(int x){
-        model = new Model(x);
+        this.model = new Model(x);
     }
+    public Controller(Model m) {this.model = m;}
 
     @Deprecated
     public Controller(int x, CliView view){
