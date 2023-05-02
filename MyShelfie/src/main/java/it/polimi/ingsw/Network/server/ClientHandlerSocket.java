@@ -10,7 +10,6 @@ import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * This class is used to respond to requests from a specific socket client
@@ -62,17 +61,16 @@ public class ClientHandlerSocket implements Runnable, Observer {
 
     @Override
     public void update(Message message) {
-        sendMessage(message, clientInformation.getOut());
+        sendMessage(message);
     }
 
     /**
      * This method sends a message to a client
      * @param m {@link Message}
-     * @param out the output stream to send a message to the {@link it.polimi.ingsw.Network.client.SocketClient}
      */
-    public void sendMessage(Message m, PrintWriter out){
+    public void sendMessage(Message m){
         String jsonString = c.convertToJSON(m);
-        out.println(jsonString);
+        clientInformation.getOut().println(jsonString);
     }
 
     /**
@@ -92,7 +90,7 @@ public class ClientHandlerSocket implements Runnable, Observer {
      */
     private void handleMoveAnswer(Message m){
         if (server.controller.dummyInput(((MoveAnswer) m).getS())){
-            sendMessage(new NotValidMoveError(), clientInformation.getOut());
+            sendMessage(new NotValidMoveError());
         }
         else {
             String[] tiles = ((MoveAnswer) m).getS().split(",");
@@ -115,7 +113,7 @@ public class ClientHandlerSocket implements Runnable, Observer {
             }
 
             if(!done){
-                sendMessage(new NotValidMoveError(), clientInformation.getOut());
+                sendMessage(new NotValidMoveError());
             }else{
                 server.win = server.controller.finishTurn();
                 Server.Lock1.release();
@@ -128,13 +126,13 @@ public class ClientHandlerSocket implements Runnable, Observer {
      * @author Alessandro Fornara
      */
     private void chooseUsernamePhase(){
-        sendMessage(new ChooseUsernameMessage(), clientInformation.getOut());
+        sendMessage(new ChooseUsernameMessage());
         line = clientInformation.getIn().nextLine();
 
         Message m = c.convertFromJSON(line);
 
         while(!server.isUsernameTaken(((UsernameAnswer) m).getS())){
-            sendMessage(new NotValidUsernameError(), clientInformation.getOut());
+            sendMessage(new NotValidUsernameError());
             line = clientInformation.getIn().nextLine();
             m = c.convertFromJSON(line);
         }
