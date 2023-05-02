@@ -89,7 +89,7 @@ public class Server /*extends unicastRemoteObject*/{
     /**
      * This method accepts a socket connection and adds the connected client to a list of {@link ClientInformation}
      * @author Alessandro Fornara
-     * @param serverSocket
+     * @param serverSocket server
      * @return list of connected clients
      * @throws IOException
      */
@@ -177,7 +177,6 @@ public class Server /*extends unicastRemoteObject*/{
         }
         controller.setFirstPlayer();
 
-        //TODO: CHECK COMMONCARDS
         Server.Lock1.acquire();
         while (!win) {
             sendMessageToObservers(new GameInformationMessage(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
