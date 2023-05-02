@@ -19,15 +19,15 @@ import java.io.*;
  * @author Donato Fiore
  */
 public class CliView{
-    private PrintStream outputStream;
+    private final PrintStream outputStream;
     private ItemEnum[][] board;
     private String[] CommonCards;
     private Card personalCard;
     private ItemEnum[][] shelf;
-    private PrintWriter out;
-    private BufferedReader in;
-    private BufferedReader stdIn;
-    private Converter c;
+    private final PrintWriter out;
+    private final BufferedReader in;
+    private final BufferedReader stdIn;
+    private final Converter c;
     private String myUsername;
     private String userInput;
 
