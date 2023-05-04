@@ -9,8 +9,9 @@ import it.polimi.ingsw.Network.messages.Message;
 public final class EmptyPositionError extends Message {
     public EmptyPositionError(){
         super("EmptyPosition");
+        this.s = "You have selected an empty position.";
     }
-    private final String s="You have selected an empty position.";
+    private final String s;
 
     public String getS() {
         return s;

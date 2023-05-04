@@ -8,9 +8,10 @@ import it.polimi.ingsw.Network.messages.Message;
  */
 public final class NotValidUsernameError extends Message {
 
-    private final String s = "Select another username, this has been already selected.";
+    private final String s;
     public NotValidUsernameError() {
         super("NotValidUsername");
+        this.s = "Select another username, this has been already selected.";
     }
 
     public String getS() {

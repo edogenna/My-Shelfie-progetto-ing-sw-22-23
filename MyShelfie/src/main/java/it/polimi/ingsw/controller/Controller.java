@@ -281,14 +281,6 @@ ERROR CODES:
         return model.getBoardMatrix();
     }
 
-    /**
-     * @author Alessandro Fornara
-     * @return 2 Common Cards
-     */
-    public CommonCardStrategy[] getCommonCards(){
-        return model.getCommonCards();
-    }
-
     public String[] getCommonCardsDesigns(){
         return model.getCommonCardsDesigns();
     }

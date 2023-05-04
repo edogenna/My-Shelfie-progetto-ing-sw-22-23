@@ -9,8 +9,9 @@ import it.polimi.ingsw.Network.messages.Message;
 public final class NotAdjacTiles extends Message {
     public NotAdjacTiles(){
         super("NotAdjTiles");
+        this.s = "The tiles aren’t adjacent.";
     }
-    private final String s = "The tiles aren’t adjacent.";
+    private final String s;
 
     public String getS() {
         return s;

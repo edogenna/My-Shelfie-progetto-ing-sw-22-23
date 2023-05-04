@@ -8,10 +8,11 @@ import it.polimi.ingsw.Network.messages.Message;
  */
 public final class NotValidMoveError extends Message {
 
-    private final String s = "Your move can't be done. Please write the input with the correct format";
+    private final String s;
 
     public NotValidMoveError() {
         super("NotValidMove");
+        this.s = "Your move can't be done. Please write the input with the correct format";
     }
 
     public String getS() {

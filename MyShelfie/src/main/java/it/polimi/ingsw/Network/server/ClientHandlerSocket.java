@@ -4,8 +4,7 @@ import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMoveError;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
+import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
 
@@ -96,13 +95,13 @@ public class ClientHandlerSocket implements Runnable, Observer, Connection, RmiG
         else {
             String[] tiles = ((MoveAnswer) m).getS().split(",");
             int i = tiles.length;
-            boolean done = false;
+            int done = 0;
             //i = number of tiles * 2 + 1;
             //TODO: remove the comment and change done in a int;
             switch (i) {
                 case 3:
                     //we have taken 1 tile;
-                    //done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                    done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
                     break;
                 case 5:
                     //we have taken 2 tiles;
@@ -114,10 +113,35 @@ public class ClientHandlerSocket implements Runnable, Observer, Connection, RmiG
                     break;
             }
 
-            if(!done){
-                sendMessage(new NotValidMoveError());
-            }else{
-                //TODO: common cards
+            /*
+            ERROR CODES:
+            0: move done;
+            1: blankTiles error;
+            2: enoughSpaceBookshelf error;
+            3: isFeasiblePickMove error, no free side error;
+            4: isFeasiblePickMove error, no adjacent tiles error;
+            5: enoughSpaceColumn error;
+            * */
+            if(done == 1) {
+                sendMessage(new EmptyPositionError());
+            }else if(done == 2){
+                sendMessage(new NotEnoughSpaceBookshelfError());
+            }else if(done == 3){
+                sendMessage(new NoFreeSideError());
+            }else if(done == 4){
+                sendMessage(new NotAdjacTiles());
+            }else if(done == 5){
+                sendMessage(new NotEnoughSpaceColumnError());
+            }
+            else if(done == 0){
+                int points1 = server.controller.controlCommonCards(0);
+                int points2 = server.controller.controlCommonCards(1);
+                if(points1!=0){
+                    server.sendMessageToObservers(new CommonCardMessage(clientInformation.getUsername(), 1, points1));
+                }
+                if(points2!=0){
+                    server.sendMessageToObservers(new CommonCardMessage(clientInformation.getUsername(), 2, points2));
+                }
                 server.win = server.controller.finishTurn();
                 Server.Lock1.release();
             }

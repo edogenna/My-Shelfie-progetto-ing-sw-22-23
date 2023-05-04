@@ -76,7 +76,7 @@ public class Server /*extends unicastRemoteObject*/{
      * @author Alessandro Fornara
      * @param message
      */
-    private void sendMessageToObservers(Message message) {
+    protected void sendMessageToObservers(Message message) {
         observable.notifyObservers(message);
     }
 

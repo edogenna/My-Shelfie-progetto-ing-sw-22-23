@@ -5,9 +5,7 @@ import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidMoveError;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
+import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Card;
 
@@ -61,12 +59,21 @@ public class CliView{
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
             case "GameInformation" -> {handleGameInformationMessage(m);}
             case "Waiting" -> outputStream.println(((WaitingMessage) m).getS());
-            case "NotValidMove" -> handleNotValidMove(m);
+            case "NotValidMove" -> {dummyInputPrint(m);
+                handleNotValidMove();}
             case "Winner" -> handleWinMessage(m);
-            case "NotEnoughSpaceMove" -> {}
-            case "InvalidColumn" -> {}
-            case "EmptyPosition" -> {}
-            case "NotAdjTiles" -> {}
+            case "NotEnoughSpaceColumn" -> {outputStream.println(((NotEnoughSpaceColumnError) m).getS());
+                handleNotValidMove();}
+            case "InvalidColumn" -> {outputStream.println(((InvalidColumnError) m).getS());
+                handleNotValidMove();}
+            case "EmptyPosition" -> {outputStream.println(((EmptyPositionError) m).getS());
+                handleNotValidMove();}
+            case "NotAdjTiles" -> {outputStream.println(((NotAdjacTiles) m).getS());
+                handleNotValidMove();}
+            case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS());
+                handleNotValidMove();}
+            case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS());
+                handleNotValidMove();}
         }
     }
 
@@ -141,8 +148,7 @@ public class CliView{
      * @param m message
      * @throws IOException
      */
-    private void handleNotValidMove(Message m) throws IOException {
-        dummyInputPrint(m);
+    private void handleNotValidMove() throws IOException {
         userInput = stdIn.readLine();
         sendMessageToServer(new MoveAnswer(userInput));
     }

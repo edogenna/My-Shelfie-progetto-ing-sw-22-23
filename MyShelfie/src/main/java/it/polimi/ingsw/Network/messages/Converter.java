@@ -55,14 +55,18 @@ public class Converter {
                 return gson.fromJson(message, NotValidMoveError.class);
             case "ListOfLobbies":
                 return gson.fromJson(message, ListOfLobbies.class);
-            case "NotEnoughSpaceMove":
-                return gson.fromJson(message, NotEnoughSpaceMoveError.class);
+            case "NotEnoughSpaceColumn":
+                return gson.fromJson(message, NotEnoughSpaceColumnError.class);
             case "InvalidColumn":
                 return gson.fromJson(message, InvalidColumnError.class);
             case "EmptyPosition":
                 return gson.fromJson(message, EmptyPositionError.class);
             case "NotAdjTiles":
                 return gson.fromJson(message, NotAdjacTiles.class);
+            case "NoFreeSide":
+                return gson.fromJson(message, NoFreeSideError.class);
+            case "NotEnoughSpaceBookshelf":
+                return gson.fromJson(message, NotEnoughSpaceBookshelfError.class);
         }
         return null;
     }

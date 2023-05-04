@@ -7,10 +7,11 @@ import it.polimi.ingsw.Network.messages.Message;
  * @author Samuele Pietro Galli
  */
 public final class InvalidColumnError extends Message {
-    private final String s= "You chose a column that does not exist";
+    private final String s;
 
     public InvalidColumnError(){
         super("InvalidColumn");
+        this.s = "You chose a column that does not exist";
     }
 
     public String getS() {
