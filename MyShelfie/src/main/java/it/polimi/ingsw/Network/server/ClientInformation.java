@@ -61,6 +61,6 @@ public class ClientInformation {
      * @return this client's username
      */
     public String getUsername() {
-        return username;
+        return this.username;
     }
 }

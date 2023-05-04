@@ -17,17 +17,17 @@ import java.net.Socket;
 public class SocketClient {
     public void startSocketClient(String hostName, int portNumber) throws IOException {
 
-        try (
+        try(
                 Socket Socket = new Socket(hostName, portNumber);
                 PrintWriter out = new PrintWriter(Socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(Socket.getInputStream()));
                 BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
-        ) {
+        ){
             System.out.println("Connected");
             Converter c = new Converter();
             CliView cliView = new CliView(out, in, stdIn);
 
-            while (true) {
+            while(true){
                 String message = in.readLine();
                 Message m = c.convertFromJSON(message);
                 cliView.actionHandler(m);
