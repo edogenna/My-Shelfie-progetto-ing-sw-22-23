@@ -98,18 +98,19 @@ public class ClientHandlerSocket implements Runnable, Observer, Connection, RmiG
             int i = tiles.length;
             boolean done = false;
             //i = number of tiles * 2 + 1;
+            //TODO: remove the comment and change done in a int;
             switch (i) {
                 case 3:
                     //we have taken 1 tile;
-                    done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                    //done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
                     break;
                 case 5:
                     //we have taken 2 tiles;
-                    done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
+                    //done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
                     break;
                 case 7:
                     //we have taken 3 tiles;
-                    done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
+                    //done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
                     break;
             }
 

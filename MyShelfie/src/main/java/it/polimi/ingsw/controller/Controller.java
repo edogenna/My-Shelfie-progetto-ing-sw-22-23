@@ -125,8 +125,6 @@ public class Controller {
     private boolean isFeasiblePickMove(int x, int y){
         boolean done;
         done = model.isFeasiblePickMove(x,y);
-        /*if(!done)
-            view.noFreeSidesPrint(x,y);*/
         return done;
     }
 
@@ -163,28 +161,37 @@ public class Controller {
         return done;
     }
 
-    public boolean pickCard(int x, int y, int col){
+/*
+ERROR CODES:
+0: move done;
+1: blankTiles error;
+2: enoughSpaceBookshelf error;
+3: isFeasiblePickMove error, no free side error;
+4: isFeasiblePickMove error, no adjacent tiles error;
+5: enoughSpaceColumn error;
+* */
+    public int pickCard(int x, int y, int col){
         boolean done;
 
         done = blankTiles(x,y);
         if(done){
-            return false;
+            return 1;
         }
 
         done = enoughSpaceBookshelf(1);
         if(!done)
-            return false;
+            return 2;
 
         done = isFeasiblePickMove(x,y);
         if(!done)
-            return false;
+            return 3;
 
         if(!model.enoughSpaceColumn(col, 1)){
             //view.notEnoughSpaceBookshelfColPrint(col);
-            return false;
+            return 5;
         }
         model.insert(x,y,col);
-        return true;
+        return 0;
     }
 
     public boolean pickCard(int x1, int y1, int x2, int y2, int col){
