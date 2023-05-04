@@ -255,10 +255,8 @@ public class Server /*extends unicastRemoteObject*/{
                 if (samePlayers)
                     controller = new Controller(m);
             }
-            else samePlayers = false;
         }
-
-        if(!samePlayers) {
+        else {
             controller = new Controller(numberOfPlayers);
             for (ClientInformation s : connectedClients) {
                 controller.setUsernamePlayer(s.getUsername());
