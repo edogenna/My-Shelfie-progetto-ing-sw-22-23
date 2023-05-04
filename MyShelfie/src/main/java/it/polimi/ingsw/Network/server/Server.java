@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.Player;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -216,18 +217,54 @@ public class Server /*extends unicastRemoteObject*/{
      * @throws IOException
      */
     private Model loadGame() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt"));
+        File file = new File("C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
         StringBuilder stringBuilder = new StringBuilder();
         Converter c = new Converter();
 
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
+        if(file.exists()) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+
+            String content = stringBuilder.toString();
+
+            return c.convertModelFromJSON(content);
+        }
+        return null;
+    }
+
+    //TODO: I have to find a way to serialize the commonCards, I could use Strings like in the message
+    //DO NOT USE THIS METHOD FOR NOW
+    private Controller checkMemoryDisk() throws IOException {
+        Model m = loadGame();
+        int i = 0;
+        boolean samePlayers = true;
+
+        if(m!=null) {
+            Player[] players = m.getPlayers();
+            if (players.length == connectedClients.size()) {
+                for (ClientInformation s : connectedClients) {
+                    if (!s.getUsername().equals(players[i].getUsername())) {
+                        samePlayers = false;
+                        break;
+                    }
+                    i++;
+                }
+                if (samePlayers)
+                    controller = new Controller(m);
+            }
+            else samePlayers = false;
         }
 
-        String content = stringBuilder.toString();
-
-        return c.convertModelFromJSON(content);
-
+        if(!samePlayers) {
+            controller = new Controller(numberOfPlayers);
+            for (ClientInformation s : connectedClients) {
+                controller.setUsernamePlayer(s.getUsername());
+            }
+            controller.setFirstPlayer();
+        }
+        return controller;
     }
 }
