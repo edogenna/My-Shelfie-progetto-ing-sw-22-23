@@ -235,22 +235,31 @@ public class Controller {
         return true;
     }
 
-    //return true if the match is finished
-    public boolean finishTurn(){
-        int points;
+    /**
+     * @author Donato Fiore
+     * @param id the number of the common card, 0:CommonCard1; 1: CommonCard2
+     * @return the points done with the CommonCard; if the goal isn't achieved, the points will be = 0;
+     * */
+    public int controlCommonCards(int id){
         boolean card;
-        card = model.controlCommonCards(0);
-        if(card){
-            points = model.getCommonCardsPoints(0);
-            //view.commonPoints(model.getActivePlayerName(), points, 1);
+        int points;
+
+        points = model.getCommonCardsPoints(id);
+        card = model.controlCommonCards(id);
+        if(!card){
+            points = 0;
         }
-        card = model.controlCommonCards(1);
-        if(card){
-            points = model.getCommonCardsPoints(1);
-            //view.commonPoints(model.getActivePlayerName(), points, 2);
-        }
-        card = model.finishTurn();
-        return card;
+        return points;
+    }
+
+    /**
+     * @author Donato Fiore
+     * @return true if the match is finished
+     * */
+    public boolean finishTurn(){
+        boolean turn;
+        turn = model.finishTurn();
+        return turn;
     }
 
     //TODO: finish this method

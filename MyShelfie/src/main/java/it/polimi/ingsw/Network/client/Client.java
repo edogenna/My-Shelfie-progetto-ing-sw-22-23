@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Main client class that starts a socket client or a RMI client.
+ * Main client class that starts a socket client or an RMI client.
  */
 public class Client {
 

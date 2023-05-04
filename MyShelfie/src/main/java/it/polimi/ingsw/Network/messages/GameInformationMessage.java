@@ -21,12 +21,12 @@ public final class GameInformationMessage extends Message {
                              "Example: x1,y1,x2,y2,x3,y3,column\n" +
                              "Example: a,3,a,4,a,5,column";
 
-    public GameInformationMessage(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard, String[] commonCards, String usrn) {
+    public GameInformationMessage(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard, String[] commonCards, String username) {
         super("GameInformation");
         this.board = board;
         this.shelf = shelf;
         this.personalCard = personalCard;
-        this.activePlayerUsername = usrn;
+        this.activePlayerUsername = username;
         this.commonCards = commonCards;
     }
 
