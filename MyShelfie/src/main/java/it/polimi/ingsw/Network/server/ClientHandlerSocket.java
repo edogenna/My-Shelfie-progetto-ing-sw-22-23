@@ -15,7 +15,7 @@ import java.io.IOException;
  * This class is used to respond to requests from a specific socket client
  * @author Alessandro Fornara
  */
-public class ClientHandlerSocket implements Runnable, Observer, Connection {
+public class ClientHandlerSocket implements Runnable, Observer, Connection, RmiGame{
     private Server server;
     private Observable observable;
     private ClientInformation clientInformation;
