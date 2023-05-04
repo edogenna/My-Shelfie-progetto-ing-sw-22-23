@@ -194,52 +194,52 @@ ERROR CODES:
         return 0;
     }
 
-    public boolean pickCard(int x1, int y1, int x2, int y2, int col){
+    public int pickCard(int x1, int y1, int x2, int y2, int col){
         boolean done;
 
         done = blankTiles(x1,y1,x2,y2);
         if(done){
-            return false;
+            return 1;
         }
 
         done = enoughSpaceBookshelf(2);
         if(!done)
-            return false;
+            return 2;
 
         done = isFeasiblePickMove(x1,y1,x2,y2);
         if(!done)
-            return false;
+            return 3;
 
         if(!model.enoughSpaceColumn(col, 2)){
             //view.notEnoughSpaceBookshelfColPrint(col);
-            return false;
+            return 5;
         }
         model.insert(x1,y1,x2,y2,col);
-        return true;
+        return 0;
     }
 
-    public boolean pickCard(int x1, int y1, int x2, int y2, int x3, int y3, int col){
+    public int pickCard(int x1, int y1, int x2, int y2, int x3, int y3, int col){
         boolean done;
 
         done = blankTiles(x1,y1,x2,y2,x3,y3);
         if(done){
-            return false;
+            return 1;
         }
 
         done = enoughSpaceBookshelf(3);
         if(!done)
-            return false;
+            return 2;
 
         done = isFeasiblePickMove(x1,y1,x2,y2,x3,y3);
         if(!done)
-            return false;
+            return 3;
 
         if(!model.enoughSpaceColumn(col, 3)){
             //view.notEnoughSpaceBookshelfColPrint(col);
-            return false;
+            return 5;
         }
         model.insert(x1,y1,x2,y2,x3,y3,col);
-        return true;
+        return 0;
     }
 
     /**
