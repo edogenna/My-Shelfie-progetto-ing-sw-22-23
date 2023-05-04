@@ -47,9 +47,10 @@ public class RmiClientConnection {
         // parametri in ingresso
         reg = LocateRegistry.getRegistry(address, port);
     }
-    //l'idea sarebbe quella di creare
-    // un thread che ciclicamente esegue un metodo 'ping' daal server RMI
-    // per verificare la connessione del client ,
-    // e in caso di disconnessione forzre la chiusura della connessione
-    // e segnalare la disconnessione alla view del client
+/*    l'idea sarebbe quella di creare
+     un thread che ciclicamente esegue un metodo 'ping' daal server RMI
+     per verificare la connessione del client ,
+     e in caso di disconnessione forzre la chiusura della connessione
+     e segnalare la disconnessione alla view del client
+*/
 }

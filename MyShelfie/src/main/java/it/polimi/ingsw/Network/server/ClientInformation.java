@@ -12,14 +12,14 @@ public class ClientInformation {
     private Socket socket;
     private PrintWriter out;
     private Scanner in;
-    private int ID;
+    private int id;
     private String username;
 
     public ClientInformation(Socket socket, PrintWriter out, Scanner in, int id){
         this.socket = socket;
         this.out = out;
         this.in = in;
-        this.ID = id;
+        this.id = id;
         this.username = null;
     }
 
@@ -45,9 +45,9 @@ public class ClientInformation {
     }
 
     /**
-     * @return this client's ID
+     * @return this client's id
      */
-    public int getID() {return this.ID;}
+    public int getId() {return this.id;}
 
     /**
      * Sets this client's username to a value

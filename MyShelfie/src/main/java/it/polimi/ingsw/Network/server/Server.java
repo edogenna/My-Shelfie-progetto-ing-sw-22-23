@@ -37,7 +37,7 @@ public class Server /*extends unicastRemoteObject*/{
     protected boolean win;
 
     public Server(int port){
-        this.portNumber=port;
+        this.portNumber = port;
         this.observable = new Observable();
         this.connectedClients = new ArrayList<>();
         this.usernames = new ArrayList<>();
@@ -49,6 +49,7 @@ public class Server /*extends unicastRemoteObject*/{
         this.win = false;
     }
 
+    //TODO: correct the documentation
     /**
      * This method starts the server
      * @author Alessandro Fornara
@@ -105,17 +106,17 @@ public class Server /*extends unicastRemoteObject*/{
     /**
      * This method check if a username has already been taken by another client, if not it is added to a list of usernames and to the client's information
      * @author Alessandro Fornara
-     * @param usrn username
+     * @param nickname username
      * @return false if the username has already been taken, true otherwise
      */
-    public boolean isUsernameTaken(String usrn){
+    public boolean isUsernameTaken(String nickname){
         for(String s: usernames){
-            if(usrn.equals(s)){
+            if(nickname.equals(s)){
                 return false;
             }
         }
-        usernames.add(usrn);
-        connectedClients.get(connectedClients.size()-1).setUsername(usrn);
+        usernames.add(nickname);
+        connectedClients.get(connectedClients.size()-1).setUsername(nickname);
         return true;
     }
 
