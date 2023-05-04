@@ -124,5 +124,10 @@ public class CommonCard03 implements CommonCardStrategy{
                 .appendAtBottom("   |=|          in the depicted shape). Tiles can be")
                 .appendAtBottom("   |=| x4       different between different groups.");
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant3;
+    }
 }
 

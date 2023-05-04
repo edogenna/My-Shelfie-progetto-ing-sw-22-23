@@ -100,4 +100,9 @@ public class CommonCard06 implements CommonCardStrategy{
                 .appendAtBottom("  | ≠ |  ")
                 .appendAtBottom("  | ≠ |  ");
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant6;
+    }
 }

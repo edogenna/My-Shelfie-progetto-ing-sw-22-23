@@ -1,21 +1,14 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.controller.Controller;
-import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.server.Server;
-import it.polimi.ingsw.view.CLI.CliView;
+import it.polimi.ingsw.Network.server.Server;
+
+import java.io.IOException;
 
 public class Main {
-    public static void main( String[] args ){
-        /*Match m1;
+    public static void main( String[] args ) throws IOException, InterruptedException {
 
-        m1=new Match(2);
-        m1.begin();
-        */
-
-        Server s=new Server(1234);
+        Server s = new Server(1234);
         s.startServer();
-
 
         /*CliView cliView = new CliView(2);
         Thread thread = new Thread(cliView);

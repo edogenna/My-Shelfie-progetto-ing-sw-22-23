@@ -1,5 +1,9 @@
-package it.polimi.ingsw.controller.messages;
+package it.polimi.ingsw.Network.messages;
 
+/**
+ * Message to send generic information about the connected clients to the user
+ * @author Alessandro Fornara
+ */
 public final class LobbyMessage extends Message{
     private final int actualNum, totalNum;
     private final String s;
@@ -7,7 +11,7 @@ public final class LobbyMessage extends Message{
         super("Lobby");
         this.totalNum = totalNum;
         this.actualNum = actualNum;
-        s = actualNum + " / " + totalNum + " Clients Connected...\nWaiting for more players...";
+        this.s = actualNum + " / " + totalNum + " Clients Connected...";
     }
     public String getS() {
         return s;

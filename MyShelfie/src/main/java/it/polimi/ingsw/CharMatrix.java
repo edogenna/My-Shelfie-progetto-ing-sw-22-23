@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 import java.util.ArrayList;
 
 /**
- * CharMatrx is an array of strings, it is used as a view
+ * CharMatrix is an array of strings, it is used as a view
  *
  * @author Edoardo Gennaretti
  */

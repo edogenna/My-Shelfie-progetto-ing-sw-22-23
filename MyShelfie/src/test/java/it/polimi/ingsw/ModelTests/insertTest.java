@@ -8,26 +8,37 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class insertTest {
-    Model m = new Model(4);
-    Board b = new Board(4);
+    Model m = new Model(2);
 
-    Player p = new Player("pollo");
+    Player p1;
+    Player p2;
 
-    private ItemEnum[][] s = m.getShelf();
+
+    private ItemEnum[][] s;
     private int x, x1;
     private int y, y1;
     private int col;
-    private ItemEnum tile = b.getItemEnum(x1, y1);
+    private ItemEnum tile;
+
+    /**
+     * this method tests the insertion and deletion of a tile, respectively, in the bookshelf and the board
+     * @author Samuele Pietro Galli
+     */
     @Test
     public void Test(){
-        x=0;
-        y=0;
+        m.setUsernamePlayer("pollo");
+        m.setUsernamePlayer("pollo1");
+        m.setFirstPlayer();
+        x1=4;
+        y1=6;
         col=0;
-        x1=2;
-        y1=2;
-        m.insert(x,y,col);
-        Assert.assertEquals(b.getItemEnum(x1,y1), ItemEnum.BLANK);
-        Assert.assertEquals(tile, m.getShelf()[0][0]);
+        tile = m.getBoardMatrix()[x1][y1];
+
+        //insert da rivedere
+        m.insert(x1,y1,col);
+        s=m.getShelf();
+        Assert.assertEquals(m.getBoardMatrix()[x1][y1], ItemEnum.BLANK);
+        Assert.assertEquals(tile, s[5][0]);
     }
 
 }

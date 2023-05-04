@@ -28,6 +28,10 @@ public class Player {
             heights[i] = 0;
     }
 
+    /**
+     * @author Donato Fiore
+     * it sets the personalCard of the player
+     * */
     public void setPersonalCard(Card goals){
         this.myGoals = goals;
     }
@@ -46,10 +50,19 @@ public class Player {
         return new String(this.username);
     }
 
+    /**
+     * @author Donato Fiore
+     * @param i column of the bookshelf
+     * @return the number of tiles present in the column
+     * */
     public int getHeights(int i){
         return this.heights[i];
     }
 
+    /**
+     * @author Donato Fiore
+     * @return a matrix of ItemEnum representing the player's bookshelf
+     * */
     public ItemEnum[][] getMatrixBookshelf() {
         ItemEnum[][] copy = new ItemEnum[6][5];
         for(int i = 0; i < 6; i++)
@@ -57,7 +70,10 @@ public class Player {
         return copy;
     }
 
-    //"calculatePoints" counts the points including the "common cards"
+    /**
+     * @author Donato Fiore
+     * @return the total points earned by the player: personalCard points, commonCard points and adjacentTiles points
+     * */
     public int calculatePoints(){
         myPoints = pointPersonalCard();
         myPoints += adjacentTilesPoints();
@@ -65,7 +81,10 @@ public class Player {
         return myPoints;
     }
 
-    //this method calculates the points achieved with the own PersonalCard
+    /**
+     * @author Donato Fiore
+     * @return the personalCard points achieved
+     * */
     private int pointPersonalCard(){
         int i, points;
         Triplet control;
@@ -91,6 +110,10 @@ public class Player {
         return points;
     }
 
+    /**
+     * @author Donato Fiore
+     * @return the points earned by placing tiles of the same color adjacent to each other
+     * */
     private int adjacentTilesPoints(){
         int points, near, i, j, x, y;
         int[][] visited = new int[6][5];
@@ -99,7 +122,6 @@ public class Player {
         boolean stop;
 
         points = 0;
-        near = 0;
 
         for(i=0; i<6; i++){
             for(j=0; j<5; j++){
@@ -187,7 +209,6 @@ public class Player {
         return true;
     }
 
-
     /**
      * @author Alessandro Fornara
      * @return Returns the boolean value CommonDone1
@@ -195,6 +216,7 @@ public class Player {
     public boolean getCommonDone1(){
         return this.CommonDone1;
     }
+
     /**
      * @author Alessandro Fornara
      * @return Returns the boolean value CommonDone2
@@ -231,12 +253,16 @@ public class Player {
      * @author Donato Fiore
      * @param j column selected
      * @param n number of tiles to insert
-     * @return true if the column has enough cells, false otherwise
+     * @return false if the column has enough cells, true otherwise
      */
     public boolean isColumnFull(int j, int n){
         return this.heights[j] + n > 6;
     }
 
+    /**
+     * @author Donato Fiore
+     * @return the maximum number of tiles that can be inserted in a column
+     * */
     public int maxTilesPick(){
         int x=0;
         for(int i=0; i<5; i++){
@@ -246,12 +272,24 @@ public class Player {
         return x;
     }
 
-    //"y" is the library column. The tile is placed on the first available row starting from the bottom.
+    /**
+     * @author Donato Fiore
+     * @param y the library column
+     * @param tile the tile he wants to insert
+     * The tile is placed on the first available row starting from the bottom
+     * */
     public void insert(int y, ItemEnum tile){
             this.shelf[5-heights[y]][y] = tile;
             heights[y]++;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param y the library column
+     * @param tile1 the first tile he wants to insert
+     * @param tile2 the second tile he wants to insert
+     * The tiles are placed on the first available row starting from the bottom
+     * */
     public void insert(int y, ItemEnum tile1, ItemEnum tile2){
             this.shelf[5-heights[y]][y] = tile1;
             heights[y]++;
@@ -259,6 +297,14 @@ public class Player {
             heights[y]++;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param y the library column
+     * @param tile1 the first tile he wants to insert
+     * @param tile2 the second tile he wants to insert
+     * @param tile3 the third tile he wants to insert
+     * The tiles are placed on the first available row starting from the bottom
+     * */
     public void insert(int y, ItemEnum tile1, ItemEnum tile2, ItemEnum tile3){
         this.shelf[5-heights[y]][y] = tile1;
         heights[y]++;

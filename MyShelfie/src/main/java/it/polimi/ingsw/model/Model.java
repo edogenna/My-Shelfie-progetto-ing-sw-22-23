@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 import java.util.Random;
@@ -28,20 +29,36 @@ public class Model {
         this.lastTurn = false;
     }
 
+    /**
+    * @return true if the tile has a free side
+    * @author Donato Fiore
+    * */
     public boolean isFeasiblePickMove(int x, int y){
         return this.board.tileFreeSide(x, y);
     }
 
+    /**
+    * it upgrades the player who will play the turn
+    * @author Donato Fiore
+    * */
     private void changeActivePlayer(){
         this.idActivePlayer++;
         this.idActivePlayer %= this.numPlayers;
         this.activePlayer = this.players[this.idActivePlayer];
     }
 
+    /**
+    * it returns the username of the player that will play the turn
+    * @author Donato Fiore
+    * */
     public String getActivePlayerName(){
         return new String(this.activePlayer.getUsername());
     }
 
+    /**
+    * it implements the player class setting the username of the player; it also set the PersonalCard of the player
+    * @author Donato Fiore
+    */
     public void setUsernamePlayer(String username){
         this.idFirstPlayer++;
         this.players[this.idFirstPlayer] = new Player(username);
@@ -52,12 +69,19 @@ public class Model {
         return this.numPlayers;
     }
 
-
-    //TODO: DOESN'T WORK (la seconda volta che viene richiamata y è uguale a 0 e quindi non entra nel ciclo e non fa il controllo)
+    public String[] getCommonCardsDesigns(){
+        return board.getCommonCardDesigns();
+    }
+    /**
+    * @return true if there is another player with the same username
+    * @author Donato Fiore
+    * */
+    @Deprecated
     public boolean duplicatedUsername(String x){
         int y = idFirstPlayer;
         if(y==-1)
             return false;
+        y = y + 1;
         for(int i=0; i<y; i++){
             if(x.equals(players[i].getUsername()))
                 return true;
@@ -97,6 +121,10 @@ public class Model {
         }
     }
 
+    /**
+    * it sets casually the first player of the match
+    * @author Donato Fiore
+    * */
     public void setFirstPlayer(){
         Random xyz = new Random();
         int i;
@@ -106,16 +134,31 @@ public class Model {
         this.activePlayer = players[i];
     }
 
+    /**
+    * @author Donato Fiore
+    * @param x is the number of tiles you want to insert in the bookshelf
+    * @return true if the maximum number of tiles that can be inserted is >= than x
+    */
     public boolean enoughSpaceBookshelf(int x){
         if(x>activePlayer.maxTilesPick())
             return false;
         return true;
     }
 
+    /**
+    * @param y column selected
+    * @param num number of tiles to insert
+    * @return true if the selected column has enough space to insert the 'num' tiles
+    * @author Donato Fiore
+    * */
     public boolean enoughSpaceColumn(int y, int num){
         return !this.activePlayer.isColumnFull(y,num);
     }
 
+    /**
+     * @author Donato Fiore
+     * @return true if the two tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates
+     * */
     public boolean adjacentTiles(int x1, int y1, int x2, int y2){
         boolean isAdjacent;
 
@@ -129,6 +172,10 @@ public class Model {
         return isAdjacent;
     }
 
+    /**
+     * @author Donato Fiore
+     * @return true if the three tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates
+     * */
     public boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
         boolean isAdjacent;
 
@@ -137,19 +184,54 @@ public class Model {
 
         return isAdjacent;
     }
-//istanzio il model, creo una board, inserisco nella shelf, getactiveboard e le confronto
+
+    //todo: eliminare questo commento se non serve più
+    //istanzio il model, creo una board, inserisco nella shelf, getactiveboard e le confronto
+
+    /**
+     * @author Donato Fiore
+     * @param x coordinate of the tile in the board
+     * @param y coordinate of the tile in the board
+     * @param col column of the bookshelf
+     * it inserts the selected tile in the lowest position of the bookshelf's column removing it from the board
+     * */
     public void insert(int x, int y, int col){
         this.activePlayer.insert(col,this.board.deleteItemEnum(x,y));
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x1 coordinate of the first selected tile in the board
+     * @param y1 coordinate of the first selected tile in the board
+     * @param x2 coordinate of the second selected tile in the board
+     * @param y2 coordinate of the second selected tile in the board
+     * @param col column of the bookshelf
+     * it inserts the selected tiles in the lowest position of the bookshelf's column removing them from the board
+     * */
     public void insert(int x1, int y1, int x2, int y2, int col){
         this.activePlayer.insert(col, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2));
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x1 coordinate of the first selected tile in the board
+     * @param y1 coordinate of the first selected tile in the board
+     * @param x2 coordinate of the second selected tile in the board
+     * @param y2 coordinate of the second selected tile in the board
+     * @param x3 coordinate of the third selected tile in the board
+     * @param y3 coordinate of the third selected tile in the board
+     * @param col column of the bookshelf
+     * it inserts the selected tiles in the lowest position of the bookshelf's column removing them from the board
+     * */
     public void insert(int x1, int y1, int x2, int y2, int x3, int y3, int col) {
         this.activePlayer.insert(col, this.board.deleteItemEnum(x1,y1), this.board.deleteItemEnum(x2,y2), this.board.deleteItemEnum(x3,y3));
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x it is the number of the CommonCard; it can be 0 or 1
+     * @return true if the player has achieved the goal
+     * */
     public boolean controlCommonCards(int x){
         boolean done = false;
         int y=0;
@@ -168,6 +250,11 @@ public class Model {
         return false;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param card it is the number of the CommonCard; it can be 0 or 1
+     * @return the available points of the selected CommonCard
+     * */
     public int getCommonCardsPoints(int card){
         if(card == 0)
             return this.commonPoints1;
@@ -176,14 +263,52 @@ public class Model {
         return 0;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param numCard it is the number of the CommonCard; it can be 0 or 1
+     * it updates the available points of the CommonCards
+     * */
     private void updateCommonPoints(int numCard){
-        if(numCard == 0){
-            this.commonPoints1 -= 2;
-        }else if(numCard == 1){
-            this.commonPoints2 -= 2;
+        switch (this.numPlayers){
+            case 4:
+                if(numCard == 0){
+                    if(this.commonPoints1 > 0)
+                        this.commonPoints1 -= 2;
+                }else if(numCard == 1){
+                    if(this.commonPoints2 > 0)
+                        this.commonPoints2 -= 2;
+                }
+                break;
+            case 3:
+                if(numCard == 0){
+                    if(this.commonPoints1 == 4)
+                        this.commonPoints1 -= 4;
+                    else if(this.commonPoints1 > 0)
+                        this.commonPoints1 -= 2;
+                }else if(numCard == 1){
+                    if(this.commonPoints2 == 4)
+                        this.commonPoints2 -= 4;
+                    else if(this.commonPoints2 > 0)
+                        this.commonPoints2 -= 2;
+                }
+                break;
+            case 2:
+                if(numCard == 0){
+                    if(this.commonPoints1 > 0)
+                        this.commonPoints1 -= 4;
+                }else if(numCard == 1){
+                    if(this.commonPoints2 > 0)
+                        this.commonPoints2 -= 4;
+                }
+                break;
         }
+
     }
 
+    /**
+     * @author Donato Fiore
+     * @return a matrix of ItemEnum representing the board
+     * */
     public ItemEnum[][] getBoardMatrix(){
         return this.board.getMatrix();
     }
@@ -209,6 +334,12 @@ public class Model {
     public Card getPersonalCard(){return activePlayer.getPersonalCard();}
 
     //todo: test this method
+    /**
+     * @author Donato Fiore
+     * @return true if match is finished
+     * it controls if the activePlayer has filled his bookshelf, changes the activePlayer and refills the board if it is
+     * necessary
+     * */
     public boolean finishTurn(){
         boolean finish;
         int x;
@@ -232,11 +363,21 @@ public class Model {
         return finish;
     }
 
+    /**
+     * This method returns the players of the game
+     * @author Samuele Pietro Galli
+     * @return an array of players {@link Player}
+     */
     public Player[] getPlayers() {
         return this.players;
     }
 
     //TODO: test this method
+    /**
+     * @author Donato Fiore
+     * @return the points of the winner player
+     * it calculates the winner player and sets him as the activePlayer
+     * */
     public int theWinnerIs(){
         int i, x, max, id;
 
@@ -261,6 +402,12 @@ public class Model {
     }
 
     //TODO: test this method
+    /**
+     * @author Donato Fiore
+     * @param x the position of the first player
+     * @param y the position of the interested player
+     * @return the distance (mod numPlayers) between the 2 players
+     * */
     private int distancePlayer(int x, int y){
         int z;
 
@@ -271,11 +418,21 @@ public class Model {
         return z;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param id index of the selected player
+     * it sets the selected player as activePlayer
+     */
     private void setActivePlayer(int id){
         this.activePlayer = this.players[id];
     }
 
-/* 0 - 1 - 2 - 3
+    public String saveModel(){
+        Converter c = new Converter();
+        return c.convertModelToJSON(this);
+    }
+/*
+* 0 - 1 - 2 - 3
 * start 1;
 * '2' e '0' same points;
 * dist(1,2) = 2 - 1 = 1;
@@ -283,8 +440,4 @@ public class Model {
 * dist(1,3) = 3 - 1 = 2;
 *
 */
-/*
-    public ItemEnum[][] getCommonCards() {
-        return
-    }*/
 }

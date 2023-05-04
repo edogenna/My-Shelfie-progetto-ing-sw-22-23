@@ -72,6 +72,11 @@ public class CommonCard09 implements CommonCardStrategy {
                 .appendAtBottom("  | ■ |  ")
                 .appendAtBottom("  | ■ |  x3");
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant9;
+    }
 }
 
 

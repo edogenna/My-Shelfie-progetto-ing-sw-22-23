@@ -1,5 +1,9 @@
-package it.polimi.ingsw.controller.messages;
+package it.polimi.ingsw.Network.messages;
 
+/**
+ * Message to ask for a username to the user
+ * @author Alessandro Fornara
+ */
 public final class ChooseUsernameMessage extends Message{
 
     private final String s = "Choose your username";

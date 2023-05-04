@@ -4,16 +4,18 @@ import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.view.CLI.CliView;
+import it.polimi.ingsw.view.CliView;
 
 public class Controller {
     private CliView view;
     private Model model;
 
     public Controller(int x){
-        model = new Model(x);
+        this.model = new Model(x);
     }
+    public Controller(Model m) {this.model = m;}
 
+    @Deprecated
     public Controller(int x, CliView view){
         this.model = new Model(x);
         this.view = view;
@@ -23,6 +25,7 @@ public class Controller {
         return this.model.getNumPlayers();
     }
 
+    @Deprecated
     public boolean duplicatedUsername(String x){
         return this.model.duplicatedUsername(x);
     }
@@ -41,12 +44,12 @@ public class Controller {
 
         len = input.length();
         if(len != 5 && len != 9 && len != 13) {
-            view.dummyInputPrint();
+            //view.dummyInputPrint();
             return true;
         }
         for(i=1; i<len; i+=2){
             if(input.charAt(i) != ','){
-                view.dummyInputPrint();
+                //view.dummyInputPrint();
                 return true;
             }
         }
@@ -58,19 +61,19 @@ public class Controller {
             if(i==coordinates.length-1){
                 //the character must be between '0' and '4', this is the column of bookshelf
                 if(coordinates[i].charAt(0) < '0' || coordinates[i].charAt(0) > '4'){
-                    view.dummyInputPrint();
+                    //view.dummyInputPrint();
                     return true;
                 }
             }else if(i%2 == 0){
                 //the character must be between 'a' and 'z'
                 if(coordinates[i].charAt(0) < 'a' || coordinates[i].charAt(0) > 'z'){
-                    view.dummyInputPrint();
+                    //view.dummyInputPrint();
                     return true;
                 }
             }else if(i%2 != 0){
                 //the character must be between '0' and '8'
                 if(coordinates[i].charAt(0) < '0' || coordinates[i].charAt(0) > '8'){
-                    view.dummyInputPrint();
+                    //view.dummyInputPrint();
                     return true;
                 }
             }
@@ -83,8 +86,8 @@ public class Controller {
         boolean done;
 
         done = model.enoughSpaceBookshelf(x);
-        if(!done)
-            view.notEnoughSpaceBookshelfPrint();
+        /*if(!done)
+            view.notEnoughSpaceBookshelfPrint();*/
 
         return done;
     }
@@ -96,8 +99,8 @@ public class Controller {
 
         board = model.getBoardMatrix();
         blank = board[x][y].equals(ItemEnum.BLANK);
-        if(blank)
-            view.blankTilesSelected(x,y);
+        /*if(blank)
+            view.blankTilesSelected(x,y);*/
 
         return blank;
     }
@@ -122,8 +125,6 @@ public class Controller {
     private boolean isFeasiblePickMove(int x, int y){
         boolean done;
         done = model.isFeasiblePickMove(x,y);
-        if(!done)
-            view.noFreeSidesPrint(x,y);
         return done;
     }
 
@@ -137,7 +138,7 @@ public class Controller {
             return false;
         done = model.adjacentTiles(x1,y1,x2,y2);
             if(!done){
-                view.notAdjacentTilesPrint();
+                //view.notAdjacentTilesPrint();
             }
         return done;
     }
@@ -155,33 +156,42 @@ public class Controller {
             return false;
         done = model.adjacentTiles(x1,y1,x2,y2,x3,y3);
         if(!done){
-            view.notAdjacentTilesPrint();
+            //view.notAdjacentTilesPrint();
         }
         return done;
     }
 
-    public boolean pickCard(int x, int y, int col){
+/*
+ERROR CODES:
+0: move done;
+1: blankTiles error;
+2: enoughSpaceBookshelf error;
+3: isFeasiblePickMove error, no free side error;
+4: isFeasiblePickMove error, no adjacent tiles error;
+5: enoughSpaceColumn error;
+* */
+    public int pickCard(int x, int y, int col){
         boolean done;
 
         done = blankTiles(x,y);
         if(done){
-            return false;
+            return 1;
         }
 
         done = enoughSpaceBookshelf(1);
         if(!done)
-            return false;
+            return 2;
 
         done = isFeasiblePickMove(x,y);
         if(!done)
-            return false;
+            return 3;
 
         if(!model.enoughSpaceColumn(col, 1)){
-            view.notEnoughSpaceBookshelfColPrint(col);
-            return false;
+            //view.notEnoughSpaceBookshelfColPrint(col);
+            return 5;
         }
         model.insert(x,y,col);
-        return true;
+        return 0;
     }
 
     public boolean pickCard(int x1, int y1, int x2, int y2, int col){
@@ -201,7 +211,7 @@ public class Controller {
             return false;
 
         if(!model.enoughSpaceColumn(col, 2)){
-            view.notEnoughSpaceBookshelfColPrint(col);
+            //view.notEnoughSpaceBookshelfColPrint(col);
             return false;
         }
         model.insert(x1,y1,x2,y2,col);
@@ -225,36 +235,46 @@ public class Controller {
             return false;
 
         if(!model.enoughSpaceColumn(col, 3)){
-            view.notEnoughSpaceBookshelfColPrint(col);
+            //view.notEnoughSpaceBookshelfColPrint(col);
             return false;
         }
         model.insert(x1,y1,x2,y2,x3,y3,col);
         return true;
     }
 
-    //return true if the match is finished
-    public boolean finishTurn(){
-        int points;
+    /**
+     * @author Donato Fiore
+     * @param id the number of the common card, 0:CommonCard1; 1: CommonCard2
+     * @return the points done with the CommonCard; if the goal isn't achieved, the points will be = 0;
+     * */
+    public int controlCommonCards(int id){
         boolean card;
-        card = model.controlCommonCards(0);
-        if(card){
-            points = model.getCommonCardsPoints(0);
-            view.commonPoints(model.getActivePlayerName(), points, 1);
+        int points;
+
+        points = model.getCommonCardsPoints(id);
+        card = model.controlCommonCards(id);
+        if(!card){
+            points = 0;
         }
-        card = model.controlCommonCards(1);
-        if(card){
-            points = model.getCommonCardsPoints(1);
-            view.commonPoints(model.getActivePlayerName(), points, 2);
-        }
-        card = model.finishTurn();
-        return card;
+        return points;
+    }
+
+    /**
+     * @author Donato Fiore
+     * @return true if the match is finished
+     * */
+    public boolean finishTurn(){
+        boolean turn;
+        turn = model.finishTurn();
+        return turn;
     }
 
     //TODO: finish this method
-    public void declareWinner(){
+    public int declareWinner(){
         int x;
         x = model.theWinnerIs();
-        view.winnerPrint(model.getActivePlayerName(), x);
+        return x;
+        //view.winnerPrint(model.getActivePlayerName(), x);
     }
 
     public ItemEnum[][] getBoard(){
@@ -267,6 +287,10 @@ public class Controller {
      */
     public CommonCardStrategy[] getCommonCards(){
         return model.getCommonCards();
+    }
+
+    public String[] getCommonCardsDesigns(){
+        return model.getCommonCardsDesigns();
     }
 
     /**
@@ -287,7 +311,7 @@ public class Controller {
      */
     public ItemEnum[][] getActivePlayershelf(){return model.getShelf();}
 
-//    public ItemEnum[][] getCommonCards(int x){
-//        return model.getCommonCards();
-//    }
+    public String getModelSave(){
+        return model.saveModel();
+    }
 }

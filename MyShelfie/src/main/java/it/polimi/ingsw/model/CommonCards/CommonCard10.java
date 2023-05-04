@@ -48,5 +48,10 @@ public class CommonCard10 implements CommonCardStrategy{
                 .appendAtBottom("   |=|     ")
                 .appendAtBottom("|=|   |=|  ");
     }
+
+    @Override
+    public String getCommonCardDesign() {
+        return constant10;
+    }
 }
 
