@@ -13,6 +13,8 @@ public class dummyInputTest {
 
     String firstOk = "c,2,c,3,d,4,3";
 
+    String space = "f,5 , c,5, d, 6";
+
     public void setC(Controller c) {
         this.c = c;
     }
@@ -37,6 +39,14 @@ public class dummyInputTest {
         return firstOk;
     }
 
+    public void setSpace(String space) {
+        this.space = space;
+    }
+
+    public String getSpace() {
+        return space;
+    }
+
     /**
      * it is a test for the function dummyInput
      * @author Samuele Pietro Galli
@@ -46,17 +56,25 @@ public class dummyInputTest {
         //rapido controllo su string banale
        Assert.assertTrue(c.dummyInput(inputTest));
        String newStr = inputTest.replace("test1", "verde");
+
        //cnotrollo con metodo replace
        Assert.assertTrue(c.dummyInput(newStr));
 
+       //controllo su ingresso con meno lettere expected
        Assert.assertTrue(c.dummyInput(inputTest1n));
 
+       //controllo sui numeri
        Assert.assertTrue(c.dummyInput(in));
+
+
        Assert.assertTrue(c.dummyInput(wrongIn));
 
 
        //controllo su una stringa ok
        Assert.assertFalse(c.dummyInput(firstOk));
+
+       //controllo inu+put con spazi
+       Assert.assertFalse(c.dummyInput(space));
 
 
     }
