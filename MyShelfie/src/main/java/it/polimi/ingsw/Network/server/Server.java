@@ -16,6 +16,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 /*import java.rmi.*;
 import java.rmi.registry.*;
 import java.rmi.server.*;*/
