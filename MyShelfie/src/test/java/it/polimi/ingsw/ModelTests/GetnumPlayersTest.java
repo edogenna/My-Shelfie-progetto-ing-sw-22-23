@@ -5,6 +5,22 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class GetnumPlayersTest {
+    public Model getM() {
+        return m;
+    }
+
+    public void setM(Model m) {
+        this.m = m;
+    }
+
+    public int getTre() {
+        return tre;
+    }
+
+    public void setTre(int tre) {
+        this.tre = tre;
+    }
+
     Model m = new Model(3);
     private int tre=3;
 

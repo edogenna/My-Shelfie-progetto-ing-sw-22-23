@@ -29,6 +29,30 @@ public class Board {
     private final static int[][] positionValid4Players = new int[][]{{4, 0}, {3, 1}};
     private CommonCardStrategy[] CommonCards;
 
+    public void setMatrix(ItemEnum[][] matrix) {
+        this.matrix = matrix;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    public void setNumItemRemained(int[] numItemRemained) {
+        this.numItemRemained = numItemRemained;
+    }
+
+    public void setCommonCards(CommonCardStrategy[] commonCards) {
+        CommonCards = commonCards;
+    }
+
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public int[] getNumItemRemained() {
+        return numItemRemained;
+    }
+
     public Board(int numPlayers) {
         matrix = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
 

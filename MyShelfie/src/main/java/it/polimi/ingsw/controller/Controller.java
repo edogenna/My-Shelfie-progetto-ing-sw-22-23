@@ -291,6 +291,22 @@ ERROR CODES:
      */
     public Card getActivePlayerPersonalCard(){return model.getPersonalCard();}
 
+    public void setView(CliView view) {
+        this.view = view;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public CliView getView() {
+        return view;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
     /**
      * @author Alessandro Fornara
      * @return The active player's username

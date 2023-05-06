@@ -13,39 +13,7 @@ public class dummyInputTest {
 
     String firstOk = "c,2,c,3,d,4,3";
 
-    String space = "f,5 , c,5, d, 6";
 
-    public void setC(Controller c) {
-        this.c = c;
-    }
-
-    public void setInputTest(String inputTest) {
-        this.inputTest = inputTest;
-    }
-
-    public void setIn(String in) {
-        this.in = in;
-    }
-
-    public void setWrongIn(String wrongIn) {
-        this.wrongIn = wrongIn;
-    }
-
-    public void setFirstOk(String firstOk) {
-        this.firstOk = firstOk;
-    }
-
-    public String getFirstOk() {
-        return firstOk;
-    }
-
-    public void setSpace(String space) {
-        this.space = space;
-    }
-
-    public String getSpace() {
-        return space;
-    }
 
     /**
      * it is a test for the function dummyInput
@@ -77,6 +45,39 @@ public class dummyInputTest {
        Assert.assertFalse(c.dummyInput(space));
 
 
+    }
+        String space = "f,5 , c,5, d, 6";
+
+    public void setC(Controller c) {
+        this.c = c;
+    }
+
+    public void setInputTest(String inputTest) {
+        this.inputTest = inputTest;
+    }
+
+    public void setIn(String in) {
+        this.in = in;
+    }
+
+    public void setWrongIn(String wrongIn) {
+        this.wrongIn = wrongIn;
+    }
+
+    public void setFirstOk(String firstOk) {
+        this.firstOk = firstOk;
+    }
+
+    public String getFirstOk() {
+        return firstOk;
+    }
+
+    public void setSpace(String space) {
+        this.space = space;
+    }
+
+    public String getSpace() {
+        return space;
     }
 
     public String getInputTest1n() {
