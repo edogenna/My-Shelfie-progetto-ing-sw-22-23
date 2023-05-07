@@ -30,10 +30,10 @@ public class Model {
     }
 
     /**
-    * @return true if the tile has a free side
+    * @return true if the tile has at least one free side
     * @author Donato Fiore
     * */
-    public boolean isFeasiblePickMove(int x, int y){
+    public boolean tileFreeSide(int x, int y){
         return this.board.tileFreeSide(x, y);
     }
 
@@ -72,6 +72,7 @@ public class Model {
     public String[] getCommonCardsDesigns(){
         return board.getCommonCardDesigns();
     }
+
     /**
     * @return true if there is another player with the same username
     * @author Donato Fiore

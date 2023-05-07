@@ -38,6 +38,11 @@ public class Controller {
         model.setFirstPlayer();
     }
 
+    /**
+     * @author Donato Fiore
+     * @param input the move that the player wants to do
+     * @return true if the player has inserted a wrong format of input
+     * */
     public boolean dummyInput(String input){
         String[] coordinates;
         int len, i;
@@ -78,21 +83,26 @@ public class Controller {
                 }
             }
         }
-
         return false;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x the number of tiles that the player wants to take
+     * @return true if 'x' is greater than the available space in the bookshelf
+     * */
     public boolean enoughSpaceBookshelf(int x){
         boolean done;
-
         done = model.enoughSpaceBookshelf(x);
-        /*if(!done)
-            view.notEnoughSpaceBookshelfPrint();*/
-
         return done;
     }
 
-    //return true if the tile is blank
+    /**
+     * @author Donato Fiore
+     * @param x the x's coordinate of the tile
+     * @param y the y's coordinate of the tile
+     * @return true if the selected tile is a blank tile
+     * */
     private boolean blankTiles(int x, int y){
         boolean blank;
         ItemEnum[][] board;
@@ -105,6 +115,14 @@ public class Controller {
         return blank;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x1 the x's coordinate of the first tile
+     * @param y1 the y's coordinate of the first tile
+     * @param x2 the x's coordinate of the second tile
+     * @param y2 the y's coordinate of the second tile
+     * @return true if at least one selected tile is a blank tile
+     * */
     private boolean blankTiles(int x1, int y1, int x2, int y2){
         boolean done;
         done = blankTiles(x1,y1);
@@ -113,6 +131,17 @@ public class Controller {
         done = blankTiles(x2, y2);
         return done;
     }
+
+    /**
+     * @author Donato Fiore
+     * @param x1 the x's coordinate of the first tile
+     * @param y1 the y's coordinate of the first tile
+     * @param x2 the x's coordinate of the second tile
+     * @param y2 the y's coordinate of the second tile
+     * @param x3 the x's coordinate of the third tile
+     * @param y3 the y's coordinate of the third tile
+     * @return true if at least one selected tile is a blank tile
+     * */
     private boolean blankTiles(int x1, int y1, int x2, int y2, int x3, int y3){
         boolean done;
         done = blankTiles(x1,y1,x2,y2);
@@ -122,18 +151,30 @@ public class Controller {
         return done;
     }
 
-    private boolean isFeasiblePickMove(int x, int y){
+    /**
+     * @author Donato Fiore
+     * @return true if the tile has at least one free side
+     * */
+    private boolean tileFreeSide(int x, int y){
         boolean done;
-        done = model.isFeasiblePickMove(x,y);
+        done = model.tileFreeSide(x,y);
         return done;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x1 the x's coordinate of the first tile
+     * @param y1 the y's coordinate of the first tile
+     * @param x2 the x's coordinate of the second tile
+     * @param y2 the y's coordinate of the second tile
+     * @return false is the move isn't allowed: no tileFreeSide or the tiles aren't adjacent
+     * */
     private boolean isFeasiblePickMove(int x1, int y1, int x2, int y2){
         boolean done;
-        done = model.isFeasiblePickMove(x1,y1);
+        done = model.tileFreeSide(x1,y1);
         if(!done)
             return false;
-        done = model.isFeasiblePickMove(x2,y2);
+        done = model.tileFreeSide(x2,y2);
         if(!done)
             return false;
         done = model.adjacentTiles(x1,y1,x2,y2);
@@ -143,15 +184,25 @@ public class Controller {
         return done;
     }
 
+    /**
+     * @author Donato Fiore
+     * @param x1 the x's coordinate of the first tile
+     * @param y1 the y's coordinate of the first tile
+     * @param x2 the x's coordinate of the second tile
+     * @param y2 the y's coordinate of the second tile
+     * @param x3 the x's coordinate of the third tile
+     * @param y3 the y's coordinate of the third tile
+     * @return false is the move isn't allowed: no tileFreeSide or the tiles aren't adjacent
+     * */
     private boolean isFeasiblePickMove(int x1, int y1, int x2, int y2, int x3, int y3){
         boolean done;
-        done = model.isFeasiblePickMove(x1,y1);
+        done = model.tileFreeSide(x1,y1);
         if(!done)
             return false;
-        done = model.isFeasiblePickMove(x2,y2);
+        done = model.tileFreeSide(x2,y2);
         if(!done)
             return false;
-        done = model.isFeasiblePickMove(x3,y3);
+        done = model.tileFreeSide(x3,y3);
         if(!done)
             return false;
         done = model.adjacentTiles(x1,y1,x2,y2,x3,y3);
@@ -161,15 +212,18 @@ public class Controller {
         return done;
     }
 
-/*
-ERROR CODES:
-0: move done;
-1: blankTiles error;
-2: enoughSpaceBookshelf error;
-3: isFeasiblePickMove error, no free side error;
-4: isFeasiblePickMove error, no adjacent tiles error;
-5: enoughSpaceColumn error;
-* */
+
+    /**
+     * @author Donato Fiore
+     * @return the code of the error or 0 if the move is done
+     * ERROR CODES:
+     * 0: move done;
+     * 1: blankTiles error;
+     * 2: enoughSpaceBookshelf error;
+     * 3: tileFreeSide error, no free side error;
+     * 4: isFeasiblePickMove error, no adjacent tiles' error;
+     * 5: enoughSpaceColumn error;
+     * */
     public int pickCard(int x, int y, int col){
         boolean done;
 
@@ -182,7 +236,7 @@ ERROR CODES:
         if(!done)
             return 2;
 
-        done = isFeasiblePickMove(x,y);
+        done = tileFreeSide(x,y);
         if(!done)
             return 3;
 
@@ -194,6 +248,22 @@ ERROR CODES:
         return 0;
     }
 
+    /**
+     * @author Donato Fiore
+     * @return the code of the error or 0 if the move is done
+     * @param x1 the x's coordinate of the first tile
+     * @param y1 the y's coordinate of the first tile
+     * @param x2 the x's coordinate of the second tile
+     * @param y2 the y's coordinate of the second tile
+     * @param col the column of the bookshelf where you want to insert the tile
+     * ERROR CODES:
+     * 0: move done;
+     * 1: blankTiles error;
+     * 2: enoughSpaceBookshelf error;
+     * 3: tileFreeSide error, no free side error;
+     * 4: isFeasiblePickMove error, no adjacent tiles' error;
+     * 5: enoughSpaceColumn error;
+     * */
     public int pickCard(int x1, int y1, int x2, int y2, int col){
         boolean done;
 
@@ -218,6 +288,24 @@ ERROR CODES:
         return 0;
     }
 
+    /**
+     * @author Donato Fiore
+     * @return the code of the error or 0 if the move is done
+     * @param x1 the x's coordinate of the first tile
+     * @param y1 the y's coordinate of the first tile
+     * @param x2 the x's coordinate of the second tile
+     * @param y2 the y's coordinate of the second tile
+     * @param x3 the x's coordinate of the third tile
+     * @param y3 the y's coordinate of the third tile
+     * @param col the column of the bookshelf where you want to insert the tile
+     * ERROR CODES:
+     * 0: move done;
+     * 1: blankTiles error;
+     * 2: enoughSpaceBookshelf error;
+     * 3: tileFreeSide error, no free side error;
+     * 4: isFeasiblePickMove error, no adjacent tiles' error;
+     * 5: enoughSpaceColumn error;
+     * */
     public int pickCard(int x1, int y1, int x2, int y2, int x3, int y3, int col){
         boolean done;
 
@@ -270,11 +358,14 @@ ERROR CODES:
     }
 
     //TODO: finish this method
+    /**
+     * @author Donato Fiore
+     * @return the points of the winner player
+     * */
     public int declareWinner(){
         int x;
         x = model.theWinnerIs();
         return x;
-        //view.winnerPrint(model.getActivePlayerName(), x);
     }
 
     public ItemEnum[][] getBoard(){

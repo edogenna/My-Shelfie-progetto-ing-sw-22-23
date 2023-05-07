@@ -97,7 +97,6 @@ public class ClientHandlerSocket implements Runnable, Observer, Connection, RmiG
             int i = tiles.length;
             int done = 0;
             //i = number of tiles * 2 + 1;
-            //TODO: remove the comment and change done in a int;
             switch (i) {
                 case 3:
                     //we have taken 1 tile;
