@@ -149,7 +149,7 @@ public class Server /*extends unicastRemoteObject*/{
 
                 sendMessageToObservers(new FirstPlayerMessage());
 
-                while (!Server.Lock1.tryAcquire()) ;
+                while(!Server.Lock1.tryAcquire());
 
                 sendMessageToObservers(new LobbyMessage(1, numberOfPlayers));
                 sendMessageToObservers(new WaitingMessage());

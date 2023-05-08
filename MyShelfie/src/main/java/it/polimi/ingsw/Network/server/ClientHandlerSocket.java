@@ -91,8 +91,7 @@ public class ClientHandlerSocket implements Runnable, Observer, Connection, RmiG
     private void handleMoveAnswer(Message m){
         if (server.controller.dummyInput(((MoveAnswer) m).getS())){
             sendMessage(new NotValidMoveError());
-        }
-        else {
+        } else {
             String[] tiles = ((MoveAnswer) m).getS().split(",");
             int i = tiles.length;
             int done = 0;
