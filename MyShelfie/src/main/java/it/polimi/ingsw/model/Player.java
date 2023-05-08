@@ -313,4 +313,6 @@ public class Player {
         this.shelf[5-heights[y]][y] = tile3;
         heights[y]++;
     }
+
+
 }
