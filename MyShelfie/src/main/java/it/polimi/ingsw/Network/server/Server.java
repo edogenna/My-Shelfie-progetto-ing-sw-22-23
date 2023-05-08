@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Network.server;
 
-import com.google.gson.Gson;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.controller.Controller;
@@ -18,7 +17,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.*;
 import java.rmi.server.*;
 
@@ -33,7 +31,7 @@ public class Server extends UnicastRemoteObject implements RmiGame{
     private ArrayList<ClientInformation> connectedClients;
     private ArrayList<String> usernames;
     private Observable observable;
-    private int numberOfPlayers;
+    private int numberOfPlayers, activePlayers;
     public static Semaphore Lock1;
     public static Semaphore Lock2;
     protected Controller controller;
@@ -47,6 +45,7 @@ public class Server extends UnicastRemoteObject implements RmiGame{
         this.usernames = new ArrayList<>();
         this.executor = Executors.newCachedThreadPool();
         this.numberOfPlayers = 0;
+        this.activePlayers = 0;
         this.Lock1 = new Semaphore(1);
         this.Lock2 = new Semaphore(1);
         this.controller = null;
@@ -128,6 +127,7 @@ public class Server extends UnicastRemoteObject implements RmiGame{
         clientSocket = serverSocket.accept();
         ClientInformation inf = new ClientInformation(clientSocket, new PrintWriter(clientSocket.getOutputStream(), true), new Scanner(clientSocket.getInputStream()), connectedClients.size()-1);
         connectedClients.add(inf);
+        this.activePlayers++;
         return connectedClients;
     }
 
@@ -297,11 +297,24 @@ public class Server extends UnicastRemoteObject implements RmiGame{
      * @author Donato Fiore
      * it prints in the server when an rmi client has connected
      * */
-    @Override
-    public String notifyConnection(){
+    public String notifyMyConnection(){
         System.out.println("Rmi User connected");
         ClientInformation inf = new ClientInformation(null, null, null, connectedClients.size()-1);
         connectedClients.add(inf);
         return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
+    }
+
+    public String notifyConnection(){
+        System.out.println("user connected");
+        return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
+    }
+
+    @Override
+    public int getNumberOfActivePlayers(){
+        return this.activePlayers;
+    }
+
+    public int getNumberOfPlayers(){
+        return this.numberOfPlayers;
     }
 }

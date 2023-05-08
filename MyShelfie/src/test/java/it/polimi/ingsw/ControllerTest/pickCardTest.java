@@ -14,7 +14,7 @@ public class pickCardTest {
         m=c.getModel();
         m.getBoardMatrix();
         c.pickCard(x, y, col);
-        Assert.assertEquals();
+//        Assert.assertEquals();
     }
 //setter and getter methods
     public Model getM() {

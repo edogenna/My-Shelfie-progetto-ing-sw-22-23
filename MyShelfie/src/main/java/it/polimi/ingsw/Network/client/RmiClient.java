@@ -19,6 +19,8 @@ public class RmiClient {
 
     public void startRMIClient() throws IOException, NotBoundException {
         Scanner input = new Scanner(System.in);
+        int x;
+
         Registry registry = LocateRegistry.getRegistry();
         System.out.println("rmi registry bindings");
         String[] e = registry.list();
@@ -35,6 +37,16 @@ public class RmiClient {
         String stringMessage = remoteObject.notifyConnection();
         Message mex = c.convertFromJSON(stringMessage);
         System.out.println(((LobbyMessage) mex).getS());
+
+        x = remoteObject.getNumberOfActivePlayers();
+        while (x != remoteObject.getNumberOfPlayers()){
+            while(x == remoteObject.getNumberOfActivePlayers());
+            stringMessage = remoteObject.notifyConnection();
+            mex = c.convertFromJSON(stringMessage);
+            System.out.println(((LobbyMessage) mex).getS());
+            x = remoteObject.getNumberOfActivePlayers();
+        }
+
         while(true){
             String message = input.nextLine();
             Message m = c.convertFromJSON(message);
