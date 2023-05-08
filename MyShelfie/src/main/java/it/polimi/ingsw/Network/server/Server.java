@@ -65,13 +65,12 @@ public class Server extends UnicastRemoteObject implements RmiGame{
             System.out.println("Starting Socket");
             serverSocket = new ServerSocket(portNumber);
             System.out.println("Socket started");
-/*
+
             System.out.println("Starting RMI");
-            GameRemote gameRemote = new GameRemote();
             System.out.println("Binding server implementation to registry");
-            Registry registry = LocateRegistry.createRegistry(portNumber + 1);
-            registry.rebind("MyShelfie", gameRemote);
-*/
+            Registry registry = LocateRegistry.createRegistry(1099);
+            registry.rebind("MyShelfie", this);
+
             System.out.println("Server started..");
         }catch (IOException e) {
             System.err.println(e.getMessage());
