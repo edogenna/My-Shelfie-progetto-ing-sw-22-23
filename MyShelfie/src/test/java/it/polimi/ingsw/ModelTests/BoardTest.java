@@ -84,4 +84,12 @@ public class BoardTest {
         Assert.assertEquals(ItemEnum.BLANK, b.getMatrix()[5][8]);
         Assert.assertEquals(ItemEnum.BLANK, b.getMatrix()[6][6]);
     }
+
+    public Board getB() {
+        return b;
+    }
+
+    public void setB(Board b) {
+        this.b = b;
+    }
 }

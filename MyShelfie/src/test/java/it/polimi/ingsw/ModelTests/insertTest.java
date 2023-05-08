@@ -41,4 +41,83 @@ public class insertTest {
         Assert.assertEquals(tile, s[5][0]);
     }
 
+    public Player getP1() {
+        return p1;
+    }
+
+    public void setP1(Player p1) {
+        this.p1 = p1;
+    }
+
+    public Player getP2() {
+        return p2;
+    }
+
+    public void setP2(Player p2) {
+        this.p2 = p2;
+    }
+
+    public ItemEnum[][] getS() {
+        return s;
+    }
+
+    public void setS(ItemEnum[][] s) {
+        this.s = s;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getX1() {
+        return x1;
+    }
+
+    public void setX1(int x1) {
+        this.x1 = x1;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getY1() {
+        return y1;
+    }
+
+    public void setY1(int y1) {
+        this.y1 = y1;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public ItemEnum getTile() {
+        return tile;
+    }
+
+    public void setTile(ItemEnum tile) {
+        this.tile = tile;
+    }
+
+    public Model getM() {
+        return m;
+    }
+
+    public void setM(Model m) {
+        this.m = m;
+    }
 }
