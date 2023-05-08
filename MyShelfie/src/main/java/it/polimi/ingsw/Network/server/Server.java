@@ -19,7 +19,6 @@ import java.util.concurrent.Semaphore;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.*;
-import java.rmi.registry.*;
 import java.rmi.server.*;
 
 /**
@@ -146,7 +145,7 @@ public class Server extends UnicastRemoteObject implements RmiGame{
             System.out.println("Ready to accept new connection");
             connectedClients = acceptConnection(serverSocket);
             executor.submit(new ClientHandlerSocket(this, connectedClients.get(connectedClients.size() - 1), observable));
-            System.out.println("User connected");
+            System.out.println("Socket User connected");
 
             while (!Server.Lock2.tryAcquire());
             Server.Lock2.release();
@@ -281,7 +280,11 @@ public class Server extends UnicastRemoteObject implements RmiGame{
      * @author Donato Fiore
      * it prints in the server when an rmi client has connected
      * */
-    public void notifyConnection(){
+    @Override
+    public String notifyConnection(){
         System.out.println("Rmi User connected");
+        ClientInformation inf = new ClientInformation(null, null, null, connectedClients.size()-1);
+        connectedClients.add(inf);
+        return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
     }
 }

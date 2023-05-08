@@ -3,13 +3,14 @@ package it.polimi.ingsw.Network.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.rmi.NotBoundException;
 
 /**
  * Main client class that starts a socket client or an RMI client.
  */
 public class Client {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NotBoundException {
 
         String hostName;
         String portNumber;
@@ -24,6 +25,7 @@ public class Client {
         System.out.println("Would you like to use SOCKET (0) or RMI (1) ? ");
         switch (Integer.parseInt(stdIn.readLine())){
             case 0 -> new SocketClient().startSocketClient(hostName, Integer.parseInt(portNumber));
+            case 1 -> new RmiClient().startRMIClient();
         }
     }
 }

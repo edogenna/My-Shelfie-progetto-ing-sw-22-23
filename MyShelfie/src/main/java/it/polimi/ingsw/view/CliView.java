@@ -6,6 +6,7 @@ import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
+import it.polimi.ingsw.Network.server.RmiGame;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Card;
 
@@ -29,7 +30,7 @@ public class CliView{
     private String myUsername;
     private String userInput;
 
-    public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn){
+    public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn, RmiGame remoteObject){
         this.out = out;
         this.in = in;
         this.stdIn = stdIn;
@@ -145,7 +146,6 @@ public class CliView{
     /**
      * This method handles the {@link NotValidMoveError}
      * @author Alessandro Fornara
-     * @param m message
      * @throws IOException
      */
     private void handleNotValidMove() throws IOException {

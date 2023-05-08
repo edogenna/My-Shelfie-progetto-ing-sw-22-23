@@ -25,7 +25,7 @@ public class SocketClient {
         ){
             System.out.println("Connected");
             Converter c = new Converter();
-            CliView cliView = new CliView(out, in, stdIn);
+            CliView cliView = new CliView(out, in, stdIn, null);
 
             while(true){
                 String message = in.readLine();
