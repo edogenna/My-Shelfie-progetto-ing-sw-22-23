@@ -276,4 +276,12 @@ public class Server extends UnicastRemoteObject implements RmiGame{
         }
         return controller;
     }
+
+    /**
+     * @author Donato Fiore
+     * it prints in the server when an rmi client has connected
+     * */
+    public void notifyConnection(){
+        System.out.println("Rmi User connected");
+    }
 }
