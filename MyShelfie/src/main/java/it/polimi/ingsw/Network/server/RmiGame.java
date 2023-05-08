@@ -5,5 +5,4 @@ import it.polimi.ingsw.Network.messages.Message;
 import java.rmi.Remote;
 
 public interface RmiGame extends Remote {
-    public void sendMessage(Message message);
 }

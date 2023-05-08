@@ -26,7 +26,7 @@ import java.rmi.server.*;
  * Main server class that starts a socket server.
  * @author Alessandro Fornara
  */
-public class Server extends UnicastRemoteObject{
+public class Server extends UnicastRemoteObject implements RmiGame{
     private ServerSocket serverSocket = null;
     private ExecutorService executor;
     private int portNumber;
@@ -39,7 +39,7 @@ public class Server extends UnicastRemoteObject{
     protected Controller controller;
     protected boolean win;
 
-    public Server(int port) throws RemoteException {
+    public Server(int port) throws RemoteException{
         super();
         this.portNumber = port;
         this.observable = new Observable();
@@ -65,13 +65,13 @@ public class Server extends UnicastRemoteObject{
             System.out.println("Starting Socket");
             serverSocket = new ServerSocket(portNumber);
             System.out.println("Socket started");
-
+/*
             System.out.println("Starting RMI");
             GameRemote gameRemote = new GameRemote();
             System.out.println("Binding server implementation to registry");
             Registry registry = LocateRegistry.createRegistry(portNumber + 1);
             registry.rebind("MyShelfie", gameRemote);
-
+*/
             System.out.println("Server started..");
         }catch (IOException e) {
             System.err.println(e.getMessage());
