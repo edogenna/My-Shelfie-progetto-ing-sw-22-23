@@ -2,10 +2,13 @@ package it.polimi.ingsw.view;
 
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
+
+import java.util.Objects;
 
 public class GuiView extends Application {
 
@@ -16,12 +19,13 @@ public class GuiView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/fxml/Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
         Parent root = loader.load();
+
         stage.setScene(new Scene(root, 300, 275));
         stage.setTitle("MyShelfie");
 
-        //stage.getIcons().add(new Image(getClass().getResourceAsStream("/graphics/icons/santorini.png")));
+        stage.getIcons().add(new Image("/resources/graphics/icon.png"));
         stage.show();
     }
 }
