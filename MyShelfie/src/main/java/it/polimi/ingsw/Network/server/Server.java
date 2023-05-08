@@ -62,6 +62,14 @@ public class Server /*extends unicastRemoteObject*/{
     public void startServer() throws IOException, InterruptedException {
         try {
             serverSocket = new ServerSocket(portNumber);
+
+            System.out.println("i'm building the rmi server");
+            GameRemote gameRemote = new GameRemote();
+            System.out.println("binding server implementation to registry");
+            Registry registry = LocateRegistry.createRegistry(portNumber);
+            registry.rebind("MyShelfie", gameRemote);
+            System.out.println("waiting invocations from the client");
+
             System.out.println("Server started..");
         }catch (IOException e) {
             System.err.println(e.getMessage());
