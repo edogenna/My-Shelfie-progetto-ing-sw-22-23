@@ -18,15 +18,15 @@ import java.util.concurrent.Semaphore;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-/*import java.rmi.*;
+import java.rmi.*;
 import java.rmi.registry.*;
-import java.rmi.server.*;*/
+import java.rmi.server.*;
 
 /**
  * Main server class that starts a socket server.
  * @author Alessandro Fornara
  */
-public class Server /*extends unicastRemoteObject*/{
+public class Server extends UnicastRemoteObject implements RmiGame{
     private ServerSocket serverSocket = null;
     private ExecutorService executor;
     private int portNumber;
@@ -39,7 +39,8 @@ public class Server /*extends unicastRemoteObject*/{
     protected Controller controller;
     protected boolean win;
 
-    public Server(int port){
+    public Server(int port) throws RemoteException{
+        super();
         this.portNumber = port;
         this.observable = new Observable();
         this.connectedClients = new ArrayList<>();
@@ -61,7 +62,15 @@ public class Server /*extends unicastRemoteObject*/{
      */
     public void startServer() throws IOException, InterruptedException {
         try {
+            System.out.println("Starting Socket");
             serverSocket = new ServerSocket(portNumber);
+            System.out.println("Socket started");
+
+            System.out.println("Starting RMI");
+            System.out.println("Binding server implementation to registry");
+            Registry registry = LocateRegistry.createRegistry(1099);
+            registry.rebind("MyShelfie", this);
+
             System.out.println("Server started..");
         }catch (IOException e) {
             System.err.println(e.getMessage());
@@ -149,7 +158,7 @@ public class Server /*extends unicastRemoteObject*/{
 
                 sendMessageToObservers(new FirstPlayerMessage());
 
-                while (!Server.Lock1.tryAcquire()) ;
+                while(!Server.Lock1.tryAcquire());
 
                 sendMessageToObservers(new LobbyMessage(1, numberOfPlayers));
                 sendMessageToObservers(new WaitingMessage());

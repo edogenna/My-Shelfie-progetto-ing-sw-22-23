@@ -25,7 +25,7 @@ public class GuiView extends Application {
         stage.setScene(new Scene(root, 300, 275));
         stage.setTitle("MyShelfie");
 
-        stage.getIcons().add(new Image("/resources/graphics/icon.png"));
+//        stage.getIcons().add(new Image("/resources/graphics/icon.png"));
         stage.show();
     }
 }
