@@ -18,15 +18,15 @@ import java.util.concurrent.Semaphore;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-/*import java.rmi.*;
+import java.rmi.*;
 import java.rmi.registry.*;
-import java.rmi.server.*;*/
+import java.rmi.server.*;
 
 /**
  * Main server class that starts a socket server.
  * @author Alessandro Fornara
  */
-public class Server /*extends unicastRemoteObject*/{
+public class Server extends UnicastRemoteObject{
     private ServerSocket serverSocket = null;
     private ExecutorService executor;
     private int portNumber;
@@ -39,7 +39,8 @@ public class Server /*extends unicastRemoteObject*/{
     protected Controller controller;
     protected boolean win;
 
-    public Server(int port){
+    public Server(int port) throws RemoteException {
+        super();
         this.portNumber = port;
         this.observable = new Observable();
         this.connectedClients = new ArrayList<>();
@@ -68,7 +69,7 @@ public class Server /*extends unicastRemoteObject*/{
             System.out.println("Starting RMI");
             GameRemote gameRemote = new GameRemote();
             System.out.println("Binding server implementation to registry");
-            Registry registry = LocateRegistry.createRegistry(portNumber);
+            Registry registry = LocateRegistry.createRegistry(portNumber + 1);
             registry.rebind("MyShelfie", gameRemote);
 
             System.out.println("Server started..");
