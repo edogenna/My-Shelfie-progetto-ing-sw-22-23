@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.polimi.ingsw.view.GuiView"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.GUI.GUI">
+   <children>
+      <StackPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('/graphics/misc/sfondo_parquet.jpg'); -fx-background-size: cover; -fx-background-position: cernter center; -fx-background-repeat: no-repeat;" />
+   </children>
 </AnchorPane>
