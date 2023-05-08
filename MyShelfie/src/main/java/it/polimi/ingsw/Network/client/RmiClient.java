@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.client;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -16,8 +17,8 @@ import it.polimi.ingsw.view.CliView;
 
 public class RmiClient {
 
-    public void startRMIClient() throws RemoteException, NotBoundException {
-
+    public void startRMIClient() throws IOException, NotBoundException {
+        Scanner input = new Scanner(System.in);
         Registry registry = LocateRegistry.getRegistry();
         System.out.println("rmi registry bindings");
         String[] e = registry.list();
@@ -28,11 +29,16 @@ public class RmiClient {
         RmiGame remoteObject = (RmiGame) registry.lookup(remoteObjectName);
 
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        CliView cliView = new CliView(null, null, stdIn, remoteObject);
+        CliView cliViewRmi = new CliView(null, null, stdIn, remoteObject);
         Converter c = new Converter();
 
-        String string = remoteObject.notifyConnection();
-        Message m = c.convertFromJSON(string);
-        System.out.println(((LobbyMessage) m).getS());
+        String stringMessage = remoteObject.notifyConnection();
+        Message mex = c.convertFromJSON(stringMessage);
+        System.out.println(((LobbyMessage) mex).getS());
+        while(true){
+            String message = input.nextLine();
+            Message m = c.convertFromJSON(message);
+            cliViewRmi.actionHandler(m);
+        }
     }
 }

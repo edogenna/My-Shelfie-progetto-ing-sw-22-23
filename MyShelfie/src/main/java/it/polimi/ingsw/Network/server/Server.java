@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class Server extends UnicastRemoteObject implements RmiGame{
         this.Lock2 = new Semaphore(1);
         this.controller = null;
         this.win = false;
+        this.startRMIServer();
     }
 
     //TODO: correct the documentation
@@ -65,10 +67,8 @@ public class Server extends UnicastRemoteObject implements RmiGame{
             serverSocket = new ServerSocket(portNumber);
             System.out.println("Socket started");
 
-            System.out.println("Starting RMI");
-            System.out.println("Binding server implementation to registry");
-            Registry registry = LocateRegistry.createRegistry(1099);
-            registry.rebind("MyShelfie", this);
+//            Registry registry = LocateRegistry.createRegistry(1099);
+//            registry.rebind("MyShelfie", this);
 
             System.out.println("Server started..");
         }catch (IOException e) {
@@ -79,6 +79,23 @@ public class Server extends UnicastRemoteObject implements RmiGame{
 
         LobbyPhase();
         GamePhase();
+    }
+
+    private void startRMIServer() {
+        System.out.println("Starting RMI");
+        try {
+            LocateRegistry.createRegistry(1099);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Binding server implementation to registry");
+        try {
+            Naming.rebind("MyShelfie", this);
+            System.out.println("Server RMI started");
+        } catch (RemoteException | MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

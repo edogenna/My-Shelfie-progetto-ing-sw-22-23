@@ -23,7 +23,7 @@ public class SocketClient {
                 BufferedReader in = new BufferedReader(new InputStreamReader(Socket.getInputStream()));
                 BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
         ){
-            System.out.println("Connected");
+            System.out.println("you are connected with socket");
             Converter c = new Converter();
             CliView cliView = new CliView(out, in, stdIn, null);
 
