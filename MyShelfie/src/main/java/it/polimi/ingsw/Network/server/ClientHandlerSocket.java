@@ -16,15 +16,15 @@ import java.rmi.RemoteException;
  * @author Alessandro Fornara
  */
 public class ClientHandlerSocket implements Runnable, Observer{
-    private Server server;
+    private SocketServer socketServer;
     private Observable observable;
     private ClientInformation clientInformation;
     private final Converter c = new Converter();
     private String line;
     private Message m;
 
-    public ClientHandlerSocket(Server server, ClientInformation client, Observable observable) {
-        this.server = server;
+    public ClientHandlerSocket(SocketServer socketServer, ClientInformation client, Observable observable) {
+        this.socketServer = socketServer;
         this.clientInformation = client;
         this.observable = observable;
         this.observable.addObserver(this);
@@ -79,8 +79,8 @@ public class ClientHandlerSocket implements Runnable, Observer{
      * @param m {@link Message}
      */
     private void handleNumberOfPlayerAnswer(Message m){
-        server.setNumberOfPlayers(((NumberOfPlayersAnswer) m).getNum());
-        Server.Lock1.release();
+        socketServer.setNumberOfPlayers(((NumberOfPlayersAnswer) m).getNum());
+        socketServer.Lock1.release();
     }
 
     /**
@@ -89,7 +89,7 @@ public class ClientHandlerSocket implements Runnable, Observer{
      * @param m {@link Message}
      */
     private void handleMoveAnswer(Message m){
-        if (server.controller.dummyInput(((MoveAnswer) m).getS())){
+        if (socketServer.controller.dummyInput(((MoveAnswer) m).getS())){
             sendMessage(new NotValidMoveError());
         } else {
             String[] tiles = ((MoveAnswer) m).getS().split(",");
@@ -99,15 +99,15 @@ public class ClientHandlerSocket implements Runnable, Observer{
             switch (i) {
                 case 3:
                     //we have taken 1 tile;
-                    done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                    done = socketServer.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
                     break;
                 case 5:
                     //we have taken 2 tiles;
-                    done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
+                    done = socketServer.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
                     break;
                 case 7:
                     //we have taken 3 tiles;
-                    done = server.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
+                    done = socketServer.controller.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
                     break;
             }
 
@@ -132,16 +132,16 @@ public class ClientHandlerSocket implements Runnable, Observer{
                 sendMessage(new NotEnoughSpaceColumnError());
             }
             else if(done == 0){
-                int points1 = server.controller.controlCommonCards(0);
-                int points2 = server.controller.controlCommonCards(1);
+                int points1 = socketServer.controller.controlCommonCards(0);
+                int points2 = socketServer.controller.controlCommonCards(1);
                 if(points1!=0){
-                    server.sendMessageToObservers(new CommonCardMessage(clientInformation.getUsername(), 1, points1));
+                    socketServer.sendMessageToObservers(new CommonCardMessage(clientInformation.getUsername(), 1, points1));
                 }
                 if(points2!=0){
-                    server.sendMessageToObservers(new CommonCardMessage(clientInformation.getUsername(), 2, points2));
+                    socketServer.sendMessageToObservers(new CommonCardMessage(clientInformation.getUsername(), 2, points2));
                 }
-                server.win = server.controller.finishTurn();
-                Server.Lock1.release();
+                socketServer.win = socketServer.controller.finishTurn();
+                socketServer.Lock1.release();
             }
         }
     }
@@ -156,13 +156,13 @@ public class ClientHandlerSocket implements Runnable, Observer{
 
         Message m = c.convertFromJSON(line);
 
-        while(!server.isUsernameTaken(((UsernameAnswer) m).getS())){
+        while(!socketServer.isUsernameTaken(((UsernameAnswer) m).getS())){
             sendMessage(new NotValidUsernameError());
             line = clientInformation.getIn().nextLine();
             m = c.convertFromJSON(line);
         }
 
-        Server.Lock2.release();
+        socketServer.Lock2.release();
     }
 }
 

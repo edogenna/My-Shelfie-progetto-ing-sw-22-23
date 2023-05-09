@@ -215,7 +215,8 @@ public class CliView{
         String jsonString = c.convertToJSON(m);
         switch (x){
             case 1:
-                while (!remoteObject.isUsernameTaken(jsonString)){
+                //while (!remoteObject.isUsernameTaken(jsonString))
+                {
                     outputStream.println(((NotValidUsernameError) m).getS());
                     userInput = stdIn.readLine();
                     this.myUsername = userInput;
