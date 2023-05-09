@@ -215,8 +215,10 @@ public class CliView{
         String jsonString = c.convertToJSON(m);
         switch (x){
             case 1:
-                if(!remoteObject.isUsernameTaken(jsonString)){
-                    actionHandler(new NotValidUsernameError());
+                while (!remoteObject.isUsernameTaken(jsonString)){
+                    outputStream.println(((NotValidUsernameError) m).getS());
+                    userInput = stdIn.readLine();
+                    this.myUsername = userInput;
                 }
             case 2: //Number of players;
             case 3: //Move function;
