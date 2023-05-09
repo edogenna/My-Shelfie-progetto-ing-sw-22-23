@@ -13,7 +13,18 @@ import it.polimi.ingsw.Network.messages.WaitingMessage;
 import it.polimi.ingsw.Network.server.RmiGame;
 import it.polimi.ingsw.view.CliView;
 
-public class RmiClient {
+public class RmiClient implements RmiClientInterface{
+
+    private BufferedReader stdIn;
+    private CliView cliViewRmi;
+    private Converter c;
+
+    public RmiClient(){
+        this.stdIn = null;
+        this.cliViewRmi = null;
+        this.c = null;
+    }
+
 
     public void startRMIClient() throws IOException, NotBoundException {
         int x;
@@ -22,9 +33,9 @@ public class RmiClient {
         String remoteObjectName = "MyShelfie";
         RmiGame remoteObject = (RmiGame) registry.lookup(remoteObjectName);
 
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        CliView cliViewRmi = new CliView(null, null, stdIn, remoteObject);
-        Converter c = new Converter();
+        this.stdIn = new BufferedReader(new InputStreamReader(System.in));
+        this.cliViewRmi = new CliView(null, null, stdIn, remoteObject);
+        this.c = new Converter();
 
         String stringMessage = remoteObject.notifyMyConnection();
         Message mex = c.convertFromJSON(stringMessage);
@@ -43,5 +54,11 @@ public class RmiClient {
                 cliViewRmi.actionHandler(new WaitingMessage());
             x = remoteObject.getNumberOfActivePlayers();
         }
+    }
+
+    @Override
+    public void printMessage(String message) throws IOException {
+        Message mex = c.convertFromJSON(message);
+        cliViewRmi.actionHandler(mex);
     }
 }
