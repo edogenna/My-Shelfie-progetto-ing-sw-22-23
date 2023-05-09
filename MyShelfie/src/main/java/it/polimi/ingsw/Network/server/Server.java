@@ -127,7 +127,7 @@ public class Server extends UnicastRemoteObject implements RmiGame{
         clientSocket = serverSocket.accept();
         ClientInformation inf = new ClientInformation(clientSocket, new PrintWriter(clientSocket.getOutputStream(), true), new Scanner(clientSocket.getInputStream()), connectedClients.size()-1);
         connectedClients.add(inf);
-        this.activePlayers++;
+        this.activePlayers = this.connectedClients.size();
         return connectedClients;
     }
 
