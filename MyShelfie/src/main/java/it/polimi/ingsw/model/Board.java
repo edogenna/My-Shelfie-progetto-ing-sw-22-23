@@ -155,6 +155,7 @@ public class Board {
         matrix[r][c]= tile;
     }
 
+
     /**
      * It returns the ItemEnum from a given position and inserts a blank ItemEnum in that position.
      *
