@@ -4,14 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.Scanner;
 
 import it.polimi.ingsw.Network.messages.Converter;
-import it.polimi.ingsw.Network.messages.LobbyMessage;
 import it.polimi.ingsw.Network.messages.Message;
+import it.polimi.ingsw.Network.messages.WaitingMessage;
 import it.polimi.ingsw.Network.server.RmiGame;
 import it.polimi.ingsw.view.CliView;
 
@@ -35,21 +33,20 @@ public class RmiClient {
 
         String stringMessage = remoteObject.notifyMyConnection();
         Message mex = c.convertFromJSON(stringMessage);
-        System.out.println(((LobbyMessage) mex).getS());
+        cliViewRmi.actionHandler(mex);
 
         x = remoteObject.getNumberOfActivePlayers();
+        if(x < remoteObject.getNumberOfPlayers())
+            cliViewRmi.actionHandler(new WaitingMessage());
+
         while (x != remoteObject.getNumberOfPlayers()){
             while(x == remoteObject.getNumberOfActivePlayers());
-            stringMessage = remoteObject.notifyConnection();
+            stringMessage = remoteObject.notifyOtherConnections();
             mex = c.convertFromJSON(stringMessage);
-            System.out.println(((LobbyMessage) mex).getS());
+            cliViewRmi.actionHandler(mex);
+            if(x < remoteObject.getNumberOfPlayers())
+                cliViewRmi.actionHandler(new WaitingMessage());
             x = remoteObject.getNumberOfActivePlayers();
-        }
-
-        while(true){
-            String message = stdIn.readLine();
-            Message m = c.convertFromJSON(message);
-            cliViewRmi.actionHandler(m);
         }
     }
 }

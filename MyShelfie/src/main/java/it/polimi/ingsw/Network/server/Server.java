@@ -297,15 +297,19 @@ public class Server extends UnicastRemoteObject implements RmiGame{
      * @author Donato Fiore
      * it prints in the server when an rmi client has connected
      * */
+    @Override
     public String notifyMyConnection(){
         System.out.println("Rmi User connected");
         ClientInformation inf = new ClientInformation(null, null, null, connectedClients.size()-1);
         connectedClients.add(inf);
         this.activePlayers = this.connectedClients.size();
+        sendMessageToObservers(new LobbyMessage(this.activePlayers, numberOfPlayers));
+        sendMessageToObservers(new WaitingMessage());
         return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
     }
 
-    public String notifyConnection(){
+    @Override
+    public String notifyOtherConnections(){
         System.out.println("user connected");
         return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
     }
@@ -315,6 +319,7 @@ public class Server extends UnicastRemoteObject implements RmiGame{
         return this.activePlayers;
     }
 
+    @Override
     public int getNumberOfPlayers(){
         return this.numberOfPlayers;
     }
