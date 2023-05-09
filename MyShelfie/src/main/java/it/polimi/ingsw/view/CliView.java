@@ -29,6 +29,7 @@ public class CliView{
     private final Converter c;
     private String myUsername;
     private String userInput;
+    private RmiGame remoteObject;
 
     public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn, RmiGame remoteObject){
         this.out = out;
@@ -42,6 +43,7 @@ public class CliView{
         this.c = new Converter();
         this.myUsername = null;
         this.userInput = null;
+        this.remoteObject = remoteObject;
     }
 
     /**
@@ -91,7 +93,9 @@ public class CliView{
             outputStream.println(new NotValidNumberofPlayersMessage().getS());
             userInput = stdIn.readLine();
         }
-        sendMessageToServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
+        if(out != null)
+            sendMessageToServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
+        else sendMessageToServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)), 2);
     }
 
     /**
@@ -104,7 +108,10 @@ public class CliView{
         outputStream.println(((ChooseUsernameMessage) m).getS());
         userInput = stdIn.readLine();
         this.myUsername = userInput;
-        sendMessageToServer(new UsernameAnswer(userInput));
+        if(out != null)
+            sendMessageToServer(new UsernameAnswer(userInput));
+        else
+            sendMessageToServer(new UsernameAnswer(userInput), 1);
     }
 
     /**
@@ -117,7 +124,9 @@ public class CliView{
         outputStream.println(((NotValidUsernameError) m).getS());
         userInput = stdIn.readLine();
         this.myUsername = userInput;
-        sendMessageToServer(new UsernameAnswer(userInput));
+        if(out != null)
+            sendMessageToServer(new UsernameAnswer(userInput));
+        else sendMessageToServer(new UsernameAnswer(userInput), 1);
     }
 
     /**
@@ -137,7 +146,9 @@ public class CliView{
             printBookshelfAndPersonal();
             outputStream.println(gameInformation.getS());
             userInput = stdIn.readLine();
-            sendMessageToServer(new MoveAnswer(userInput));
+            if(out != null)
+                sendMessageToServer(new MoveAnswer(userInput));
+            else sendMessageToServer(new MoveAnswer(userInput), 3);
         } else {
             outputStream.println(gameInformation.getActivePlayerUsername() + " is making his move...");
         }
@@ -150,7 +161,9 @@ public class CliView{
      */
     private void handleNotValidMove() throws IOException {
         userInput = stdIn.readLine();
-        sendMessageToServer(new MoveAnswer(userInput));
+        if(out != null)
+            sendMessageToServer(new MoveAnswer(userInput));
+        else sendMessageToServer(new MoveAnswer(userInput), 3);
     }
 
     /**
@@ -195,6 +208,15 @@ public class CliView{
     private void sendMessageToServer(Message m){
         String jsonString = c.convertToJSON(m);
         out.println(jsonString);
+    }
+
+    private void sendMessageToServer(Message m, int x){
+        String jsonString = c.convertToJSON(m);
+        switch (x){
+            case 1: //Username function;
+            case 2: //Number of players;
+            case 3: //Move function;
+        }
     }
 
     @Deprecated
