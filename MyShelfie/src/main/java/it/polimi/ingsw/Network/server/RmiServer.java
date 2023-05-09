@@ -15,7 +15,7 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame{
     public RmiServer() throws RemoteException {
         super();
     }
-    private void startRMIServer() {
+    public void startRMIServer() {
         System.out.println("Starting RMI");
         try {
             LocateRegistry.createRegistry(1099);
