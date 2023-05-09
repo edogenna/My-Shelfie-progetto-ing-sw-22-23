@@ -18,7 +18,6 @@ import it.polimi.ingsw.view.CliView;
 public class RmiClient {
 
     public void startRMIClient() throws IOException, NotBoundException {
-        Scanner input = new Scanner(System.in);
         int x;
 
         Registry registry = LocateRegistry.getRegistry();
@@ -48,7 +47,7 @@ public class RmiClient {
         }
 
         while(true){
-            String message = input.nextLine();
+            String message = stdIn.readLine();
             Message m = c.convertFromJSON(message);
             cliViewRmi.actionHandler(m);
         }
