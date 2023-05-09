@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.server;
 
+import it.polimi.ingsw.Network.client.ServerManager;
 import it.polimi.ingsw.Network.messages.ChooseUsernameMessage;
 import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.Network.messages.LobbyMessage;
@@ -10,11 +11,20 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RmiServer extends UnicastRemoteObject implements RmiGame{
-
+public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
+    private int rmiPort;
+    private ServerManager serverManagerRmi;
+    
     public RmiServer() throws RemoteException {
         super();
     }
+
+    public RmiServer(ServerManager serverManagerRmi, int port) throws RemoteException {
+        super();
+        this.serverManagerRmi = serverManagerRmi;
+        this.rmiPort = port;
+    }
+
     public void startRMIServer() {
         System.out.println("Starting RMI");
         try {
@@ -27,6 +37,7 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame{
         try {
             Naming.rebind("MyShelfie", this);
             System.out.println("Server RMI started");
+            System.out.println();
         } catch (RemoteException | MalformedURLException e) {
             e.printStackTrace();
         }
@@ -34,7 +45,7 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame{
 
     /**
      * @author Donato Fiore
-     * it prints in the server when an rmi client has connected
+     * it prints in the server when a rmi client has connected
      * */
     @Override
     public String notifyMyConnection(){
@@ -65,5 +76,10 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame{
     public int getNumberOfPlayers(){
         //return this.numberOfPlayers;
         return 0;
+    }
+
+    @Override
+    public void run() {
+
     }
 }

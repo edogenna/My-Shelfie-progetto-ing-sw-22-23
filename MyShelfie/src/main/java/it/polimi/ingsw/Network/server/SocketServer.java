@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.server;
 
+import it.polimi.ingsw.Network.client.ServerManager;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.controller.Controller;
@@ -19,8 +20,9 @@ import java.util.concurrent.Semaphore;
  * Main server class that starts a socket server.
  * @author Alessandro Fornara
  */
-public class SocketServer{
+public class SocketServer implements Runnable{
     private ServerSocket serverSocket;
+    private ServerManager serverMother;
     private ExecutorService executor;
     private int portNumber;
     public ArrayList<ClientInformation> connectedClients;
@@ -45,6 +47,23 @@ public class SocketServer{
         this.Lock2 = new Semaphore(1);
         this.controller = null;
         this.win = false;
+        //this.startRMIServer();
+    }
+
+    public SocketServer(ServerManager serverMother, int port){
+        this.serverSocket = null;
+        this.portNumber = port;
+        this.observable = new Observable();
+        this.connectedClients = new ArrayList<>();
+        this.usernames = new ArrayList<>();
+        this.executor = Executors.newCachedThreadPool();
+        this.numberOfPlayers = 0;
+        this.activePlayers = 0;
+        this.Lock1 = new Semaphore(1);
+        this.Lock2 = new Semaphore(1);
+        this.controller = null;
+        this.win = false;
+        this.serverMother = serverMother;
         //this.startRMIServer();
     }
 
@@ -187,8 +206,8 @@ public class SocketServer{
         this.Lock1.acquire();
         while (!win) {
 
-            saveGame();
-            System.out.println("Game has been saved");
+//            saveGame();
+//            System.out.println("Game has been saved");
 
             sendMessageToObservers(new GameInformationMessage(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
             while (!this.Lock1.tryAcquire());
@@ -268,4 +287,8 @@ public class SocketServer{
         return controller;
     }
 
+    @Override
+    public void run() {
+
+    }
 }

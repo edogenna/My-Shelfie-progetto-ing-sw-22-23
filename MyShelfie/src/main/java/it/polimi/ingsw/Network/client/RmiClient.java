@@ -37,9 +37,11 @@ public class RmiClient implements RmiClientInterface{
         this.cliViewRmi = new CliView(null, null, stdIn, remoteObject);
         this.c = new Converter();
 
+        System.out.println("rucola");
         String stringMessage = remoteObject.notifyMyConnection();
         Message mex = c.convertFromJSON(stringMessage);
         cliViewRmi.actionHandler(mex);
+        System.out.println("cipolla");
 
         x = remoteObject.getNumberOfActivePlayers();
         if(x < remoteObject.getNumberOfPlayers())
