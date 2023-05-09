@@ -34,7 +34,7 @@ public class RmiClient {
         CliView cliViewRmi = new CliView(null, null, stdIn, remoteObject);
         Converter c = new Converter();
 
-        String stringMessage = remoteObject.notifyConnection();
+        String stringMessage = remoteObject.notifyMyConnection();
         Message mex = c.convertFromJSON(stringMessage);
         System.out.println(((LobbyMessage) mex).getS());
 
