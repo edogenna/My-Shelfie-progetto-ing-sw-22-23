@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Card;
 
 import java.io.*;
+import java.rmi.RemoteException;
 
 /**
  * This class offers a User Interface to the user via terminal
@@ -210,10 +211,13 @@ public class CliView{
         out.println(jsonString);
     }
 
-    private void sendMessageToServer(Message m, int x){
+    private void sendMessageToServer(Message m, int x) throws IOException {
         String jsonString = c.convertToJSON(m);
         switch (x){
-            case 1: //Username function;
+            case 1:
+                if(!remoteObject.isUsernameTaken(jsonString)){
+                    actionHandler(new NotValidUsernameError());
+                }
             case 2: //Number of players;
             case 3: //Move function;
         }

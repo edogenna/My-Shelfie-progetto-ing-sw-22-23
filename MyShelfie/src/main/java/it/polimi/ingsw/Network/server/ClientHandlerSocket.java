@@ -9,6 +9,7 @@ import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 /**
  * This class is used to respond to requests from a specific socket client
@@ -149,7 +150,7 @@ public class ClientHandlerSocket implements Runnable, Observer{
      * This method is used during the lobby phase and allows the user to choose a username
      * @author Alessandro Fornara
      */
-    private void chooseUsernamePhase(){
+    private void chooseUsernamePhase() throws RemoteException {
         sendMessage(new ChooseUsernameMessage());
         line = clientInformation.getIn().nextLine();
 

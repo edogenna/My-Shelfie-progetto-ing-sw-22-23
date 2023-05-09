@@ -137,7 +137,7 @@ public class Server extends UnicastRemoteObject implements RmiGame{
      * @param nickname username
      * @return false if the username has already been taken, true otherwise
      */
-    public boolean isUsernameTaken(String nickname){
+    public boolean isUsernameTaken(String nickname) throws RemoteException{
         for(String s: usernames){
             if(nickname.equals(s)){
                 return false;
@@ -303,9 +303,10 @@ public class Server extends UnicastRemoteObject implements RmiGame{
         ClientInformation inf = new ClientInformation(null, null, null, connectedClients.size()-1);
         connectedClients.add(inf);
         this.activePlayers = this.connectedClients.size();
-        sendMessageToObservers(new LobbyMessage(this.activePlayers, numberOfPlayers));
-        sendMessageToObservers(new WaitingMessage());
-        return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
+//        sendMessageToObservers(new LobbyMessage(this.activePlayers, numberOfPlayers));
+//        sendMessageToObservers(new WaitingMessage());
+//        return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
+        return new Converter().convertToJSON(new ChooseUsernameMessage());
     }
 
     @Override

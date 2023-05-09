@@ -19,11 +19,6 @@ public class RmiClient {
         int x;
 
         Registry registry = LocateRegistry.getRegistry();
-        System.out.println("rmi registry bindings");
-        String[] e = registry.list();
-        for (int i=0; i < e.length; i++){
-            System.out.println(e[i]);
-        }
         String remoteObjectName = "MyShelfie";
         RmiGame remoteObject = (RmiGame) registry.lookup(remoteObjectName);
 
