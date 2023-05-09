@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ControllerTest;
 
+import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
 import org.junit.Assert;
@@ -9,21 +10,23 @@ public class pickCardTest {
     Model m;
     Controller c = new Controller(m);
     private int x, y, col;
-    public pickCardTest(){
-        x=2; y=3; col=2;
-        m=c.getModel();
-        m.getBoardMatrix();
-        c.pickCard(x, y, col);
-//        Assert.assertEquals();
-    }
-//setter and getter methods
-    public Model getM() {
-        return m;
+    public ItemEnum[][] board = new ItemEnum[9][9];
+
+    @Test
+    public void test(){
+        for (int i = 0; i<9; i++){
+            for (int j=0; j<9;j++)
+                board[i][j]= ItemEnum.BLUE;
+        }
+        x=0; y=0; col=2;
+        m.getBoard().setItemEnum(x,y, ItemEnum.WHITE);
+        m.getBoard().setItemEnum(x+1,y,ItemEnum.WHITE);
+
+        Assert.assertEquals(c.pickCard(x, y, col),0 );
     }
 
-    public void setM(Model m) {
-        this.m = m;
-    }
+
+//setter and getter methods
 
     public Controller getC() {
         return c;

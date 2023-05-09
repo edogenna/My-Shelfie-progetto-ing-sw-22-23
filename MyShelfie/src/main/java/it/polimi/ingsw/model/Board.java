@@ -151,6 +151,10 @@ public class Board {
         return matrix[r][c];
     }
 
+    public void setItemEnum(int r, int c, ItemEnum tile){
+        matrix[r][c]= tile;
+    }
+
     /**
      * It returns the ItemEnum from a given position and inserts a blank ItemEnum in that position.
      *
