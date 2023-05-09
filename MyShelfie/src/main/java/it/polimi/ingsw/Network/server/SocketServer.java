@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ import java.util.concurrent.Semaphore;
  * @author Alessandro Fornara
  */
 public class SocketServer{
-    private ServerSocket serverSocket = null;
+    private ServerSocket serverSocket;
     private ExecutorService executor;
     private int portNumber;
     public ArrayList<ClientInformation> connectedClients;
@@ -34,6 +33,7 @@ public class SocketServer{
     protected boolean win;
 
     public SocketServer(int port){
+        this.serverSocket = null;
         this.portNumber = port;
         this.observable = new Observable();
         this.connectedClients = new ArrayList<>();
