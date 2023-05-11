@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Network.client.ServerManager;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.controller.Controller;
@@ -11,6 +10,8 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,7 +23,7 @@ import java.util.concurrent.Semaphore;
  */
 public class SocketServer implements Runnable{
     private ServerSocket serverSocket;
-    private ServerManager serverMother;
+    private ServerManager serverManager;
     private ExecutorService executor;
     private int portNumber;
     public ArrayList<ClientInformation> connectedClients;
@@ -33,6 +34,10 @@ public class SocketServer implements Runnable{
     protected Semaphore Lock2;
     protected Controller controller;
     protected boolean win;
+
+    private final Map<Socket, Scanner> fromClient = new HashMap<>();
+    private final Map<Socket, PrintWriter> toClient = new HashMap<>();
+
 
     public SocketServer(int port){
         this.serverSocket = null;
@@ -50,9 +55,9 @@ public class SocketServer implements Runnable{
         //this.startRMIServer();
     }
 
-    public SocketServer(ServerManager serverMother, int port){
+    public SocketServer(ServerManager serverManager, int port){
+        //old constructor
         this.serverSocket = null;
-        this.portNumber = port;
         this.observable = new Observable();
         this.connectedClients = new ArrayList<>();
         this.usernames = new ArrayList<>();
@@ -63,8 +68,10 @@ public class SocketServer implements Runnable{
         this.Lock2 = new Semaphore(1);
         this.controller = null;
         this.win = false;
-        this.serverMother = serverMother;
-        //this.startRMIServer();
+
+        //new constructor
+        this.serverManager = serverManager;
+        this.portNumber = port;
     }
 
     //TODO: correct the documentation
@@ -287,8 +294,25 @@ public class SocketServer implements Runnable{
         return controller;
     }
 
+    private void registry(Socket client) throws IOException {
+        serverManager.addClient(client);
+        fromClient.put(client, new Scanner(client.getInputStream()));
+        toClient.put(client, new PrintWriter(client.getOutputStream(), true));
+        int number = serverManager.getNumber(client);
+        System.out.println("User " + number + " connected on the SocketServer");
+        //todo: new Thread(new ClientReception(serverManager, number)).start();
+    }
+
     @Override
     public void run() {
-
+        try (ServerSocket serverSocket = new ServerSocket(this.portNumber)) {
+            System.out.println("SocketServer has started");
+            while (true) {
+                Socket client = serverSocket.accept();
+                registry(client);
+            }
+        } catch (IOException e) {
+            System.out.println("SocketServer is closed.");
+        }
     }
 }

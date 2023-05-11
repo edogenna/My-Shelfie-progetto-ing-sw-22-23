@@ -1,27 +1,25 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Network.client.ServerManager;
 import it.polimi.ingsw.Network.messages.ChooseUsernameMessage;
 import it.polimi.ingsw.Network.messages.Converter;
-import it.polimi.ingsw.Network.messages.LobbyMessage;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Scanner;
 
 public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
     private int rmiPort;
-    private ServerManager serverManagerRmi;
-    
-    public RmiServer() throws RemoteException {
-        super();
-    }
+    private ServerManager serverManager;
 
-    public RmiServer(ServerManager serverManagerRmi, int port) throws RemoteException {
+    public RmiServer(ServerManager serverManager, int port) throws RemoteException {
         super();
-        this.serverManagerRmi = serverManagerRmi;
+        this.serverManager = serverManager;
         this.rmiPort = port;
     }
 
@@ -41,6 +39,13 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
         } catch (RemoteException | MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void registry(RmiGame client) {
+        serverManager.addClient(client);
+        int number = serverManager.getNumber(client);
+        System.out.println("User " + number + " accettato sul RmiServer.");
+        //todo: new Thread(new ClientReception(serverManager, number)).start();
     }
 
     /**

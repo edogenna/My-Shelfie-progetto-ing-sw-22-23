@@ -1,10 +1,13 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
+import it.polimi.ingsw.Network.messages.ChooseUsernameMessage;
+import it.polimi.ingsw.Network.messages.CommonCardMessage;
+import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
+import it.polimi.ingsw.Network.messages.Message;
 import it.polimi.ingsw.Observer.Observable;
 import it.polimi.ingsw.Observer.Observer;
 

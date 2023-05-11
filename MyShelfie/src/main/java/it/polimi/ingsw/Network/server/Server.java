@@ -1,10 +1,5 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Network.client.ServerManager;
-
-import java.io.IOException;
-import java.net.Socket;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.InputMismatchException;
@@ -27,27 +22,27 @@ class Server {
             System.out.println("local ip: unknown");
         }
         System.out.println("Specify the port number for the SocketServer:");
-        socketPort = manageIntInput(stdin, MIN_PORT, MAX_PORT, 0);
+        socketPort = manageIntInput(stdin, 0);
         System.out.println("Specify the port number for the RmiServer:");
-        rmiPort = manageIntInput(stdin, MIN_PORT, MAX_PORT, socketPort);
-//        serverManager = new ServerManager(secondsAfterThirdConnection, secondsDuringTurn, socketPort, rmiPort, skulls);
-//        serverManager.run();
+        rmiPort = manageIntInput(stdin, socketPort);
+        serverManager = new ServerManager(socketPort, rmiPort);
+        serverManager.run();
     }
 
-    private static int manageIntInput(Scanner stdin, int minValue, int maxValue, int forbiddenValue) {
+    private static int manageIntInput(Scanner stdin, int forbiddenValue) {
         int output;
         try {
             output = stdin.nextInt();
         } catch (InputMismatchException e) {
-            output = minValue - 1;
+            output = Server.MIN_PORT - 1;
             stdin.nextLine();
         }
-        while (output > maxValue || output < minValue || output == forbiddenValue) {
-            System.out.println("Il valore deve essere compreso fra " + minValue + " and " + maxValue + ". Try again:");
+        while (output > Server.MAX_PORT || output < Server.MIN_PORT || output == forbiddenValue) {
+            System.out.println("the value must be between " + Server.MIN_PORT + " and " + Server.MAX_PORT + ". Try again:");
             try {
                 output = stdin.nextInt();
             } catch (InputMismatchException e) {
-                output = minValue - 1;
+                output = Server.MIN_PORT - 1;
                 stdin.nextLine();
             }
         }
