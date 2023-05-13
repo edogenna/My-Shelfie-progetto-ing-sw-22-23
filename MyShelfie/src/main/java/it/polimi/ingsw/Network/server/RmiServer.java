@@ -82,10 +82,19 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
 
     @Override
     public void registry(RmiClientInterface client) throws RemoteException {
+        System.out.println("registry method!");
         serverManager.addClient(client);
         int number = serverManager.getNumber(client);
-        System.out.println("User " + number + " accettato sul RmiServer.");
+        System.out.println("User " + number + " connected on the RmiServer.");
         new Thread(new ClientManager(serverManager, number)).start();
+    }
+
+    String sendMessageAndGetAnswer(RmiClientInterface addressee, String message){
+        try {
+            return addressee.sendMessageAndGetAnswer(message);
+        } catch (RemoteException e) {
+            return "Impossible connection with the client" + e.getMessage();
+        }
     }
 
     @Override

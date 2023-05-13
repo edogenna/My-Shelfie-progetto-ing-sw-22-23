@@ -8,12 +8,10 @@ import java.rmi.NotBoundException;
 /**
  * Main client class that starts a socket client or an RMI client.
  */
-public class Client {
-
+public class Client implements Runnable{
+    static String hostName;
+    static String portNumber;
     public static void main(String[] args) throws IOException, NotBoundException {
-
-        String hostName;
-        String portNumber;
 
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Insert the hostName or just press enter to get 127.0.0.1 (your own device): ");
@@ -27,5 +25,10 @@ public class Client {
             case 0 -> new SocketClient().startSocketClient(hostName, Integer.parseInt(portNumber));
             case 1 -> new RmiClient().startRMIClient();
         }
+    }
+
+    @Override
+    public void run() {
+
     }
 }

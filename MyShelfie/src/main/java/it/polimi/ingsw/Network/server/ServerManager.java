@@ -97,8 +97,8 @@ public class ServerManager implements Runnable{
             communication = new SocketCommunication(serializedMessage, socketClients.get(number), socketServer, number, this);
             new Thread(communication).start();
         } else if (rmiClients.containsKey(number)) {
-            //communication = new RmiCommunication(serializedMessage, rmiClients.get(number), rmiServer, number, this);
-            //new Thread(communication).start();
+            communication = new RmiCommunication(serializedMessage, rmiClients.get(number), rmiServer, number, this);
+            new Thread(communication).start();
         } else {
             System.out.println("Unregistered Client");
             return "ERROR";
@@ -113,15 +113,15 @@ public class ServerManager implements Runnable{
             }
             counter++;
             if (counter % MILLIS_TO_WAIT == 0) {
-                /*if (rmiClients.containsKey(number)) {
-                    try {
+                if (rmiClients.containsKey(number)) {
+/*                    try {
                         //check if rmi client is still connected;
                     } catch (RemoteException e) {
                         System.out.println("Unable to reach client. " + e.getMessage());
-                        //rmi client removed from rmi server;
+                        rmi client removed from rmi server;
                         return "ERROR";
-                    }
-                }*/
+                    }*/
+                }
                 if (socketClients.containsKey(number)) {
                     try {
                         socketClients.get(number).getInetAddress().isReachable(MILLIS_IN_SECOND);
@@ -144,15 +144,15 @@ public class ServerManager implements Runnable{
             answer = sendMessageAndWaitForAnswer(number, new NotValidUsernameError());
             m = converter.convertFromJSON(answer);
         }
-        String usrn = ((UsernameAnswer) m).getS();
-        return usrn;
+        return ((UsernameAnswer) m).getS();
     }
 
     protected void clientLogin(int number){
+        System.out.println("clientLogin Method, ServerManager");
         String username = login(number);
 
-        if(firstPlayer){
-            firstPlayer = false;
+        if(this.firstPlayer){
+            this.firstPlayer = false;
             String answer = sendMessageAndWaitForAnswer(number, new FirstPlayerMessage());
             Message m = converter.convertFromJSON(answer);
             activeMatch = new Controller(((NumberOfPlayersAnswer) m).getNum());
@@ -160,7 +160,6 @@ public class ServerManager implements Runnable{
         }
         lobby.put(number, username);
         notifyNewConnection(this.numberOfPlayers);
-
     }
 
     private void notifyNewConnection(int numberOfPlayers) {

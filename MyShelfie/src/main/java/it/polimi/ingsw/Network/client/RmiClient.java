@@ -15,7 +15,7 @@ import it.polimi.ingsw.Network.messages.WaitingMessage;
 import it.polimi.ingsw.Network.server.RmiGame;
 import it.polimi.ingsw.view.CliView;
 
-public class RmiClient implements RmiClientInterface, Runnable{
+public class RmiClient extends Client implements RmiClientInterface, Runnable{
 
     private BufferedReader stdIn;
     private CliView cliViewRmi;
@@ -59,6 +59,12 @@ public class RmiClient implements RmiClientInterface, Runnable{
         }
     }
 
+    //TODO: finish this method
+    @Override
+    public String sendMessageAndGetAnswer(String message) throws RemoteException {
+        return null;
+    }
+
     @Override
     public void printMessage(String message) throws IOException {
         Message mex = c.convertFromJSON(message);
@@ -67,13 +73,13 @@ public class RmiClient implements RmiClientInterface, Runnable{
 
     @Override
     public void run() {
- /*       while (true) {
+        while (true) {
             try {
-                rmiGame = (RmiGame) LocateRegistry.getRegistry(ip, rmiPort).lookup("MyShelfie");
+                rmiGame = (RmiGame) LocateRegistry.getRegistry(hostName, Integer.parseInt(portNumber)).lookup("MyShelfie");
                 rmiGame.registry((RmiClientInterface) UnicastRemoteObject.exportObject(this, 0));
                 break;
             } catch (RemoteException | NotBoundException e) {
             }
-        }*/
+        }
     }
 }

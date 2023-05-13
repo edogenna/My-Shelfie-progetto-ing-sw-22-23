@@ -21,6 +21,6 @@ public class Communication implements Runnable{
 
     @Override
     public void run() {
-
+        //empty, because we want so
     }
 }
