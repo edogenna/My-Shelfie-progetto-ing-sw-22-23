@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.Answers.ACKMessage;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
@@ -57,12 +58,15 @@ public class CliView{
 
         switch (m.getType()) {
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
-            case "Lobby" -> outputStream.println(((LobbyMessage) m).getS());
-            case "StartingGame" -> {outputStream.println(((StartingGameMessage) m).getS());}
+            case "Lobby" -> {outputStream.println(((LobbyMessage) m).getS());
+                sendMessageToServer(new ACKMessage());}
+            case "StartingGame" -> {outputStream.println(((StartingGameMessage) m).getS());
+                sendMessageToServer(new ACKMessage());}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
             case "GameInformation" -> {handleGameInformationMessage(m);}
-            case "Waiting" -> outputStream.println(((WaitingMessage) m).getS());
+            case "Waiting" -> {outputStream.println(((WaitingMessage) m).getS());
+                sendMessageToServer(new ACKMessage());}
             case "NotValidMove" -> {dummyInputPrint(m);
                 handleNotValidMove();}
             case "Winner" -> handleWinMessage(m);

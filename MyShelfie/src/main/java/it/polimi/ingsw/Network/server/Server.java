@@ -49,15 +49,3 @@ class Server {
         return output;
     }
 }
-
-/*
-public class Server {
-
-    public static void main( String[] args ) throws IOException, InterruptedException {
-        SocketServer socketServer = new SocketServer(1234);
-        RmiServer rmiServer = new RmiServer();
-        rmiServer.startRMIServer();
-        socketServer.startServer();
-    }
-}
-*/

@@ -9,10 +9,7 @@ import it.polimi.ingsw.model.Player;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -37,23 +34,6 @@ public class SocketServer implements Runnable{
 
     private final Map<Socket, Scanner> fromClient = new HashMap<>();
     private final Map<Socket, PrintWriter> toClient = new HashMap<>();
-
-
-    public SocketServer(int port){
-        this.serverSocket = null;
-        this.portNumber = port;
-        this.observable = new Observable();
-        this.connectedClients = new ArrayList<>();
-        this.usernames = new ArrayList<>();
-        this.executor = Executors.newCachedThreadPool();
-        this.numberOfPlayers = 0;
-        this.activePlayers = 0;
-        this.Lock1 = new Semaphore(1);
-        this.Lock2 = new Semaphore(1);
-        this.controller = null;
-        this.win = false;
-        //this.startRMIServer();
-    }
 
     public SocketServer(ServerManager serverManager, int port){
         //old constructor
@@ -300,7 +280,17 @@ public class SocketServer implements Runnable{
         toClient.put(client, new PrintWriter(client.getOutputStream(), true));
         int number = serverManager.getNumber(client);
         System.out.println("User " + number + " connected on the SocketServer");
-        //todo: new Thread(new ClientReception(serverManager, number)).start();
+        new Thread(new ClientManager(serverManager, number)).start();
+    }
+
+    public String sendMessageAndGetAnswer(Socket socket, String message) {
+        toClient.get(socket).println(message);
+        try {
+            return fromClient.get(socket).nextLine();
+        } catch (NoSuchElementException e) {
+            //remove socket from server manager;
+            return "Unable to reach the client." + e.getMessage();
+        }
     }
 
     @Override

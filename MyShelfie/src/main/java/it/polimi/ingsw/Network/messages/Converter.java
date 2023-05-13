@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network.messages;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import it.polimi.ingsw.Network.messages.Answers.ACKMessage;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
@@ -25,6 +26,8 @@ public class Converter {
         JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
         String type = jsonObject.get("type").getAsString();
         switch(type) {
+            case "ACK":
+                return gson.fromJson(message, ACKMessage.class);
             case "FirstPlayer":
                 return gson.fromJson(message, FirstPlayerMessage.class);
             case "Waiting":
