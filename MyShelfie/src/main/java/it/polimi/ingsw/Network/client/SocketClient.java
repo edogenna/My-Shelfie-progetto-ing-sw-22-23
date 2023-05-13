@@ -16,7 +16,6 @@ import java.net.Socket;
  */
 public class SocketClient {
     public void startSocketClient(String hostName, int portNumber) throws IOException {
-
         try(
                 Socket Socket = new Socket(hostName, portNumber);
                 PrintWriter out = new PrintWriter(Socket.getOutputStream(), true);

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.server;
 
+import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.ChooseUsernameMessage;
 import it.polimi.ingsw.Network.messages.Converter;
 
@@ -44,13 +45,6 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
         }
     }
 
-    public void registry(RmiGame client) {
-        serverManager.addClient(client);
-        int number = serverManager.getNumber(client);
-        System.out.println("User " + number + " accettato sul RmiServer.");
-        //todo: new Thread(new ClientReception(serverManager, number)).start();
-    }
-
     /**
      * @author Donato Fiore
      * it prints in the server when a rmi client has connected
@@ -84,6 +78,14 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
     public int getNumberOfPlayers(){
         //return this.numberOfPlayers;
         return 0;
+    }
+
+    @Override
+    public void registry(RmiClientInterface client) throws RemoteException {
+        serverManager.addClient(client);
+        int number = serverManager.getNumber(client);
+        System.out.println("User " + number + " accettato sul RmiServer.");
+        new Thread(new ClientManager(serverManager, number)).start();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Network.server;
 
+import it.polimi.ingsw.Network.client.RmiClient;
+import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
@@ -23,7 +25,7 @@ public class ServerManager implements Runnable{
     private final int socketPort;
     private final int rmiPort;
     private final Map<Integer, Socket> socketClients = new HashMap<>();
-    private final Map<Integer, RmiGame> rmiClients = new HashMap<>();
+    private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
     private final Map<Integer, Boolean> answerReady = new HashMap<>();
     private final Map<Integer, String> lobby = new HashMap<>();
@@ -50,7 +52,7 @@ public class ServerManager implements Runnable{
         idClient++;
     }
 
-    void addClient(RmiGame client) {
+    void addClient(RmiClientInterface client) {
         rmiClients.put(idClient, client);
         answerReady.put(idClient, true);
         idClient++;
@@ -68,8 +70,8 @@ public class ServerManager implements Runnable{
         return x;
     }
 
-    public int getNumber(RmiGame client) {
-        for (Map.Entry<Integer, RmiGame> entry : rmiClients.entrySet())
+    public int getNumber(RmiClientInterface client) {
+        for (Map.Entry<Integer, RmiClientInterface> entry : rmiClients.entrySet())
             if (entry.getValue() == client)
                 return entry.getKey();
         throw new NoSuchElementException();
