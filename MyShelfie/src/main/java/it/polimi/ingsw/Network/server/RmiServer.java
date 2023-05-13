@@ -5,8 +5,11 @@ import it.polimi.ingsw.Network.messages.Converter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
+import java.net.UnknownHostException;
+import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -85,6 +88,14 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
 
     @Override
     public void run() {
-
+        try {
+            System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
+            RmiGame stub = (RmiGame) UnicastRemoteObject.exportObject(this, 0);
+            LocateRegistry.createRegistry(rmiPort);
+            LocateRegistry.getRegistry(rmiPort).bind("MyShelfie", stub);
+            System.out.println("RmiServer started.");
+        } catch (UnknownHostException | RemoteException | AlreadyBoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
