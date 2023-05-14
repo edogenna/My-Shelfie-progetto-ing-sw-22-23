@@ -15,7 +15,7 @@ import it.polimi.ingsw.Network.messages.WaitingMessage;
 import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.view.CliView;
 
-public class RmiClient extends Client implements RmiClientInterface, Runnable{
+public class RmiClient extends Client implements RmiClientInterface{
 
     private BufferedReader stdIn;
     private CliView cliViewRmi;
@@ -40,7 +40,7 @@ public class RmiClient extends Client implements RmiClientInterface, Runnable{
         this.cliViewRmi = new CliView(null, null, stdIn, remoteObject);
         this.c = new Converter();
 
-        String stringMessage = remoteObject.notifyMyConnection();
+        /*String stringMessage = remoteObject.notifyMyConnection();
         Message mex = c.convertFromJSON(stringMessage);
         cliViewRmi.actionHandler(mex);
 
@@ -56,7 +56,7 @@ public class RmiClient extends Client implements RmiClientInterface, Runnable{
             if(x < remoteObject.getNumberOfPlayers())
                 cliViewRmi.actionHandler(new WaitingMessage());
             x = remoteObject.getNumberOfActivePlayers();
-        }
+        }*/
     }
 
     @Override
@@ -67,8 +67,8 @@ public class RmiClient extends Client implements RmiClientInterface, Runnable{
     synchronized String manageMessage(String messageJsonCoded) throws IOException {
         Converter conv = new Converter();
         Message fromServer = conv.convertFromJSON(messageJsonCoded);
-        CliView view = new CliView(null, null, stdIn, rmiServerInterface);
-        view.actionHandler(fromServer);
+        cliViewRmi = new CliView(null, null, stdIn, rmiServerInterface);
+        cliViewRmi.actionHandler(fromServer);
         return null;
     }
 

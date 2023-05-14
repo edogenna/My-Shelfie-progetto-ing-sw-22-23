@@ -14,14 +14,22 @@ import java.net.Socket;
  * This class represents a socket client implementation
  * @author Alessandro Fornara
  */
-public class SocketClient {
+public class SocketClient extends Client{
+
+    Socket socket = null;
+    PrintWriter out = null;
+    BufferedReader in = null;
+    BufferedReader stdIn = null;
     public void startSocketClient(String hostName, int portNumber) throws IOException {
-        try(
-                Socket Socket = new Socket(hostName, portNumber);
-                PrintWriter out = new PrintWriter(Socket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(Socket.getInputStream()));
-                BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))
-        ){
+        try {
+            this.socket = new Socket(hostName, portNumber);
+            this.out = new PrintWriter(socket.getOutputStream(), true);
+            this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.stdIn = new BufferedReader(new InputStreamReader(System.in));
+        } catch (IOException e){
+            System.out.println("Invalid parameters: " + e.getMessage());
+            System.exit(0);
+        }
             System.out.println("you are connected with socket");
             Converter c = new Converter();
             CliView cliView = new CliView(out, in, stdIn, null);
@@ -31,6 +39,16 @@ public class SocketClient {
                 Message m = c.convertFromJSON(message);
                 cliView.actionHandler(m);
             }
+
+    }
+    @Override
+    public void stop() throws IOException {
+        out.close();
+        in.close();
+        try {
+            socket.close();
+        } catch (IOException e) {
+            System.out.println("An error occured while trying to close socket: " + e.getMessage());
         }
     }
 }

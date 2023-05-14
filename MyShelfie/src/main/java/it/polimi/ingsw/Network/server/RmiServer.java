@@ -6,10 +6,8 @@ import it.polimi.ingsw.Network.messages.Converter;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
@@ -21,24 +19,6 @@ public class RmiServer implements RmiServerInterface, Runnable{
     public RmiServer(ServerManager serverManager, int port) throws RemoteException {
         this.serverManager = serverManager;
         this.rmiPort = port;
-    }
-
-    public void startRMIServer() {
-        System.out.println("Starting RMI");
-        try {
-            LocateRegistry.createRegistry(1099);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Binding server implementation to registry");
-        try {
-            Naming.rebind("MyShelfie", this);
-            System.out.println("Server RMI started");
-            System.out.println();
-        } catch (RemoteException | MalformedURLException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -89,9 +69,9 @@ public class RmiServer implements RmiServerInterface, Runnable{
         return true;
     }
 
-    String sendMessageAndGetAnswer(RmiClientInterface addressee, String message){
+    String sendMessageAndGetAnswer(RmiClientInterface rmiClient, String message){
         try {
-            return addressee.sendMessageAndGetAnswer(message);
+            return rmiClient.sendMessageAndGetAnswer(message);
         } catch (RemoteException e) {
             return "Impossible connection with the rmi client" + e.getMessage();
         } catch (IOException e) {

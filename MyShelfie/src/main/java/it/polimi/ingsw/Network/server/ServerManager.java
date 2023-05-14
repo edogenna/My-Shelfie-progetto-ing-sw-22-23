@@ -117,7 +117,7 @@ public class ServerManager implements Runnable{
                     try {
                         rmiClients.get(number).testAliveness();
                     } catch (RemoteException e) {
-                        System.out.println("Impossibile raggiungere il client. " + e.getMessage());
+                        System.out.println("Unable to reach client " + e.getMessage());
 //                        rmiServer.unregister(rmiClients.get(number));
                         return "ERROR";
                     }
@@ -180,7 +180,7 @@ public class ServerManager implements Runnable{
      * This method check if a username has already been taken by another client, if not it is added to a map of usernames
      * @author Alessandro Fornara
      * @param nickname username
-     * @return true if the username has already been taken, flase otherwise
+     * @return true if the username has already been taken, false otherwise
      */
     public boolean isUsernameTaken(String nickname, int idClient){
         for(String s: nicknames.values()){
