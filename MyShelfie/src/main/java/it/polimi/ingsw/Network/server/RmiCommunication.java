@@ -15,7 +15,7 @@ public class RmiCommunication extends Communication{
 
     @Override
     public void run(){
-        String answer = rmiServer.sendMessageAndGetAnswer(client, message);
+        String answer = rmiServer.sendMessageAndGetAnswer(this.client, this.message);
         showAndSetAnswer(answer);
     }
 }

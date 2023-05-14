@@ -5,24 +5,20 @@ import it.polimi.ingsw.Network.messages.ChooseUsernameMessage;
 import it.polimi.ingsw.Network.messages.Converter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Scanner;
 
-public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
+public class RmiServer implements RmiServerInterface, Runnable{
     private int rmiPort;
     private ServerManager serverManager;
 
     public RmiServer(ServerManager serverManager, int port) throws RemoteException {
-        super();
         this.serverManager = serverManager;
         this.rmiPort = port;
     }
@@ -89,21 +85,28 @@ public class RmiServer extends UnicastRemoteObject implements RmiGame, Runnable{
         new Thread(new ClientManager(serverManager, number)).start();
     }
 
+    public synchronized boolean testAliveness() {
+        return true;
+    }
+
     String sendMessageAndGetAnswer(RmiClientInterface addressee, String message){
         try {
             return addressee.sendMessageAndGetAnswer(message);
         } catch (RemoteException e) {
-            return "Impossible connection with the client" + e.getMessage();
+            return "Impossible connection with the rmi client" + e.getMessage();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void run() {
+        System.out.println("RmiServer run");
         try {
             System.setProperty("java.rmi.server.hostname", InetAddress.getLocalHost().getHostAddress());
-            RmiGame stub = (RmiGame) UnicastRemoteObject.exportObject(this, 0);
-            LocateRegistry.createRegistry(rmiPort);
-            LocateRegistry.getRegistry(rmiPort).bind("MyShelfie", stub);
+            RmiServerInterface remoteObject = (RmiServerInterface) UnicastRemoteObject.exportObject(this, 0);
+            LocateRegistry.createRegistry(this.rmiPort);
+            LocateRegistry.getRegistry(this.rmiPort).bind("MyShelfie", remoteObject);
             System.out.println("RmiServer started.");
         } catch (UnknownHostException | RemoteException | AlreadyBoundException e) {
             System.out.println(e.getMessage());

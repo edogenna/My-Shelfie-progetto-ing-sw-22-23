@@ -7,12 +7,11 @@ import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
-import it.polimi.ingsw.Network.server.RmiGame;
+import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Card;
 
 import java.io.*;
-import java.rmi.RemoteException;
 
 /**
  * This class offers a User Interface to the user via terminal
@@ -31,9 +30,9 @@ public class CliView{
     private final Converter c;
     private String myUsername;
     private String userInput;
-    private RmiGame remoteObject;
+    private RmiServerInterface remoteObject;
 
-    public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn, RmiGame remoteObject){
+    public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn, RmiServerInterface remoteObject){
         this.out = out;
         this.in = in;
         this.stdIn = stdIn;

@@ -12,7 +12,7 @@ import java.rmi.server.UnicastRemoteObject;
 import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.Network.messages.Message;
 import it.polimi.ingsw.Network.messages.WaitingMessage;
-import it.polimi.ingsw.Network.server.RmiGame;
+import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.view.CliView;
 
 public class RmiClient extends Client implements RmiClientInterface, Runnable{
@@ -20,7 +20,7 @@ public class RmiClient extends Client implements RmiClientInterface, Runnable{
     private BufferedReader stdIn;
     private CliView cliViewRmi;
     private Converter c;
-    private RmiGame rmiGame;
+    private RmiServerInterface rmiServerInterface;
 
     public RmiClient(){
         this.stdIn = null;
@@ -34,7 +34,7 @@ public class RmiClient extends Client implements RmiClientInterface, Runnable{
 
         Registry registry = LocateRegistry.getRegistry();
         String remoteObjectName = "MyShelfie";
-        RmiGame remoteObject = (RmiGame) registry.lookup(remoteObjectName);
+        RmiServerInterface remoteObject = (RmiServerInterface) registry.lookup(remoteObjectName);
 
         this.stdIn = new BufferedReader(new InputStreamReader(System.in));
         this.cliViewRmi = new CliView(null, null, stdIn, remoteObject);
@@ -59,24 +59,30 @@ public class RmiClient extends Client implements RmiClientInterface, Runnable{
         }
     }
 
-    //TODO: finish this method
     @Override
-    public String sendMessageAndGetAnswer(String message) throws RemoteException {
+    public String sendMessageAndGetAnswer(String message) throws IOException {
+        return manageMessage(message);
+    }
+
+    synchronized String manageMessage(String messageJsonCoded) throws IOException {
+        Converter conv = new Converter();
+        Message fromServer = conv.convertFromJSON(messageJsonCoded);
+        CliView view = new CliView(null, null, stdIn, rmiServerInterface);
+        view.actionHandler(fromServer);
         return null;
     }
 
     @Override
-    public void printMessage(String message) throws IOException {
-        Message mex = c.convertFromJSON(message);
-        cliViewRmi.actionHandler(mex);
+    public boolean testAliveness() {
+        return true;
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                rmiGame = (RmiGame) LocateRegistry.getRegistry(hostName, Integer.parseInt(portNumber)).lookup("MyShelfie");
-                rmiGame.registry((RmiClientInterface) UnicastRemoteObject.exportObject(this, 0));
+                rmiServerInterface = (RmiServerInterface) LocateRegistry.getRegistry(hostName, Integer.parseInt(portNumber)).lookup("MyShelfie");
+                rmiServerInterface.registry((RmiClientInterface) UnicastRemoteObject.exportObject(this, 0));
                 break;
             } catch (RemoteException | NotBoundException e) {
             }

@@ -114,13 +114,13 @@ public class ServerManager implements Runnable{
             counter++;
             if (counter % MILLIS_TO_WAIT == 0) {
                 if (rmiClients.containsKey(number)) {
-/*                    try {
-                        //check if rmi client is still connected;
+                    try {
+                        rmiClients.get(number).testAliveness();
                     } catch (RemoteException e) {
-                        System.out.println("Unable to reach client. " + e.getMessage());
-                        rmi client removed from rmi server;
+                        System.out.println("Impossibile raggiungere il client. " + e.getMessage());
+//                        rmiServer.unregister(rmiClients.get(number));
                         return "ERROR";
-                    }*/
+                    }
                 }
                 if (socketClients.containsKey(number)) {
                     try {
@@ -137,6 +137,7 @@ public class ServerManager implements Runnable{
     }
 
     private String login(int number){
+        System.out.println("login Method, ServerManager");
         String answer = sendMessageAndWaitForAnswer(number, new ChooseUsernameMessage());
         Message m = converter.convertFromJSON(answer);
 
@@ -193,6 +194,7 @@ public class ServerManager implements Runnable{
 
     @Override
     public void run() {
+        System.out.println("ServerManager run");
         socketServer = new SocketServer(this, this.socketPort);
         try {
             rmiServer = new RmiServer(this, this.rmiPort);
@@ -200,6 +202,7 @@ public class ServerManager implements Runnable{
             throw new RuntimeException(e);
         }
         new Thread(socketServer).start();
+        System.out.println("ServerManager run, we are going to start rmiServer thread");
         new Thread(rmiServer).start();
     }
 }

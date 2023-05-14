@@ -16,6 +16,7 @@ public class ClientManager implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("ClientManager run");
         serverManager.clientLogin(this.number);
     }
 }

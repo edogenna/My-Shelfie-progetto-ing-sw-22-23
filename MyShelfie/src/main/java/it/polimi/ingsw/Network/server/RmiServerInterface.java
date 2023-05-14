@@ -5,7 +5,7 @@ import it.polimi.ingsw.Network.client.RmiClientInterface;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface RmiGame extends Remote {
+public interface RmiServerInterface extends Remote {
     public String notifyMyConnection() throws RemoteException;
     public String notifyOtherConnections() throws RemoteException;
     //public boolean isUsernameTaken(String nickname) throws RemoteException;
