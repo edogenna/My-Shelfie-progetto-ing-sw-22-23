@@ -57,33 +57,53 @@ public class CliView{
 
         switch (m.getType()) {
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
-            case "Lobby" -> {outputStream.println(((LobbyMessage) m).getS());
-                sendMessageToServer(new ACKMessage());}
-            case "StartingGame" -> {outputStream.println(((StartingGameMessage) m).getS());
-                sendMessageToServer(new ACKMessage());}
+            case "Lobby" -> {handleLobbyMessage(m);}
+            case "StartingGame" -> {handleStartingGameMessage(m);}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
             case "GameInformation" -> {handleGameInformationMessage(m);}
-            case "Waiting" -> {outputStream.println(((WaitingMessage) m).getS());
-                sendMessageToServer(new ACKMessage());}
-            case "NotValidMove" -> {dummyInputPrint(m);
-                handleNotValidMove();}
+            case "Waiting" -> {handleWaitingMessage(m);}
+            case "NotValidMove" -> {dummyInputPrint(m); handleNotValidMove();}
             case "Winner" -> handleWinMessage(m);
-            case "NotEnoughSpaceColumn" -> {outputStream.println(((NotEnoughSpaceColumnError) m).getS());
-                handleNotValidMove();}
-            case "InvalidColumn" -> {outputStream.println(((InvalidColumnError) m).getS());
-                handleNotValidMove();}
-            case "EmptyPosition" -> {outputStream.println(((EmptyPositionError) m).getS());
-                handleNotValidMove();}
-            case "NotAdjTiles" -> {outputStream.println(((NotAdjacTiles) m).getS());
-                handleNotValidMove();}
-            case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS());
-                handleNotValidMove();}
-            case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS());
-                handleNotValidMove();}
+            case "NotEnoughSpaceColumn" -> {outputStream.println(((NotEnoughSpaceColumnError) m).getS()); handleNotValidMove();}
+            case "InvalidColumn" -> {outputStream.println(((InvalidColumnError) m).getS()); handleNotValidMove();}
+            case "EmptyPosition" -> {outputStream.println(((EmptyPositionError) m).getS()); handleNotValidMove();}
+            case "NotAdjTiles" -> {outputStream.println(((NotAdjacTiles) m).getS()); handleNotValidMove();}
+            case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS()); handleNotValidMove();}
+            case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
+            default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
     }
 
+    /**
+     * This method handles the {@link LobbyMessage}
+     * @author Alessandro Fornara
+     * @param m message
+     */
+    private void handleLobbyMessage(Message m){
+        outputStream.println(((LobbyMessage) m).getS());
+        sendMessageToServer(new ACKMessage());
+    }
+
+    /**
+     * This method handles the {@link StartingGameMessage}
+     * @author Alessandro Fornara
+     * @param m message
+     */
+    private void handleStartingGameMessage(Message m){
+        outputStream.println(((StartingGameMessage) m).getS());
+        sendMessageToServer(new ACKMessage());
+    }
+
+    /**
+     * This method handles the {@link WaitingMessage}
+     * @author Alessandro Fornara
+     * @param m message
+     */
+    private void handleWaitingMessage(Message m){
+        outputStream.println(((WaitingMessage) m).getS());
+        sendMessageToServer(new ACKMessage());
+    }
     /**
      * This method handles the {@link FirstPlayerMessage}
      * @author Alessandro Fornara
@@ -176,6 +196,7 @@ public class CliView{
      */
     private void handleWinMessage(Message m){
         outputStream.println(((WinMessage) m).getS());
+        sendMessageToServer(new ACKMessage());
     }
 
     /**
