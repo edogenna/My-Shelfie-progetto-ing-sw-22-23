@@ -326,13 +326,49 @@ public class Model {
      * @author Alessandro Fornara
      * @return the active player's bookshelf
      */
-    public ItemEnum[][] getShelf(){return activePlayer.getMatrixBookshelf();}
+    public ItemEnum[][] getActivePlayerShelf(){return activePlayer.getMatrixBookshelf();}
+
+    /**
+     * @author Donato Fiore
+     * @param username the name of the player concerned
+     * @return the player's bookshelf
+     */
+    public ItemEnum[][] getPlayerShelf(String username){
+        int i;
+        int x=-1;
+        for(i=0; i<players.length; i++){
+            if(players[i].getUsername().equals(username))
+                x = i;
+        }
+        if(x<0){
+            return null;
+        }
+        return players[x].getMatrixBookshelf();
+    }
 
     /**
      * @author Alessandro Fornara
      * @return The active player's personal card
      */
-    public Card getPersonalCard(){return activePlayer.getPersonalCard();}
+    public Card getActivePlayerPersonalCard(){return activePlayer.getPersonalCard();}
+
+    /**
+     * @author Donato Fiore
+     * @param username the name of the player concerned
+     * @return the player's PersonalCard
+     */
+    public Card getPlayerPersonalCard(String username){
+        int i;
+        int x=-1;
+        for(i=0; i<players.length; i++){
+            if(players[i].getUsername().equals(username))
+                x = i;
+        }
+        if(x<0){
+            return null;
+        }
+        return players[x].getPersonalCard();
+    }
 
     //todo: test this method
     /**
@@ -362,15 +398,6 @@ public class Model {
             board.refill();
 
         return finish;
-    }
-
-    /**
-     * This method returns the players of the game
-     * @author Samuele Pietro Galli
-     * @return an array of players {@link Player}
-     */
-    public Player[] getPlayers() {
-        return this.players;
     }
 
     //TODO: test this method
@@ -433,8 +460,19 @@ public class Model {
         return c.convertModelToJSON(this);
     }
 
+
+    //TODO: i don't think it is correct doing this; control the test method e modify it;
     public Board getBoard() {
         return board;
+    }
+
+    /**
+     * This method returns the players of the game
+     * @author Samuele Pietro Galli
+     * @return an array of players {@link Player}
+     */
+    public Player[] getPlayers() {
+        return this.players;
     }
 
     public void setBoard(Board board) {

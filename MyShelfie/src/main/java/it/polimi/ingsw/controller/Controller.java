@@ -2,7 +2,6 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
-import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.view.CliView;
 
@@ -380,7 +379,7 @@ public class Controller {
      * @author Alessandro Fornara
      * @return The active player's personal card
      */
-    public Card getActivePlayerPersonalCard(){return model.getPersonalCard();}
+    public Card getActivePlayerPersonalCard(){return model.getActivePlayerPersonalCard();}
 
     public void setView(CliView view) {
         this.view = view;
@@ -408,7 +407,7 @@ public class Controller {
      * @author Alessandro Fornara
      * @return the active player's bookshelf
      */
-    public ItemEnum[][] getActivePlayershelf(){return model.getShelf();}
+    public ItemEnum[][] getActivePlayershelf(){return model.getActivePlayerShelf();}
 
     public String getModelSave(){
         return model.saveModel();

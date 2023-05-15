@@ -2,7 +2,6 @@ package it.polimi.ingsw.ModelTests;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Player;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class insertTest {
 
         //insert da rivedere
         m.insert(x1,y1,col);
-        s=m.getShelf();
+        s=m.getActivePlayerShelf();
         Assert.assertEquals(m.getBoardMatrix()[x1][y1], ItemEnum.BLANK);
         Assert.assertEquals(tile, s[5][0]);
     }

@@ -117,7 +117,7 @@ public class insert2Test {
         col=0;
         tile1 = m.getBoardMatrix()[x1][y1];
         tile2 = m.getBoardMatrix()[x2][y2];
-        s=m.getShelf();
+        s=m.getActivePlayerShelf();
         //insert da rivedere
         m.insert(x1,y1,x2,y2,col);
         Assert.assertEquals(m.getBoardMatrix()[x1][y1], ItemEnum.BLANK);
