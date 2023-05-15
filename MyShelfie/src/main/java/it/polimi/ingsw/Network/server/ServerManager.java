@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Network.client.RmiClient;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
@@ -223,8 +222,7 @@ public class ServerManager implements Runnable{
 
             //Sending graphical info on the game's status
             for (Integer i : this.lobby.keySet()) {
-                //TODO: CHANGE THIS for, WE HAVE TO SEND TO EACH PLAYER HIS OWN PERSONAL CARD AND BOOKSHELF, NOT THE ACTIVE PLAYER'S
-                sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getActivePlayershelf(), activeMatch.getActivePlayerPersonalCard(), activeUsername));
+                sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
             }
 
             //Sending to the active player a move request and handling the answer

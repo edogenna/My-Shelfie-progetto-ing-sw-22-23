@@ -14,19 +14,8 @@ public class Controller {
     }
     public Controller(Model m) {this.model = m;}
 
-    @Deprecated
-    public Controller(int x, CliView view){
-        this.model = new Model(x);
-        this.view = view;
-    }
-
     public int getNumPlayers(){
         return this.model.getNumPlayers();
-    }
-
-    @Deprecated
-    public boolean duplicatedUsername(String x){
-        return this.model.duplicatedUsername(x);
     }
 
     public void setUsernamePlayer(String name){
@@ -381,16 +370,8 @@ public class Controller {
      */
     public Card getActivePlayerPersonalCard(){return model.getActivePlayerPersonalCard();}
 
-    public void setView(CliView view) {
-        this.view = view;
-    }
-
     public void setModel(Model model) {
         this.model = model;
-    }
-
-    public CliView getView() {
-        return view;
     }
 
     public Model getModel() {
@@ -407,9 +388,17 @@ public class Controller {
      * @author Alessandro Fornara
      * @return the active player's bookshelf
      */
-    public ItemEnum[][] getActivePlayershelf(){return model.getActivePlayerBookshelf();}
+    public ItemEnum[][] getActivePlayerShelf(){return model.getActivePlayerBookshelf();}
 
     public String getModelSave(){
         return model.saveModel();
+    }
+
+    public Card getPlayerPersonalCard(String username){
+        return model.getPlayerPersonalCard(username);
+    }
+
+    public ItemEnum[][] getPlayerBookshelf(String username){
+        return model.getPlayerBookshelf(username);
     }
 }

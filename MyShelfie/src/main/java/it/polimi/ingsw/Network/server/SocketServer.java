@@ -245,7 +245,7 @@ public class SocketServer implements Runnable{
 
     //TODO: I have to find a way to serialize the commonCards, I could use Strings like in the message
     //DO NOT USE THIS METHOD FOR NOW
-    private Controller checkMemoryDisk() throws IOException {
+    /*private Controller checkMemoryDisk() throws IOException {
         Model m = loadGame();
         int i = 0;
         boolean samePlayers = true;
@@ -272,7 +272,7 @@ public class SocketServer implements Runnable{
             controller.setFirstPlayer();
         }
         return controller;
-    }
+    }*/
 
     private void registry(Socket client) throws IOException {
         System.out.println("socket registry method!");
