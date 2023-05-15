@@ -400,7 +400,6 @@ public class Model {
         return finish;
     }
 
-    //TODO: test this method
     /**
      * @author Donato Fiore
      * @return the points of the winner player
