@@ -11,7 +11,7 @@ import java.rmi.NotBoundException;
 /**
  * Main client class that starts a socket client or an RMI client.
  */
-public class Client implements Runnable{
+public class Client {
     static String hostName;
     static String portNumber;
     public static void main(String[] args) throws IOException, NotBoundException {
@@ -28,11 +28,6 @@ public class Client implements Runnable{
             case 0 -> new SocketClient().startSocketClient(hostName, Integer.parseInt(portNumber));
             case 1 -> new RmiClient().startRMIClient();
         }
-    }
-
-    @Override
-    public void run() {
-
     }
 
     public void stop() throws IOException {

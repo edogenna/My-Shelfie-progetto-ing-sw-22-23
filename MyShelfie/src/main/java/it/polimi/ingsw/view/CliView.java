@@ -31,6 +31,7 @@ public class CliView{
     private String myUsername;
     private String userInput;
     private RmiServerInterface remoteObject;
+    private String messageToServer;
 
     public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn, RmiServerInterface remoteObject){
         this.out = out;
@@ -53,7 +54,7 @@ public class CliView{
      * @param m message
      * @throws IOException
      */
-    public void actionHandler(Message m) throws IOException {
+    public String actionHandler(Message m) throws IOException {
 
         switch (m.getType()) {
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
@@ -73,6 +74,8 @@ public class CliView{
             case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
+
+        return messageToServer;
     }
 
     /**
@@ -80,9 +83,11 @@ public class CliView{
      * @author Alessandro Fornara
      * @param m message
      */
-    private void handleLobbyMessage(Message m){
+    private void handleLobbyMessage(Message m) throws IOException {
         outputStream.println(((LobbyMessage) m).getS());
-        sendMessageToServer(new ACKMessage());
+        if(out != null)
+            sendMessageToServer(new ACKMessage());
+        else sendMessageToRmiServer(new ACKMessage());
     }
 
     /**
@@ -90,9 +95,11 @@ public class CliView{
      * @author Alessandro Fornara
      * @param m message
      */
-    private void handleStartingGameMessage(Message m){
+    private void handleStartingGameMessage(Message m) throws IOException {
         outputStream.println(((StartingGameMessage) m).getS());
-        sendMessageToServer(new ACKMessage());
+        if(out != null)
+            sendMessageToServer(new ACKMessage());
+        else sendMessageToRmiServer(new ACKMessage());
     }
 
     /**
@@ -100,9 +107,11 @@ public class CliView{
      * @author Alessandro Fornara
      * @param m message
      */
-    private void handleWaitingMessage(Message m){
+    private void handleWaitingMessage(Message m) throws IOException {
         outputStream.println(((WaitingMessage) m).getS());
-        sendMessageToServer(new ACKMessage());
+        if(out != null)
+            sendMessageToServer(new ACKMessage());
+        else sendMessageToRmiServer(new ACKMessage());
     }
     /**
      * This method handles the {@link FirstPlayerMessage}
@@ -119,7 +128,7 @@ public class CliView{
         }
         if(out != null)
             sendMessageToServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
-        else sendMessageToServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)), 2);
+        else sendMessageToRmiServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
     }
 
     /**
@@ -135,7 +144,7 @@ public class CliView{
         if(out != null)
             sendMessageToServer(new UsernameAnswer(userInput));
         else
-            sendMessageToServer(new UsernameAnswer(userInput), 1);
+            sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
 
     /**
@@ -150,7 +159,7 @@ public class CliView{
         this.myUsername = userInput;
         if(out != null)
             sendMessageToServer(new UsernameAnswer(userInput));
-        else sendMessageToServer(new UsernameAnswer(userInput), 1);
+        else sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
 
     /**
@@ -172,7 +181,7 @@ public class CliView{
             userInput = stdIn.readLine();
             if(out != null)
                 sendMessageToServer(new MoveAnswer(userInput));
-            else sendMessageToServer(new MoveAnswer(userInput), 3);
+            else sendMessageToRmiServer(new MoveAnswer(userInput));
         } else {
             outputStream.println(gameInformation.getActivePlayerUsername() + " is making his move...");
         }
@@ -187,16 +196,18 @@ public class CliView{
         userInput = stdIn.readLine();
         if(out != null)
             sendMessageToServer(new MoveAnswer(userInput));
-        else sendMessageToServer(new MoveAnswer(userInput), 3);
+        else sendMessageToRmiServer(new MoveAnswer(userInput));
     }
 
     /**
      * This method handles the {@link WinMessage}
      * @param m message
      */
-    private void handleWinMessage(Message m){
+    private void handleWinMessage(Message m) throws IOException {
         outputStream.println(((WinMessage) m).getS());
-        sendMessageToServer(new ACKMessage());
+        if(out != null)
+            sendMessageToServer(new ACKMessage());
+        else sendMessageToRmiServer(new ACKMessage());
     }
 
     /**
@@ -235,19 +246,9 @@ public class CliView{
         out.println(jsonString);
     }
 
-    private void sendMessageToServer(Message m, int x) throws IOException {
+    private void sendMessageToRmiServer(Message m) throws IOException {
         String jsonString = c.convertToJSON(m);
-        switch (x){
-            case 1:
-                //while (!remoteObject.isUsernameTaken(jsonString))
-                {
-                    outputStream.println(((NotValidUsernameError) m).getS());
-                    userInput = stdIn.readLine();
-                    this.myUsername = userInput;
-                }
-            case 2: //Number of players;
-            case 3: //Move function;
-        }
+        this.messageToServer = jsonString;
     }
 
     @Deprecated

@@ -6,10 +6,5 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface RmiServerInterface extends Remote {
-    public String notifyMyConnection() throws RemoteException;
-    public String notifyOtherConnections() throws RemoteException;
-    //public boolean isUsernameTaken(String nickname) throws RemoteException;
-    public int getNumberOfActivePlayers() throws RemoteException;
-    public int getNumberOfPlayers() throws RemoteException;
     public void registry(RmiClientInterface client) throws RemoteException;
 }
