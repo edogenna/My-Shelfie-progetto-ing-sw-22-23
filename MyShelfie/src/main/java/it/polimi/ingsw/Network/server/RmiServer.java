@@ -21,41 +21,6 @@ public class RmiServer implements RmiServerInterface, Runnable{
         this.rmiPort = port;
     }
 
-    /**
-     * @author Donato Fiore
-     * it prints in the server when a rmi client has connected
-     * */
-    @Override
-    public String notifyMyConnection(){
-        System.out.println("Rmi User connected");
-        //ClientInformation inf = new ClientInformation(null, null, null, connectedClients.size()-1);
-        //connectedClients.add(inf);
-        //activePlayers = connectedClients.size();
-//        sendMessageToObservers(new LobbyMessage(this.activePlayers, numberOfPlayers));
-//        sendMessageToObservers(new WaitingMessage());
-//        return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
-        return new Converter().convertToJSON(new ChooseUsernameMessage());
-    }
-
-    @Override
-    public String notifyOtherConnections(){
-        System.out.println("user connected");
-        //return new Converter().convertToJSON(new LobbyMessage(connectedClients.size(), numberOfPlayers));
-        return null;
-    }
-
-    @Override
-    public int getNumberOfActivePlayers(){
-        //return this.activePlayers;
-        return 0;
-    }
-
-    @Override
-    public int getNumberOfPlayers(){
-        //return this.numberOfPlayers;
-        return 0;
-    }
-
     @Override
     public void registry(RmiClientInterface client) throws RemoteException {
         System.out.println("registry method!");
