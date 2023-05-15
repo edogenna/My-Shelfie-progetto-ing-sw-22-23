@@ -35,7 +35,7 @@ public class insert3Test {
         tile1 = m.getBoardMatrix()[x1][y1];
         tile2 = m.getBoardMatrix()[x2][y2];
         tile3 = m.getBoardMatrix()[x3][y3];
-        s=m.getActivePlayerShelf();
+        s=m.getActivePlayerBookshelf();
         //TODO: riguardare le coordinate delle tre tessere
         m.insert(x1,y1,col);
         Assert.assertEquals(m.getBoardMatrix()[x1][y1], ItemEnum.BLANK);

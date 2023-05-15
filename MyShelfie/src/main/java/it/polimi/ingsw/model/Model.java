@@ -326,14 +326,14 @@ public class Model {
      * @author Alessandro Fornara
      * @return the active player's bookshelf
      */
-    public ItemEnum[][] getActivePlayerShelf(){return activePlayer.getMatrixBookshelf();}
+    public ItemEnum[][] getActivePlayerBookshelf(){return activePlayer.getMatrixBookshelf();}
 
     /**
      * @author Donato Fiore
      * @param username the name of the player concerned
      * @return the player's bookshelf
      */
-    public ItemEnum[][] getPlayerShelf(String username){
+    public ItemEnum[][] getPlayerBookshelf(String username){
         int i;
         int x=-1;
         for(i=0; i<players.length; i++){

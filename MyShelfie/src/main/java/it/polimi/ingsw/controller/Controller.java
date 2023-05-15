@@ -407,7 +407,7 @@ public class Controller {
      * @author Alessandro Fornara
      * @return the active player's bookshelf
      */
-    public ItemEnum[][] getActivePlayershelf(){return model.getActivePlayerShelf();}
+    public ItemEnum[][] getActivePlayershelf(){return model.getActivePlayerBookshelf();}
 
     public String getModelSave(){
         return model.saveModel();

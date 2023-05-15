@@ -35,7 +35,7 @@ public class insertTest {
 
         //insert da rivedere
         m.insert(x1,y1,col);
-        s=m.getActivePlayerShelf();
+        s=m.getActivePlayerBookshelf();
         Assert.assertEquals(m.getBoardMatrix()[x1][y1], ItemEnum.BLANK);
         Assert.assertEquals(tile, s[5][0]);
     }
