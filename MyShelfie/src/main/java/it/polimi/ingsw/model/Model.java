@@ -429,7 +429,6 @@ public class Model {
         return this.activePlayer.getMyPoints();
     }
 
-    //TODO: test this method
     /**
      * @author Donato Fiore
      * @param x the position of the first player
@@ -466,78 +465,7 @@ public class Model {
         return board;
     }
 
-    /**
-     * This method returns the players of the game
-     * @author Samuele Pietro Galli
-     * @return an array of players {@link Player}
-     */
-    public Player[] getPlayers() {
-        return this.players;
-    }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
-    public void setPlayers(Player[] players) {
-        this.players = players;
-    }
-
-    public Player getActivePlayer() {
-        return activePlayer;
-    }
-
-    public void setActivePlayer(Player activePlayer) {
-        this.activePlayer = activePlayer;
-    }
-
-    public Card[] getPersonalCards() {
-        return personalCards;
-    }
-
-    public void setPersonalCards(Card[] personalCards) {
-        this.personalCards = personalCards;
-    }
-
-    public int getCommonPoints1() {
-        return commonPoints1;
-    }
-
-    public void setCommonPoints1(int commonPoints1) {
-        this.commonPoints1 = commonPoints1;
-    }
-
-    public int getCommonPoints2() {
-        return commonPoints2;
-    }
-
-    public void setCommonPoints2(int commonPoints2) {
-        this.commonPoints2 = commonPoints2;
-    }
-
-    public int getIdFirstPlayer() {
-        return idFirstPlayer;
-    }
-
-    public void setIdFirstPlayer(int idFirstPlayer) {
-        this.idFirstPlayer = idFirstPlayer;
-    }
-
-    public int getIdActivePlayer() {
-        return idActivePlayer;
-    }
-
-    public void setIdActivePlayer(int idActivePlayer) {
-        this.idActivePlayer = idActivePlayer;
-    }
-
-    public boolean isLastTurn() {
-        return lastTurn;
-    }
-
-    public void setLastTurn(boolean lastTurn) {
-        this.lastTurn = lastTurn;
-    }
     /*
 * 0 - 1 - 2 - 3
 * start 1;
