@@ -10,7 +10,7 @@ public class dummyInputTest {
     String inputTest1n = "ok";
     String in = "x,y,x,y,x,y,c";
     String wrongIn = "xy,x,y,x,y,c";
-
+    String space = "f,5 , c,5, d, 6";
     String firstOk = "c,2,c,3,d,4,3";
 
 
@@ -41,12 +41,11 @@ public class dummyInputTest {
        //controllo su una stringa ok
        Assert.assertFalse(c.dummyInput(firstOk));
 
-       //controllo inu+put con spazi
-       Assert.assertFalse(c.dummyInput(space));
+       //controllo input con spazi
+       Assert.assertTrue(c.dummyInput(space));
 
 
     }
-        String space = "f,5 , c,5, d, 6";
 
     public void setC(Controller c) {
         this.c = c;
