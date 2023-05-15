@@ -464,6 +464,14 @@ public class Model {
         return board;
     }
 
+    /**
+     * This method returns the players of the game
+     * @author Samuele Pietro Galli
+     * @return an array of players {@link Player}
+     */
+    public Player[] getPlayers() {
+        return this.players;
+    }
 
     /*
 * 0 - 1 - 2 - 3
