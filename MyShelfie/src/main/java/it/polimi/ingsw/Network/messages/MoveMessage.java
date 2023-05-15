@@ -7,13 +7,9 @@ import it.polimi.ingsw.model.Card;
  * Message to send generic information about the game to the user and ask for a player's move
  * @author Alessandro Fornara
  */
-public final class GameInformationMessage extends Message {
+public final class MoveMessage extends Message {
 
-    private final ItemEnum[][] board;
-    private final ItemEnum[][] shelf;
-    private final Card personalCard;
-    private final String[] commonCards;
-    private String activePlayerUsername;
+    private final String activePlayerUsername;
 
     private final String s = "it's your turn." +
                              "Please insert which tiles you would like to remove from the board and the column of your bookshelf you want to put your tiles in\n" +
@@ -21,29 +17,9 @@ public final class GameInformationMessage extends Message {
                              "Example: x1,y1,x2,y2,x3,y3,column\n" +
                              "Example: a,3,a,4,a,5,column";
 
-    public GameInformationMessage(ItemEnum[][] board, ItemEnum[][] shelf, Card personalCard, String[] commonCards, String username) {
-        super("GameInformation");
-        this.board = board;
-        this.shelf = shelf;
-        this.personalCard = personalCard;
+    public MoveMessage(String username) {
+        super("MoveMessage");
         this.activePlayerUsername = username;
-        this.commonCards = commonCards;
-    }
-
-    public ItemEnum[][] getBoard() {
-        return this.board;
-    }
-
-    public ItemEnum[][] getShelf() {
-        return this.shelf;
-    }
-
-    public Card getPersonalCard(){
-        return this.personalCard;
-    }
-
-    public String[] getCommonCards(){
-        return this.commonCards;
     }
 
     public String getActivePlayerUsername() {

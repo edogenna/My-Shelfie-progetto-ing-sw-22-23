@@ -57,12 +57,13 @@ public class CliView{
     public String actionHandler(Message m) throws IOException {
 
         switch (m.getType()) {
+            case "MoveMessage" -> handleMoveMessage(m);
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
             case "Lobby" -> {handleLobbyMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
-            case "GameInformation" -> {handleGameInformationMessage(m);}
+            case "GraphicalGameInfo" -> {handleGraphicalInfoMessage(m);}
             case "Waiting" -> {handleWaitingMessage(m);}
             case "NotValidMove" -> {dummyInputPrint(m); handleNotValidMove();}
             case "Winner" -> handleWinMessage(m);
@@ -78,6 +79,13 @@ public class CliView{
         return messageToServer;
     }
 
+    private void handleMoveMessage(Message m) throws IOException{
+        outputStream.println(((MoveMessage) m).getS());
+        userInput = stdIn.readLine();
+        if(out != null)
+            sendMessageToServer(new MoveAnswer(userInput));
+        else sendMessageToRmiServer(new MoveAnswer(userInput));
+    }
     /**
      * This method handles the {@link LobbyMessage}
      * @author Alessandro Fornara
@@ -163,28 +171,24 @@ public class CliView{
     }
 
     /**
-     * This method handles the {@link GameInformationMessage}
+     * This method handles the {@link GraphicalGameInfo}
      * @author Alessandro Fornara
      * @param m message
      * @throws IOException
      */
-    private void handleGameInformationMessage(Message m) throws IOException {
-        GameInformationMessage gameInformation = (GameInformationMessage) m;
-        this.board = gameInformation.getBoard();
-        this.CommonCards = gameInformation.getCommonCards();
+    private void handleGraphicalInfoMessage(Message m) throws IOException {
+        GraphicalGameInfo graphicalGameInfo = (GraphicalGameInfo) m;
+        this.board = graphicalGameInfo.getBoard();
+        this.CommonCards = graphicalGameInfo.getCommonCards();
+        this.personalCard = graphicalGameInfo.getPersonalCard();
+        this.shelf = graphicalGameInfo.getShelf();
         printGame();
-        if(gameInformation.getActivePlayerUsername().equals(this.myUsername)){
-            this.personalCard = gameInformation.getPersonalCard();
-            this.shelf = gameInformation.getShelf();
-            printBookshelfAndPersonal();
-            outputStream.println(gameInformation.getS());
-            userInput = stdIn.readLine();
-            if(out != null)
-                sendMessageToServer(new MoveAnswer(userInput));
-            else sendMessageToRmiServer(new MoveAnswer(userInput));
-        } else {
-            outputStream.println(gameInformation.getActivePlayerUsername() + " is making his move...");
-        }
+        printBookshelfAndPersonal();
+        outputStream.println(graphicalGameInfo.getS());
+
+        if(out != null)
+            sendMessageToServer(new ACKMessage());
+        else sendMessageToRmiServer(new ACKMessage());
     }
 
     /**

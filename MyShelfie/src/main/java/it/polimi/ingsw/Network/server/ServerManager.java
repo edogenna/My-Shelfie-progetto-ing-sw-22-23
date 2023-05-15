@@ -3,9 +3,10 @@ package it.polimi.ingsw.Network.server;
 import it.polimi.ingsw.Network.client.RmiClient;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.*;
+import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
-import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
+import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.controller.Controller;
 
 import java.io.IOException;
@@ -61,6 +62,16 @@ public class ServerManager implements Runnable{
     public String getNickname(int playerId) {
         return nicknames.get(playerId);
     }
+
+    private int getNumberByUsernameFromLobby(String value) {
+        for (Map.Entry<Integer, String> entry : lobby.entrySet()) {
+            if (entry.getValue().equals(value)) {
+                return entry.getKey();
+            }
+        }
+        return -1;
+    }
+
 
     public int getNumber(Socket client){
         int x = -1;
@@ -161,6 +172,10 @@ public class ServerManager implements Runnable{
         }
         lobby.put(number, username);
         notifyNewConnection(this.numberOfPlayers);
+
+        if(lobby.size() == this.numberOfPlayers){
+            startGame();
+        }
     }
 
     private void notifyNewConnection(int numberOfPlayers) {
@@ -190,6 +205,93 @@ public class ServerManager implements Runnable{
         }
         nicknames.put(idClient, nickname);
         return false;
+    }
+
+    private void startGame() {
+        activeMatch = new Controller(this.numberOfPlayers);
+        boolean win = false;
+
+        for (Integer i : this.lobby.keySet()) {
+            activeMatch.setUsernamePlayer(lobby.get(i));
+        }
+        activeMatch.setFirstPlayer();
+        while (!win) {
+
+//            saveGame();
+//            System.out.println("Game has been saved");
+            String activeUsername = activeMatch.getActivePlayerUsername();
+
+            //Sending graphical info on the game's status
+            for (Integer i : this.lobby.keySet()) {
+                //TODO: CHANGE THIS for, WE HAVE TO SEND TO EACH PLAYER HIS OWN PERSONAL CARD AND BOOKSHELF, NOT THE ACTIVE PLAYER'S
+                sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getActivePlayershelf(), activeMatch.getActivePlayerPersonalCard(), activeUsername));
+            }
+
+            //Sending to the active player a move request and handling the answer
+            int x = getNumberByUsernameFromLobby(activeUsername);
+            String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
+            Message m = converter.convertFromJSON(answer);
+            handleMoveAnswer(x, m);
+            win = activeMatch.finishTurn();
+
+            if (win) {
+                int points = activeMatch.declareWinner();
+                for (Integer j : this.lobby.keySet()) {
+                    sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                }
+            }
+
+        }
+    }
+
+    private void handleMoveAnswer(int number, Message m){
+        if (activeMatch.dummyInput(((MoveAnswer) m).getS())){
+            sendMessageAndWaitForAnswer(number, new NotValidMoveError());
+        } else {
+            String[] tiles = ((MoveAnswer) m).getS().split(",");
+            int i = tiles.length;
+            int done = 0;
+            //i = number of tiles * 2 + 1;
+            switch (i) {
+                case 3:
+                    //we have taken 1 tile;
+                    done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                    break;
+                case 5:
+                    //we have taken 2 tiles;
+                    done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
+                    break;
+                case 7:
+                    //we have taken 3 tiles;
+                    done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
+                    break;
+            }
+            if(done == 1) {
+                sendMessageAndWaitForAnswer(number, new EmptyPositionError());
+            }else if(done == 2){
+                sendMessageAndWaitForAnswer(i, new NotEnoughSpaceBookshelfError());
+            }else if(done == 3){
+                sendMessageAndWaitForAnswer(i, new NoFreeSideError());
+            }else if(done == 4){
+                sendMessageAndWaitForAnswer(i, new NotAdjacTiles());
+            }else if(done == 5){
+                sendMessageAndWaitForAnswer(i, new NotEnoughSpaceColumnError());
+            }
+            else if(done == 0){
+                int points1 = activeMatch.controlCommonCards(0);
+                int points2 = activeMatch.controlCommonCards(1);
+                if(points1!=0){
+                    for (Integer j : this.lobby.keySet()) {
+                        sendMessageAndWaitForAnswer(j, new CommonCardMessage(this.lobby.get(number), 1, points1));
+                    }
+                }
+                if(points2!=0){
+                    for (Integer j : this.lobby.keySet()) {
+                        sendMessageAndWaitForAnswer(j, new CommonCardMessage(this.lobby.get(number), 2, points2));
+                    }
+                }
+            }
+        }
     }
 
     @Override

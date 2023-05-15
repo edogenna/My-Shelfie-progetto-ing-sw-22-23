@@ -75,7 +75,7 @@ public class SocketServer implements Runnable{
         System.out.println("Server ready");
 
         LobbyPhase();
-        GamePhase();
+        //GamePhase();
     }
 
     /**
@@ -181,7 +181,7 @@ public class SocketServer implements Runnable{
      * @author Alessandro Fornara
      * @throws InterruptedException
      */
-    private void GamePhase() throws InterruptedException, IOException {
+ /*   private void GamePhase() throws InterruptedException, IOException {
 
         //TODO: checks if there is a game saved on disk and creates the controller using the other constructor if true
         controller = new Controller(numberOfPlayers);
@@ -196,14 +196,14 @@ public class SocketServer implements Runnable{
 //            saveGame();
 //            System.out.println("Game has been saved");
 
-            sendMessageToObservers(new GameInformationMessage(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
+            sendMessageToObservers(new MoveMessage(controller.getBoard(), controller.getActivePlayershelf(), controller.getActivePlayerPersonalCard(), controller.getCommonCardsDesigns(), controller.getActivePlayerUsername()));
             while (!this.Lock1.tryAcquire());
             if(win){
                 int points = controller.declareWinner();
                 sendMessageToObservers(new WinMessage(controller.getActivePlayerUsername(), points));
             }
         }
-    }
+    }*/
 
     /**
      * This method saves the game

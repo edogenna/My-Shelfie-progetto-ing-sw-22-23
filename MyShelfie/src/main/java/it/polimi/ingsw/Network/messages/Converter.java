@@ -26,6 +26,8 @@ public class Converter {
         JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
         String type = jsonObject.get("type").getAsString();
         switch(type) {
+            case "MoveMessage":
+                return gson.fromJson(message, MoveMessage.class);
             case "ACK":
                 return gson.fromJson(message, ACKMessage.class);
             case "FirstPlayer":
@@ -40,8 +42,8 @@ public class Converter {
                 return gson.fromJson(message, StartingGameMessage.class);
             case "ChooseUsername":
                 return gson.fromJson(message, ChooseUsernameMessage.class);
-            case "GameInformation":
-                return gson.fromJson(message, GameInformationMessage.class);
+            case "GraphicalGameInfo":
+                return gson.fromJson(message, GraphicalGameInfo.class);
             case "UsernameAnswer":
                 return gson.fromJson(message, UsernameAnswer.class);
             case "Move":
