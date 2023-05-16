@@ -44,26 +44,6 @@ public class Board {
         this.matrix = matrix;
     }
 
-    public void setNumPlayers(int numPlayers) {
-        this.numPlayers = numPlayers;
-    }
-
-    public void setNumItemRemained(int[] numItemRemained) {
-        this.numItemRemained = numItemRemained;
-    }
-
-    public void setCommonCards(CommonCardStrategy[] commonCards) {
-        CommonCards = commonCards;
-    }
-
-    public int getNumPlayers() {
-        return numPlayers;
-    }
-
-    public int[] getNumItemRemained() {
-        return numItemRemained;
-    }
-
 
     public Board(int numPlayers) {
         matrix = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
@@ -86,7 +66,6 @@ public class Board {
 
         if(first == second)
             assignFirstAndSecond();
-        else setCommonCards(first, second);
 
     }
 
@@ -288,9 +267,9 @@ public class Board {
         this.first = CommonCards[0].getNumber();
         this.second = CommonCards[1].getNumber();
     }
-    private void setCommonCards ( int first, int second){
-
-        switch (first) {
+    public void setCommonCards(){
+        this.CommonCards = new CommonCardStrategy[2];
+        switch (this.first) {
             case 1 -> CommonCards[0] = new CommonCard01();
             case 2 -> CommonCards[0] = new CommonCard02();
             case 3 -> CommonCards[0] = new CommonCard03();
@@ -305,7 +284,7 @@ public class Board {
             case 12 -> CommonCards[0] = new CommonCard12();
         }
 
-        switch (second) {
+        switch (this.second) {
             case 1 -> CommonCards[1] = new CommonCard01();
             case 2 -> CommonCards[1] = new CommonCard02();
             case 3 -> CommonCards[1] = new CommonCard03();

@@ -224,7 +224,14 @@ public class ServerManager implements Runnable{
     }
 
     private void startGame() throws IOException {
-        activeMatch = checkMemoryDisk();
+        //activeMatch = checkMemoryDisk();
+        //TODO: fix bug of first turn after reloading game
+        activeMatch = new Controller(numberOfPlayers);
+        System.out.println("A new game has been created");
+        for (Integer j : this.lobby.keySet()) {
+            activeMatch.setUsernamePlayer(lobby.get(j));
+        }
+        activeMatch.setFirstPlayer();
 
         boolean win = false;
 
@@ -395,23 +402,19 @@ public class ServerManager implements Runnable{
         boolean samePlayers = true;
 
         if(m!=null) {
+            m.getBoard().setCommonCards();
             Player[] players = m.getPlayers();
             ArrayList<String> oldUsernames = new ArrayList<>();
 
-            for(int k=0; i<players.length; i++){
+            for(int k=0; k<players.length; k++){
                 oldUsernames.add(players[k].getUsername());
             }
 
             if (oldUsernames.size() == this.numberOfPlayers) {
 
                 Utils.mergeSort(oldUsernames, 0, oldUsernames.size() - 1);
-                for(String s: oldUsernames)
-                    System.out.println(s);
                 List<String> lobbyList = new ArrayList<>(lobby.values());
                 Utils.mergeSort(lobbyList, 0, lobbyList.size() - 1);
-
-                for(String s: lobbyList)
-                    System.out.println(s);
 
                 for(int k = 0; k<oldUsernames.size() && samePlayers; k++)
                     if(!lobbyList.get(k).equals(oldUsernames.get(k))){
