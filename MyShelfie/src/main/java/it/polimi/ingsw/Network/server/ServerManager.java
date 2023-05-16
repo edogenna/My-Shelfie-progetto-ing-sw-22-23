@@ -31,19 +31,22 @@ public class ServerManager implements Runnable{
     private final Map<Integer, String> nicknames = new HashMap<>();
     //private final Map<Integer, Controller> activeMatches = new HashMap<>();
     Controller activeMatch;
-    //private final List<Integer> awayFromKeyboardOrDisconnected = new ArrayList<>();
+    private final List<Integer> awayFromKeyboardOrDisconnected = new ArrayList<>();
     Converter converter = new Converter();
     private SocketServer socketServer;
     private RmiServer rmiServer;
     private SocketServerChat socketServerChat;
 
+    private final int secondsDuringTurn = 120;
     private int idClient = 0;
     private int idClientChat = 0;
-    private boolean firstPlayer = true;
-    int numberOfPlayers = 0;
-    //private int chosenBoard = 0;
+    private boolean firstPlayer;
+    private int numberOfPlayers;
+
 
     public ServerManager() {
+        this.firstPlayer = true;
+        this.numberOfPlayers = 0;
     }
 
     void addClient(Socket client) {
@@ -77,7 +80,6 @@ public class ServerManager implements Runnable{
         return -1;
     }
 
-
     public int getNumber(Socket client){
         int x = -1;
         for (Map.Entry<Integer, Socket> entry : socketClients.entrySet())
@@ -99,6 +101,10 @@ public class ServerManager implements Runnable{
     }
 
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
+        //TODO: create new message
+        if (isAwayFromKeyboardOrDisconnected(number))
+            return "the player is disconnected";
+
         String serializedMessage = converter.convertToJSON(message);
         while (!answerReady.get(number)) {
             try {
@@ -117,9 +123,11 @@ public class ServerManager implements Runnable{
             new Thread(communication).start();
         } else {
             System.out.println("Unregistered Client");
-            return "ERROR";
+            //TODO: new message
+            return "ERROR registration";
         }
 
+        boolean isTimeExceeded = false;
         int counter = 0;
         while (!answerReady.get(number)) {
             try {
@@ -148,6 +156,18 @@ public class ServerManager implements Runnable{
                     }
                 }
             }
+            if (counter > secondsDuringTurn * MILLIS_IN_SECOND / MILLIS_TO_WAIT) {
+                isTimeExceeded = true;
+                break;
+            }
+        }
+        if (isTimeExceeded) {
+/*            communication.setTimeExceeded();
+            if (activeMatches.containsKey(number)) {
+                awayFromKeyboardOrDisconnected.add(number);
+                activeMatches.get(number).disconnect(nicknames.get(number));
+            }
+            return Protocol.ERR;*/
         }
         return answers.get(number);
     }
@@ -156,11 +176,11 @@ public class ServerManager implements Runnable{
         String answer = sendMessageAndWaitForAnswer(number, new ChooseUsernameMessage());
         Message m = converter.convertFromJSON(answer);
 
-        while (isUsernameTaken(((UsernameAnswer) m).getS(), number)){
+        while (isUsernameTaken(((UsernameAnswer) m).getString(), number)){
             answer = sendMessageAndWaitForAnswer(number, new NotValidUsernameError());
             m = converter.convertFromJSON(answer);
         }
-        return ((UsernameAnswer) m).getS();
+        return ((UsernameAnswer) m).getString();
     }
 
     protected void clientLogin(int number){
@@ -299,6 +319,32 @@ public class ServerManager implements Runnable{
                 exit = true;
             }
         }
+    }
+
+    private boolean checkIfDisconnected(String code) {
+        int oldId;
+        try {
+            oldId = Integer.parseInt(code);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        if (isAwayFromKeyboardOrDisconnected(oldId))
+            return true;
+        if (!answerReady.getOrDefault(oldId, false))
+            return false;
+
+        //TODO: this is a temporary message, create new message for connection
+        sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
+        return isAwayFromKeyboardOrDisconnected(oldId);
+    }
+
+    /**
+     * @author Donato Fiore
+     * @param code the id of the player
+     * @return true if the player was disconnected or AFK
+     * */
+    public boolean isAwayFromKeyboardOrDisconnected(int code) {
+        return awayFromKeyboardOrDisconnected.contains(code);
     }
 
     @Override

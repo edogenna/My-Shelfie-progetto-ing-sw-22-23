@@ -12,7 +12,7 @@ public final class UsernameAnswer extends Message {
         super("UsernameAnswer");
         this.s = usrn;
     }
-    public String getS() {
+    public String getString() {
         return s;
     }
 }

@@ -11,8 +11,6 @@ class Server {
     private static final int MAX_PORT = 50000;
 
     public static void main(String[] args) {
-        int socketPort;
-        int rmiPort;
         ServerManager serverManager;
         Scanner stdin = new Scanner(System.in);
         System.out.println("server starting...");
