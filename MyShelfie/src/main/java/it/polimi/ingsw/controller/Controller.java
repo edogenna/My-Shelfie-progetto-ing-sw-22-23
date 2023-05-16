@@ -142,9 +142,33 @@ public class Controller {
      * @return true if the tile has at least one free side
      * */
     private boolean tileFreeSide(int x, int y){
-        boolean done;
-        done = model.tileFreeSide(x,y);
-        return done;
+        return model.tileFreeSide(x,y);
+    }
+
+    /**
+     * @author Donato Fiore
+     * @param x1 the x's coordinate of the first tile
+     * @param y1 the y's coordinate of the first tile
+     * @param x2 the x's coordinate of the second tile
+     * @param y2 the y's coordinate of the second tile
+     * @return true if the two tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates, and they are next door
+     * */
+    private boolean adjacentTiles(int x1, int y1, int x2, int y2){
+        return model.adjacentTiles(x1,y1,x2,y2);
+    }
+
+    /**
+     * @author Donato Fiore
+     * @param x1 the x's coordinate of the first tile
+     * @param y1 the y's coordinate of the first tile
+     * @param x2 the x's coordinate of the second tile
+     * @param y2 the y's coordinate of the second tile
+     * @param x3 the x's coordinate of the third tile
+     * @param y3 the y's coordinate of the third tile
+     * @return true if the two tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates, and they are next door
+     * */
+    private boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
+        return model.adjacentTiles(x1,y1,x2,y2,x3,y3);
     }
 
     /**
@@ -155,19 +179,17 @@ public class Controller {
      * @param y2 the y's coordinate of the second tile
      * @return false is the move isn't allowed: no tileFreeSide or the tiles aren't adjacent
      * */
-    private boolean isFeasiblePickMove(int x1, int y1, int x2, int y2){
+    private boolean tileFreeSide(int x1, int y1, int x2, int y2){
         boolean done;
+
         done = model.tileFreeSide(x1,y1);
         if(!done)
             return false;
         done = model.tileFreeSide(x2,y2);
         if(!done)
             return false;
-        done = model.adjacentTiles(x1,y1,x2,y2);
-        if(!done)
-            return false;
 
-        return done;
+        return true;
     }
 
     /**
@@ -180,7 +202,7 @@ public class Controller {
      * @param y3 the y's coordinate of the third tile
      * @return false is the move isn't allowed: no tileFreeSide or the tiles aren't adjacent
      * */
-    private boolean isFeasiblePickMove(int x1, int y1, int x2, int y2, int x3, int y3){
+    private boolean tileFreeSide(int x1, int y1, int x2, int y2, int x3, int y3){
         boolean done;
         done = model.tileFreeSide(x1,y1);
         if(!done)
@@ -191,11 +213,8 @@ public class Controller {
         done = model.tileFreeSide(x3,y3);
         if(!done)
             return false;
-        done = model.adjacentTiles(x1,y1,x2,y2,x3,y3);
-        if(!done){
-            return false;
-        }
-        return done;
+
+        return true;
     }
 
 
@@ -203,11 +222,12 @@ public class Controller {
      * @author Donato Fiore
      * @return the code of the error or 0 if the move is done
      * ERROR CODES:
+     * ERROR CODES:
      * 0: move done;
      * 1: blankTiles error;
      * 2: enoughSpaceBookshelf error;
-     * 3: tileFreeSide error, no free side error;
-     * 4: isFeasiblePickMove error, no adjacent tiles' error;
+     * 3: tileFreeSide error;
+     * 4: adjacentTiles error;
      * 5: enoughSpaceColumn error;
      * */
     public int pickCard(int x, int y, int col){
@@ -227,7 +247,6 @@ public class Controller {
             return 3;
 
         if(!model.enoughSpaceColumn(col, 1)){
-            //view.notEnoughSpaceBookshelfColPrint(col);
             return 5;
         }
         model.insert(x,y,col);
@@ -246,8 +265,8 @@ public class Controller {
      * 0: move done;
      * 1: blankTiles error;
      * 2: enoughSpaceBookshelf error;
-     * 3: tileFreeSide error, no free side error;
-     * 4: isFeasiblePickMove error, no adjacent tiles' error;
+     * 3: tileFreeSide error;
+     * 4: adjacentTiles error;
      * 5: enoughSpaceColumn error;
      * */
     public int pickCard(int x1, int y1, int x2, int y2, int col){
@@ -262,14 +281,18 @@ public class Controller {
         if(!done)
             return 2;
 
-        done = isFeasiblePickMove(x1,y1,x2,y2);
+        done = tileFreeSide(x1,y1,x2,y2);
         if(!done)
             return 3;
 
-        if(!model.enoughSpaceColumn(col, 2)){
-            //view.notEnoughSpaceBookshelfColPrint(col);
+        done = adjacentTiles(x1,y1,x2,y2);
+        if(!done)
+            return 4;
+
+        done = model.enoughSpaceColumn(col, 2);
+        if(!done)
             return 5;
-        }
+
         model.insert(x1,y1,x2,y2,col);
         return 0;
     }
@@ -288,8 +311,8 @@ public class Controller {
      * 0: move done;
      * 1: blankTiles error;
      * 2: enoughSpaceBookshelf error;
-     * 3: tileFreeSide error, no free side error;
-     * 4: isFeasiblePickMove error, no adjacent tiles' error;
+     * 3: tileFreeSide error;
+     * 4: adjacentTiles error;
      * 5: enoughSpaceColumn error;
      * */
     public int pickCard(int x1, int y1, int x2, int y2, int x3, int y3, int col){
@@ -304,14 +327,18 @@ public class Controller {
         if(!done)
             return 2;
 
-        done = isFeasiblePickMove(x1,y1,x2,y2,x3,y3);
+        done = tileFreeSide(x1,y1,x2,y2,x3,y3);
         if(!done)
             return 3;
 
-        if(!model.enoughSpaceColumn(col, 3)){
-            //view.notEnoughSpaceBookshelfColPrint(col);
+        done = adjacentTiles(x1,y1,x2,y2,x3,y3);
+        if(!done)
+            return 4;
+
+        done = model.enoughSpaceColumn(col, 3);
+        if(!done)
             return 5;
-        }
+
         model.insert(x1,y1,x2,y2,x3,y3,col);
         return 0;
     }

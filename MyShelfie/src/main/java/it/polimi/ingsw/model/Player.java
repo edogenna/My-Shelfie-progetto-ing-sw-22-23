@@ -253,7 +253,7 @@ public class Player {
      * @author Donato Fiore
      * @param j column selected
      * @param n number of tiles to insert
-     * @return false if the column has enough cells, true otherwise
+     * @return false if the column has enough cells, true if the column is full
      */
     public boolean isColumnFull(int j, int n){
         return this.heights[j] + n > 6;
