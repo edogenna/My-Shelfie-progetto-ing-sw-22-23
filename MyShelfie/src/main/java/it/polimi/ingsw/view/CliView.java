@@ -232,7 +232,9 @@ public class CliView{
      */
     private void printBookshelfAndPersonal(){
         outputStream.println("\n" + "Your Bookshelf:   Your Personal Card:");
-        ItemEnum.generateCharMatrix(shelf, 6, 5).appendToAllRows("   ")
+        ItemEnum.generateCharMatrix(shelf, 6, 5)
+                .addNumbering(5)
+                .appendToAllRows("   ")
                 .addOnRight(ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)).printMatrix();
     }
 
