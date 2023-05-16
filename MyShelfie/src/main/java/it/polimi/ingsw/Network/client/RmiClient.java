@@ -9,6 +9,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import it.polimi.ingsw.Constant;
 import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.Network.messages.Message;
 import it.polimi.ingsw.Network.messages.WaitingMessage;
@@ -36,7 +37,7 @@ public class RmiClient extends Client implements RmiClientInterface{
         this.c = new Converter();
 
         try {
-            rmiServerInterface = (RmiServerInterface) LocateRegistry.getRegistry(hostName, Integer.parseInt(portNumber)).lookup("MyShelfie");
+            rmiServerInterface = (RmiServerInterface) LocateRegistry.getRegistry(hostName, Constant.PORT_RMI_GAME).lookup("MyShelfie");
             rmiServerInterface.registry((RmiClientInterface) UnicastRemoteObject.exportObject(this, 0));;
         } catch (RemoteException | NotBoundException e) {
             System.out.println("Invalid parameters: " + e.getMessage());

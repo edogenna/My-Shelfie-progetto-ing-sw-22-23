@@ -73,6 +73,7 @@ public class CliView{
             case "NotAdjTiles" -> {outputStream.println(((NotAdjacTiles) m).getS()); handleNotValidMove();}
             case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS()); handleNotValidMove();}
             case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
+            case "ChatMessage" -> {handleChatMessage(m);}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
 
@@ -255,6 +256,17 @@ public class CliView{
     private void sendMessageToRmiServer(Message m) throws IOException {
         String jsonString = c.convertToJSON(m);
         this.messageToServer = jsonString;
+    }
+
+
+    private void handleChatMessage(Message m) throws IOException {
+        outputStream.print(((ChatMessage) m).getSender() + ": ");
+        outputStream.println(((ChatMessage) m).getMessage());
+
+        if(out != null)
+            sendMessageToServer(new ACKMessage());
+        else sendMessageToRmiServer(new ACKMessage());
+
     }
 
     @Deprecated
