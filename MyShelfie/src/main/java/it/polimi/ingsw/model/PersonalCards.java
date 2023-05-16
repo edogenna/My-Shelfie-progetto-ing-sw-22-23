@@ -1,9 +1,10 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.annotations.Expose;
 import it.polimi.ingsw.ItemEnum;
 
-//TODO: change names to "PersonalCard" and "Card" classes; however it isn't important
 public final class PersonalCards {
+     @Expose
      private final Card[] figure = new Card[12];
 
      //implementation of the 12 personal cards; each card has 6 triplets.
@@ -104,8 +105,11 @@ public final class PersonalCards {
 }
 
 class Triplet {
+     @Expose
      private final int x;
+     @Expose
      private final int y;
+     @Expose
      private final ItemEnum color;
 
      public Triplet(int x, int y, ItemEnum color){

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.messages;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import it.polimi.ingsw.Network.messages.Answers.ACKMessage;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
@@ -67,7 +68,9 @@ public class Converter {
     }
 
     public String convertModelToJSON(Model model){
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
+                .create();
         return gson.toJson(model);
     }
 

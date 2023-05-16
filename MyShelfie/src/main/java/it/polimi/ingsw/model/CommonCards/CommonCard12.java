@@ -15,6 +15,8 @@ public class CommonCard12 implements CommonCardStrategy{
             "|•|•|•|         on the right, each next column must be made of\n"+
             "|•|•|•|•|       exactly one more tile. Tiles can be of any type.\n"+
             "|•|•|•|•|•|\n";
+
+    public final int number = 12;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         final int numberOfRows=b.length;
@@ -87,6 +89,11 @@ public class CommonCard12 implements CommonCardStrategy{
     @Override
     public String getCommonCardDesign() {
         return constant12;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }
 

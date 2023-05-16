@@ -14,6 +14,8 @@ public class CommonCard11 implements CommonCardStrategy {
             "  |=| |=|       Eight tiles of the same type. There's\n"+
             "|=| |=| |=|     no restriction about the positions\n"+
             "|=| |=| |=|     of these tiles.\n";
+
+    public final int number = 11;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         int[] occurrences = new int[6];
@@ -76,5 +78,10 @@ public class CommonCard11 implements CommonCardStrategy {
     @Override
     public String getCommonCardDesign() {
         return constant11;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }

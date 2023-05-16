@@ -16,6 +16,8 @@ public class CommonCard08 implements CommonCardStrategy {
             "                     types of tiles. One line can show the\n"+
             "       x2            the same or a different combination\n"+
             "                     of another line.\n";
+
+    public final int number = 8;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         //TODO: check BLANK CASE and general check
@@ -114,5 +116,10 @@ public class CommonCard08 implements CommonCardStrategy {
     @Override
     public String getCommonCardDesign() {
         return constant8;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }

@@ -17,6 +17,9 @@ public class CommonCard06 implements CommonCardStrategy{
             "| ≠ |    x2     types of tiles.\n"+
             "| ≠ |\n"+
             "| ≠ |\n";
+
+    public final int number = 6;
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[] occurrences = new int[6];
@@ -104,5 +107,10 @@ public class CommonCard06 implements CommonCardStrategy{
     @Override
     public String getCommonCardDesign() {
         return constant6;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }

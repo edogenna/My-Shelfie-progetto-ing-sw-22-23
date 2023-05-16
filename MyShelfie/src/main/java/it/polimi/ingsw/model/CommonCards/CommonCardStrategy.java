@@ -32,5 +32,7 @@ public interface CommonCardStrategy {
      * @return Common Card Design
      */
     String getCommonCardDesign();
+
+    int getNumber();
 }
 

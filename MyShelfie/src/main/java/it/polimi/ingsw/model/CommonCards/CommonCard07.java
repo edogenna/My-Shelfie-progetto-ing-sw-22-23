@@ -15,6 +15,8 @@ public class CommonCard07 implements CommonCardStrategy {
             "|=| |=|         the same type in a 2x2 square. The tiles\n" +
             "   x2           of one square can be different from\n" +
             "                those of the other square.\n";
+
+    public final int number = 7;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         int count=0;
@@ -53,5 +55,10 @@ public class CommonCard07 implements CommonCardStrategy {
     @Override
     public String getCommonCardDesign() {
         return constant7;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }

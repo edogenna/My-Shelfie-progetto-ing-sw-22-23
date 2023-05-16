@@ -24,7 +24,6 @@ public class RmiServer implements RmiServerInterface, Runnable{
 
     @Override
     public void registry(RmiClientInterface client) throws RemoteException {
-        System.out.println("registry method!");
         serverManager.addClient(client);
         int number = serverManager.getNumber(client);
         System.out.println("User " + number + " connected on the RmiServer.");

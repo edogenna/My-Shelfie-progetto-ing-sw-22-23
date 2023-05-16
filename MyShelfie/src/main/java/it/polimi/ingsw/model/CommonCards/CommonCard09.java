@@ -16,6 +16,8 @@ public class CommonCard09 implements CommonCardStrategy {
             "| ■ |    x3     column can show the same or a different\n"+
             "| ■ |           combination of another column.\n"+
             "| ■ |\n";
+
+    public final int number = 9;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum firstColor;
@@ -76,6 +78,11 @@ public class CommonCard09 implements CommonCardStrategy {
     @Override
     public String getCommonCardDesign() {
         return constant9;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }
 

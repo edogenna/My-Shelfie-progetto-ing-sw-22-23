@@ -10,6 +10,7 @@ import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.Utils;
 
 import java.io.*;
 import java.net.Socket;
@@ -39,7 +40,6 @@ public class ServerManager implements Runnable{
     private RmiServer rmiServer;
     private final int secondsDuringTurn = 120;
     private int idClient = 0;
-    private int idClientChat = 0;
     private boolean firstPlayer;
     private int numberOfPlayers;
 
@@ -54,12 +54,6 @@ public class ServerManager implements Runnable{
         answerReady.put(idClient, true);
         idClient++;
     }
-
-    void addChatClient(Socket client) {
-        socketClients.put(idClient, client);
-        idClient++;
-    }
-
 
     void addClient(RmiClientInterface client) {
         rmiClients.put(idClient, client);
@@ -190,7 +184,6 @@ public class ServerManager implements Runnable{
             this.firstPlayer = false;
             String answer = sendMessageAndWaitForAnswer(number, new FirstPlayerMessage());
             Message m = converter.convertFromJSON(answer);
-            activeMatch = new Controller(((NumberOfPlayersAnswer) m).getNum());
             this.numberOfPlayers = ((NumberOfPlayersAnswer) m).getNum();
         }
         lobby.put(number, username);
@@ -231,17 +224,13 @@ public class ServerManager implements Runnable{
     }
 
     private void startGame() throws IOException {
-        //CheckMemoryDisk();
-        activeMatch = new Controller(this.numberOfPlayers);
+        activeMatch = checkMemoryDisk();
+
         boolean win = false;
 
-        for (Integer i : this.lobby.keySet()) {
-            activeMatch.setUsernamePlayer(lobby.get(i));
-        }
-        activeMatch.setFirstPlayer();
         while (!win) {
 
-            //saveGame();
+            saveGame();
             System.out.println("Game has been saved");
 
             String activeUsername = activeMatch.getActivePlayerUsername();
@@ -399,39 +388,59 @@ public class ServerManager implements Runnable{
         return null;
     }
 
-    //TODO: I have to find a way to serialize the commonCards, I could use Strings like in the message
-    //DO NOT USE THIS METHOD FOR NOW
     private Controller checkMemoryDisk() throws IOException {
         Model m = loadGame();
+
         int i = 0;
         boolean samePlayers = true;
 
         if(m!=null) {
             Player[] players = m.getPlayers();
             ArrayList<String> oldUsernames = new ArrayList<>();
+
             for(int k=0; i<players.length; i++){
                 oldUsernames.add(players[k].getUsername());
             }
-            //TODO: order usernames and confront
-            if (players.length == lobby.size()) {
-                for (Integer j : this.lobby.keySet()) {
-                    if (!lobby.get(j).equals(players[i].getUsername())) {
+
+            if (oldUsernames.size() == this.numberOfPlayers) {
+
+                Utils.mergeSort(oldUsernames, 0, oldUsernames.size() - 1);
+                for(String s: oldUsernames)
+                    System.out.println(s);
+                List<String> lobbyList = new ArrayList<>(lobby.values());
+                Utils.mergeSort(lobbyList, 0, lobbyList.size() - 1);
+
+                for(String s: lobbyList)
+                    System.out.println(s);
+
+                for(int k = 0; k<oldUsernames.size() && samePlayers; k++)
+                    if(!lobbyList.get(k).equals(oldUsernames.get(k))){
                         samePlayers = false;
-                        break;
                     }
-                    i++;
-                }
-                if (samePlayers)
+
+                if (samePlayers) {
                     activeMatch = new Controller(m);
+                    System.out.println("A game save has been restored");
+                }
+                else{
+                    activeMatch = new Controller(numberOfPlayers);
+                    System.out.println("A new game has been created");
+                    for (Integer j : this.lobby.keySet()) {
+                        activeMatch.setUsernamePlayer(lobby.get(j));
+                    }
+                    activeMatch.setFirstPlayer();
+                }
             }
         }
         else {
             activeMatch = new Controller(numberOfPlayers);
+            System.out.println("A new game has been created");
             for (Integer j : this.lobby.keySet()) {
                 activeMatch.setUsernamePlayer(lobby.get(j));
             }
             activeMatch.setFirstPlayer();
         }
+
         return activeMatch;
     }
 }

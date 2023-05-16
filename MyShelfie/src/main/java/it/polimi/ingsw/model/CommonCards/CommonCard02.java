@@ -16,6 +16,8 @@ public class CommonCard02 implements CommonCardStrategy {
             "    |=|\n"+
             "      |=|\n"+
             "        |=|\n";
+
+    public final int number = 2;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum color;
@@ -94,5 +96,10 @@ public class CommonCard02 implements CommonCardStrategy {
     @Override
     public String getCommonCardDesign() {
         return constant2;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }

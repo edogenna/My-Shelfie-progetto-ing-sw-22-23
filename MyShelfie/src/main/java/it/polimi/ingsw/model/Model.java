@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.annotations.Expose;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
@@ -7,13 +8,21 @@ import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import java.util.Random;
 
 public class Model {
+    @Expose
     private Board board;
+    @Expose
     private final int numPlayers;
+    @Expose
     private Player[] players;
+    @Expose
     private Player activePlayer;
+    @Expose
     private Card[] personalCards;
+    @Expose
     private int commonPoints1, commonPoints2;
+    @Expose
     private int idFirstPlayer, idActivePlayer;
+    @Expose
     private boolean lastTurn;
 
     public Model(int numPlayers){

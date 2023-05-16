@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.annotations.Expose;
 import it.polimi.ingsw.ItemEnum;
-import it.polimi.ingsw.model.CommonCards.CommonCardGenerator;
-import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
+import it.polimi.ingsw.model.CommonCards.*;
 
 import java.util.Random;
 
@@ -12,22 +12,33 @@ import java.util.Random;
  * @author Edoardo Gennaretti
  */
 public class Board {
+    @Expose
     public static final int BOARD_SIZE = 9;
+    @Expose
     public static final int INITIAL_NUMBER_ITEMENUM = 20;
+    @Expose
     private ItemEnum[][] matrix;
+    @Expose
     private int numPlayers;
+    @Expose
     private int[] numItemRemained = new int[ItemEnum.NUM_ITEMENUM];
 
     //TODO: modificare in un array in cui togliere i punti se si è in 3/4 giocatori
     //TODO: aggiungere funzione per togliere carta in una posizione, refill e prendere carta in una posizione
 
+    @Expose
     private final static int[][] positionsAlwaysForbidden = new int[][]{{0, 0}, {0, 1}, {0, 2},
             {1, 0}, {1, 1}, {1, 2},
             {2, 0}, {2, 1},
             {3, 0}};
+    @Expose
     private final static int[][] positionValid3Players = new int[][]{{0, 3}, {2, 2}};
+    @Expose
     private final static int[][] positionValid4Players = new int[][]{{4, 0}, {3, 1}};
     private CommonCardStrategy[] CommonCards;
+
+    @Expose
+    private int first = 0, second = 0;
 
     public void setMatrix(ItemEnum[][] matrix) {
         this.matrix = matrix;
@@ -53,31 +64,37 @@ public class Board {
         return numItemRemained;
     }
 
+
     public Board(int numPlayers) {
         matrix = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
 
-        if(numPlayers <= 1 || numPlayers > 4){
+        if (numPlayers <= 1 || numPlayers > 4) {
             System.out.println("ERROR: The number of players must be between 2 and 4. It has been set to 2.");
             numPlayers = 2;
         }
         this.numPlayers = numPlayers;
 
-        for(int i = 0; i < ItemEnum.NUM_ITEMENUM; i++)
+        for (int i = 0; i < ItemEnum.NUM_ITEMENUM; i++)
             numItemRemained[i] = INITIAL_NUMBER_ITEMENUM;
 
         refill();
 
         //Generating Common Goal Cards
-        CommonCards =new CommonCardStrategy[2];
+        CommonCards = new CommonCardStrategy[2];
         CommonCardGenerator gen = new CommonCardGenerator();
         CommonCards = gen.GenerateCommonCards();
+
+        if(first == second)
+            assignFirstAndSecond();
+        else setCommonCards(first, second);
+
     }
 
     /**
      * Returns a copy of the matrix of the board.
      *
-     * @author Edoardo Gennaretti
      * @return matrix of ItemEnum
+     * @author Edoardo Gennaretti
      */
     public ItemEnum[][] getMatrix() {
         ItemEnum[][] copy = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
@@ -102,7 +119,7 @@ public class Board {
         }
 
         //excluding positions valid only for 4 players
-        if(this.numPlayers == 2 || this.numPlayers == 3){
+        if (this.numPlayers == 2 || this.numPlayers == 3) {
             for (int[] ints : positionValid4Players) {
                 if (arePositionsEqual4Square(ints[0], ints[1], r, c))
                     return false;
@@ -110,7 +127,7 @@ public class Board {
         }
 
         //excluding positions valid for 3 players
-        if(numPlayers == 2){
+        if (numPlayers == 2) {
             for (int[] ints : positionValid3Players) {
                 if (arePositionsEqual4Square(ints[0], ints[1], r, c))
                     return false;
@@ -140,33 +157,33 @@ public class Board {
     /**
      * It returns the ItemEnum from a given position.
      *
-     * @author Edoardo Gennaretti
      * @param r row of the matrix
      * @param c coloumn of the matrix
      * @return ItemEnum
+     * @author Edoardo Gennaretti
      */
-    public ItemEnum getItemEnum(int r, int c){
-        if(matrix[r][c] == ItemEnum.BLANK)
+    public ItemEnum getItemEnum(int r, int c) {
+        if (matrix[r][c] == ItemEnum.BLANK)
             System.out.println("Restituita una carta Blank!");
         return matrix[r][c];
     }
 
-    public void setItemEnum(int r, int c, ItemEnum tile){
-        matrix[r][c]= tile;
+    public void setItemEnum(int r, int c, ItemEnum tile) {
+        matrix[r][c] = tile;
     }
 
 
     /**
      * It returns the ItemEnum from a given position and inserts a blank ItemEnum in that position.
      *
-     * @author Edoardo Gennaretti
      * @param r row of the matrix
      * @param c coloumn of the matrix
      * @return ItemEnum
+     * @author Edoardo Gennaretti
      */
-    public ItemEnum deleteItemEnum(int r, int c){
+    public ItemEnum deleteItemEnum(int r, int c) {
         ItemEnum i = matrix[r][c];
-        if(i == ItemEnum.BLANK)
+        if (i == ItemEnum.BLANK)
             System.out.println("Eliminata una carta Blank!");
         else
             matrix[r][c] = ItemEnum.BLANK;
@@ -178,12 +195,12 @@ public class Board {
      *
      * @author Edoardo Gennaretti
      */
-    public void refill(){
+    public void refill() {
         Random rand = new Random();
         int n;
         ItemEnum item;
 
-        for (int i = 0; i < BOARD_SIZE; i++){
+        for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (isPositionValid(i, j)) {
                     n = rand.nextInt(ItemEnum.NUM_ITEMENUM); //blank is excluded
@@ -214,20 +231,20 @@ public class Board {
     /**
      * It returns if the matrix need to be refilled following the rule of the game
      *
-     * @author Edoardo Gennaretti
      * @return true if the board need to be refilled, false otherwise
+     * @author Edoardo Gennaretti
      */
-    public boolean isRefillable(){
-        for(int i = 0; i < BOARD_SIZE; i++) {
+    public boolean isRefillable() {
+        for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                if(matrix[i][j] != ItemEnum.BLANK) {
+                if (matrix[i][j] != ItemEnum.BLANK) {
                     for (int k = -1; k <= 1; k++) {
-                        if (i + k >= 0 && i + k < BOARD_SIZE && matrix[i+k][j] != ItemEnum.BLANK)
-                                return false;
+                        if (i + k >= 0 && i + k < BOARD_SIZE && matrix[i + k][j] != ItemEnum.BLANK)
+                            return false;
                     }
 
                     for (int h = -1; h <= 1; h++) {
-                        if (j + h >= 0 && j + h < BOARD_SIZE && matrix[i][j+h] != ItemEnum.BLANK)
+                        if (j + h >= 0 && j + h < BOARD_SIZE && matrix[i][j + h] != ItemEnum.BLANK)
                             return false;
                     }
                 }
@@ -238,17 +255,17 @@ public class Board {
     }
 
     /**
-     * @author Alessandro Fornara
      * @return Array of CommonCardStrategy
+     * @author Alessandro Fornara
      */
     //TODO: fix the array's pointer;
-    public CommonCardStrategy[] getCommonCards(){
+    public CommonCardStrategy[] getCommonCards() {
         return CommonCards;
     }
 
-    public String[] getCommonCardDesigns(){
+    public String[] getCommonCardDesigns() {
         String[] array = new String[2];
-        for(int i=0; i<2; i++){
+        for (int i = 0; i < 2; i++) {
             array[i] = CommonCards[i].getCommonCardDesign();
         }
         return array;
@@ -261,9 +278,46 @@ public class Board {
      * @param c column of the tile
      * @return true if the tile has a free side, false otherwise
      */
-    public boolean tileFreeSide(int r, int c){
-        return (r>0 && this.matrix[r-1][c] == ItemEnum.BLANK) || (r<8 && this.matrix[r+1][c] == ItemEnum.BLANK) ||
-                (c>0 && this.matrix[r][c-1] == ItemEnum.BLANK) || (c<8 && this.matrix[r][c+1] == ItemEnum.BLANK) ||
-                r==0 || c==0 || r==8 || c==8;
+    public boolean tileFreeSide(int r, int c) {
+        return (r > 0 && this.matrix[r - 1][c] == ItemEnum.BLANK) || (r < 8 && this.matrix[r + 1][c] == ItemEnum.BLANK) ||
+                (c > 0 && this.matrix[r][c - 1] == ItemEnum.BLANK) || (c < 8 && this.matrix[r][c + 1] == ItemEnum.BLANK) ||
+                r == 0 || c == 0 || r == 8 || c == 8;
+    }
+
+    private void assignFirstAndSecond() {
+        this.first = CommonCards[0].getNumber();
+        this.second = CommonCards[1].getNumber();
+    }
+    private void setCommonCards ( int first, int second){
+
+        switch (first) {
+            case 1 -> CommonCards[0] = new CommonCard01();
+            case 2 -> CommonCards[0] = new CommonCard02();
+            case 3 -> CommonCards[0] = new CommonCard03();
+            case 4 -> CommonCards[0] = new CommonCard04();
+            case 5 -> CommonCards[0] = new CommonCard05();
+            case 6 -> CommonCards[0] = new CommonCard06();
+            case 7 -> CommonCards[0] = new CommonCard07();
+            case 8 -> CommonCards[0] = new CommonCard08();
+            case 9 -> CommonCards[0] = new CommonCard09();
+            case 10 -> CommonCards[0] = new CommonCard10();
+            case 11 -> CommonCards[0] = new CommonCard11();
+            case 12 -> CommonCards[0] = new CommonCard12();
         }
+
+        switch (second) {
+            case 1 -> CommonCards[1] = new CommonCard01();
+            case 2 -> CommonCards[1] = new CommonCard02();
+            case 3 -> CommonCards[1] = new CommonCard03();
+            case 4 -> CommonCards[1] = new CommonCard04();
+            case 5 -> CommonCards[1] = new CommonCard05();
+            case 6 -> CommonCards[1] = new CommonCard06();
+            case 7 -> CommonCards[1] = new CommonCard07();
+            case 8 -> CommonCards[1] = new CommonCard08();
+            case 9 -> CommonCards[1] = new CommonCard09();
+            case 10 -> CommonCards[1] = new CommonCard10();
+            case 11 -> CommonCards[1] = new CommonCard11();
+            case 12 -> CommonCards[1] = new CommonCard12();
+        }
+    }
 }

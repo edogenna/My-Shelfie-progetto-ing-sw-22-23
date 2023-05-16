@@ -13,6 +13,8 @@ public class CommonCard10 implements CommonCardStrategy{
             "|=|   |=|        Five tiles of the same type forming an X.\n"+
             "   |=|\n"+
             "|=|   |=|\n";
+
+    public final int number = 10;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;
@@ -52,6 +54,11 @@ public class CommonCard10 implements CommonCardStrategy{
     @Override
     public String getCommonCardDesign() {
         return constant10;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }
 

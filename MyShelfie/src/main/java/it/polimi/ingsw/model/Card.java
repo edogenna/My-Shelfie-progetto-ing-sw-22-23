@@ -1,9 +1,12 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.annotations.Expose;
 import it.polimi.ingsw.ItemEnum;
 
 public class Card {
+    @Expose
     private final Triplet[] dataTriad = new Triplet[6];
+    @Expose
     private final ItemEnum[][] matrixPersonal = new ItemEnum[6][5];
 
     public Card() {

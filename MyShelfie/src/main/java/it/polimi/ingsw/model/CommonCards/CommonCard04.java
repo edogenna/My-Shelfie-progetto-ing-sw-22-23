@@ -14,6 +14,8 @@ public class CommonCard04 implements CommonCardStrategy {
             "|■| |■| |■| |■| |■|  Four lines each formed by 5 tiles of\n"+
             "     MAX 3 ≠         maximum three different types.\n"+
             "       x4            Lines can be different from one another.\n";
+
+    public final int number = 4;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum firstColor;
@@ -75,6 +77,11 @@ public class CommonCard04 implements CommonCardStrategy {
     @Override
     public String getCommonCardDesign() {
         return constant4;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }
 

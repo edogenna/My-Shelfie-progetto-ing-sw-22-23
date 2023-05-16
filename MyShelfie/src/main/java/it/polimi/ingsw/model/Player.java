@@ -1,16 +1,24 @@
 package it.polimi.ingsw.model;
 
+import com.google.gson.annotations.Expose;
 import it.polimi.ingsw.ItemEnum;
 
 import java.util.Stack;
 
 public class Player {
+    @Expose
     private int myPoints;
+    @Expose
     private int myCommonPoints;
+    @Expose
     private final String username;
+    @Expose
     private Card myGoals;
+    @Expose
     private boolean CommonDone1, CommonDone2;
+    @Expose
     private ItemEnum[][] shelf = new ItemEnum[6][5];
+    @Expose
     private int[] heights = new int[5];
 
     public Player(String username){

@@ -20,6 +20,8 @@ public class CommonCard03 implements CommonCardStrategy{
             "   |=|  x4      4 tiles of the same type (non necessarily\n"+
             "   |=|          in the depicted shape). Tiles can be\n"+
             "   |=|          different between different groups.\n";
+
+    public final int number = 3;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[][] m=new int[r][c];
@@ -128,6 +130,11 @@ public class CommonCard03 implements CommonCardStrategy{
     @Override
     public String getCommonCardDesign() {
         return constant3;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }
 

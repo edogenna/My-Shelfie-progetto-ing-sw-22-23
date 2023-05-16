@@ -14,6 +14,8 @@ public class CommonCard05 implements CommonCardStrategy{
             "                  corners of the bookshelf.\n"+
             "\n"+
             "|=|       |=|\n";
+
+    public final int number = 5;
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;
@@ -45,6 +47,11 @@ public class CommonCard05 implements CommonCardStrategy{
     @Override
     public String getCommonCardDesign() {
         return constant5;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 }
 
