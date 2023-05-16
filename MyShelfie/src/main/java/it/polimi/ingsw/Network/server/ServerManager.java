@@ -156,12 +156,12 @@ public class ServerManager implements Runnable{
             }
         }
         if (isTimeExceeded) {
-/*            communication.setTimeExceeded();
-            if (activeMatches.containsKey(number)) {
+            communication.setTimeExceeded();
+            if (lobby.containsKey(number)) {
                 awayFromKeyboardOrDisconnected.add(number);
-                activeMatches.get(number).disconnect(nicknames.get(number));
+//                activeMatches.get(number).disconnect(nicknames.get(number));
             }
-            return Protocol.ERR;*/
+            return "Error";
         }
         return answers.get(number);
     }
