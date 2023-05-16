@@ -12,7 +12,7 @@
     <children>
         <ImageView fx:id="roxleyIcon" fitHeight="349.0" fitWidth="540.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../../../../17_MyShelfie_BGA/common%20goal%20cards/back.jpg" />
+                <Image url="" />
             </image>
         </ImageView>
         <TextField fx:id="username" layoutX="245.0" layoutY="59.0" />

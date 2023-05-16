@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" prefHeight="453.0" prefWidth="800.0" styleClass="mainBackground" stylesheets="@../css/LoadingCSS.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+    <children>
+        <ProgressBar layoutX="200.0" layoutY="358.0" prefHeight="50.0" prefWidth="400.0" style="-fx-padding: 8;">
+        </ProgressBar>
+        <Label fx:id="displayStatus" alignment="CENTER" layoutX="14.0" layoutY="158.0" prefHeight="235.0" prefWidth="773.0" styleClass="loadingText" stylesheets="@../css/LoadingCSS.css" text="LOADING..." textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="Bell MT" size="48.0" />
+            </font>
+            <effect>
+                <DropShadow />
+            </effect>
+        </Label>
+        <ImageView fx:id="title" fitHeight="327.0" fitWidth="391.0" layoutX="206.0" layoutY="-29.0" pickOnBounds="true">
+            <image>
+                <Image url="@../../../../../../17_MyShelfie_BGA/Publisher%20material/Title%202000x2000px.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

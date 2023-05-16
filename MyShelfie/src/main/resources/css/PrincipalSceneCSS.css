@@ -1,36 +1,6 @@
-.playerBoard {
-    -fx-background-image: url("../graphics/bgs/player_board.png");
-    -fx-background-size: stretch;
-}
 
-.rightBoard {
-    -fx-background-image: url("../graphics/btns/cm_btn_blue.png");
-    -fx-background-size: stretch;
-    -fx-text-fill: white;
-    -fx-text-alignment: center;
-    -fx-alignment: center;
-    -fx-font-family: "Dalek Pinpoint";
-    -fx-font-size: 15;
-}
 
-.rightBoard:pressed {
-    -fx-background-image: url("../graphics/btns/cm_btn_green_pressed.png");
-}
 
-.grayedOut {
-    -fx-background-image: url("../graphics/btns/cm_btn_blue.png");
-    -fx-background-size: stretch;
-    -fx-text-fill: white;
-    -fx-text-alignment: center;
-    -fx-alignment: center;
-    -fx-font-family: "Dalek Pinpoint";
-    -fx-font-size: 15;
-}
-
-.grayedOut:pressed {
-    -fx-background-image: url("../graphics/btns/cm_btn_grey.png");
-    -fx-background-size: stretch;
-}
 
 .background {
     -fx-background-image: url("../graphics/misc/sfondo_parquet.jpg");
@@ -41,18 +11,4 @@
     -fx-background-size: stretch;
 }
 
-.rightMenu {
-    -fx-background-image: url("../graphics/bgs/clp_bg_1.png");
-    -fx-background-size: stretch;
-}
 
-.players {
-    -fx-font-family: "Roboto";
-    -fx-font-size: 15;
-    -fx-text-fill: black;
-}
-
-.gridpane {
-    -fx-background-image: url("../graphics/boards/livingroom.png");
-    -fx-background-size: stretch;
-}
