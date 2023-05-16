@@ -25,55 +25,34 @@ public class Converter {
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
         String type = jsonObject.get("type").getAsString();
-        switch(type) {
-            case "MoveMessage":
-                return gson.fromJson(message, MoveMessage.class);
-            case "ACK":
-                return gson.fromJson(message, ACKMessage.class);
-            case "FirstPlayer":
-                return gson.fromJson(message, FirstPlayerMessage.class);
-            case "Waiting":
-                return gson.fromJson(message, WaitingMessage.class);
-            case "NumberOfPlayers":
-                return gson.fromJson(message, NumberOfPlayersAnswer.class);
-            case "Lobby":
-                return gson.fromJson(message, LobbyMessage.class);
-            case "StartingGame":
-                return gson.fromJson(message, StartingGameMessage.class);
-            case "ChooseUsername":
-                return gson.fromJson(message, ChooseUsernameMessage.class);
-            case "GraphicalGameInfo":
-                return gson.fromJson(message, GraphicalGameInfo.class);
-            case "UsernameAnswer":
-                return gson.fromJson(message, UsernameAnswer.class);
-            case "Move":
-                return gson.fromJson(message, MoveAnswer.class);
-            case "NotValidNumber":
-                return gson.fromJson(message, NotValidNumberofPlayersMessage.class);
-            case "NotValidUsername":
-                return gson.fromJson(message, NotValidUsernameError.class);
-            case "NotValidGameId":
-                return gson.fromJson(message, NotValidGameIdError.class);
-            case "GraphicalGameInformation":
-                return gson.fromJson(message, GraphicalGameInfo.class);
-            case "NotValidMove":
-                return gson.fromJson(message, NotValidMoveError.class);
-            case "ListOfLobbies":
-                return gson.fromJson(message, ListOfLobbies.class);
-            case "NotEnoughSpaceColumn":
-                return gson.fromJson(message, NotEnoughSpaceColumnError.class);
-            case "InvalidColumn":
-                return gson.fromJson(message, InvalidColumnError.class);
-            case "EmptyPosition":
-                return gson.fromJson(message, EmptyPositionError.class);
-            case "NotAdjTiles":
-                return gson.fromJson(message, NotAdjacTiles.class);
-            case "NoFreeSide":
-                return gson.fromJson(message, NoFreeSideError.class);
-            case "NotEnoughSpaceBookshelf":
-                return gson.fromJson(message, NotEnoughSpaceBookshelfError.class);
-        }
-        return null;
+        return switch (type) {
+            case "MoveMessage" -> gson.fromJson(message, MoveMessage.class);
+            case "ACK" -> gson.fromJson(message, ACKMessage.class);
+            case "ChatMessage" -> gson.fromJson(message, ChatMessage.class);
+            case "CommonCard" -> gson.fromJson(message, CommonCardMessage.class);
+            case "FirstPlayer" -> gson.fromJson(message, FirstPlayerMessage.class);
+            case "Waiting" -> gson.fromJson(message, WaitingMessage.class);
+            case "NumberOfPlayers" -> gson.fromJson(message, NumberOfPlayersAnswer.class);
+            case "Lobby" -> gson.fromJson(message, LobbyMessage.class);
+            case "StartingGame" -> gson.fromJson(message, StartingGameMessage.class);
+            case "ChooseUsername" -> gson.fromJson(message, ChooseUsernameMessage.class);
+            case "GraphicalGameInfo" -> gson.fromJson(message, GraphicalGameInfo.class);
+            case "UsernameAnswer" -> gson.fromJson(message, UsernameAnswer.class);
+            case "Move" -> gson.fromJson(message, MoveAnswer.class);
+            case "NotValidNumber" -> gson.fromJson(message, NotValidNumberofPlayersMessage.class);
+            case "NotValidUsername" -> gson.fromJson(message, NotValidUsernameError.class);
+            case "NotValidGameId" -> gson.fromJson(message, NotValidGameIdError.class);
+            case "GraphicalGameInformation" -> gson.fromJson(message, GraphicalGameInfo.class);
+            case "NotValidMove" -> gson.fromJson(message, NotValidMoveError.class);
+            case "ListOfLobbies" -> gson.fromJson(message, ListOfLobbies.class);
+            case "NotEnoughSpaceColumn" -> gson.fromJson(message, NotEnoughSpaceColumnError.class);
+            case "InvalidColumn" -> gson.fromJson(message, InvalidColumnError.class);
+            case "EmptyPosition" -> gson.fromJson(message, EmptyPositionError.class);
+            case "NotAdjTiles" -> gson.fromJson(message, NotAdjacTiles.class);
+            case "NoFreeSide" -> gson.fromJson(message, NoFreeSideError.class);
+            case "NotEnoughSpaceBookshelf" -> gson.fromJson(message, NotEnoughSpaceBookshelfError.class);
+            default -> null;
+        };
     }
 
     /**

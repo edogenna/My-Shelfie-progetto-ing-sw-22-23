@@ -23,8 +23,10 @@ public class ServerManager implements Runnable{
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
     private final Map<Integer, Socket> socketClients = new HashMap<>();
-    private final Map<Integer, Socket> socketChatClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
+
+    private final Map<Integer, Socket> socketClientsChat = new HashMap<>();
+    private final Map<Integer, RmiClientInterface> rmiClientsChat = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
     private final Map<Integer, Boolean> answerReady = new HashMap<>();
     private final Map<Integer, String> lobby = new HashMap<>();
@@ -36,6 +38,7 @@ public class ServerManager implements Runnable{
     private SocketServer socketServer;
     private RmiServer rmiServer;
     private SocketServerChat socketServerChat;
+    private RmiServerChat rmiServerChat;
 
     private int idClient = 0;
     private int idClientChat = 0;
@@ -43,7 +46,26 @@ public class ServerManager implements Runnable{
     int numberOfPlayers = 0;
     //private int chosenBoard = 0;
 
+    protected Queue<String> messagesQueue = new LinkedList<>();
+
     public ServerManager() {
+        new Thread(() -> {
+            Communication communication;
+            while (true) {
+                if (!messagesQueue.isEmpty()) {
+                    String message = messagesQueue.poll();
+                    for (Integer i : lobby.keySet()) {
+                        if (socketClientsChat.containsKey(i)) {
+                            communication = new SocketCommunicationChat(message, socketClientsChat.get(i), socketServerChat, i, this);
+                            new Thread(communication).start();
+                        } else if (rmiClientsChat.containsKey(i)) {
+                            communication = new RmiCommunicationChat(message, rmiClientsChat.get(i), rmiServerChat, i, this);
+                            new Thread(communication).start();
+                        }
+                    }
+                }
+            }
+        }).start();
     }
 
     void addClient(Socket client) {
@@ -52,9 +74,9 @@ public class ServerManager implements Runnable{
         idClient++;
     }
 
-    void addChatClient(Socket client) {
-        socketClients.put(idClient, client);
-        idClient++;
+    void addClientChat(Socket client) {
+        socketClientsChat.put(idClient, client);
+        idClientChat++;
     }
 
 
@@ -62,6 +84,12 @@ public class ServerManager implements Runnable{
         rmiClients.put(idClient, client);
         answerReady.put(idClient, true);
         idClient++;
+    }
+
+    void addClientChat(RmiClientInterface client) {
+        rmiClientsChat.put(idClient, client);
+        answerReady.put(idClient, true);
+        idClientChat++;
     }
 
     public String getNickname(int playerId) {
@@ -307,10 +335,13 @@ public class ServerManager implements Runnable{
         socketServerChat = new SocketServerChat(this, Constant.PORT_SOCKET_CHAT);
         try {
             rmiServer = new RmiServer(this, Constant.PORT_RMI_GAME);
+            rmiServerChat = new RmiServerChat(this, Constant.PORT_RMI_CHAT);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
         new Thread(socketServer).start();
+        new Thread(socketServerChat).start();
         new Thread(rmiServer).start();
+        new Thread(rmiServerChat).start();
     }
 }
