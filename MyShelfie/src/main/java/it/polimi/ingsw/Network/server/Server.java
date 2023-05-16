@@ -21,14 +21,11 @@ class Server {
         } catch (UnknownHostException e) {
             System.out.println("local ip: unknown");
         }
-        System.out.println("Specify the port number for the SocketServer:");
-        socketPort = manageIntInput(stdin, 0);
-        System.out.println("Specify the port number for the RmiServer:");
-        rmiPort = manageIntInput(stdin, socketPort);
-        serverManager = new ServerManager(socketPort, rmiPort);
+        serverManager = new ServerManager();
         serverManager.run();
     }
 
+    @Deprecated
     private static int manageIntInput(Scanner stdin, int forbiddenValue) {
         int output;
         try {

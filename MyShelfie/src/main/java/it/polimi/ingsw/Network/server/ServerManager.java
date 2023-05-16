@@ -22,8 +22,6 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int socketPort;
-    private final int rmiPort;
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, Socket> socketChatClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
@@ -45,9 +43,7 @@ public class ServerManager implements Runnable{
     int numberOfPlayers = 0;
     //private int chosenBoard = 0;
 
-    public ServerManager(int socketPort, int rmiPort) {
-        this.socketPort = socketPort;
-        this.rmiPort = rmiPort;
+    public ServerManager() {
     }
 
     void addClient(Socket client) {
@@ -157,7 +153,6 @@ public class ServerManager implements Runnable{
     }
 
     private String login(int number){
-        System.out.println("login Method, ServerManager");
         String answer = sendMessageAndWaitForAnswer(number, new ChooseUsernameMessage());
         Message m = converter.convertFromJSON(answer);
 
@@ -169,7 +164,6 @@ public class ServerManager implements Runnable{
     }
 
     protected void clientLogin(int number){
-        System.out.println("clientLogin Method, ServerManager");
         String username = login(number);
 
         if(this.firstPlayer){
@@ -309,7 +303,6 @@ public class ServerManager implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("ServerManager run");
         socketServer = new SocketServer(this, Constant.PORT_SOCKET_GAME);
         socketServerChat = new SocketServerChat(this, Constant.PORT_SOCKET_CHAT);
         try {
@@ -318,7 +311,6 @@ public class ServerManager implements Runnable{
             throw new RuntimeException(e);
         }
         new Thread(socketServer).start();
-        System.out.println("ServerManager run, we are going to start rmiServer thread");
         new Thread(rmiServer).start();
     }
 }
