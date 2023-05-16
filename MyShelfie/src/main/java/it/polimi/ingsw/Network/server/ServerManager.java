@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.server;
 
+import it.polimi.ingsw.Constant;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
@@ -16,7 +17,6 @@ import java.util.*;
 import static java.lang.Thread.sleep;
 
 public class ServerManager implements Runnable{
-
     public static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 4;
     private static final int DEFAULT_BOARD = 1;
@@ -25,6 +25,7 @@ public class ServerManager implements Runnable{
     private final int socketPort;
     private final int rmiPort;
     private final Map<Integer, Socket> socketClients = new HashMap<>();
+    private final Map<Integer, Socket> socketChatClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
     private final Map<Integer, Boolean> answerReady = new HashMap<>();
@@ -36,7 +37,10 @@ public class ServerManager implements Runnable{
     Converter converter = new Converter();
     private SocketServer socketServer;
     private RmiServer rmiServer;
+    private SocketServerChat socketServerChat;
+
     private int idClient = 0;
+    private int idClientChat = 0;
     private boolean firstPlayer = true;
     int numberOfPlayers = 0;
     //private int chosenBoard = 0;
@@ -51,6 +55,12 @@ public class ServerManager implements Runnable{
         answerReady.put(idClient, true);
         idClient++;
     }
+
+    void addChatClient(Socket client) {
+        socketClients.put(idClient, client);
+        idClient++;
+    }
+
 
     void addClient(RmiClientInterface client) {
         rmiClients.put(idClient, client);
@@ -151,7 +161,7 @@ public class ServerManager implements Runnable{
         String answer = sendMessageAndWaitForAnswer(number, new ChooseUsernameMessage());
         Message m = converter.convertFromJSON(answer);
 
-        while (isUsernameTaken(((UsernameAnswer) m).getS(), idClient)){
+        while (isUsernameTaken(((UsernameAnswer) m).getS(), number)){
             answer = sendMessageAndWaitForAnswer(number, new NotValidUsernameError());
             m = converter.convertFromJSON(answer);
         }
@@ -300,9 +310,10 @@ public class ServerManager implements Runnable{
     @Override
     public void run() {
         System.out.println("ServerManager run");
-        socketServer = new SocketServer(this, this.socketPort);
+        socketServer = new SocketServer(this, Constant.PORT_SOCKET_GAME);
+        socketServerChat = new SocketServerChat(this, Constant.PORT_SOCKET_CHAT);
         try {
-            rmiServer = new RmiServer(this, this.rmiPort);
+            rmiServer = new RmiServer(this, Constant.PORT_RMI_GAME);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
