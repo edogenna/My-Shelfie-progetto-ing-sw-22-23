@@ -58,5 +58,4 @@ public class dummyInputTest {
         this.wrongColumn = wrongColumn;
     }
 
-
 }

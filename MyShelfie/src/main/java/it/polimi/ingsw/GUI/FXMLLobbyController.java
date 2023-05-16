@@ -10,7 +10,6 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: CARICARE IL FONT TEKO
 public class FXMLLobbyController {
 
     private List<String> connectedPlayers;
@@ -54,11 +53,11 @@ public class FXMLLobbyController {
         closeButton.setDisable(true);
         closeButton.setVisible(false);
 
-        closeButton.setFont(Font.loadFont(getClass().getResource("/Font/").toExternalForm(),
+        closeButton.setFont(Font.loadFont(getClass().getResource("/Font/Teko-Bold.ttf").toExternalForm(),
                 15
         ));
 
-        titleLabel.setFont(Font.loadFont(getClass().getResource("/Font/").toExternalForm(),
+        titleLabel.setFont(Font.loadFont(getClass().getResource("/Font/Teko-Bold.ttf").toExternalForm(),
                 15
         ));
 
@@ -81,7 +80,7 @@ public class FXMLLobbyController {
             label.setText("");
             label.setVisible(false);
 
-            label.setFont( Font.loadFont(getClass().getResource("/Font/DisneyHeroic.ttf").toExternalForm(),
+            label.setFont( Font.loadFont(getClass().getResource("/Font/Teko-Bold.ttf").toExternalForm(),
                     15
             ));
 
