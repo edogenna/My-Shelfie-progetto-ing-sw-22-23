@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Network.server;
 
+import java.io.IOException;
+
 /**
  * This class allows to manage parallel client enrollments.
  */
@@ -16,6 +18,10 @@ public class ClientManager implements Runnable {
 
     @Override
     public void run() {
-        serverManager.clientLogin(this.number);
+        try {
+            serverManager.clientLogin(this.number);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
