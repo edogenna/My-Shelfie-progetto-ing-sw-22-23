@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network.client;
 
+import it.polimi.ingsw.Constant;
 import it.polimi.ingsw.Network.messages.*;
 ;
 import it.polimi.ingsw.view.CliView;
@@ -20,9 +21,9 @@ public class SocketClient extends Client{
     PrintWriter out = null;
     BufferedReader in = null;
     BufferedReader stdIn = null;
-    public void startSocketClient(String hostName, int portNumber) throws IOException {
+    public void startSocketClient() throws IOException {
         try {
-            this.socket = new Socket(hostName, portNumber);
+            this.socket = new Socket(hostName, Constant.PORT_SOCKET_GAME);
             this.out = new PrintWriter(socket.getOutputStream(), true);
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.stdIn = new BufferedReader(new InputStreamReader(System.in));

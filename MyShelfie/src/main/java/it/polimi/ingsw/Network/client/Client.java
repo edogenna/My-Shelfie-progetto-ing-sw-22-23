@@ -23,7 +23,7 @@ public class Client {
             hostName = "127.0.0.1";
         System.out.println("Would you like to use SOCKET (0) or RMI (1) ? ");
         switch (Integer.parseInt(stdIn.readLine())) {
-            case 0 -> new SocketClient().startSocketClient(hostName, Constant.PORT_SOCKET_GAME);
+            case 0 -> new SocketClient().startSocketClient();
             case 1 -> new RmiClient().startRMIClient();
         }
     }
