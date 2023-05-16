@@ -13,6 +13,7 @@ public class dummyInputTest {
     String space = "f,5 , c,5, d, 6";
     String firstOk = "c,2,c,3,d,4,3";
 
+    String wrongColumn = "c,2,c,3,9";
 
 
     /**
@@ -44,62 +45,18 @@ public class dummyInputTest {
        //controllo input con spazi
        Assert.assertTrue(c.dummyInput(space));
 
+       //controllo con numero di colonna sbagliato
+       Assert.assertTrue(c.dummyInput(wrongColumn));
 
     }
 
-    public void setC(Controller c) {
-        this.c = c;
+    public String getWrongColumn() {
+        return wrongColumn;
     }
 
-    public void setInputTest(String inputTest) {
-        this.inputTest = inputTest;
+    public void setWrongColumn(String wrongColumn) {
+        this.wrongColumn = wrongColumn;
     }
 
-    public void setIn(String in) {
-        this.in = in;
-    }
 
-    public void setWrongIn(String wrongIn) {
-        this.wrongIn = wrongIn;
-    }
-
-    public void setFirstOk(String firstOk) {
-        this.firstOk = firstOk;
-    }
-
-    public String getFirstOk() {
-        return firstOk;
-    }
-
-    public void setSpace(String space) {
-        this.space = space;
-    }
-
-    public String getSpace() {
-        return space;
-    }
-
-    public String getInputTest1n() {
-        return inputTest1n;
-    }
-
-    public void setInputTest1n(String inputTest1n) {
-        this.inputTest1n = inputTest1n;
-    }
-
-    public String getInputTest() {
-        return inputTest;
-    }
-
-    public String getWrongIn() {
-        return wrongIn;
-    }
-
-    public Controller getC() {
-        return c;
-    }
-
-    public String getIn() {
-        return in;
-    }
 }
