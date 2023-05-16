@@ -96,7 +96,6 @@ public class SocketServer implements Runnable{
     }*/
 
     private void registry(Socket client) throws IOException {
-        System.out.println("socket registry method!");
         serverManager.addClient(client);
         fromClient.put(client, new Scanner(client.getInputStream()));
         toClient.put(client, new PrintWriter(client.getOutputStream(), true));

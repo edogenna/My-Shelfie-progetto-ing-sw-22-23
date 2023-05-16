@@ -1,0 +1,14 @@
+
+
+
+
+.background {
+    -fx-background-image: url("../graphics/misc/sfondo_parquet.jpg");
+    -fx-background-size: stretch;
+}
+.background1 {
+    -fx-background-image: url("../graphics/boards/livingroom.png");
+    -fx-background-size: stretch;
+}
+
+

@@ -1,5 +1,5 @@
 .mainPanel {
-    -fx-background-image: url("../graphics/bg_mainmenu.png");
+    -fx-background-image: url("../graphics/");
     -fx-background-size: stretch;
 }
 
@@ -32,11 +32,6 @@
     -fx-font-size: 30px;
 }
 
-.inputLabels {
-    -fx-font-family: "Roboto";
-    -fx-font-weight: bold;
-    -fx-font-size: 15;
-}
 
 .joinButton:pressed {
     -fx-background-image: url("../graphics/cm_btn_blue_pressed.png");

@@ -10,13 +10,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="basePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.GUI.InitSceneController">
+<Pane fx:id="basePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="561.0" styleClass="background" stylesheets="@../css/ChooseNick.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.GUI.FXMLChooseNickController">
    <children>
-      <ImageView fitHeight="360.0" fitWidth="561.0" layoutY="-1.0" pickOnBounds="true">
-         <image>
-            <Image url="@../../../../../../17_MyShelfie_BGA/misc/sfondo%20parquet.jpg" />
-         </image>
-      </ImageView>
       <Label layoutX="100.0" layoutY="69.0" prefHeight="79.0" prefWidth="362.0" text="Choose your nickname" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Vivaldi Italic" size="48.0" />
