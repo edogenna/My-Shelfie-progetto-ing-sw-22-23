@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="Small changes in the server">
+    <list default="true" id="9920a50d-1492-46f5-b4fc-e7739f7c20ce" name="Changes" comment="client port">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/client/RmiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/client/RmiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/client/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/client/SocketClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/server/RmiGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/server/RmiGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CliView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/view/CliView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/server/Communication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/server/Communication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/server/ServerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Network/server/ServerManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -53,23 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/alefo/Desktop/openjfx-17.0.7_windows-x64_bin-sdk/javafx-sdk-17.0.7/lib",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/donat/Desktop/Progetto Ing Sftw/ing-sw-2023-Gennaretti-Fiore-Fornara-Galli/MyShelfie&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.jest.jest_package&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="it.polimi.ingsw.model" />
@@ -81,24 +74,13 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="Client" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+    <configuration name="parallel" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Network.client.Client" />
       <module name="MyShelfie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.Network.client.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Client" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -135,28 +117,19 @@
       <workItem from="1680960421358" duration="724000" />
       <workItem from="1681210349738" duration="1147000" />
       <workItem from="1681214806795" duration="7460000" />
-      <workItem from="1683554523483" duration="11742000" />
-    </task>
-    <task id="LOCAL-00001" summary="Test git donato">
-      <created>1679411053113</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1679411053113</updated>
-    </task>
-    <task id="LOCAL-00002" summary="implementation of the &quot;Personal Card&quot; class through 2 auxiliary private classes.&#10;The &quot;Triplet&quot; class is formed by the x and y coordinates and the color of the tile.">
-      <created>1679415453941</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1679415453941</updated>
-    </task>
-    <task id="LOCAL-00003" summary="implemented the first 6 personal cards">
-      <created>1679572469249</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1679572469249</updated>
+      <workItem from="1683637277045" duration="3652000" />
+      <workItem from="1683642587803" duration="1743000" />
+      <workItem from="1683661005422" duration="4753000" />
+      <workItem from="1683791847255" duration="6003000" />
+      <workItem from="1683973823613" duration="2179000" />
+      <workItem from="1683993556170" duration="5861000" />
+      <workItem from="1684009210068" duration="4335000" />
+      <workItem from="1684057108723" duration="1183000" />
+      <workItem from="1684066695916" duration="6477000" />
+      <workItem from="1684131295985" duration="2430000" />
+      <workItem from="1684156518024" duration="3015000" />
+      <workItem from="1684242490606" duration="9019000" />
+      <workItem from="1684263810833" duration="1712000" />
     </task>
     <task id="LOCAL-00004" summary="changed the name &quot;bookshelf&quot; to &quot;figure&quot;">
       <created>1679572683127</created>
@@ -368,21 +341,140 @@
       <option name="project" value="LOCAL" />
       <updated>1680791414688</updated>
     </task>
-    <task id="LOCAL-00034" summary="Small changes in the server">
-      <created>1683554646745</created>
+    <task id="LOCAL-00034" summary="rmi server, start method">
+      <created>1683578869755</created>
       <option name="number" value="00034" />
       <option name="presentableId" value="LOCAL-00034" />
       <option name="project" value="LOCAL" />
-      <updated>1683554646745</updated>
+      <updated>1683578869755</updated>
     </task>
-    <task id="LOCAL-00035" summary="Small changes in the server">
-      <created>1683555841644</created>
+    <task id="LOCAL-00035" summary="lobby phase with rmi-socket; doesn't work">
+      <created>1683581804287</created>
       <option name="number" value="00035" />
       <option name="presentableId" value="LOCAL-00035" />
       <option name="project" value="LOCAL" />
-      <updated>1683555841644</updated>
+      <updated>1683581804325</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="update lobby phase with rmi-socket; doesn't work">
+      <created>1683639020488</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1683639020488</updated>
+    </task>
+    <task id="LOCAL-00037" summary="username rmi phase">
+      <created>1683643730302</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1683643730302</updated>
+    </task>
+    <task id="LOCAL-00038" summary="implementation ServerManager class">
+      <created>1683666404412</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1683666404412</updated>
+    </task>
+    <task id="LOCAL-00039" summary="implementation ServerManager,SocketServer and RmiServer classes">
+      <created>1683798743755</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1683798743755</updated>
+    </task>
+    <task id="LOCAL-00040" summary="rmi server run">
+      <created>1683993962438</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1683993962438</updated>
+    </task>
+    <task id="LOCAL-00041" summary="rmi server and client working in progress">
+      <created>1684002358061</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1684002358061</updated>
+    </task>
+    <task id="LOCAL-00042" summary="RmiCommunication and RmiClient">
+      <created>1684013652630</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1684013652630</updated>
+    </task>
+    <task id="LOCAL-00043" summary="RmiServer bug fixed, sendMessageAndWaitAnswer done, sendMessage maybe errors">
+      <created>1684074006326</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1684074006326</updated>
+    </task>
+    <task id="LOCAL-00044" summary="removed old RmiMethod of the rmiServerInterface: notifyConnection, notifyNewConnection, getActiveNumberPlayer">
+      <created>1684135941379</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1684135941379</updated>
+    </task>
+    <task id="LOCAL-00045" summary="new model method: getPlayerPersonalCard and getPlayerShelf">
+      <created>1684159872157</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1684159872163</updated>
+    </task>
+    <task id="LOCAL-00046" summary="bug push">
+      <created>1684160008281</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1684160008281</updated>
+    </task>
+    <task id="LOCAL-00047" summary="bug push">
+      <created>1684160307967</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1684160307967</updated>
+    </task>
+    <task id="LOCAL-00048" summary="update port of socket and rmi clients">
+      <created>1684244182863</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1684244182863</updated>
+    </task>
+    <task id="LOCAL-00049" summary="new controller methods: adjacentTiles(x1,y1,x2,y2) and adjacentTiles(x1,y1,x2,y2,x3,y3)">
+      <created>1684246032647</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1684246032647</updated>
+    </task>
+    <task id="LOCAL-00050" summary="starting implementation of timer&#10;ServerManager: new methods: checkIfDisconnected and isAwayFromKeyboardOrDisconnected; modified methods: sendMessageAndWaitForAnswer">
+      <created>1684252109429</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1684252109430</updated>
+    </task>
+    <task id="LOCAL-00051" summary="starting implementation of timer&#10;ServerManager: new methods: checkIfDisconnected and isAwayFromKeyboardOrDisconnected; modified methods: sendMessageAndWaitForAnswer">
+      <created>1684252212205</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1684252212205</updated>
+    </task>
+    <task id="LOCAL-00052" summary="client port">
+      <created>1684252454219</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1684252454219</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -400,22 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="problems with push-merge 01" />
-    <MESSAGE value="create and start to implemente the Bookshelf class" />
-    <MESSAGE value="&quot;PersonalCard&quot; points calculation and testing &quot;insert&quot; method of Bookshelf class." />
-    <MESSAGE value="&quot;PersonalCard&quot; and &quot;Bookshelf&quot; printing." />
-    <MESSAGE value="starting new method of bookshelf to calculate adjacent points" />
-    <MESSAGE value="Starting the implementation of the crossing algorithm in the bookshelf." />
-    <MESSAGE value="Done the adjacent Points algorithm, but i have to resolve the &quot;pop&quot; bug" />
-    <MESSAGE value="Bug of the pop method is solved.&#10;The PersonalCard and Bookshelf classes are fine." />
-    <MESSAGE value="very basic draft of the &quot;player&quot; class" />
-    <MESSAGE value="Player class: methods about the points, done.&#10;Method fish1tile, ok.&#10;TO DO: fish-2-tiles and fish-3-tiles method" />
-    <MESSAGE value="Player class: fish-2-tiles, 90%.&#10;TO DO: fish-3-tiles method." />
-    <MESSAGE value="more power to the &quot;insert&quot; method of bookshelf class.&#10;Finished the Player class, but maybe there's a bug in fish-3-tiles and i need the &quot;remove&quot; method of the board to complete the methods" />
-    <MESSAGE value="Upgraded the fish methods." />
-    <MESSAGE value="new private methods in &quot;Player&quot; class to check the adjacency of the tiles" />
-    <MESSAGE value="done the new method &quot;tileFreeSide&quot; in Player class.&#10;finished the method &quot;adjacentTiles&quot;, I have to put it into the &quot;pickCard&quot; method" />
-    <MESSAGE value="fixed the &quot;pickCard&quot; method in Player class." />
     <MESSAGE value="created the Model package and upgraded the visibility of some classes and methods" />
     <MESSAGE value="merge bug" />
     <MESSAGE value="Removed the &quot;Bookshelf&quot; Class;&#10;Fixed some errors of the methods: isColumnFull and checkIfFull;&#10;Created the methods &quot;getId&quot; and &quot;getUsername&quot;;&#10;changed the visibility of the player's &quot;username&quot;." />
@@ -424,7 +500,23 @@
     <MESSAGE value="Removed some warnings and cleared the code" />
     <MESSAGE value="implementing the mvc design pattern" />
     <MESSAGE value="model class modified" />
-    <MESSAGE value="Small changes in the server" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small changes in the server" />
+    <MESSAGE value="rmi server, start method" />
+    <MESSAGE value="lobby phase with rmi-socket; doesn't work" />
+    <MESSAGE value="update lobby phase with rmi-socket; doesn't work" />
+    <MESSAGE value="username rmi phase" />
+    <MESSAGE value="implementation ServerManager class" />
+    <MESSAGE value="implementation ServerManager,SocketServer and RmiServer classes" />
+    <MESSAGE value="rmi server run" />
+    <MESSAGE value="rmi server and client working in progress" />
+    <MESSAGE value="RmiCommunication and RmiClient" />
+    <MESSAGE value="RmiServer bug fixed, sendMessageAndWaitAnswer done, sendMessage maybe errors" />
+    <MESSAGE value="removed old RmiMethod of the rmiServerInterface: notifyConnection, notifyNewConnection, getActiveNumberPlayer" />
+    <MESSAGE value="new model method: getPlayerPersonalCard and getPlayerShelf" />
+    <MESSAGE value="bug push" />
+    <MESSAGE value="update port of socket and rmi clients" />
+    <MESSAGE value="new controller methods: adjacentTiles(x1,y1,x2,y2) and adjacentTiles(x1,y1,x2,y2,x3,y3)" />
+    <MESSAGE value="starting implementation of timer&#10;ServerManager: new methods: checkIfDisconnected and isAwayFromKeyboardOrDisconnected; modified methods: sendMessageAndWaitForAnswer" />
+    <MESSAGE value="client port" />
+    <option name="LAST_COMMIT_MESSAGE" value="client port" />
   </component>
 </project>

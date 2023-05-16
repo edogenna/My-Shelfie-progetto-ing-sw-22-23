@@ -35,7 +35,7 @@ public class ServerManager implements Runnable{
     Converter converter = new Converter();
     private SocketServer socketServer;
     private RmiServer rmiServer;
-    private SocketServerChat socketServerChat;
+//    private SocketServerChat socketServerChat;
 
     private final int secondsDuringTurn = 120;
     private int idClient = 0;
@@ -162,12 +162,12 @@ public class ServerManager implements Runnable{
             }
         }
         if (isTimeExceeded) {
-/*            communication.setTimeExceeded();
-            if (activeMatches.containsKey(number)) {
+            communication.setTimeExceeded();
+            if (lobby.containsKey(number)) {
                 awayFromKeyboardOrDisconnected.add(number);
-                activeMatches.get(number).disconnect(nicknames.get(number));
+//                activeMatches.get(number).disconnect(nicknames.get(number));
             }
-            return Protocol.ERR;*/
+            return "Error";
         }
         return answers.get(number);
     }
@@ -350,7 +350,7 @@ public class ServerManager implements Runnable{
     @Override
     public void run() {
         socketServer = new SocketServer(this, Constant.PORT_SOCKET_GAME);
-        socketServerChat = new SocketServerChat(this, Constant.PORT_SOCKET_CHAT);
+        //socketServerChat = new SocketServerChat(this, Constant.PORT_SOCKET_CHAT);
         try {
             rmiServer = new RmiServer(this, Constant.PORT_RMI_GAME);
         } catch (RemoteException e) {
