@@ -37,12 +37,10 @@ public class Controller {
 
         len = input.length();
         if(len != 5 && len != 9 && len != 13) {
-            //view.dummyInputPrint();
             return true;
         }
         for(i=1; i<len; i+=2){
             if(input.charAt(i) != ','){
-                //view.dummyInputPrint();
                 return true;
             }
         }
