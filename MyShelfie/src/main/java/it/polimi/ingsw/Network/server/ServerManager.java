@@ -8,8 +8,10 @@ import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.Player;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
@@ -35,8 +37,6 @@ public class ServerManager implements Runnable{
     Converter converter = new Converter();
     private SocketServer socketServer;
     private RmiServer rmiServer;
-//    private SocketServerChat socketServerChat;
-
     private final int secondsDuringTurn = 120;
     private int idClient = 0;
     private int idClientChat = 0;
@@ -183,7 +183,7 @@ public class ServerManager implements Runnable{
         return ((UsernameAnswer) m).getString();
     }
 
-    protected void clientLogin(int number){
+    protected void clientLogin(int number) throws IOException {
         String username = login(number);
 
         if(this.firstPlayer){
@@ -230,7 +230,8 @@ public class ServerManager implements Runnable{
         return false;
     }
 
-    private void startGame() {
+    private void startGame() throws IOException {
+        //CheckMemoryDisk();
         activeMatch = new Controller(this.numberOfPlayers);
         boolean win = false;
 
@@ -240,8 +241,9 @@ public class ServerManager implements Runnable{
         activeMatch.setFirstPlayer();
         while (!win) {
 
-//            saveGame();
-//            System.out.println("Game has been saved");
+            //saveGame();
+            System.out.println("Game has been saved");
+
             String activeUsername = activeMatch.getActivePlayerUsername();
 
             //Sending graphical info on the game's status
@@ -350,7 +352,6 @@ public class ServerManager implements Runnable{
     @Override
     public void run() {
         socketServer = new SocketServer(this, Constant.PORT_SOCKET_GAME);
-        //socketServerChat = new SocketServerChat(this, Constant.PORT_SOCKET_CHAT);
         try {
             rmiServer = new RmiServer(this, Constant.PORT_RMI_GAME);
         } catch (RemoteException e) {
@@ -358,5 +359,79 @@ public class ServerManager implements Runnable{
         }
         new Thread(socketServer).start();
         new Thread(rmiServer).start();
+    }
+
+    /**
+     * This method saves the game
+     * @author Alessandro Fornara
+     * @throws IOException
+     */
+    private void saveGame() throws IOException {
+        String save = this.activeMatch.getModelSave();
+
+        String filePath = "C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt";
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(save);
+        fileWriter.close();
+    }
+
+    /**
+     * This method loads a game that has been saved in file
+     * @return game {@link Model}
+     * @throws IOException
+     */
+    private Model loadGame() throws IOException {
+        File file = new File("C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        StringBuilder stringBuilder = new StringBuilder();
+        Converter c = new Converter();
+
+        if(file.exists()) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+
+            String content = stringBuilder.toString();
+
+            return c.convertModelFromJSON(content);
+        }
+        return null;
+    }
+
+    //TODO: I have to find a way to serialize the commonCards, I could use Strings like in the message
+    //DO NOT USE THIS METHOD FOR NOW
+    private Controller checkMemoryDisk() throws IOException {
+        Model m = loadGame();
+        int i = 0;
+        boolean samePlayers = true;
+
+        if(m!=null) {
+            Player[] players = m.getPlayers();
+            ArrayList<String> oldUsernames = new ArrayList<>();
+            for(int k=0; i<players.length; i++){
+                oldUsernames.add(players[k].getUsername());
+            }
+            //TODO: order usernames and confront
+            if (players.length == lobby.size()) {
+                for (Integer j : this.lobby.keySet()) {
+                    if (!lobby.get(j).equals(players[i].getUsername())) {
+                        samePlayers = false;
+                        break;
+                    }
+                    i++;
+                }
+                if (samePlayers)
+                    activeMatch = new Controller(m);
+            }
+        }
+        else {
+            activeMatch = new Controller(numberOfPlayers);
+            for (Integer j : this.lobby.keySet()) {
+                activeMatch.setUsernamePlayer(lobby.get(j));
+            }
+            activeMatch.setFirstPlayer();
+        }
+        return activeMatch;
     }
 }
