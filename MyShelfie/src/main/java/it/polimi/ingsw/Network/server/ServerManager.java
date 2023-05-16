@@ -242,55 +242,108 @@ public class ServerManager implements Runnable{
         }
     }
 
-    private void handleMoveAnswer(int number, Message m){
-        if (activeMatch.dummyInput(((MoveAnswer) m).getS())){
-            sendMessageAndWaitForAnswer(number, new NotValidMoveError());
-        } else {
+    private void handleMoveAnswer(int number, Message m) {
+        int done = 6;
+        boolean exit = false;
+        while (!exit) {
+
+            if (done == 1) {
+                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new EmptyPositionError()));
+            } else if (done == 2) {
+                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotEnoughSpaceBookshelfError()));
+            } else if (done == 3) {
+                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NoFreeSideError()));
+            } else if (done == 4) {
+                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotAdjacTiles()));
+            } else if (done == 5) {
+                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotEnoughSpaceColumnError()));
+            }
+            while (activeMatch.dummyInput(((MoveAnswer) m).getS())) {
+                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotValidMoveError()));
+            }
             String[] tiles = ((MoveAnswer) m).getS().split(",");
             int i = tiles.length;
-            int done = 0;
             //i = number of tiles * 2 + 1;
             switch (i) {
                 case 3:
                     //we have taken 1 tile;
-                    done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                    done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
                     break;
                 case 5:
                     //we have taken 2 tiles;
-                    done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
+                    done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0) - 'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
                     break;
                 case 7:
                     //we have taken 3 tiles;
-                    done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
+                    done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0) - 'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0) - 'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
                     break;
             }
-            if(done == 1) {
-                sendMessageAndWaitForAnswer(number, new EmptyPositionError());
-            }else if(done == 2){
-                sendMessageAndWaitForAnswer(i, new NotEnoughSpaceBookshelfError());
-            }else if(done == 3){
-                sendMessageAndWaitForAnswer(i, new NoFreeSideError());
-            }else if(done == 4){
-                sendMessageAndWaitForAnswer(i, new NotAdjacTiles());
-            }else if(done == 5){
-                sendMessageAndWaitForAnswer(i, new NotEnoughSpaceColumnError());
-            }
-            else if(done == 0){
+
+            if (done == 0) {
                 int points1 = activeMatch.controlCommonCards(0);
                 int points2 = activeMatch.controlCommonCards(1);
-                if(points1!=0){
+                if (points1 != 0) {
                     for (Integer j : this.lobby.keySet()) {
                         sendMessageAndWaitForAnswer(j, new CommonCardMessage(this.lobby.get(number), 1, points1));
                     }
                 }
-                if(points2!=0){
+                if (points2 != 0) {
                     for (Integer j : this.lobby.keySet()) {
                         sendMessageAndWaitForAnswer(j, new CommonCardMessage(this.lobby.get(number), 2, points2));
                     }
                 }
+                exit = true;
             }
         }
     }
+    /*private void handleMoveAnswer(int number, Message m){
+        while (activeMatch.dummyInput(((MoveAnswer) m).getS())){
+            m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotValidMoveError()));
+        }
+        String[] tiles = ((MoveAnswer) m).getS().split(",");
+        int i = tiles.length;
+        int done = 0;
+        //i = number of tiles * 2 + 1;
+        switch (i) {
+            case 3:
+                //we have taken 1 tile;
+                done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                break;
+            case 5:
+                //we have taken 2 tiles;
+                done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
+                break;
+            case 7:
+                //we have taken 3 tiles;
+                done = activeMatch.pickCard(tiles[0].charAt(0)-'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0)-'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0)-'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
+                break;
+        }
+        if(done == 1) {
+            String answer = sendMessageAndWaitForAnswer(number, new EmptyPositionError());
+        }else if(done == 2){
+            String answer = sendMessageAndWaitForAnswer(number, new NotEnoughSpaceBookshelfError());
+        }else if(done == 3){
+            String answer = sendMessageAndWaitForAnswer(number, new NoFreeSideError());
+        }else if(done == 4){
+            String answer = sendMessageAndWaitForAnswer(number, new NotAdjacTiles());
+        }else if(done == 5){
+            String answer = sendMessageAndWaitForAnswer(number, new NotEnoughSpaceColumnError());
+        }
+        else if(done == 0){
+            int points1 = activeMatch.controlCommonCards(0);
+            int points2 = activeMatch.controlCommonCards(1);
+            if(points1!=0){
+                for (Integer j : this.lobby.keySet()) {
+                    sendMessageAndWaitForAnswer(j, new CommonCardMessage(this.lobby.get(number), 1, points1));
+                }
+            }
+            if(points2!=0){
+                for (Integer j : this.lobby.keySet()) {
+                    sendMessageAndWaitForAnswer(j, new CommonCardMessage(this.lobby.get(number), 2, points2));
+                }
+            }
+        }
+    }*/
 
     @Override
     public void run() {

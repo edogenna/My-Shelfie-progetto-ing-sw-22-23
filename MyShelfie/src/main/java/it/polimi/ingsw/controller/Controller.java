@@ -166,9 +166,9 @@ public class Controller {
         if(!done)
             return false;
         done = model.adjacentTiles(x1,y1,x2,y2);
-            if(!done){
-                //view.notAdjacentTilesPrint();
-            }
+        if(!done)
+            return false;
+
         return done;
     }
 
@@ -195,7 +195,7 @@ public class Controller {
             return false;
         done = model.adjacentTiles(x1,y1,x2,y2,x3,y3);
         if(!done){
-            //view.notAdjacentTilesPrint();
+            return false;
         }
         return done;
     }
