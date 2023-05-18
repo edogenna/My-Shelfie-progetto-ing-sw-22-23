@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.view.CliView;
 
 public class Controller {
-    private CliView view;
     private Model model;
 
     public Controller(int x){
@@ -433,5 +432,9 @@ public class Controller {
 
     public ItemEnum[][] getPlayerBookshelf(String username){
         return model.getPlayerBookshelf(username);
+    }
+
+    public void reconnect(String username) {
+        model.setConnected(username);
     }
 }

@@ -20,6 +20,7 @@ public class Player {
     private ItemEnum[][] shelf = new ItemEnum[6][5];
     @Expose
     private int[] heights = new int[5];
+    private boolean disconnected;
 
     public Player(String username){
         this.username = username;
@@ -27,6 +28,7 @@ public class Player {
         myCommonPoints = 0;
         CommonDone1 = false;
         CommonDone2 = false;
+        disconnected = false;
         myGoals = new Card();
         for(int i=0; i<6; i++){
             for(int j=0; j<5; j++)
@@ -322,5 +324,15 @@ public class Player {
         heights[y]++;
     }
 
+    public boolean isDisconnected() {
+        return this.disconnected;
+    }
 
+    public void setDisconnected() {
+        this.disconnected = true;
+    }
+
+    public void setConnected() {
+        this.disconnected = false;
+    }
 }

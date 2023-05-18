@@ -6,10 +6,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Server {
-
-    private static final int MIN_PORT = 1000;
-    private static final int MAX_PORT = 50000;
-
     public static void main(String[] args) {
         ServerManager serverManager;
         Scanner stdin = new Scanner(System.in);
@@ -21,26 +17,5 @@ class Server {
         }
         serverManager = new ServerManager();
         serverManager.run();
-    }
-
-    @Deprecated
-    private static int manageIntInput(Scanner stdin, int forbiddenValue) {
-        int output;
-        try {
-            output = stdin.nextInt();
-        } catch (InputMismatchException e) {
-            output = Server.MIN_PORT - 1;
-            stdin.nextLine();
-        }
-        while (output > Server.MAX_PORT || output < Server.MIN_PORT || output == forbiddenValue) {
-            System.out.println("the value must be between " + Server.MIN_PORT + " and " + Server.MAX_PORT + ". Try again:");
-            try {
-                output = stdin.nextInt();
-            } catch (InputMismatchException e) {
-                output = Server.MIN_PORT - 1;
-                stdin.nextLine();
-            }
-        }
-        return output;
     }
 }

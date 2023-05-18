@@ -26,13 +26,13 @@ public class ServerManager implements Runnable{
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
     private final int secondsDuringTurn = 120;
+    private static final String RECONNECT = "Reconnect";
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
     private final Map<Integer, Boolean> answerReady = new HashMap<>();
     private final Map<Integer, String> lobby = new HashMap<>();
     private final Map<Integer, String> nicknames = new HashMap<>();
-    //private final Map<Integer, Controller> activeMatches = new HashMap<>();
     Controller activeMatch;
     private final List<Integer> afkPlayers = new ArrayList<>();
     private final List<Integer> disconnectedPlayers = new ArrayList<>();
@@ -139,7 +139,7 @@ public class ServerManager implements Runnable{
 
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         //TODO: create new message
-        if (isAwayFromKeyboardOrDisconnected(number))
+        if (isAwayFromKeyboard(number))
             return "the player" + number + "is disconnected";
 
         String serializedMessage = converter.convertToJSON(message);
@@ -254,29 +254,34 @@ public class ServerManager implements Runnable{
     void addClientToLog(int temporaryId) {
         String code;
         int oldId;
-/*        while (true) {
-            String reconnect = sendMessageAndWaitForAnswer(temporaryId, new Message(Protocol.RECONNECT, "", Arrays.asList(NEW_GAME, RECONNECT)));
-            if (reconnect.equals(Protocol.ERR))
+        while (true) {
+            //new Message(Protocol.RECONNECT, "", Arrays.asList(NEW_GAME, RECONNECT))
+            String reconnect = sendMessageAndWaitForAnswer(temporaryId, new ChooseUsernameMessage());
+            if (reconnect.equals("ERR"))
                 break;
             else if (reconnect.equals(RECONNECT)) {
-                code = sendMessageAndWaitForAnswer(temporaryId, new Message(Protocol.INSERT_OLD_CODE, "", null));
-                if (code.equals(Protocol.ERR))
+                //new Message(Protocol.INSERT_OLD_CODE, "", null)
+                code = sendMessageAndWaitForAnswer(temporaryId, new FirstPlayerMessage());
+                if (code.equals("ERR"))
                     break;
                 if (checkIfDisconnected(code)) {
                     oldId = Integer.parseInt(code);
                     if (!switchClientId(oldId, temporaryId))
                         break;
                     disconnectedPlayers.remove((Object) oldId);
-                    sendMessageAndWaitForAnswer(oldId, new Message(Protocol.WELCOME_BACK, nicknames.get(oldId), null));
-                    activeMatches.get(oldId).reconnect(nicknames.get(oldId));
+                    //new Message(Protocol.WELCOME_BACK, nicknames.get(oldId), null)
+                    sendMessageAndWaitForAnswer(oldId, new FirstPlayerMessage());
+                    activeMatch.reconnect(nicknames.get(oldId));
                     break;
-                } else
-                    sendMessageAndWaitForAnswer(temporaryId, new Message(Protocol.INVALID_OLD_CODE, "", null));
+                }else{
+                    //new Message(Protocol.INVALID_OLD_CODE, "", null)
+                    sendMessageAndWaitForAnswer(temporaryId, new NotValidUsernameError());
+                }
             } else {
-                addClientToLobby(temporaryId);
+                //addClientToLobby(temporaryId);
                 break;
             }
-        }*/
+        }
     }
 
     private void notifyNewConnection(int numberOfPlayers) {
@@ -411,23 +416,32 @@ public class ServerManager implements Runnable{
         } catch (NumberFormatException e) {
             return false;
         }
-        if (isAwayFromKeyboardOrDisconnected(oldId))
+        if (isAwayFromKeyboard(oldId))
             return true;
         if (!answerReady.getOrDefault(oldId, false))
             return false;
 
         //TODO: this is a temporary message, create new message for connection
         sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
-        return isAwayFromKeyboardOrDisconnected(oldId);
+        return isAwayFromKeyboard(oldId);
     }
 
     /**
      * @author Donato Fiore
      * @param code the id of the player
-     * @return true if the player was disconnected or AFK
+     * @return true if the player is AFK
      * */
-    public boolean isAwayFromKeyboardOrDisconnected(int code) {
+    public boolean isAwayFromKeyboard(int code) {
         return afkPlayers.contains(code);
+    }
+
+    /**
+     * @author Donato Fiore
+     * @param code the id of the player
+     * @return true if the player was disconnected
+     * */
+    public boolean isDisconnected(int code){
+        return disconnectedPlayers.contains(code);
     }
 
     @Override
@@ -443,8 +457,8 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * This method saves the game
      * @author Alessandro Fornara
+     * This method saves the game
      * @throws IOException
      */
     private void saveGame() throws IOException {

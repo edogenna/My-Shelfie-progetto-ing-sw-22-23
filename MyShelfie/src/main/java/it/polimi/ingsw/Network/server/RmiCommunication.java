@@ -17,11 +17,11 @@ public class RmiCommunication extends Communication{
     public void run(){
         String answer = rmiServer.sendMessageAndGetAnswer(this.client, this.message);
         showAndSetAnswer(answer);
-        if (this.timeExceeded) {
+/*        if (this.timeExceeded) {
             //TODO: new message for time exceeded;
 //            answer = rmiServer.sendMessageAndGetAnswer(client, new Parser().serialize(new Message(Protocol.TIME_EXCEEDED, "", null)));
             showAndSetAnswer(answer);
             rmiServer.unregister(client);
-        }
+        }*/
     }
 }

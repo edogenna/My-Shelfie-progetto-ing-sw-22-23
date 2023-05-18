@@ -474,6 +474,18 @@ public class Model {
         return c.convertModelToJSON(this);
     }
 
+    public void setConnected(String username){
+        int x=-1;
+        for(int i=0; i<players.length; i++){
+            if(players[i].getUsername().equals(username)){
+                x = i;
+                break;
+            }
+        }
+        if(x>-1)
+            players[x].setConnected();
+    }
+
 
     //TODO: i don't think it is correct doing this; control the test method e modify it;
     public Board getBoard() {
