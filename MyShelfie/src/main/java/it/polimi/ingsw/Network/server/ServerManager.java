@@ -309,14 +309,14 @@ public class ServerManager implements Runnable{
     }
 
     private void startGame() throws IOException {
-        //activeMatch = checkMemoryDisk();
-        //TODO: fix bug of first turn after reloading game
-        activeMatch = new Controller(numberOfPlayers);
+        activeMatch = checkMemoryDisk();
+
+        /*activeMatch = new Controller(numberOfPlayers);
         System.out.println("A new game has been created");
         for (Integer j : this.lobby.keySet()) {
             activeMatch.setUsernamePlayer(lobby.get(j));
         }
-        activeMatch.setFirstPlayer();
+        activeMatch.setFirstPlayer();*/
 
         boolean win = false;
 
@@ -509,6 +509,7 @@ public class ServerManager implements Runnable{
                 if (samePlayers) {
                     activeMatch = new Controller(m);
                     System.out.println("A game save has been restored");
+                    activeMatch.setActivePlayer(activeMatch.getIdActivePlayer());
                 }
                 else{
                     activeMatch = new Controller(numberOfPlayers);

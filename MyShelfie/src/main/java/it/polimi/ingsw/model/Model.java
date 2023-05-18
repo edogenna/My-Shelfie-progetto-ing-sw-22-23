@@ -21,7 +21,9 @@ public class Model {
     @Expose
     private int commonPoints1, commonPoints2;
     @Expose
-    private int idFirstPlayer, idActivePlayer;
+    private int idFirstPlayer;
+    @Expose
+    private int idActivePlayer;
     @Expose
     private boolean lastTurn;
 
@@ -139,6 +141,12 @@ public class Model {
         Random xyz = new Random();
         int i;
         i = xyz.nextInt(numPlayers);
+        this.idFirstPlayer = i;
+        this.idActivePlayer = i;
+        this.activePlayer = players[i];
+    }
+
+    public void setFirstPlayer(int i){
         this.idFirstPlayer = i;
         this.idActivePlayer = i;
         this.activePlayer = players[i];
@@ -430,7 +438,6 @@ public class Model {
                 }
             }
         }
-        this.idActivePlayer = id;
         this.setActivePlayer(id);
 
         return this.activePlayer.getMyPoints();
@@ -457,8 +464,9 @@ public class Model {
      * @param id index of the selected player
      * it sets the selected player as activePlayer
      */
-    private void setActivePlayer(int id){
+    public void setActivePlayer(int id){
         this.activePlayer = this.players[id];
+        this.idActivePlayer = id;
     }
 
     public String saveModel(){
@@ -479,6 +487,10 @@ public class Model {
      */
     public Player[] getPlayers() {
         return this.players;
+    }
+
+    public int getIdActivePlayer(){
+        return this.idActivePlayer;
     }
 
     /*

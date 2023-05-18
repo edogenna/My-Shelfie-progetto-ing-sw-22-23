@@ -26,6 +26,14 @@ public class Controller {
         model.setFirstPlayer();
     }
 
+    public void setActivePlayer(int i){
+        model.setActivePlayer(i);
+    }
+
+    public int getIdActivePlayer(){
+        return model.getIdActivePlayer();
+    }
+
     /**
      * @author Donato Fiore
      * @param input the move that the player wants to do
