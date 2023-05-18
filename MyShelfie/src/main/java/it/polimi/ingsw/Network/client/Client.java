@@ -8,12 +8,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
+import java.util.Queue;
 
 /**
  * Main client class that starts a socket client or an RMI client.
  */
 public class Client {
     static String hostName;
+    protected Queue<String> queueChat; //queue that contains json string
     public static void main(String[] args) throws IOException, NotBoundException {
 
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
