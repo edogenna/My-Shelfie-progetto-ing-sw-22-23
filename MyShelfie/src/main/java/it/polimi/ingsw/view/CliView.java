@@ -60,6 +60,7 @@ public class CliView{
             case "MoveMessage" -> handleMoveMessage(m);
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
             case "Lobby" -> {handleLobbyMessage(m);}
+            case "CommonCard" -> outputStream.println(((CommonCardMessage) m).getS());
             case "StartingGame" -> {handleStartingGameMessage(m);}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
@@ -232,11 +233,13 @@ public class CliView{
      * @author Alessandro Fornara
      */
     private void printBookshelfAndPersonal(){
-        outputStream.println("\n" + "Your Bookshelf:   Your Personal Card:");
+        outputStream.println("\n" + "Your Bookshelf:    Your Personal Card:");
         ItemEnum.generateCharMatrix(shelf, 6, 5)
-                .addNumbering(5)
+                .addColumnNumbering(5)
                 .appendToAllRows("   ")
-                .addOnRight(ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)).printMatrix();
+                .alignColumn()
+                .addOnRight(ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5).addColumnNumbering(5))
+                .printMatrix();
     }
 
     public void dummyInputPrint(Message m){

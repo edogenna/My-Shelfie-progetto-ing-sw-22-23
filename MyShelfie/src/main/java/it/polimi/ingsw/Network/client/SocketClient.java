@@ -17,10 +17,12 @@ import java.net.Socket;
  */
 public class SocketClient extends Client{
 
+    //TODO: salvare l'username nel client quando questo si connette al server
     Socket socket = null;
     PrintWriter out = null;
     BufferedReader in = null;
     BufferedReader stdIn = null;
+    Thread inputReader;
     public void startSocketClient() throws IOException {
         try {
             this.socket = new Socket(hostName, Constant.PORT_SOCKET_GAME);
@@ -31,15 +33,18 @@ public class SocketClient extends Client{
             System.out.println("Invalid parameters: " + e.getMessage());
             System.exit(0);
         }
-            System.out.println("you are connected with socket");
-            Converter c = new Converter();
-            CliView cliView = new CliView(out, in, stdIn, null);
 
-            while(true){
-                String message = in.readLine();
-                Message m = c.convertFromJSON(message);
-                cliView.actionHandler(m);
-            }
+        System.out.println("you are connected with socket");
+        Converter c = new Converter();
+        CliView cliView = new CliView(out, in, stdIn, null);
+        inputReader = createInputReader();
+        inputReader.start();
+
+        while(true){
+            String message = in.readLine();
+            Message m = c.convertFromJSON(message);
+            cliView.actionHandler(m);
+        }
 
     }
     @Override
@@ -51,5 +56,18 @@ public class SocketClient extends Client{
         } catch (IOException e) {
             System.out.println("An error occured while trying to close socket: " + e.getMessage());
         }
+    }
+
+    private Thread createInputReader(){
+        return new Thread(() -> {
+            while(true){
+                try {
+                    String message = stdIn.readLine();
+                    out.println(new Converter().convertToJSON(new ChatMessage(message, "IlMioUserName")));;
+                } catch (IOException e) {
+                    System.out.println("An error occured while trying to read from socket: " + e.getMessage());
+                }
+            }
+        });
     }
 }
