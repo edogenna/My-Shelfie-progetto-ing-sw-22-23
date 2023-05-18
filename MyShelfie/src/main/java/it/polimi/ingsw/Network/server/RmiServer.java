@@ -30,6 +30,10 @@ public class RmiServer implements RmiServerInterface, Runnable{
         new Thread(new ClientManager(serverManager, number)).start();
     }
 
+    public void unregister(RmiClientInterface client) {
+        serverManager.removeClient(client);
+    }
+
     public synchronized boolean testAliveness() {
         return true;
     }

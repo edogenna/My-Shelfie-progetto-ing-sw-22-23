@@ -25,8 +25,8 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
+    private final int secondsDuringTurn = 120;
     private final Map<Integer, Socket> socketClients = new HashMap<>();
-    private final Map<Integer, Socket> socketChatClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
     private final Map<Integer, Boolean> answerReady = new HashMap<>();
@@ -34,12 +34,13 @@ public class ServerManager implements Runnable{
     private final Map<Integer, String> nicknames = new HashMap<>();
     //private final Map<Integer, Controller> activeMatches = new HashMap<>();
     Controller activeMatch;
-    private final List<Integer> awayFromKeyboardOrDisconnected = new ArrayList<>();
+    private final List<Integer> afkPlayers = new ArrayList<>();
+    private final List<Integer> disconnectedPlayers = new ArrayList<>();
+    private final Map<Integer, Socket> socketChatClients = new HashMap<>();
     Converter converter = new Converter();
     private SocketServer socketServer;
     private RmiServer rmiServer;
-    private final int secondsDuringTurn = 120;
-    private int idClient = 0;
+    private int idClient;
     private boolean firstPlayer;
     private int numberOfPlayers;
 
@@ -47,6 +48,7 @@ public class ServerManager implements Runnable{
     public ServerManager() {
         this.firstPlayer = true;
         this.numberOfPlayers = 0;
+        this.idClient = 0;
     }
 
     void addClient(Socket client) {
@@ -94,10 +96,51 @@ public class ServerManager implements Runnable{
         answerReady.put(client, true);
     }
 
+    void removeClient(Socket client) {
+        try {
+            int number = getNumber(client);
+            socketClients.remove(number);
+            removeClient(number);
+        } catch (NoSuchElementException e) {
+            //Do nothing
+        }
+    }
+
+    void removeClient(RmiClientInterface client) {
+        try {
+            int number = getNumber(client);
+            rmiClients.remove(number);
+            removeClient(number);
+        } catch (NoSuchElementException e) {
+            //Do nothing
+        }
+    }
+
+    private void removeClient(int number) {
+        if (lobby.containsKey(number))
+            removeClientFromLobby(number);
+/*        else if (lobby.containsKey(number)) {
+            awayFromKeyboardOrDisconnected.add(number);
+            lobby.get(number).disconnect(nicknames.get(number));
+        }*/
+        System.out.println("Client " + number + " removed.");
+    }
+
+    private void removeClientFromLobby(int number) {
+        String name = lobby.get(number);
+        lobby.remove(number);
+        Integer[] clients = lobby.keySet().toArray(new Integer[0]);
+        for (int i : clients) {
+            //TODO: new message for disconnection to send everyone; name + "is disconnected";
+            sendMessageAndWaitForAnswer(i, new NotValidUsernameError());
+//            notifyTimeLeft(i, clients.length);//to be removed?
+        }
+    }
+
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         //TODO: create new message
         if (isAwayFromKeyboardOrDisconnected(number))
-            return "the player is disconnected";
+            return "the player" + number + "is disconnected";
 
         String serializedMessage = converter.convertToJSON(message);
         while (!answerReady.get(number)) {
@@ -136,7 +179,7 @@ public class ServerManager implements Runnable{
                         rmiClients.get(number).testAliveness();
                     } catch (RemoteException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
-//                        rmiServer.unregister(rmiClients.get(number));
+                        rmiServer.unregister(rmiClients.get(number));
                         return "ERROR";
                     }
                 }
@@ -145,7 +188,7 @@ public class ServerManager implements Runnable{
                         socketClients.get(number).getInetAddress().isReachable(MILLIS_IN_SECOND);
                     } catch (IOException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
-                        //socket client removed from socket server;
+                        //socketServer.unregister(socketClients.get(number));
                         return "ERROR";
                     }
                 }
@@ -158,7 +201,7 @@ public class ServerManager implements Runnable{
         if (isTimeExceeded) {
             communication.setTimeExceeded();
             if (lobby.containsKey(number)) {
-                awayFromKeyboardOrDisconnected.add(number);
+                afkPlayers.add(number);
 //                activeMatches.get(number).disconnect(nicknames.get(number));
             }
             return "Error";
@@ -194,6 +237,48 @@ public class ServerManager implements Runnable{
         }
     }
 
+    private boolean switchClientId(int oldId, int temporaryId) {
+        if (socketClients.containsKey(temporaryId)) {
+            socketClients.put(oldId, socketClients.get(temporaryId));
+            socketClients.remove(temporaryId);
+            return true;
+        }
+        if (rmiClients.containsKey(temporaryId)) {
+            rmiClients.put(oldId, rmiClients.get(temporaryId));
+            rmiClients.remove(temporaryId);
+            return true;
+        }
+        return false;
+    }
+
+    void addClientToLog(int temporaryId) {
+        String code;
+        int oldId;
+/*        while (true) {
+            String reconnect = sendMessageAndWaitForAnswer(temporaryId, new Message(Protocol.RECONNECT, "", Arrays.asList(NEW_GAME, RECONNECT)));
+            if (reconnect.equals(Protocol.ERR))
+                break;
+            else if (reconnect.equals(RECONNECT)) {
+                code = sendMessageAndWaitForAnswer(temporaryId, new Message(Protocol.INSERT_OLD_CODE, "", null));
+                if (code.equals(Protocol.ERR))
+                    break;
+                if (checkIfDisconnected(code)) {
+                    oldId = Integer.parseInt(code);
+                    if (!switchClientId(oldId, temporaryId))
+                        break;
+                    disconnectedPlayers.remove((Object) oldId);
+                    sendMessageAndWaitForAnswer(oldId, new Message(Protocol.WELCOME_BACK, nicknames.get(oldId), null));
+                    activeMatches.get(oldId).reconnect(nicknames.get(oldId));
+                    break;
+                } else
+                    sendMessageAndWaitForAnswer(temporaryId, new Message(Protocol.INVALID_OLD_CODE, "", null));
+            } else {
+                addClientToLobby(temporaryId);
+                break;
+            }
+        }*/
+    }
+
     private void notifyNewConnection(int numberOfPlayers) {
         Integer[] clients = lobby.keySet().toArray(new Integer[0]);
         for (int i : clients) {
@@ -213,7 +298,7 @@ public class ServerManager implements Runnable{
      * @param nickname username
      * @return true if the username has already been taken, false otherwise
      */
-    public boolean isUsernameTaken(String nickname, int idClient){
+    private boolean isUsernameTaken(String nickname, int idClient){
         for(String s: nicknames.values()){
             if(nickname.equals(s)){
                 return true;
@@ -342,7 +427,7 @@ public class ServerManager implements Runnable{
      * @return true if the player was disconnected or AFK
      * */
     public boolean isAwayFromKeyboardOrDisconnected(int code) {
-        return awayFromKeyboardOrDisconnected.contains(code);
+        return afkPlayers.contains(code);
     }
 
     @Override
