@@ -37,7 +37,6 @@ public class ServerManager implements Runnable{
     private final List<Integer> afkPlayers = new ArrayList<>();
     private final List<Integer> disconnectedPlayers = new ArrayList<>();
     private final Map<Integer, Socket> socketChatClients = new HashMap<>();
-    Converter converter = new Converter();
     private SocketServer socketServer;
     private RmiServer rmiServer;
     private int idClient;
@@ -142,7 +141,7 @@ public class ServerManager implements Runnable{
         if (isAwayFromKeyboard(number))
             return "the player" + number + "is disconnected";
 
-        String serializedMessage = converter.convertToJSON(message);
+        String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
             try {
                 sleep(MILLIS_TO_WAIT);
@@ -211,11 +210,11 @@ public class ServerManager implements Runnable{
 
     private String login(int number){
         String answer = sendMessageAndWaitForAnswer(number, new ChooseUsernameMessage());
-        Message m = converter.convertFromJSON(answer);
+        Message m = Converter.convertFromJSON(answer);
 
         while (isUsernameTaken(((UsernameAnswer) m).getString(), number)){
             answer = sendMessageAndWaitForAnswer(number, new NotValidUsernameError());
-            m = converter.convertFromJSON(answer);
+            m = Converter.convertFromJSON(answer);
         }
         return ((UsernameAnswer) m).getString();
     }
@@ -226,7 +225,7 @@ public class ServerManager implements Runnable{
         if(this.firstPlayer){
             this.firstPlayer = false;
             String answer = sendMessageAndWaitForAnswer(number, new FirstPlayerMessage());
-            Message m = converter.convertFromJSON(answer);
+            Message m = Converter.convertFromJSON(answer);
             this.numberOfPlayers = ((NumberOfPlayersAnswer) m).getNum();
         }
         lobby.put(number, username);
@@ -340,7 +339,7 @@ public class ServerManager implements Runnable{
             //Sending to the active player a move request and handling the answer
             int x = getNumberByUsernameFromLobby(activeUsername);
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
-            Message m = converter.convertFromJSON(answer);
+            Message m = Converter.convertFromJSON(answer);
             handleMoveAnswer(x, m);
             win = activeMatch.finishTurn();
 
@@ -360,18 +359,18 @@ public class ServerManager implements Runnable{
         while (!exit) {
 
             if (done == 1) {
-                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new EmptyPositionError()));
+                m = Converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new EmptyPositionError()));
             } else if (done == 2) {
-                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotEnoughSpaceBookshelfError()));
+                m = Converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotEnoughSpaceBookshelfError()));
             } else if (done == 3) {
-                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NoFreeSideError()));
+                m = Converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NoFreeSideError()));
             } else if (done == 4) {
-                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotAdjacTiles()));
+                m = Converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotAdjacTiles()));
             } else if (done == 5) {
-                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotEnoughSpaceColumnError()));
+                m = Converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotEnoughSpaceColumnError()));
             }
             while (activeMatch.dummyInput(((MoveAnswer) m).getS())) {
-                m = converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotValidMoveError()));
+                m = Converter.convertFromJSON(sendMessageAndWaitForAnswer(number, new NotValidMoveError()));
             }
             String[] tiles = ((MoveAnswer) m).getS().split(",");
             int i = tiles.length;
@@ -479,7 +478,6 @@ public class ServerManager implements Runnable{
         File file = new File("C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt");
         BufferedReader reader = new BufferedReader(new FileReader(file));
         StringBuilder stringBuilder = new StringBuilder();
-        Converter c = new Converter();
 
         if(file.exists()) {
             String line;
@@ -489,7 +487,7 @@ public class ServerManager implements Runnable{
 
             String content = stringBuilder.toString();
 
-            return c.convertModelFromJSON(content);
+            return Converter.convertModelFromJSON(content);
         }
         return null;
     }

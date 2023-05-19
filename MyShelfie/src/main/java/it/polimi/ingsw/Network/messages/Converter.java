@@ -16,13 +16,19 @@ import it.polimi.ingsw.model.Model;
  */
 public class Converter {
 
+    //TODO: creare il costruttore come privato cosi da non piter instanzare questa classe
+
+
+    private Converter() {}
+
+
     /**
      * This method converts a message from a JSON string to a {@link Message}
      * @author Alessandro Fornara
      * @param message
      * @return a {@link Message} object
      */
-    public Message convertFromJSON(String message){
+    public static Message convertFromJSON(String message){
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
         String type = jsonObject.get("type").getAsString();
@@ -68,19 +74,19 @@ public class Converter {
      * @param m message
      * @return a string
      */
-    public String convertToJSON(Message m){
+    static public String convertToJSON(Message m){
         Gson gson = new Gson();
         return gson.toJson(m);
     }
 
-    public String convertModelToJSON(Model model){
+    static public String convertModelToJSON(Model model){
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
                 .create();
         return gson.toJson(model);
     }
 
-    public Model convertModelFromJSON(String model){
+    static public Model convertModelFromJSON(String model){
         Gson gson = new Gson();
         return gson.fromJson(model, Model.class);
     }

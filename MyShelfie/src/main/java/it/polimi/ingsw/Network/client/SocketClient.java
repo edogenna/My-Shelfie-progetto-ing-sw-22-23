@@ -35,14 +35,13 @@ public class SocketClient extends Client{
         }
 
         System.out.println("you are connected with socket");
-        Converter c = new Converter();
         CliView cliView = new CliView(out, in, stdIn, null);
         inputReader = createInputReader();
         inputReader.start();
 
         while(true){
             String message = in.readLine();
-            Message m = c.convertFromJSON(message);
+            Message m = Converter.convertFromJSON(message);
             cliView.actionHandler(m);
         }
 
@@ -63,7 +62,7 @@ public class SocketClient extends Client{
             while(true){
                 try {
                     String message = stdIn.readLine();
-                    out.println(new Converter().convertToJSON(new ChatMessage(message, "IlMioUserName")));;
+                    out.println(Converter.convertToJSON(new ChatMessage(message, "IlMioUserName")));;
                 } catch (IOException e) {
                     System.out.println("An error occured while trying to read from socket: " + e.getMessage());
                 }

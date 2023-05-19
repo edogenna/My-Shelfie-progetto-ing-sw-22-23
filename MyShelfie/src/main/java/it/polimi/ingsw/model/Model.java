@@ -470,8 +470,7 @@ public class Model {
     }
 
     public String saveModel(){
-        Converter c = new Converter();
-        return c.convertModelToJSON(this);
+        return Converter.convertModelToJSON(this);
     }
 
     public void setConnected(String username){
