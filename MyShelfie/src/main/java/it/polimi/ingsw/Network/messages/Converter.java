@@ -16,6 +16,12 @@ import it.polimi.ingsw.model.Model;
  */
 public class Converter {
 
+    //TODO: creare il costruttore come privato cosi da non piter instanzare questa classe
+
+
+    private Converter() {}
+
+
     /**
      * This method converts a message from a JSON string to a {@link Message}
      * @author Alessandro Fornara

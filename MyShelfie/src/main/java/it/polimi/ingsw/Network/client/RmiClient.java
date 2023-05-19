@@ -20,21 +20,16 @@ public class RmiClient extends Client implements RmiClientInterface{
 
     private BufferedReader stdIn;
     private CliView cliViewRmi;
-    private Converter c;
     private RmiServerInterface rmiServerInterface;
 
     public RmiClient(){
         this.stdIn = null;
         this.cliViewRmi = null;
-        this.c = null;
     }
 
-
     public void startRMIClient() throws IOException {
-
         this.stdIn = new BufferedReader(new InputStreamReader(System.in));
         this.cliViewRmi = new CliView(null, null, stdIn, rmiServerInterface);
-        this.c = new Converter();
 
         try {
             rmiServerInterface = (RmiServerInterface) LocateRegistry.getRegistry(hostName, Constant.PORT_RMI_GAME).lookup("MyShelfie");
@@ -51,8 +46,7 @@ public class RmiClient extends Client implements RmiClientInterface{
     }
 
     synchronized String manageMessage(String messageJsonCoded) throws IOException {
-        Converter conv = new Converter();
-        Message fromServer = conv.convertFromJSON(messageJsonCoded);
+        Message fromServer = Converter.convertFromJSON(messageJsonCoded);
         return cliViewRmi.actionHandler(fromServer);
     }
 
