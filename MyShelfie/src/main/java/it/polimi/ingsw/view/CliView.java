@@ -27,7 +27,6 @@ public class CliView{
     private final PrintWriter out;
     private final BufferedReader in;
     private final BufferedReader stdIn;
-    private final Converter c;
     private String myUsername;
     private String userInput;
     private RmiServerInterface remoteObject;
@@ -42,7 +41,6 @@ public class CliView{
         this.CommonCards = null;
         this.board = null;
         this.shelf = null;
-        this.c = new Converter();
         this.myUsername = null;
         this.userInput = null;
         this.remoteObject = remoteObject;
@@ -252,12 +250,12 @@ public class CliView{
      * @param m {@link Message}
      */
     private void sendMessageToServer(Message m){
-        String jsonString = c.convertToJSON(m);
+        String jsonString = Converter.convertToJSON(m);
         out.println(jsonString);
     }
 
     private void sendMessageToRmiServer(Message m) throws IOException {
-        String jsonString = c.convertToJSON(m);
+        String jsonString = Converter.convertToJSON(m);
         this.messageToServer = jsonString;
     }
 
