@@ -52,6 +52,12 @@ public class Converter {
             case "NotAdjTiles" -> gson.fromJson(message, NotAdjacTiles.class);
             case "NoFreeSide" -> gson.fromJson(message, NoFreeSideError.class);
             case "NotEnoughSpaceBookshelf" -> gson.fromJson(message, NotEnoughSpaceBookshelfError.class);
+            case "OldGameId" -> gson.fromJson(message, OldGameID.class);
+            case "Reconnect" -> gson.fromJson(message, ReconnectionMessage.class);
+            case "Timeout" -> gson.fromJson(message, TimeoutMessage.class);
+            case "TurnTimeOut" -> gson.fromJson(message, TurnTimeOut.class);
+            case "UserIdMessage" -> gson.fromJson(message, UserIdMessage.class);
+            case "OldGameIdAnswer" -> gson.fromJson(message, OldGameID.class);
             default -> null;
         };
     }
