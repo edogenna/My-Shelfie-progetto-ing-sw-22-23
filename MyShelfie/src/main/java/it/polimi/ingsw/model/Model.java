@@ -473,6 +473,11 @@ public class Model {
         return Converter.convertModelToJSON(this);
     }
 
+    /**
+     * @author Donato Fiore
+     * @param username the name of the player connected
+     * it set the connection's boolean of the player class
+     * */
     public void setConnected(String username){
         int x=-1;
         for(int i=0; i<players.length; i++){

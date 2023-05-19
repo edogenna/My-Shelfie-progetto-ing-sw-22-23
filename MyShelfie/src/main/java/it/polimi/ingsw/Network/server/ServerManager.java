@@ -137,9 +137,10 @@ public class ServerManager implements Runnable{
     }
 
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
-        //TODO: create new message
-        if (isAwayFromKeyboard(number))
+        if (isAwayFromKeyboard(number)){
+            //TODO: create new message / i'm doubtful
             return "the player" + number + "is disconnected";
+        }
 
         String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
@@ -159,7 +160,7 @@ public class ServerManager implements Runnable{
             new Thread(communication).start();
         } else {
             System.out.println("Unregistered Client");
-            //TODO: new message
+            //TODO: new ERROR message
             return "ERROR registration";
         }
 
@@ -219,7 +220,7 @@ public class ServerManager implements Runnable{
         return ((UsernameAnswer) m).getString();
     }
 
-    protected void clientLogin(int number) throws IOException {
+    protected void addClientToLobby(int number) throws IOException {
         String username = login(number);
 
         if(this.firstPlayer){
@@ -236,31 +237,16 @@ public class ServerManager implements Runnable{
         }
     }
 
-    private boolean switchClientId(int oldId, int temporaryId) {
-        if (socketClients.containsKey(temporaryId)) {
-            socketClients.put(oldId, socketClients.get(temporaryId));
-            socketClients.remove(temporaryId);
-            return true;
-        }
-        if (rmiClients.containsKey(temporaryId)) {
-            rmiClients.put(oldId, rmiClients.get(temporaryId));
-            rmiClients.remove(temporaryId);
-            return true;
-        }
-        return false;
-    }
-
-    void addClientToLog(int temporaryId) {
+    void addClientToLog(int temporaryId) throws IOException {
         String code;
         int oldId;
         while (true) {
             //new Message(Protocol.RECONNECT, "", Arrays.asList(NEW_GAME, RECONNECT))
-            String reconnect = sendMessageAndWaitForAnswer(temporaryId, new ChooseUsernameMessage());
+            String reconnect = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
             if (reconnect.equals("ERR"))
                 break;
             else if (reconnect.equals(RECONNECT)) {
-                //new Message(Protocol.INSERT_OLD_CODE, "", null)
-                code = sendMessageAndWaitForAnswer(temporaryId, new FirstPlayerMessage());
+                code = sendMessageAndWaitForAnswer(temporaryId, new OldGameID());
                 if (code.equals("ERR"))
                     break;
                 if (checkIfDisconnected(code)) {
@@ -273,14 +259,27 @@ public class ServerManager implements Runnable{
                     activeMatch.reconnect(nicknames.get(oldId));
                     break;
                 }else{
-                    //new Message(Protocol.INVALID_OLD_CODE, "", null)
-                    sendMessageAndWaitForAnswer(temporaryId, new NotValidUsernameError());
+                    sendMessageAndWaitForAnswer(temporaryId, new OldIdNotValid());
                 }
             } else {
-                //addClientToLobby(temporaryId);
+                addClientToLobby(temporaryId);
                 break;
             }
         }
+    }
+
+    private boolean switchClientId(int oldId, int temporaryId) {
+        if (socketClients.containsKey(temporaryId)) {
+            socketClients.put(oldId, socketClients.get(temporaryId));
+            socketClients.remove(temporaryId);
+            return true;
+        }
+        if (rmiClients.containsKey(temporaryId)) {
+            rmiClients.put(oldId, rmiClients.get(temporaryId));
+            rmiClients.remove(temporaryId);
+            return true;
+        }
+        return false;
     }
 
     private void notifyNewConnection(int numberOfPlayers) {
@@ -570,5 +569,4 @@ public class ServerManager implements Runnable{
 
         return activeMatch;
     }
-
 }

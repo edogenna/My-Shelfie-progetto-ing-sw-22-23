@@ -40,14 +40,14 @@ public class RmiClient extends Client implements RmiClientInterface{
         }
     }
 
-    @Override
-    public String sendMessageAndGetAnswer(String message) throws IOException {
-        return manageMessage(message);
-    }
-
     synchronized String manageMessage(String messageJsonCoded) throws IOException {
         Message fromServer = Converter.convertFromJSON(messageJsonCoded);
         return cliViewRmi.actionHandler(fromServer);
+    }
+
+    @Override
+    public String sendMessageAndGetAnswer(String message) throws IOException {
+        return manageMessage(message);
     }
 
     @Override

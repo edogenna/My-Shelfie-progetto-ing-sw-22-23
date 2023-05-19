@@ -6,4 +6,7 @@ public final class ReconnectionMessage extends Message{
     public ReconnectionMessage(){
         super("Reconnect");
     }
+    public String getS() {
+        return s;
+    }
 }
