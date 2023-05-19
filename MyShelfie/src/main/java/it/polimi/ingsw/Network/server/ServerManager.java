@@ -338,7 +338,26 @@ public class ServerManager implements Runnable{
 
             //Sending to the active player a move request and handling the answer
             int x = getNumberByUsernameFromLobby(activeUsername);
+
+            /*for (Integer i : this.lobby.keySet()) {
+                if (i != getNumberByUsernameFromLobby(activeUsername)) {
+                    new Thread(() -> {
+                        while (true) {
+                            String answerChat = sendMessageAndWaitForAnswer(i, new ChatBeginsMessage());
+                            Message m = Converter.convertFromJSON(answerChat);
+
+                            System.out.println(((ChatMessage) m).getMessage());
+                            /*for (Integer j : this.lobby.keySet()){
+                                if (j != getNumberByUsernameFromLobby(activeUsername) && !j.equals(i)) {
+                                    sendMessageAndWaitForAnswer(j, new ChatMessage(((ChatMessage) m).getMessage(), "Server"));
+                                }
+                            }
+                        }
+                    }).start();
+                }
+            }*/
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
+
             Message m = Converter.convertFromJSON(answer);
             handleMoveAnswer(x, m);
             win = activeMatch.finishTurn();
@@ -531,6 +550,13 @@ public class ServerManager implements Runnable{
                     }
                     activeMatch.setFirstPlayer();
                 }
+            }else{
+                activeMatch = new Controller(numberOfPlayers);
+                System.out.println("A new game has been created");
+                for (Integer j : this.lobby.keySet()) {
+                    activeMatch.setUsernamePlayer(lobby.get(j));
+                }
+                activeMatch.setFirstPlayer();
             }
         }
         else {
@@ -544,4 +570,5 @@ public class ServerManager implements Runnable{
 
         return activeMatch;
     }
+
 }

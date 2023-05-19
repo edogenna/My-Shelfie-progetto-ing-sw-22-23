@@ -59,6 +59,7 @@ public class CliView{
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
             case "Lobby" -> {handleLobbyMessage(m);}
             case "CommonCard" -> outputStream.println(((CommonCardMessage) m).getS());
+            case "ChatBegins" -> {handleChatBeginsMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
@@ -268,6 +269,15 @@ public class CliView{
             sendMessageToServer(new ACKMessage());
         else sendMessageToRmiServer(new ACKMessage());
 
+    }
+
+    private void handleChatBeginsMessage(Message m) throws IOException {
+        outputStream.println(((ChatBeginsMessage) m).getS());
+        userInput = stdIn.readLine();
+
+        if(out != null)
+            sendMessageToServer(new ChatMessage(userInput, "1"));
+        else sendMessageToRmiServer(new ChatMessage(userInput, "1"));
     }
 
     @Deprecated

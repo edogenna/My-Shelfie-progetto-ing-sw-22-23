@@ -36,8 +36,8 @@ public class SocketClient extends Client{
 
         System.out.println("you are connected with socket");
         CliView cliView = new CliView(out, in, stdIn, null);
-        inputReader = createInputReader();
-        inputReader.start();
+        //inputReader = createInputReader();
+        //inputReader.start();
 
         while(true){
             String message = in.readLine();
