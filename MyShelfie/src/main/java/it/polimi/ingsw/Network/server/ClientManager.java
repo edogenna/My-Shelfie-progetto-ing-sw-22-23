@@ -19,7 +19,7 @@ public class ClientManager implements Runnable {
     @Override
     public void run() {
         try {
-            serverManager.clientLogin(this.number);
+            serverManager.addClientToLobby(this.number);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

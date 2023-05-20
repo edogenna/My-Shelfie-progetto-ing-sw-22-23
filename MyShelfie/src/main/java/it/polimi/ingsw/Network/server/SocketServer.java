@@ -24,8 +24,6 @@ public class SocketServer implements Runnable{
         this.portNumber = port;
     }
 
-    //TODO: correct the documentation
-
     private void registry(Socket client) throws IOException {
         serverManager.addClient(client);
         fromClient.put(client, new Scanner(client.getInputStream()));
