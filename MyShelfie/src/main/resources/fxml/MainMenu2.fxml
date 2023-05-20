@@ -10,7 +10,9 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="it.polimi.ingsw.GUI.GUI"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="400.0" prefWidth="600.0"
+            >
+
 
     <children>
         <ImageView fx:id="title" fitHeight="139.0" fitWidth="391.0" layoutX="285.0" layoutY="8.0" pickOnBounds="true">

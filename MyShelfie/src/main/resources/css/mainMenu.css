@@ -1,5 +1,10 @@
 .mainPanel {
-    -fx-background-image: url("../graphics/");
+    -fx-background-image: url("../graphics/misc/sfondo parquet.jpg");
+    -fx-background-size: stretch;
+}
+
+.background {
+    -fx-background-image: url("../graphics/misc/sfondo parquet.jpg");
     -fx-background-size: stretch;
 }
 
