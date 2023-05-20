@@ -312,22 +312,20 @@ public class ServerManager implements Runnable{
     }
 
     private void startGame() throws IOException {
-        activeMatch = checkMemoryDisk();
+//        activeMatch = checkMemoryDisk();
 
-/*
         activeMatch = new Controller(numberOfPlayers);
         System.out.println("A new game has been created");
         for (Integer j : this.lobby.keySet()) {
             activeMatch.setUsernamePlayer(lobby.get(j));
         }
         activeMatch.setFirstPlayer();
-*/
 
         boolean win = false;
 
         while (!win) {
 
-            saveGame();
+            //saveGame();
             System.out.println("Game has been saved");
 
             String activeUsername = activeMatch.getActivePlayerUsername();
