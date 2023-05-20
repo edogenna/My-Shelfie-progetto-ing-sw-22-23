@@ -241,12 +241,11 @@ public class ServerManager implements Runnable{
         String code;
         int oldId;
         while (true) {
-            //new Message(Protocol.RECONNECT, "", Arrays.asList(NEW_GAME, RECONNECT))
             String answer = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
             if (answer.equals("ERR"))
                 break;
             else if (answer.equals(RECONNECT)) {
-                code = sendMessageAndWaitForAnswer(temporaryId, new OldGameID());
+                code = sendMessageAndWaitForAnswer(temporaryId, new OldGameId());
                 if (code.equals("ERR"))
                     break;
                 if (checkIfDisconnected(code)) {
@@ -254,7 +253,7 @@ public class ServerManager implements Runnable{
                     if (!switchClientId(oldId, temporaryId))
                         break;
                     disconnectedPlayers.remove((Object) oldId);
-                    //new Message(Protocol.WELCOME_BACK, nicknames.get(oldId), null)
+                    //TODO: new Message(Protocol.WELCOME_BACK, nicknames.get(oldId), null)
                     sendMessageAndWaitForAnswer(oldId, new FirstPlayerMessage());
                     activeMatch.reconnect(nicknames.get(oldId));
                     break;
@@ -433,14 +432,14 @@ public class ServerManager implements Runnable{
         } catch (NumberFormatException e) {
             return false;
         }
-        if (isAwayFromKeyboard(oldId))
+        if (isDisconnected(oldId))
             return true;
         if (!answerReady.getOrDefault(oldId, false))
             return false;
 
         //TODO: this is a temporary message, create new message for connection
         sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
-        return isAwayFromKeyboard(oldId);
+        return isDisconnected(oldId);
     }
 
     /**

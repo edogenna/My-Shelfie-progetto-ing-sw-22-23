@@ -72,6 +72,7 @@ public class CliView{
             case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
             case "ChatMessage" -> {handleChatMessage(m);}
             case "Reconnect" -> {handleReconnectionMessage(m);}
+            case "OldGameId" -> {handleOldGameIdMessage(m);}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
 
@@ -284,6 +285,15 @@ public class CliView{
             sendMessageToServer(new ReconnectionAnswer(this.userInput));
         else
             sendMessageToRmiServer(new ReconnectionAnswer(this.userInput));
+    }
+
+    private void handleOldGameIdMessage(Message m) throws IOException {
+        outputStream.println(((OldGameId) m).getS());
+        this.userInput = stdIn.readLine();
+        if(this.out != null)
+            sendMessageToServer(new OldGameIdAnswer(this.userInput));
+        else
+            sendMessageToRmiServer(new OldGameIdAnswer(this.userInput));
     }
 
     @Deprecated

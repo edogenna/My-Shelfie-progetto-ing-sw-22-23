@@ -6,9 +6,9 @@ public final class OldGameIdAnswer extends Message {
     private int id;
     private final String s = "Game id is: " + id;
 
-    public OldGameIdAnswer(int id) {
+    public OldGameIdAnswer(String id) {
         super("OldGameIdAnswer");
-        this.id = id;
+        this.id = Integer.parseInt(id);
     }
 
     public String getS() {
