@@ -242,10 +242,10 @@ public class ServerManager implements Runnable{
         int oldId;
         while (true) {
             //new Message(Protocol.RECONNECT, "", Arrays.asList(NEW_GAME, RECONNECT))
-            String reconnect = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
-            if (reconnect.equals("ERR"))
+            String answer = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
+            if (answer.equals("ERR"))
                 break;
-            else if (reconnect.equals(RECONNECT)) {
+            else if (answer.equals(RECONNECT)) {
                 code = sendMessageAndWaitForAnswer(temporaryId, new OldGameID());
                 if (code.equals("ERR"))
                     break;
@@ -314,12 +314,14 @@ public class ServerManager implements Runnable{
     private void startGame() throws IOException {
         activeMatch = checkMemoryDisk();
 
-        /*activeMatch = new Controller(numberOfPlayers);
+/*
+        activeMatch = new Controller(numberOfPlayers);
         System.out.println("A new game has been created");
         for (Integer j : this.lobby.keySet()) {
             activeMatch.setUsernamePlayer(lobby.get(j));
         }
-        activeMatch.setFirstPlayer();*/
+        activeMatch.setFirstPlayer();
+*/
 
         boolean win = false;
 

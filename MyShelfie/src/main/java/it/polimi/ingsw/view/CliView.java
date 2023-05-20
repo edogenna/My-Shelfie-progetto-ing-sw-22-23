@@ -2,10 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
-import it.polimi.ingsw.Network.messages.Answers.ACKMessage;
-import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
-import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
-import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
+import it.polimi.ingsw.Network.messages.Answers.*;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.model.Board;
@@ -74,6 +71,7 @@ public class CliView{
             case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS()); handleNotValidMove();}
             case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
             case "ChatMessage" -> {handleChatMessage(m);}
+            case "Reconnect" -> {handleReconnectionMessage(m);}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
 
@@ -256,8 +254,7 @@ public class CliView{
     }
 
     private void sendMessageToRmiServer(Message m) throws IOException {
-        String jsonString = Converter.convertToJSON(m);
-        this.messageToServer = jsonString;
+        this.messageToServer = Converter.convertToJSON(m);
     }
 
 
@@ -278,6 +275,15 @@ public class CliView{
         if(out != null)
             sendMessageToServer(new ChatMessage(userInput, "1"));
         else sendMessageToRmiServer(new ChatMessage(userInput, "1"));
+    }
+
+    private void handleReconnectionMessage(Message m) throws IOException {
+        outputStream.println(((ReconnectionMessage) m).getS());
+        this.userInput = stdIn.readLine();
+        if(this.out != null)
+            sendMessageToServer(new ReconnectionAnswer(this.userInput));
+        else
+            sendMessageToRmiServer(new ReconnectionAnswer(this.userInput));
     }
 
     @Deprecated
