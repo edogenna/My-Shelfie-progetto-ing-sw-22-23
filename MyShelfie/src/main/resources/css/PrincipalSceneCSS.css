@@ -3,7 +3,7 @@
 
 
 .background {
-    -fx-background-image: url("../graphics/misc/sfondo parquet.jpg");
+    -fx-background-image: url("../graphics/misc/sfondo_parquet.jpg");
     -fx-background-size: stretch;
 }
 .background1 {
