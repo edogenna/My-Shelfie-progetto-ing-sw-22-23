@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,11 +8,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="mainPane" prefHeight="699.0" prefWidth="1190.0" styleClass="background" stylesheets="@../css/PrincipalSceneCSS.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainPane" prefHeight="854.0" prefWidth="1349.0" styleClass="background" stylesheets="@../css/PrincipalSceneCSS.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane layoutX="603.0" layoutY="132.0" prefHeight="400.0" prefWidth="400.0" styleClass="background1" stylesheets="@../css/PrincipalSceneCSS.css" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="603.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+      <Pane layoutX="689.0" layoutY="179.0" prefHeight="400.0" prefWidth="400.0" styleClass="background1" stylesheets="@../css/PrincipalSceneCSS.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="689.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="179.0">
          <children>
-            <GridPane layoutX="18.0" layoutY="20.0" prefHeight="477.0" prefWidth="444.0">
+            <GridPane layoutX="28.0" layoutY="16.0" prefHeight="628.0" prefWidth="591.0">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,9 +20,9 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,18 +32,18 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="46.77777099609375" minHeight="10.0" prefHeight="27.22222900390625" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="78.77777099609375" minHeight="10.0" prefHeight="78.77777099609375" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
          </children>
       </Pane>
-      <ImageView fitHeight="434.0" fitWidth="379.0" layoutX="79.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="434.0" fitWidth="379.0" layoutX="7.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../17_MyShelfie_BGA/boards/bookshelf.png" />
          </image>
       </ImageView>
-      <GridPane layoutX="119.0" layoutY="336.0" prefHeight="315.0" prefWidth="299.0">
+      <GridPane layoutX="42.0" layoutY="493.0" prefHeight="315.0" prefWidth="310.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -53,16 +52,15 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="59.6666259765625" minHeight="10.0" prefHeight="58.77777099609375" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="49.888916015625" minHeight="10.0" prefHeight="47.22222900390625" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <TextField layoutX="607.0" layoutY="627.0" prefHeight="48.0" prefWidth="480.0" text="Messaggio se è il tuo o il turno di un altro player" />
-      <ImageView fitHeight="248.0" fitWidth="196.0" layoutX="9.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="248.0" fitWidth="196.0" layoutX="9.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="94.0">
          <image>
             <Image url="@../../../../../../17_MyShelfie_BGA/boards/bookshelf_orth.png" />
          </image>
@@ -84,5 +82,86 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
+      <ImageView fitHeight="132.0" fitWidth="347.0" layoutX="963.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../17_MyShelfie_BGA/Publisher%20material/Title%202000x618px.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="248.0" fitWidth="196.0" layoutX="235.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="94.0">
+         <image>
+            <Image url="@../../../../../../17_MyShelfie_BGA/boards/bookshelf_orth.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="253.0" layoutY="102.0" prefHeight="164.0" prefWidth="160.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <ImageView fitHeight="248.0" fitWidth="196.0" layoutX="458.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../17_MyShelfie_BGA/boards/bookshelf_orth.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="476.0" layoutY="102.0" prefHeight="164.0" prefWidth="160.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <ImageView fitHeight="279.0" fitWidth="242.0" layoutX="457.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/personal%20goal%20cards/front_EMPTY.jpg" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="475.0" layoutY="521.0" prefHeight="172.0" prefWidth="153.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <ImageView fitHeight="151.0" fitWidth="241.0" layoutX="54.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/common%20goal%20cards/4.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="151.0" fitWidth="241.0" layoutX="342.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/common%20goal%20cards/4.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
