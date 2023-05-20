@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="854.0" prefWidth="1349.0" styleClass="background" stylesheets="@../css/PrincipalSceneCSS.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="132.0" fitWidth="347.0" layoutX="-21.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="132.0" fitWidth="347.0" layoutX="1021.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../17_MyShelfie_BGA/Publisher%20material/Title%202000x618px.png" />
          </image>
@@ -87,5 +87,20 @@
             </Label>
          </children>
       </GridPane>
+      <ImageView fitHeight="98.0" fitWidth="138.0" layoutX="932.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../17_MyShelfie_BGA/scoring%20tokens/end%20game.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1207.0" layoutY="719.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../17_MyShelfie_BGA/scoring%20tokens/scoring_back_example.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="712.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../17_MyShelfie_BGA/Publisher%20material/Publisher.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
