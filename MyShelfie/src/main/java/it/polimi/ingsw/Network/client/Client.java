@@ -19,7 +19,7 @@ public class Client {
     public static void main(String[] args) throws IOException, NotBoundException {
 
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Insert the hostName or just press enter to get 127.0.0.1 (your own device): ");
+        System.out.println("Insert the hostName or just press enter to get your own device: ");
         hostName = stdIn.readLine();
         if (hostName.equals("\n"))
             hostName = "127.0.0.1";

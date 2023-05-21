@@ -136,6 +136,7 @@ public class ServerManager implements Runnable{
         }
     }
 
+    //TODO: finish this method for the resilience
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         if (isAwayFromKeyboard(number)){
             //TODO: create new message / i'm doubtful
@@ -242,10 +243,12 @@ public class ServerManager implements Runnable{
         int oldId;
         while (true) {
             String answer = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
-            if (answer.equals("ERR"))
+            if (answer.equals("ERR")){
+                //TODO: this maybe will never enter, but it isn't useful;
                 break;
-            else if (answer.equals(RECONNECT)) {
+            }else if (answer.equals(RECONNECT)) {
                 code = sendMessageAndWaitForAnswer(temporaryId, new OldGameId());
+                //TODO: insert a try{}catch(...) in OldGameId answer, so you set the answer like "ERR";
                 if (code.equals("ERR"))
                     break;
                 if (checkIfDisconnected(code)) {
@@ -267,6 +270,35 @@ public class ServerManager implements Runnable{
         }
     }
 
+    /**
+     * @author Donato Fiore
+     * @param code the id of the player
+     * @return true if the player had been disconnected
+     * */
+    private boolean checkIfDisconnected(String code) {
+        int oldId;
+        try {
+            oldId = Integer.parseInt(code);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        if (isDisconnected(oldId))
+            return true;
+        if (!answerReady.getOrDefault(oldId, false))
+            return false;
+
+        //TODO: this is a temporary message, create new message for connection
+        //      sendMessageAndWaitForAnswer(oldId, new Message(Protocol.ARE_YOU_ALIVE, "", null));
+        sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
+        return isDisconnected(oldId);
+    }
+
+    /**
+     * @author Donato Fiore
+     * @param oldId the id of the player before his disconnection
+     * @param temporaryId the new id of the player when he reconnected again with the server
+     * @return true if the oldId is present in  socketClients or rmiClients maps
+     * */
     private boolean switchClientId(int oldId, int temporaryId) {
         if (socketClients.containsKey(temporaryId)) {
             socketClients.put(oldId, socketClients.get(temporaryId));
@@ -423,23 +455,6 @@ public class ServerManager implements Runnable{
                 exit = true;
             }
         }
-    }
-
-    private boolean checkIfDisconnected(String code) {
-        int oldId;
-        try {
-            oldId = Integer.parseInt(code);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        if (isDisconnected(oldId))
-            return true;
-        if (!answerReady.getOrDefault(oldId, false))
-            return false;
-
-        //TODO: this is a temporary message, create new message for connection
-        sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
-        return isDisconnected(oldId);
     }
 
     /**
