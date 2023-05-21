@@ -466,6 +466,9 @@ public class Model {
         this.idActivePlayer = id;
     }
 
+    /**
+     * @return a json string containing all information of the model
+     */
     public String saveModel(){
         return Converter.convertModelToJSON(this);
     }

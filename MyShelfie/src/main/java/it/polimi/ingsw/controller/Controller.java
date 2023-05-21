@@ -8,7 +8,6 @@ import it.polimi.ingsw.view.CliView;
 /**
  * This class controls a match
  * @author Donato Fiore
- * @author Alessandro Fornara
  */
 public class Controller {
     private Model model;
