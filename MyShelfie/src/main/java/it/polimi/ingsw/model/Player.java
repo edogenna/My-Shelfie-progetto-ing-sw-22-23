@@ -8,8 +8,6 @@ import java.util.Stack;
 /**
  * Contains all player's data
  * @author Donato Fiore
- * @author Samuele Pietro Galli
- * @author Alessandro Fornara
  */
 public class Player {
     @Expose
