@@ -2,6 +2,9 @@ package it.polimi.ingsw.Network.server;
 
 import it.polimi.ingsw.Network.client.RmiClient;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
+import it.polimi.ingsw.Network.messages.TimeoutMessage;
+
+import java.sql.Time;
 
 /**
  * Implementation of the communication class for rmi
@@ -21,11 +24,12 @@ public class RmiCommunication extends Communication{
     public void run(){
         String answer = rmiServer.sendMessageAndGetAnswer(this.client, this.message);
         showAndSetAnswer(answer);
-/*        if (this.timeExceeded) {
-            //TODO: new message for time exceeded;
+        if (this.timeExceeded) {
 //            answer = rmiServer.sendMessageAndGetAnswer(client, new Parser().serialize(new Message(Protocol.TIME_EXCEEDED, "", null)));
+            //TODO: maybe this is wrong;
+            answer = rmiServer.sendMessageAndGetAnswer(this.client, new TimeoutMessage().getS());
             showAndSetAnswer(answer);
             rmiServer.unregister(client);
-        }*/
+        }
     }
 }

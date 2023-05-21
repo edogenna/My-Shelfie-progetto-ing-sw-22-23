@@ -27,7 +27,7 @@ public class Communication implements Runnable{
     }
 
     void setTimeExceeded() {
-        timeExceeded = true;
+        this.timeExceeded = true;
         showAndSetAnswer("time out");
     }
 

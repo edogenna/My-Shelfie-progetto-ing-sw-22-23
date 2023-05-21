@@ -110,6 +110,9 @@ public class ServerManager implements Runnable{
         }
     }
 
+    /**
+     * the client is disconnected for some problems, not the timeout; so we remove him from lobby, afkPlayers and we add him to disconnectedPlayers
+     * */
     void removeClient(RmiClientInterface client) {
         try {
             int number = getNumber(client);
@@ -120,19 +123,27 @@ public class ServerManager implements Runnable{
         }
     }
 
+    //TODO: finish
     private void removeClient(int number) {
-        if (lobby.containsKey(number))
+        if (lobby.containsKey(number)){
             removeClientFromLobby(number);
-/*        else if (lobby.containsKey(number)) {
-            awayFromKeyboardOrDisconnected.add(number);
-            lobby.get(number).disconnect(nicknames.get(number));
-        }*/
+            if(isAwayFromKeyboard(number))
+                afkPlayers.remove(number);
+        }
+        if (!activeMatch.isDisconnected(nicknames.get(number))){
+            disconnectedPlayers.add(number);
+            activeMatch.disconnect(nicknames.get(number));
+        }
         System.out.println("Client " + number + " removed.");
     }
 
     private void removeClientFromLobby(int number) {
         String name = lobby.get(number);
         lobby.remove(number);
+
+        //TODO: winner;
+        // if(lobby.size()<MIN_PLAYERS)
+
         Integer[] clients = lobby.keySet().toArray(new Integer[0]);
         for (int i : clients) {
             //TODO: new message for disconnection to send everyone; name + "is disconnected";
@@ -206,9 +217,12 @@ public class ServerManager implements Runnable{
         }
         if (isTimeExceeded) {
             communication.setTimeExceeded();
-            if (lobby.containsKey(number)) {
+            if(isAwayFromKeyboard(number)){
+                afkPlayers.remove(number);
+                disconnectedPlayers.add(number);
+                activeMatch.disconnect(nicknames.get(number));
+            }else if (lobby.containsKey(number) && !isAwayFromKeyboard(number)) {
                 afkPlayers.add(number);
-//                activeMatches.get(number).disconnect(nicknames.get(number));
             }
             return "Error";
         }

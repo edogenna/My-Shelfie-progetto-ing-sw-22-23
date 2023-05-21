@@ -308,10 +308,16 @@ public class Player {
         heights[y]++;
     }
 
+    /**
+     * @return true if the player is disconnected;
+     * */
     public boolean isDisconnected() {
         return this.disconnected;
     }
 
+    /**
+     * it sets true the attribute "disconnected" if the player had been disconnected;
+     * */
     public void setDisconnected() {
         this.disconnected = true;
     }

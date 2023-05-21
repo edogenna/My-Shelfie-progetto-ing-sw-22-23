@@ -419,4 +419,12 @@ public class Controller {
     public void reconnect(String username) {
         model.setConnected(username);
     }
+
+    public void disconnect(String username) {
+        model.setDisconnected(username);
+    }
+
+    public boolean isDisconnected(String username) {
+        return model.isDisconnected(username);
+    }
 }
