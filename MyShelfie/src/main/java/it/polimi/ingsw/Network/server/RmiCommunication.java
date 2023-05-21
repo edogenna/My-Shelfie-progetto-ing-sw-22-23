@@ -3,6 +3,10 @@ package it.polimi.ingsw.Network.server;
 import it.polimi.ingsw.Network.client.RmiClient;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
 
+/**
+ * Implementation of the communication class for rmi
+ * @author Donato Fiore
+ */
 public class RmiCommunication extends Communication{
     private final RmiClientInterface client;
     private final RmiServer rmiServer;

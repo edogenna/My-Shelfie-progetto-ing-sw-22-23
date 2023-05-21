@@ -1,6 +1,10 @@
 package it.polimi.ingsw;
 import java.util.Random;
 
+/**
+ * This class represents a tile of the game used in board, bookshelves and personal cards
+ * @author Edoardo Gennaretti
+ */
 public enum ItemEnum {
     GREEN ("\u001B[38;5;040m"),
     WHITE ("\u001B[38;5;255m"),
@@ -50,10 +54,7 @@ public enum ItemEnum {
             System.out.print(" "+ Constant.toChar(i) + "\n");
         }
     }
-    @Deprecated
-    public static void printMatrix(ItemEnum[][] m, int size){
-        printMatrix(m, size, size);
-    }
+
     public static CharMatrix generateCharMatrix(ItemEnum mEnum[][], int r, int c) {
         CharMatrix cm = new CharMatrix();
         String s = "";

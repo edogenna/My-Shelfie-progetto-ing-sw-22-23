@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.*;
 
 /**
- * Main server class that starts a socket server.
+ * This class is an implementation of a server using socket technology
  * @author Alessandro Fornara
  */
 public class SocketServer implements Runnable{
@@ -24,6 +24,11 @@ public class SocketServer implements Runnable{
         this.portNumber = port;
     }
 
+    /**
+     * This method adds a socket client to a map on the {@link ServerManager}
+     * @param client
+     * @throws IOException
+     */
     private void registry(Socket client) throws IOException {
         serverManager.addClient(client);
         fromClient.put(client, new Scanner(client.getInputStream()));

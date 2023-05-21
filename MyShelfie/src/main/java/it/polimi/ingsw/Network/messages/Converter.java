@@ -17,15 +17,11 @@ import it.polimi.ingsw.model.Model;
 public class Converter {
 
     //TODO: creare il costruttore come privato cosi da non piter instanzare questa classe
-
-
     private Converter() {}
-
 
     /**
      * This method converts a message from a JSON string to a {@link Message}
-     * @author Alessandro Fornara
-     * @param message
+     * @param message a json string
      * @return a {@link Message} object
      */
     public static Message convertFromJSON(String message){
@@ -71,7 +67,6 @@ public class Converter {
 
     /**
      * This method converts a {@link Message} to a JSON string
-     * @author Alessandro Fornara
      * @param m message
      * @return a string
      */
@@ -80,6 +75,11 @@ public class Converter {
         return gson.toJson(m);
     }
 
+    /**
+     * This method converts a {@link Model} to a JSON string
+     * @param model model
+     * @return a string
+     */
     static public String convertModelToJSON(Model model){
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
@@ -87,6 +87,11 @@ public class Converter {
         return gson.toJson(model);
     }
 
+    /**
+     * This method converts a JSON string into a {@link Model}
+     * @param model a json string
+     * @return a {@link Model} object
+     */
     static public Model convertModelFromJSON(String model){
         Gson gson = new Gson();
         return gson.fromJson(model, Model.class);

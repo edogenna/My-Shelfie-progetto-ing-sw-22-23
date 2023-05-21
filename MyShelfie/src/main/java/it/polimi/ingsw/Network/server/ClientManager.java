@@ -4,6 +4,7 @@ import java.io.IOException;
 
 /**
  * This class allows to manage parallel client enrollments.
+ * @author Alessandro Fornara
  */
 
 public class ClientManager implements Runnable {

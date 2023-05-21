@@ -8,7 +8,7 @@ import org.junit.Test;
 
 /**
  * This class is a test for the first common card
- * @author Alessandro Fornara
+ * @author Samuele Pietro Galli
  */
 public class CommonCard01Test {
     private CommonCardStrategy c;
@@ -19,7 +19,6 @@ public class CommonCard01Test {
     }
     /**
      * This method inserts in a column of an ItemEnum matrix some colors
-     * @author Alessandro Fornara
      * @param j Column
      * @param x1 First color
      * @param x2 Second color

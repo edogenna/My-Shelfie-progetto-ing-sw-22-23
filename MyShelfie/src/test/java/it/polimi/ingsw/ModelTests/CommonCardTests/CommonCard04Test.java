@@ -20,7 +20,6 @@ public class CommonCard04Test {
     }
     /**
      * This method inserts in a column of an ItemEnum matrix some colors
-     * @author Alessandro Fornara, Samuele Pietro Galli
      * @param j Column
      * @param x1 First color
      * @param x2 Second color

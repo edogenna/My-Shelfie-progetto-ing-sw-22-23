@@ -16,6 +16,11 @@ import it.polimi.ingsw.Network.messages.WaitingMessage;
 import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.view.CliView;
 
+/**
+ * This class represents a rmi client implementation
+ * @author Donato Fiore
+ * @author Alessandro Fornara
+ */
 public class RmiClient extends Client implements RmiClientInterface{
 
     private BufferedReader stdIn;

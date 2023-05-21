@@ -3,6 +3,10 @@ package it.polimi.ingsw.model;
 import com.google.gson.annotations.Expose;
 import it.polimi.ingsw.ItemEnum;
 
+/**
+ * This class contains the personal cards used in the game
+ * @author Donato Fiore
+ */
 public final class PersonalCards {
      @Expose
      private final Card[] figure = new Card[12];

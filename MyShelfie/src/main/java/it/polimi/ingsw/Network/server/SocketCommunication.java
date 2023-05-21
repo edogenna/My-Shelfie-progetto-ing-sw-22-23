@@ -5,6 +5,10 @@ import it.polimi.ingsw.Network.messages.Message;
 
 import java.net.Socket;
 
+/**
+ * Implementation of the communication class for socket
+ * @author Alessandro Fornara
+ */
 public class SocketCommunication extends Communication{
 
     private final Socket client;

@@ -8,7 +8,6 @@ import java.util.Random;
 
 /**
  * Board represent the common board from which players take cards.
- *
  * @author Edoardo Gennaretti
  */
 public class Board {
@@ -71,9 +70,7 @@ public class Board {
 
     /**
      * Returns a copy of the matrix of the board.
-     *
      * @return matrix of ItemEnum
-     * @author Edoardo Gennaretti
      */
     public ItemEnum[][] getMatrix() {
         ItemEnum[][] copy = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
@@ -85,7 +82,6 @@ public class Board {
 
     /**
      * Determines if a position is valid for filling
-     *
      * @param r row
      * @param c column
      * @return true if the position is valid, false otherwise
@@ -119,7 +115,6 @@ public class Board {
 
     /**
      * Compare the two positions, specularly in the 4 quadrants
-     *
      * @param r1 first row
      * @param c1 first column
      * @param r2 second row
@@ -135,11 +130,9 @@ public class Board {
 
     /**
      * It returns the ItemEnum from a given position.
-     *
      * @param r row of the matrix
      * @param c coloumn of the matrix
      * @return ItemEnum
-     * @author Edoardo Gennaretti
      */
     public ItemEnum getItemEnum(int r, int c) {
         if (matrix[r][c] == ItemEnum.BLANK)
@@ -154,11 +147,9 @@ public class Board {
 
     /**
      * It returns the ItemEnum from a given position and inserts a blank ItemEnum in that position.
-     *
      * @param r row of the matrix
      * @param c coloumn of the matrix
      * @return ItemEnum
-     * @author Edoardo Gennaretti
      */
     public ItemEnum deleteItemEnum(int r, int c) {
         ItemEnum i = matrix[r][c];
@@ -171,8 +162,6 @@ public class Board {
 
     /**
      * It refills the matrix following the rule of the game.
-     *
-     * @author Edoardo Gennaretti
      */
     public void refill() {
         Random rand = new Random();
@@ -209,9 +198,7 @@ public class Board {
 
     /**
      * It returns if the matrix need to be refilled following the rule of the game
-     *
      * @return true if the board need to be refilled, false otherwise
-     * @author Edoardo Gennaretti
      */
     public boolean isRefillable() {
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -235,13 +222,14 @@ public class Board {
 
     /**
      * @return Array of CommonCardStrategy
-     * @author Alessandro Fornara
      */
-    //TODO: fix the array's pointer;
     public CommonCardStrategy[] getCommonCards() {
         return CommonCards;
     }
 
+    /**
+     * This method is used to return designs of commonCards
+     */
     public String[] getCommonCardDesigns() {
         String[] array = new String[2];
         for (int i = 0; i < 2; i++) {
@@ -252,7 +240,6 @@ public class Board {
 
     /**
      * Check if a tile has a free side
-     *
      * @param r row of the tile
      * @param c column of the tile
      * @return true if the tile has a free side, false otherwise
@@ -263,10 +250,17 @@ public class Board {
                 r == 0 || c == 0 || r == 8 || c == 8;
     }
 
+    /**
+     * This method assigns the number of two common cards, it is used when a game is loaded from the memory disk
+     */
     private void assignFirstAndSecond() {
         this.first = CommonCards[0].getNumber();
         this.second = CommonCards[1].getNumber();
     }
+
+    /**
+     * This method sets common cards using two variables initialized when the game has been loaded from the memory disk
+     */
     public void setCommonCards(){
         this.CommonCards = new CommonCardStrategy[2];
         switch (this.first) {

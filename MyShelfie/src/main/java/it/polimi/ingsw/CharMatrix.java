@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 /**
  * CharMatrix is an array of strings, it is used as a view
- *
  * @author Edoardo Gennaretti
  */
 public class CharMatrix {
@@ -15,8 +14,6 @@ public class CharMatrix {
 
     /**
      * print the CharMatrix object
-     *
-     * @author Edoardo Gennaretti
      */
     public void printMatrix(){
         for(String s : m)
@@ -25,8 +22,6 @@ public class CharMatrix {
 
     /**
      * print the CharMatrix object with a '|' at the end of each line
-     *
-     * @author Edoardo Gennaretti
      */
     public void printMatrixWithAllineator(){
         for(String s : m)
@@ -34,11 +29,8 @@ public class CharMatrix {
     }
 
 
-    //TODO: gestione con eccezione
     /**
      * print a specific line of the CharMatrix object
-     *
-     * @author Edoardo Gennaretti
      * @param l line to be printed (must be between 0 and the number of lines)
      */
     public void printLine(int l){
@@ -49,11 +41,8 @@ public class CharMatrix {
         System.out.println(m.get(l));
     }
 
-    //TODO: gestione con eccezione
     /**
      * append a string s at the end of a specific line l
-     *
-     * @author Edoardo Gennaretti
      * @param s string to be appended
      * @param l line (must be between 0 and the number of lines)
      * @return CharMatrix modified
@@ -70,8 +59,6 @@ public class CharMatrix {
 
     /**
      * adds the string s as a new line at the bottom of the CharMatrix
-     *
-     * @author Edoardo Gennaretti
      * @param s string to be appended
      * @return CharMatrix modified
      */
@@ -82,8 +69,6 @@ public class CharMatrix {
 
     /**
      * adds rows and columns numbering
-     *
-     * @author Edoardo Gennaretti
      * @param col number of columns of the matrix
      * @return CharMatrix modified
      */
@@ -103,8 +88,6 @@ public class CharMatrix {
 
     /**
      * adds columns numbering
-     *
-     * @author Edoardo Gennaretti
      * @param col number of columns of the matrix
      * @return CharMatrix modified
      */
@@ -120,8 +103,6 @@ public class CharMatrix {
 
     /**
      * adds rows numbering
-     *
-     * @author Edoardo Gennaretti
      * @return CharMatrix modified
      */
     public CharMatrix addRowsNumbering(){
@@ -134,14 +115,10 @@ public class CharMatrix {
 
     /**
      * concatenates two CharMatrix, adding another on the right
-     *
-     * @author Edoardo Gennaretti
      * @param toBeAdded CharMatrix to be concatenated on the righr
      * @return two concatenated CharMatrix
      */
     public CharMatrix addOnRight(CharMatrix toBeAdded){
-        //TODO modificare questa situazione aggiungento in this.m delle righe di spazi allineate
-        //TODO fare overload della funzione in modo fa poter scegliere a quale riga inizare ad aggiungere
         if(toBeAdded.m.size() > m.size()) {
             System.out.println("errore");
             return this;
@@ -155,8 +132,6 @@ public class CharMatrix {
 
     /**
      * append a string at the end of each row
-     *
-     * @author Edoardo Gennaretti
      * @param s string to be appended
      * @return CharMatrix modified
      */
@@ -184,11 +159,8 @@ public class CharMatrix {
         return count;
     }
 
-    //TODO: migliorare l'implementazione salvando la lunghezza dei caratteri non speciali in un array ??
     /**
      * aligns the column of the CharMatrix adding some spaces to shorter rows
-     *
-     * @author Edoardo Gennaretti
      * @return CharMatrix modified
      */
     public CharMatrix alignColumn(){

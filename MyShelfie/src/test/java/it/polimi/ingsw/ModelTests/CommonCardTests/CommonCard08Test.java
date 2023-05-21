@@ -8,6 +8,7 @@ import org.junit.Test;
 
 /**
  * This class is a test for the eighth common card
+ * @author Alessandro Fornara
  * @author Samuele Pietro Galli
  */
 public class CommonCard08Test {
@@ -19,7 +20,6 @@ public class CommonCard08Test {
     }
         /**
      * This method inserts in a column of an ItemEnum matrix some colors
-     * @author Alessandro Fornara, Samuele Pietro Galli
      * @param j Column
      * @param x1 First color
      * @param x2 Second color

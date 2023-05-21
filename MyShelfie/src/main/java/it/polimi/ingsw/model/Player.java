@@ -5,6 +5,12 @@ import it.polimi.ingsw.ItemEnum;
 
 import java.util.Stack;
 
+/**
+ * Contains all player's data
+ * @author Donato Fiore
+ * @author Samuele Pietro Galli
+ * @author Alessandro Fornara
+ */
 public class Player {
     @Expose
     private int myPoints;
@@ -39,7 +45,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * it sets the personalCard of the player
      * */
     public void setPersonalCard(Card goals){
@@ -47,13 +52,11 @@ public class Player {
     }
 
     /**
-     * @author Alessandro Fornara
      * @return This player's personal card
      */
     public Card getPersonalCard(){ return this.myGoals; }
 
     /**
-     * @author Donato Fiore
      * @return This player's username
      */
     public String getUsername(){
@@ -61,7 +64,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @param i column of the bookshelf
      * @return the number of tiles present in the column
      * */
@@ -70,7 +72,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @return a matrix of ItemEnum representing the player's bookshelf
      * */
     public ItemEnum[][] getMatrixBookshelf() {
@@ -81,7 +82,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @return the total points earned by the player: personalCard points, commonCard points and adjacentTiles points
      * */
     public int calculatePoints(){
@@ -92,7 +92,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @return the personalCard points achieved
      * */
     private int pointPersonalCard(){
@@ -106,8 +105,6 @@ public class Player {
                 points++;
             }
         }
-
-        //TODO: use a switch case? is it more beautiful?
         if(points == 3)
             points = 4;
         else if(points == 4)
@@ -121,7 +118,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @return the points earned by placing tiles of the same color adjacent to each other
      * */
     private int adjacentTilesPoints(){
@@ -205,7 +201,6 @@ public class Player {
 
     /**
      * This method checks if the bookshelf is full of tiles that are not BLANK.
-     * @author Samuele Galli
      * @return true if is full, false otherwise.
      */
     public boolean checkIfFull(){
@@ -220,7 +215,6 @@ public class Player {
     }
 
     /**
-     * @author Alessandro Fornara
      * @return Returns the boolean value CommonDone1
      */
     public boolean getCommonDone1(){
@@ -228,14 +222,12 @@ public class Player {
     }
 
     /**
-     * @author Alessandro Fornara
      * @return Returns the boolean value CommonDone2
      */
     public boolean getCommonDone2(){
         return this.CommonDone2;
     }
     /**
-     * @author Alessandro Fornara
      * @return Returns the int value myCommonPoints
      */
     public int getMyPoints(){
@@ -244,7 +236,6 @@ public class Player {
 
     /**
      * Adds to MyCommonPoints a value and sets CommonDone1 or CommonDone2 to true
-     * @author Alessandro Fornara
      * @param p int value
      */
     public void updateCommonPoints(int p, int whichCard){
@@ -260,7 +251,6 @@ public class Player {
 
     /**
      * This method returns true if the column hasn't enough cells to cover the move
-     * @author Donato Fiore
      * @param j column selected
      * @param n number of tiles to insert
      * @return false if the column has enough cells, true if the column is full
@@ -270,7 +260,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @return the maximum number of tiles that can be inserted in a column
      * */
     public int maxTilesPick(){
@@ -283,7 +272,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @param y the library column
      * @param tile the tile he wants to insert
      * The tile is placed on the first available row starting from the bottom
@@ -294,7 +282,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @param y the library column
      * @param tile1 the first tile he wants to insert
      * @param tile2 the second tile he wants to insert
@@ -308,7 +295,6 @@ public class Player {
     }
 
     /**
-     * @author Donato Fiore
      * @param y the library column
      * @param tile1 the first tile he wants to insert
      * @param tile2 the second tile he wants to insert

@@ -2,6 +2,11 @@ package it.polimi.ingsw.Network.server;
 
 import it.polimi.ingsw.Network.messages.Message;
 
+/**
+ * This class contains methods used by the server to communicate with clients
+ * @author Alessandro Fornara
+ * @author Donato Fiore
+ */
 public class Communication implements Runnable{
 
     final String message;

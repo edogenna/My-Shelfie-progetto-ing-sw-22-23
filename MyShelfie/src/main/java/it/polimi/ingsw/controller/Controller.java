@@ -5,6 +5,11 @@ import it.polimi.ingsw.model.Card;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.view.CliView;
 
+/**
+ * This class controls a match
+ * @author Donato Fiore
+ * @author Alessandro Fornara
+ */
 public class Controller {
     private Model model;
 
@@ -34,7 +39,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param input the move that the player wants to do
      * @return true if the player has inserted a wrong format of input
      * */
@@ -80,7 +84,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param x the number of tiles that the player wants to take
      * @return true if 'x' is greater than the available space in the bookshelf
      * */
@@ -91,7 +94,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param x the x's coordinate of the tile
      * @param y the y's coordinate of the tile
      * @return true if the selected tile is a blank tile
@@ -109,7 +111,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -126,7 +127,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -145,7 +145,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @return true if the tile has at least one free side
      * */
     private boolean tileFreeSide(int x, int y){
@@ -153,7 +152,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -165,7 +163,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -179,7 +176,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -200,7 +196,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -226,7 +221,6 @@ public class Controller {
 
 
     /**
-     * @author Donato Fiore
      * @return the code of the error or 0 if the move is done
      * ERROR CODES:
      * ERROR CODES:
@@ -261,7 +255,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @return the code of the error or 0 if the move is done
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
@@ -305,7 +298,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @return the code of the error or 0 if the move is done
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
@@ -351,7 +343,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @param id the number of the common card, 0:CommonCard1; 1: CommonCard2
      * @return the points done with the CommonCard; if the goal isn't achieved, the points will be = 0;
      * */
@@ -368,7 +359,6 @@ public class Controller {
     }
 
     /**
-     * @author Donato Fiore
      * @return true if the match is finished
      * */
     public boolean finishTurn(){
@@ -379,7 +369,6 @@ public class Controller {
 
     //TODO: finish this method
     /**
-     * @author Donato Fiore
      * @return the points of the winner player
      * */
     public int declareWinner(){
@@ -396,12 +385,6 @@ public class Controller {
         return model.getCommonCardsDesigns();
     }
 
-    /**
-     * @author Alessandro Fornara
-     * @return The active player's personal card
-     */
-    public Card getActivePlayerPersonalCard(){return model.getActivePlayerPersonalCard();}
-
     public void setModel(Model model) {
         this.model = model;
     }
@@ -411,17 +394,17 @@ public class Controller {
     }
 
     /**
-     * @author Alessandro Fornara
      * @return The active player's username
      */
     public String getActivePlayerUsername(){return model.getActivePlayerName();}
 
     /**
-     * @author Alessandro Fornara
      * @return the active player's bookshelf
      */
-    public ItemEnum[][] getActivePlayerShelf(){return model.getActivePlayerBookshelf();}
 
+    /**
+     * @return a copy of the model
+     */
     public String getModelSave(){
         return model.saveModel();
     }

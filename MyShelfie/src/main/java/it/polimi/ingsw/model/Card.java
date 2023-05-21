@@ -3,6 +3,10 @@ package it.polimi.ingsw.model;
 import com.google.gson.annotations.Expose;
 import it.polimi.ingsw.ItemEnum;
 
+/**
+ * This class is used in the personal card's implementation
+ * @author Donato Fiore
+ */
 public class Card {
     @Expose
     private final Triplet[] dataTriad = new Triplet[6];

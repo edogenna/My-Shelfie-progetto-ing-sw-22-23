@@ -23,7 +23,6 @@ public class CommonCard02Test {
 
     /**
      * This method inserts in a column of an ItemEnum matrix some colors
-     * @author Alessandro Fornara, Samuele Pietro Galli
      * @param j Column
      * @param x1 First color
      * @param x2 Second color
@@ -46,7 +45,6 @@ public class CommonCard02Test {
 
     /**
      * This method tests if the method checkBookshelf is working correctly
-     * @author Samuele Pietro Galli
      * */
     @Test
     public void Test(){

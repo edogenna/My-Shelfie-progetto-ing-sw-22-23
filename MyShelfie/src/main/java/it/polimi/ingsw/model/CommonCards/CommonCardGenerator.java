@@ -8,7 +8,6 @@ import java.util.Random;
 public class CommonCardGenerator {
     /**
      * Generates two random common goal cards (different from one another).
-     * @author Alessandro Fornara
      * @return An array of {@link CommonCardStrategy} that contains the first card in position number 0 and the second card in position number 1.
      */
     public CommonCardStrategy[] GenerateCommonCards(){

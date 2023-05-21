@@ -21,7 +21,6 @@ public class CommonCard05Test {
 
     /**
      * This method inserts in the corners of an ItemEnum matrix some colors
-     * @author Alessandro Fornara
      * @param x1 First color
      * @param x2 Second color
      * @param x3 Third color
@@ -36,7 +35,6 @@ public class CommonCard05Test {
 
     /**
      * This method tests if the method checkBookshelf is working correctly
-     * @author Alessandro Fornara
      * */
     @Test
     public void Test(){

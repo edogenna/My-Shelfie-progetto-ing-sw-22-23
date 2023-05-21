@@ -19,6 +19,11 @@ import java.util.*;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * This class manages socket and rmi servers
+ * @author Alessandro Fornara
+ * @author Donato Fiore
+ */
 public class ServerManager implements Runnable{
     public static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 4;
@@ -210,6 +215,11 @@ public class ServerManager implements Runnable{
         return answers.get(number);
     }
 
+    /**
+     * This method is used when a player connects to the server
+     * @param number id of the player
+     * @return username the player chose
+     */
     private String login(int number){
         String answer = sendMessageAndWaitForAnswer(number, new ChooseUsernameMessage());
         Message m = Converter.convertFromJSON(answer);
@@ -271,7 +281,6 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * @author Donato Fiore
      * @param code the id of the player
      * @return true if the player had been disconnected
      * */
@@ -294,7 +303,6 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * @author Donato Fiore
      * @param oldId the id of the player before his disconnection
      * @param temporaryId the new id of the player when he reconnected again with the server
      * @return true if the oldId is present in  socketClients or rmiClients maps
@@ -328,7 +336,6 @@ public class ServerManager implements Runnable{
 
     /**
      * This method check if a username has already been taken by another client, if not it is added to a map of usernames
-     * @author Alessandro Fornara
      * @param nickname username
      * @return true if the username has already been taken, false otherwise
      */
@@ -402,6 +409,11 @@ public class ServerManager implements Runnable{
         }
     }
 
+    /**
+     * This method handles a {@link MoveAnswer} message from a player
+     * @param number id of the player
+     * @param m message
+     */
     private void handleMoveAnswer(int number, Message m) {
         int done = 6;
         boolean exit = false;
@@ -458,7 +470,6 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * @author Donato Fiore
      * @param code the id of the player
      * @return true if the player is AFK
      * */
@@ -467,7 +478,6 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * @author Donato Fiore
      * @param code the id of the player
      * @return true if the player was disconnected
      * */
@@ -488,7 +498,6 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * @author Alessandro Fornara
      * This method saves the game
      * @throws IOException
      */
@@ -524,6 +533,11 @@ public class ServerManager implements Runnable{
         return null;
     }
 
+    /**
+     * This method checks if there is game present on the memory disk
+     * @return a controller linked to the model loaded from memory
+     * @throws IOException
+     */
     private Controller checkMemoryDisk() throws IOException {
         Model m = loadGame();
 

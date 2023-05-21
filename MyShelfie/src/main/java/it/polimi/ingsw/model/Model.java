@@ -7,6 +7,10 @@ import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 import java.util.Random;
 
+/**
+ * This class implements the logic of the game
+ * @author Donato Fiore
+ */
 public class Model {
     @Expose
     private Board board;
@@ -42,7 +46,7 @@ public class Model {
 
     /**
     * @return true if the tile has at least one free side
-    * @author Donato Fiore
+    * 
     * */
     public boolean tileFreeSide(int x, int y){
         return this.board.tileFreeSide(x, y);
@@ -50,7 +54,6 @@ public class Model {
 
     /**
     * it upgrades the player who will play the turn
-    * @author Donato Fiore
     * */
     private void changeActivePlayer(){
         this.idActivePlayer++;
@@ -60,7 +63,6 @@ public class Model {
 
     /**
     * it returns the username of the player that will play the turn
-    * @author Donato Fiore
     * */
     public String getActivePlayerName(){
         return new String(this.activePlayer.getUsername());
@@ -68,7 +70,7 @@ public class Model {
 
     /**
     * it implements the player class setting the username of the player; it also set the PersonalCard of the player
-    * @author Donato Fiore
+    * 
     */
     public void setUsernamePlayer(String username){
         this.idFirstPlayer++;
@@ -86,7 +88,7 @@ public class Model {
 
     /**
     * @return true if there is another player with the same username
-    * @author Donato Fiore
+    * 
     * */
     @Deprecated
     public boolean duplicatedUsername(String x){
@@ -103,7 +105,6 @@ public class Model {
 
     /**
      * This method generates random Personal Cards which are contained in the class PersonalClass, (all different from one another).
-     * @author Alessandro Fornara
      */
     private void GeneratePersonalCards(){
         int[] idPersonalCards = new int[numPlayers];
@@ -135,7 +136,6 @@ public class Model {
 
     /**
     * it sets casually the first player of the match
-    * @author Donato Fiore
     * */
     public void setFirstPlayer(){
         Random xyz = new Random();
@@ -153,7 +153,7 @@ public class Model {
     }
 
     /**
-    * @author Donato Fiore
+    * 
     * @param x is the number of tiles you want to insert in the bookshelf
     * @return true if the maximum number of tiles that can be inserted is >= than x
     */
@@ -167,14 +167,14 @@ public class Model {
     * @param y column selected
     * @param num number of tiles to insert
     * @return true if the selected column has enough space to insert the 'num' tiles
-    * @author Donato Fiore
+    * 
     * */
     public boolean enoughSpaceColumn(int y, int num){
         return !this.activePlayer.isColumnFull(y,num);
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @return true if the two tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates
      * */
     public boolean adjacentTiles(int x1, int y1, int x2, int y2){
@@ -191,7 +191,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @return true if the three tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates
      * */
     public boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
@@ -206,7 +206,7 @@ public class Model {
     //istanzio il model, creo una board, inserisco nella shelf, getactiveboard e le confronto
 
     /**
-     * @author Donato Fiore
+     * 
      * @param x coordinate of the tile in the board
      * @param y coordinate of the tile in the board
      * @param col column of the bookshelf
@@ -217,7 +217,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @param x1 coordinate of the first selected tile in the board
      * @param y1 coordinate of the first selected tile in the board
      * @param x2 coordinate of the second selected tile in the board
@@ -230,7 +230,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @param x1 coordinate of the first selected tile in the board
      * @param y1 coordinate of the first selected tile in the board
      * @param x2 coordinate of the second selected tile in the board
@@ -245,7 +245,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @param x it is the number of the CommonCard; it can be 0 or 1
      * @return true if the player has achieved the goal
      * */
@@ -268,7 +268,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @param card it is the number of the CommonCard; it can be 0 or 1
      * @return the available points of the selected CommonCard
      * */
@@ -281,7 +281,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @param numCard it is the number of the CommonCard; it can be 0 or 1
      * it updates the available points of the CommonCards
      * */
@@ -323,7 +323,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @return a matrix of ItemEnum representing the board
      * */
     public ItemEnum[][] getBoardMatrix(){
@@ -331,7 +331,6 @@ public class Model {
     }
 
     /**
-     * @author Alessandro Fornara
      * @return 2 Common Cards
      */
     public CommonCardStrategy[] getCommonCards(){
@@ -339,13 +338,12 @@ public class Model {
     }
 
     /**
-     * @author Alessandro Fornara
      * @return the active player's bookshelf
      */
     public ItemEnum[][] getActivePlayerBookshelf(){return activePlayer.getMatrixBookshelf();}
 
     /**
-     * @author Donato Fiore
+     * 
      * @param username the name of the player concerned
      * @return the player's bookshelf
      */
@@ -363,13 +361,12 @@ public class Model {
     }
 
     /**
-     * @author Alessandro Fornara
      * @return The active player's personal card
      */
     public Card getActivePlayerPersonalCard(){return activePlayer.getPersonalCard();}
 
     /**
-     * @author Donato Fiore
+     * 
      * @param username the name of the player concerned
      * @return the player's PersonalCard
      */
@@ -388,7 +385,7 @@ public class Model {
 
     //todo: test this method
     /**
-     * @author Donato Fiore
+     * 
      * @return true if match is finished
      * it controls if the activePlayer has filled his bookshelf, changes the activePlayer and refills the board if it is
      * necessary
@@ -417,7 +414,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @return the points of the winner player
      * it calculates the winner player and sets him as the activePlayer
      * */
@@ -444,7 +441,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @param x the position of the first player
      * @param y the position of the interested player
      * @return the distance (mod numPlayers) between the 2 players
@@ -460,7 +457,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @param id index of the selected player
      * it sets the selected player as activePlayer
      */
@@ -474,7 +471,7 @@ public class Model {
     }
 
     /**
-     * @author Donato Fiore
+     * 
      * @param username the name of the player connected
      * it set the connection's boolean of the player class
      * */
@@ -498,7 +495,6 @@ public class Model {
 
     /**
      * This method returns the players of the game
-     * @author Samuele Pietro Galli
      * @return an array of players {@link Player}
      */
     public Player[] getPlayers() {

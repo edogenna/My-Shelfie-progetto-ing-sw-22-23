@@ -14,10 +14,8 @@ public final class Utils {
 
     /**
      * Sets all cells in a matrix to the indicated value
-     *
      * @param m     Matrix
      * @param value Number to be assigned
-     * @author Alessandro Fornara
      */
     public static void setMatrix(int[][] m, int value) {
         for (int i = 0; i < m.length; i++)
@@ -27,10 +25,8 @@ public final class Utils {
 
     /**
      * Sets all cells in an array to the indicated value
-     *
      * @param a     Array
      * @param value Number to be assigned
-     * @author Alessandro Fornara
      */
     public static void setArray(int[] a, int value) {
         for (int i = 0; i < a.length; i++)
@@ -39,9 +35,7 @@ public final class Utils {
 
     /**
      * This method prints an Integer matrix
-     *
      * @param m matrix
-     * @author Alessandro Fornara
      */
     public static void printMatrix(int[][] m) {
         for (int i = 0; i < m.length; i++) {
@@ -56,9 +50,7 @@ public final class Utils {
 
     /**
      * This method prints an Integer array
-     *
      * @param a array
-     * @author Alessandro Fornara
      */
     public static void printArray(int[] a) {
         for (int i = 0; i < a.length; i++)

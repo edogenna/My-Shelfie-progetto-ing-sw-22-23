@@ -1,5 +1,8 @@
 package it.polimi.ingsw;
 
+/**
+ * This class contains constants
+ */
 public final class Constant {
 
     public static final int PORT_SOCKET_CHAT = 2255;
