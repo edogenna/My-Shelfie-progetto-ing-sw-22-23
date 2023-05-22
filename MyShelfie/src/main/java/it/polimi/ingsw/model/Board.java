@@ -204,15 +204,14 @@ public class Board {
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (matrix[i][j] != ItemEnum.BLANK) {
-                    for (int k = -1; k <= 1; k++) {
-                        if (i + k >= 0 && i + k < BOARD_SIZE && matrix[i + k][j] != ItemEnum.BLANK)
-                            return false;
-                    }
-
-                    for (int h = -1; h <= 1; h++) {
-                        if (j + h >= 0 && j + h < BOARD_SIZE && matrix[i][j + h] != ItemEnum.BLANK)
-                            return false;
-                    }
+                    if(i - 1 >= 0 && matrix[i - 1][j] != ItemEnum.BLANK)
+                        return false;
+                    if(i + 1 < BOARD_SIZE && matrix[i + 1][j] != ItemEnum.BLANK)
+                        return false;
+                    if(j - 1 >= 0 && matrix[i][j - 1] != ItemEnum.BLANK)
+                        return false;
+                    if(j + 1 < BOARD_SIZE && matrix[i][j + 1] != ItemEnum.BLANK)
+                        return false;
                 }
             }
         }
