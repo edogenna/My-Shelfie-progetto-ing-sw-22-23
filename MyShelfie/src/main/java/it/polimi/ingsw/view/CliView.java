@@ -132,7 +132,12 @@ public class CliView{
     private void handleFirstPlayerMessage(Message m) throws IOException {
         outputStream.println(((FirstPlayerMessage) m).getS());
         userInput = stdIn.readLine();
-        while(Integer.parseInt(userInput)<2 || Integer.parseInt(userInput)>4){
+        try {
+            while (Integer.parseInt(userInput) < 2 || Integer.parseInt(userInput) > 4) {
+                outputStream.println(new NotValidNumberofPlayersMessage().getS());
+                userInput = stdIn.readLine();
+            }
+        }catch (NumberFormatException e){
             outputStream.println(new NotValidNumberofPlayersMessage().getS());
             userInput = stdIn.readLine();
         }
