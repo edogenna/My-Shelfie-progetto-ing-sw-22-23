@@ -129,7 +129,10 @@ public class Player {
 
         for(i=0; i<6; i++){
             for(j=0; j<5; j++){
-                visited[i][j] = 0;
+                if(this.shelf[i][j].equals(ItemEnum.BLANK))
+                    visited[i][j] = 1;
+                else
+                    visited[i][j] = 0;
             }
         }
 
