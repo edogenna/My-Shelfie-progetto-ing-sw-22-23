@@ -14,7 +14,7 @@ public class Board {
     @Expose
     public static final int BOARD_SIZE = 9;
     @Expose
-    public static final int INITIAL_NUMBER_ITEMENUM = 20;
+    public static final int INITIAL_NUMBER_ITEMENUM = 22;
     @Expose
     private ItemEnum[][] matrix;
     @Expose
@@ -170,11 +170,11 @@ public class Board {
 
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                if (isPositionValid(i, j)) {
+                if (isPositionValid(i, j) && matrix[i][j] == ItemEnum.BLANK) {
                     n = rand.nextInt(ItemEnum.NUM_ITEMENUM); //blank is excluded
 
-                    while (numItemRemained[n] == 0)
-                        n = rand.nextInt(ItemEnum.NUM_ITEMENUM);
+                    while (numItemRemained[n] <= 0)
+                        n = (n + 1) % ItemEnum.NUM_ITEMENUM;
 
                     numItemRemained[n]--;
                     item = switch (n) {
