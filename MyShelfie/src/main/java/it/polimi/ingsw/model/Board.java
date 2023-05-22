@@ -110,8 +110,6 @@ public class Board {
             }
         }
         return true;
-
-
     }
 
     /**
@@ -142,7 +140,7 @@ public class Board {
     }
 
     /**
-     *
+     * It sets all the ItemEnum of the board as a blank ItemEnum
      */
     private void setBoardAllBlank(){
         for(int i = 0; i < BOARD_SIZE; i++)
@@ -150,6 +148,12 @@ public class Board {
                 matrix[i][j] = ItemEnum.BLANK;
     }
 
+    /**
+     * It sets the ItemEnum in a given position.
+     * @param r row
+     * @param c column
+     * @param tile ItemEnum to set
+     */
     public void setItemEnum(int r, int c, ItemEnum tile) {
         matrix[r][c] = tile;
     }
@@ -236,6 +240,7 @@ public class Board {
 
     /**
      * This method is used to return designs of commonCards
+     * @return Array of strings
      */
     public String[] getCommonCardDesigns() {
         String[] array = new String[2];
