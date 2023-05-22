@@ -237,11 +237,11 @@ public class Player {
      * @param p int value
      */
     public void updateCommonPoints(int p, int whichCard){
-        if(whichCard==1) {
+        if(whichCard==0) {
             this.myCommonPoints += p;
             this.CommonDone1 = true;
         }
-        else if(whichCard==2) {
+        else if(whichCard==1) {
             this.myCommonPoints += p;
             this.CommonDone2 = true;
         }
