@@ -56,6 +56,7 @@ public class Board {
         for (int i = 0; i < ItemEnum.NUM_ITEMENUM; i++)
             numItemRemained[i] = INITIAL_NUMBER_ITEMENUM;
 
+        setBoardAllBlank();
         refill();
 
         //Generating Common Goal Cards
@@ -140,6 +141,15 @@ public class Board {
         return matrix[r][c];
     }
 
+    /**
+     *
+     */
+    private void setBoardAllBlank(){
+        for(int i = 0; i < BOARD_SIZE; i++)
+            for(int j = 0; j < BOARD_SIZE; j++)
+                matrix[i][j] = ItemEnum.BLANK;
+    }
+
     public void setItemEnum(int r, int c, ItemEnum tile) {
         matrix[r][c] = tile;
     }
@@ -188,8 +198,6 @@ public class Board {
                     };
 
                     matrix[i][j] = item;
-                } else {
-                    matrix[i][j] = ItemEnum.BLANK;
                 }
             }
         }
