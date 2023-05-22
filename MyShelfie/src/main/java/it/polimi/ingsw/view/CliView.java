@@ -138,8 +138,10 @@ public class CliView{
                 userInput = stdIn.readLine();
             }
         }catch (NumberFormatException e){
-            outputStream.println(new NotValidNumberofPlayersMessage().getS());
-            userInput = stdIn.readLine();
+            while (Integer.parseInt(userInput) < 2 || Integer.parseInt(userInput) > 4) {
+                outputStream.println(new NotValidNumberofPlayersMessage().getS());
+                userInput = stdIn.readLine();
+            }
         }
         if(out != null)
             sendMessageToSocketServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
