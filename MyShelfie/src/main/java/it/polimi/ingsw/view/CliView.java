@@ -54,7 +54,10 @@ public class CliView{
             case "MoveMessage" -> handleMoveMessage(m);
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
             case "Lobby" -> {handleLobbyMessage(m);}
-            case "CommonCard" -> outputStream.println(((CommonCardMessage) m).getS());
+            case "CommonCard" -> {outputStream.println(((CommonCardMessage) m).getS());
+                if(out != null)
+                    sendMessageToSocketServer(new ACKMessage());
+                else sendMessageToRmiServer(new ACKMessage());}
             case "ChatBegins" -> {handleChatBeginsMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
