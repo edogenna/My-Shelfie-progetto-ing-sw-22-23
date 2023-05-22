@@ -132,16 +132,9 @@ public class CliView{
     private void handleFirstPlayerMessage(Message m) throws IOException {
         outputStream.println(((FirstPlayerMessage) m).getS());
         userInput = stdIn.readLine();
-        try {
-            while (Integer.parseInt(userInput) < 2 || Integer.parseInt(userInput) > 4) {
-                outputStream.println(new NotValidNumberofPlayersMessage().getS());
-                userInput = stdIn.readLine();
-            }
-        }catch (NumberFormatException e){
-            while (Integer.parseInt(userInput) < 2 || Integer.parseInt(userInput) > 4) {
-                outputStream.println(new NotValidNumberofPlayersMessage().getS());
-                userInput = stdIn.readLine();
-            }
+        while (userInput.length()!=1 || (userInput.charAt(0) < '2' || userInput.charAt(0) > '4')) {
+            outputStream.println(new NotValidNumberofPlayersMessage().getS());
+            userInput = stdIn.readLine();
         }
         if(out != null)
             sendMessageToSocketServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
