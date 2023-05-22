@@ -65,7 +65,7 @@ public class CliView{
             case "GraphicalGameInfo" -> {handleGraphicalInfoMessage(m);}
             case "Waiting" -> {handleWaitingMessage(m);}
             case "NotValidMove" -> {dummyInputPrint(m); handleNotValidMove();}
-            case "Winner" -> handleWinMessage(m);
+            case "Win" -> handleWinMessage(m);
             case "NotEnoughSpaceColumn" -> {outputStream.println(((NotEnoughSpaceColumnError) m).getS()); handleNotValidMove();}
             case "InvalidColumn" -> {outputStream.println(((InvalidColumnError) m).getS()); handleNotValidMove();}
             case "EmptyPosition" -> {outputStream.println(((EmptyPositionError) m).getS()); handleNotValidMove();}
