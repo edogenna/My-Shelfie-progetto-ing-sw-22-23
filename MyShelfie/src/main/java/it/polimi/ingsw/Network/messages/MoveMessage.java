@@ -8,9 +8,6 @@ import it.polimi.ingsw.model.Card;
  * @author Alessandro Fornara
  */
 public final class MoveMessage extends Message {
-
-    private final String activePlayerUsername;
-
     private final String s = "it's your turn." +
                              "Please insert which tiles you would like to remove from the board and the column of your bookshelf you want to put your tiles in\n" +
                              "the first one will go to the first position available on the bottom of the column and the others will pile up\n" +
@@ -19,11 +16,6 @@ public final class MoveMessage extends Message {
 
     public MoveMessage(String username) {
         super("MoveMessage");
-        this.activePlayerUsername = username;
-    }
-
-    public String getActivePlayerUsername() {
-        return activePlayerUsername;
     }
 
     public String getS() {

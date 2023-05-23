@@ -30,7 +30,7 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 240;
+    private final int secondsDuringTurn = 30;
     private static final String RECONNECT = "Reconnect";
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
@@ -125,6 +125,7 @@ public class ServerManager implements Runnable{
 
     //TODO: finish
     private void removeClient(int number) {
+        System.out.println("remove Client method with number: " + number);
         if (lobby.containsKey(number)){
             removeClientFromLobby(number);
             if(isAwayFromKeyboard(number))
@@ -140,14 +141,13 @@ public class ServerManager implements Runnable{
     private void removeClientFromLobby(int number) {
         String name = lobby.get(number);
         lobby.remove(number);
-
+        System.out.println("remove client from lobby: " + number);
         //TODO: winner;
         // if(lobby.size()<MIN_PLAYERS)
 
         Integer[] clients = lobby.keySet().toArray(new Integer[0]);
         for (int i : clients) {
-            //TODO: new message for disconnection to send everyone; name + "is disconnected";
-            sendMessageAndWaitForAnswer(i, new NotValidUsernameError());
+            sendMessageAndWaitForAnswer(i, new UserDisconnection(nicknames.get(number)));
 //            notifyTimeLeft(i, clients.length);//to be removed?
         }
     }
