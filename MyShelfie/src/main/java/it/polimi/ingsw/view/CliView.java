@@ -78,7 +78,9 @@ public class CliView{
             case "UnknownCode" ->{outputStream.println(((UnknownCodeMessage) m).getS());
                 if(out != null)
                     sendMessageToSocketServer(new ACKMessage());
-                else sendMessageToRmiServer(new ACKMessage());}
+                else
+                    sendMessageToRmiServer(new ACKMessage());}
+            case "Disconnection" -> {handleDisconnectionMessage(m);}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
 
@@ -318,4 +320,15 @@ public class CliView{
             sendMessageToRmiServer(new OldGameIdAnswer(this.userInput));
     }
 
+    /**
+     * This method handles the {@link UserDisconnection}
+     * @param m message
+     */
+    private void handleDisconnectionMessage(Message m) throws IOException {
+        outputStream.println(((UserDisconnection) m).getS());
+        if(this.out != null)
+            sendMessageToSocketServer(new ACKMessage());
+        else
+            sendMessageToRmiServer(new ACKMessage());
+    }
 }
