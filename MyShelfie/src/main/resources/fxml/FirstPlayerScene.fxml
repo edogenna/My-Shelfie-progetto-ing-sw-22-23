@@ -17,18 +17,18 @@
       <TextField floatText="Number of players" layoutX="333.0" layoutY="145.0" prefHeight="35.0" prefWidth="179.0" />
       <Text layoutX="14.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are the first player to connect, please submit the number of players for the next game:" wrappingWidth="285.9446105957031">
          <font>
-            <Font size="24.0" />
+            <Font name="Poor Richard" size="24.0" />
          </font>
       </Text>
-      <Label layoutX="53.0" layoutY="245.0" prefHeight="91.0" prefWidth="561.0" text="Select another number, it has to be between 2 and 4.">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="411.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../17_MyShelfie_BGA/Publisher%20material/Title%202000x2000px.png" />
          </image>
       </ImageView>
+      <Label layoutX="52.0" layoutY="263.0" text="Select another number, it has to be between 2 and 4.">
+         <font>
+            <Font name="Poor Richard" size="24.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
