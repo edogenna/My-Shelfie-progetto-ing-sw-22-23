@@ -53,8 +53,5 @@ public class GUI extends Application {
         window.show();
     }
 
-    public void quit() {
-        System.out.println("Thanks for playing! See you next time!");
-        System.exit(0);
-    }
+
 }
