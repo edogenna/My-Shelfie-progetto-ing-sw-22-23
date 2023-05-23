@@ -39,6 +39,7 @@ public class Converter {
             case "ChatMessage" -> gson.fromJson(message, ChatMessage.class);
             case "ChooseUsername" -> gson.fromJson(message, ChooseUsernameMessage.class);
             case "CommonCard" -> gson.fromJson(message, CommonCardMessage.class);
+            case "Disconnection" -> gson.fromJson(message, UserDisconnection.class);
             case "EmptyPosition" -> gson.fromJson(message, EmptyPositionError.class);
             case "FirstPlayer" -> gson.fromJson(message, FirstPlayerMessage.class);
             case "GraphicalGameInfo" -> gson.fromJson(message, GraphicalGameInfo.class);

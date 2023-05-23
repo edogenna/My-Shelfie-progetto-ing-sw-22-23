@@ -24,12 +24,12 @@ public class RmiCommunication extends Communication{
     public void run(){
         String answer = rmiServer.sendMessageAndGetAnswer(this.client, this.message);
         showAndSetAnswer(answer);
-/*        if (this.timeExceeded) {
+        if (this.timeExceeded) {
 //            answer = rmiServer.sendMessageAndGetAnswer(client, new Parser().serialize(new Message(Protocol.TIME_EXCEEDED, "", null)));
             //TODO: maybe this is wrong;
             answer = rmiServer.sendMessageAndGetAnswer(this.client, new TimeoutMessage().getS());
             showAndSetAnswer(answer);
             rmiServer.unregister(client);
-        }*/
+        }
     }
 }

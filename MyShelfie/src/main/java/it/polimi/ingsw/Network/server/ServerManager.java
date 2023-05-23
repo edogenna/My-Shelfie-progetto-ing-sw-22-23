@@ -31,7 +31,7 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 30;
+    private final int secondsDuringTurn = 20;
     private static final String RECONNECT = "Reconnect";
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
@@ -47,12 +47,13 @@ public class ServerManager implements Runnable{
     private int idClient;
     private boolean firstPlayer;
     private int numberOfPlayers;
-
+    private boolean win;
 
     public ServerManager() {
         this.firstPlayer = true;
         this.numberOfPlayers = 0;
         this.idClient = 0;
+        this.win = false;
     }
 
     void addClient(Socket client) {
@@ -143,11 +144,13 @@ public class ServerManager implements Runnable{
         lobby.remove(number);
         System.out.println("remove client from lobby: " + number);
         //TODO: winner;
-        // if(lobby.size()<MIN_PLAYERS)
+         if(lobby.size()<MIN_PLAYERS){
+             this.win = true;
+         }
 
         Integer[] clients = lobby.keySet().toArray(new Integer[0]);
         for (int i : clients) {
-            sendMessageAndWaitForAnswer(i, new UserDisconnection(nicknames.get(number)));
+            sendMessageAndWaitForAnswer(i, new UserDisconnection(name));
 //            notifyTimeLeft(i, clients.length);//to be removed?
         }
     }
@@ -365,8 +368,6 @@ public class ServerManager implements Runnable{
 
     private void startGame() throws IOException {
         activeMatch = checkMemoryDisk();
-
-        boolean win = false;
 
         while (!win) {
 

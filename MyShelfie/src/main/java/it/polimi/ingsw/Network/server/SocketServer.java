@@ -38,6 +38,12 @@ public class SocketServer implements Runnable{
         new Thread(new ClientManager(serverManager, number)).start();
     }
 
+    public void unregister(Socket client){
+        fromClient.remove(client);
+        toClient.remove(client);
+        serverManager.removeClient(client);
+    }
+
     public String sendMessageAndGetAnswer(Socket socket, String message) {
         toClient.get(socket).println(message);
         try {

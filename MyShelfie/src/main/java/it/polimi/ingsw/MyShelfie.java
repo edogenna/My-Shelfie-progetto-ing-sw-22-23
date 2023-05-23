@@ -17,6 +17,4 @@ public class MyShelfie {
             case 1 -> Client.main();
         }
     }
-
-
 }
