@@ -156,7 +156,7 @@ public class ServerManager implements Runnable{
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         if (isAwayFromKeyboard(number)){
             //TODO: create new message / i'm doubtful
-            return "the player" + number + "is disconnected";
+            return "the player" + number + "has disconnected";
         }
 
         String serializedMessage = Converter.convertToJSON(message);
@@ -385,8 +385,14 @@ public class ServerManager implements Runnable{
 
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
 
-            Message m = Converter.convertFromJSON(answer);
-            handleMoveAnswer(x, m);
+            if(isDisconnected(x)) {
+                    //Do nothing, turn is skipped
+            }else if(isAwayFromKeyboard(x)){
+                sendMessageAndWaitForAnswer(x, new TurnTimeOut());
+            }else {
+                Message m = Converter.convertFromJSON(answer);
+                handleMoveAnswer(x, m);
+            }
             win = activeMatch.finishTurn();
 
             if (win) {

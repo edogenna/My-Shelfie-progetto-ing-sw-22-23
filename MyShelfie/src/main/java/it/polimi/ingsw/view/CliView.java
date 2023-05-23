@@ -75,12 +75,20 @@ public class CliView{
             case "OldIdNotValid" ->{handleOldIdNotValidMessage(m);}
             case "Disconnection" -> {handleDisconnectionMessage(m);}
             case "WelcomeBack" -> {handleWelcomeBackMessage(m);}
+            case "TurnTimeOut" -> {handleTurnTimeOut(m);}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
 
         return messageToServer;
     }
 
+    private void handleTurnTimeOut(Message m) throws IOException {
+        outputStream.println(((TurnTimeOut) m).getS());
+        if(out != null)
+            sendMessageToSocketServer(new ACKMessage());
+        else
+            sendMessageToRmiServer(new ACKMessage());
+    }
     /**
      * This method handles the {@link WelcomeBackMessage}
      * @param m message
