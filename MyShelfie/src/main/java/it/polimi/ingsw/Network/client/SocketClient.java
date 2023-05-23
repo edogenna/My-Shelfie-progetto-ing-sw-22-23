@@ -36,8 +36,6 @@ public class SocketClient extends Client{
 
         System.out.println("you are connected with socket");
         CliView cliView = new CliView(out, in, stdIn, null);
-        //inputReader = createInputReader();
-        //inputReader.start();
 
         while(true){
             String message = in.readLine();
@@ -55,18 +53,5 @@ public class SocketClient extends Client{
         } catch (IOException e) {
             System.out.println("An error occured while trying to close socket: " + e.getMessage());
         }
-    }
-
-    private Thread createInputReader(){
-        return new Thread(() -> {
-            while(true){
-                try {
-                    String message = stdIn.readLine();
-                    out.println(Converter.convertToJSON(new ChatMessage(message, "IlMioUserName")));;
-                } catch (IOException e) {
-                    System.out.println("An error occured while trying to read from socket: " + e.getMessage());
-                }
-            }
-        });
     }
 }

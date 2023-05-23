@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
 import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
+import it.polimi.ingsw.Network.messages.Answers.ReconnectionAnswer;
 import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.controller.Controller;
@@ -38,10 +39,9 @@ public class ServerManager implements Runnable{
     private final Map<Integer, Boolean> answerReady = new HashMap<>();
     private final Map<Integer, String> lobby = new HashMap<>();
     private final Map<Integer, String> nicknames = new HashMap<>();
-    Controller activeMatch;
+    private Controller activeMatch;
     private final List<Integer> afkPlayers = new ArrayList<>();
     private final List<Integer> disconnectedPlayers = new ArrayList<>();
-    private final Map<Integer, Socket> socketChatClients = new HashMap<>();
     private SocketServer socketServer;
     private RmiServer rmiServer;
     private int idClient;
@@ -267,10 +267,11 @@ public class ServerManager implements Runnable{
         int oldId;
         while (true) {
             String answer = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
+            Message m = Converter.convertFromJSON(answer);
             if (answer.equals("ERR")){
-                //TODO: this maybe will never enter, but it isn't useful;
+                //this maybe will never enter
                 break;
-            }else if (answer.equals(RECONNECT)) {
+            }else if(((ReconnectionAnswer) m).getString().equals(RECONNECT)) {
                 code = sendMessageAndWaitForAnswer(temporaryId, new OldGameId());
                 //TODO: insert a try{}catch(...) in OldGameId answer, so you set the answer like "ERR";
                 if (code.equals("ERR"))
@@ -280,8 +281,7 @@ public class ServerManager implements Runnable{
                     if (!switchClientId(oldId, temporaryId))
                         break;
                     disconnectedPlayers.remove((Object) oldId);
-                    //TODO: new Message(Protocol.WELCOME_BACK, nicknames.get(oldId), null)
-                    sendMessageAndWaitForAnswer(oldId, new FirstPlayerMessage());
+                    sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
                     activeMatch.reconnect(nicknames.get(oldId));
                     break;
                 }else{
@@ -366,13 +366,6 @@ public class ServerManager implements Runnable{
     private void startGame() throws IOException {
         activeMatch = checkMemoryDisk();
 
-        /*activeMatch = new Controller(numberOfPlayers);
-        System.out.println("A new game has been created");
-        for (Integer j : this.lobby.keySet()) {
-            activeMatch.setUsernamePlayer(lobby.get(j));
-        }
-        activeMatch.setFirstPlayer();*/
-
         boolean win = false;
 
         while (!win) {
@@ -390,23 +383,6 @@ public class ServerManager implements Runnable{
             //Sending to the active player a move request and handling the answer
             int x = getNumberByUsernameFromLobby(activeUsername);
 
-            /*for (Integer i : this.lobby.keySet()) {
-                if (i != getNumberByUsernameFromLobby(activeUsername)) {
-                    new Thread(() -> {
-                        while (true) {
-                            String answerChat = sendMessageAndWaitForAnswer(i, new ChatBeginsMessage());
-                            Message m = Converter.convertFromJSON(answerChat);
-
-                            System.out.println(((ChatMessage) m).getMessage());
-                            /*for (Integer j : this.lobby.keySet()){
-                                if (j != getNumberByUsernameFromLobby(activeUsername) && !j.equals(i)) {
-                                    sendMessageAndWaitForAnswer(j, new ChatMessage(((ChatMessage) m).getMessage(), "Server"));
-                                }
-                            }
-                        }
-                    }).start();
-                }
-            }*/
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
 
             Message m = Converter.convertFromJSON(answer);

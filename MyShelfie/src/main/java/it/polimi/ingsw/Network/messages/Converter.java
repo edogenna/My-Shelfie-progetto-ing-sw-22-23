@@ -13,9 +13,17 @@ import it.polimi.ingsw.model.Model;
  */
 public class Converter {
 
-    //TODO: creare il costruttore come privato cosi da non piter instanzare questa classe
     private Converter() {}
 
+    /**
+     * @param message a json string
+     * @return type of the message
+     */
+    public static String getType(String message){
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
+        return jsonObject.get("type").getAsString();
+    }
     /**
      * This method converts a message from a JSON string to a {@link Message}
      * @param message a json string
@@ -61,6 +69,7 @@ public class Converter {
             case "UsernameAnswer" -> gson.fromJson(message, UsernameAnswer.class);
             case "Waiting" -> gson.fromJson(message, WaitingMessage.class);
             case "UnknownCode" -> gson.fromJson(message, UnknownCodeMessage.class);
+            case "WelcomeBack" -> gson.fromJson(message, WelcomeBackMessage.class);
             case "Win" -> gson.fromJson(message, WinMessage.class);
             default -> null;
         };

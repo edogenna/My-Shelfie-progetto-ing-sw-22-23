@@ -4,9 +4,6 @@ package it.polimi.ingsw;
  * This class contains constants
  */
 public final class Constant {
-
-    public static final int PORT_SOCKET_CHAT = 2255;
-    public static final int PORT_RMI_CHAT = 2266;
     public static final int PORT_SOCKET_GAME = 50010;
     public static final int PORT_RMI_GAME = 50011;
 

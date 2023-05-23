@@ -54,10 +54,7 @@ public class CliView{
             case "MoveMessage" -> handleMoveMessage(m);
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
             case "Lobby" -> {handleLobbyMessage(m);}
-            case "CommonCard" -> {outputStream.println(((CommonCardMessage) m).getS());
-                if(out != null)
-                    sendMessageToSocketServer(new ACKMessage());
-                else sendMessageToRmiServer(new ACKMessage());}
+            case "CommonCard" -> handleCommonCardMessage(m);
             case "ChatBegins" -> {handleChatBeginsMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
@@ -75,18 +72,52 @@ public class CliView{
             case "ChatMessage" -> {handleChatMessage(m);}
             case "Reconnect" -> {handleReconnectionMessage(m);}
             case "OldGameId" -> {handleOldGameIdMessage(m);}
-            case "UnknownCode" ->{outputStream.println(((UnknownCodeMessage) m).getS());
-                if(out != null)
-                    sendMessageToSocketServer(new ACKMessage());
-                else
-                    sendMessageToRmiServer(new ACKMessage());}
+            case "OldIdNotValid" ->{handleOldIdNotValidMessage(m);}
             case "Disconnection" -> {handleDisconnectionMessage(m);}
+            case "WelcomeBack" -> {handleWelcomeBackMessage(m);}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
 
         return messageToServer;
     }
 
+    /**
+     * This method handles the {@link WelcomeBackMessage}
+     * @param m message
+     * @throws IOException
+     */
+    private void handleWelcomeBackMessage(Message m) throws IOException {
+        outputStream.println(((WelcomeBackMessage) m).getString());
+        if(out != null)
+            sendMessageToSocketServer(new ACKMessage());
+        else
+            sendMessageToRmiServer(new ACKMessage());
+    }
+
+    /**
+     * This method handles the {@link OldIdNotValid}
+     * @param m message
+     * @throws IOException
+     */
+    private void handleOldIdNotValidMessage(Message m) throws IOException {
+        outputStream.println(((OldIdNotValid) m).getS());
+        if(out != null)
+            sendMessageToSocketServer(new ACKMessage());
+        else
+            sendMessageToRmiServer(new ACKMessage());
+    }
+
+    /**
+     * This method handles the {@link CommonCardMessage}
+     * @param m message
+     * @throws IOException
+     */
+    private void handleCommonCardMessage(Message m) throws IOException {
+        outputStream.println(((CommonCardMessage) m).getS());
+            if(out != null)
+                sendMessageToSocketServer(new ACKMessage());
+            else sendMessageToRmiServer(new ACKMessage());
+    }
     /**
      * This method handles the {@link MoveMessage}
      * @param m message
