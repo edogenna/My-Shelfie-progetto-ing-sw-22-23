@@ -364,20 +364,20 @@ public class ServerManager implements Runnable{
     }
 
     private void startGame() throws IOException {
-//        activeMatch = checkMemoryDisk();
+        activeMatch = checkMemoryDisk();
 
-        activeMatch = new Controller(numberOfPlayers);
+        /*activeMatch = new Controller(numberOfPlayers);
         System.out.println("A new game has been created");
         for (Integer j : this.lobby.keySet()) {
             activeMatch.setUsernamePlayer(lobby.get(j));
         }
-        activeMatch.setFirstPlayer();
+        activeMatch.setFirstPlayer();*/
 
         boolean win = false;
 
         while (!win) {
 
-            //saveGame();
+            saveGame();
             System.out.println("Game has been saved");
 
             String activeUsername = activeMatch.getActivePlayerUsername();
@@ -518,7 +518,7 @@ public class ServerManager implements Runnable{
     private void saveGame() throws IOException {
         String save = this.activeMatch.getModelSave();
 
-        String filePath = "C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt";
+        String filePath = "save.txt";
         FileWriter fileWriter = new FileWriter(filePath);
         fileWriter.write(save);
         fileWriter.close();
@@ -530,11 +530,11 @@ public class ServerManager implements Runnable{
      * @throws IOException
      */
     private Model loadGame() throws IOException {
-        File file = new File("C:\\Users\\alefo\\Desktop\\ing-sw-2023-Gennaretti-Fiore-Fornara-Galli\\MyShelfie\\save.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        StringBuilder stringBuilder = new StringBuilder();
+        File file = new File("save.txt");
 
         if(file.exists()) {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            StringBuilder stringBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line);
