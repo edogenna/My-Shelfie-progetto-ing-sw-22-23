@@ -13,7 +13,7 @@ public class CommonCard08 implements CommonCardStrategy {
     private final String constant8=
             "Card number 8        Description:\n"+
             "|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different\n"+
-            "                     types of tiles. One line can show the\n"+
+            "                     types of tiles. One line can show \n"+
             "       x2            the same or a different combination\n"+
             "                     of another line.\n";
 

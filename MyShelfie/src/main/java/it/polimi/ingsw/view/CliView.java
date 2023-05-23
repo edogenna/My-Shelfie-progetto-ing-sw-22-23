@@ -75,6 +75,10 @@ public class CliView{
             case "ChatMessage" -> {handleChatMessage(m);}
             case "Reconnect" -> {handleReconnectionMessage(m);}
             case "OldGameId" -> {handleOldGameIdMessage(m);}
+            case "UnknownCode" ->{outputStream.println(((UnknownCodeMessage) m).getS());
+                if(out != null)
+                    sendMessageToSocketServer(new ACKMessage());
+                else sendMessageToRmiServer(new ACKMessage());}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
 

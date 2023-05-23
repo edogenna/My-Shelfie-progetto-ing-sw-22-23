@@ -60,6 +60,7 @@ public class Converter {
             case "UserIdMessage" -> gson.fromJson(message, UserIdMessage.class);
             case "UsernameAnswer" -> gson.fromJson(message, UsernameAnswer.class);
             case "Waiting" -> gson.fromJson(message, WaitingMessage.class);
+            case "UnknownCode" -> gson.fromJson(message, UnknownCodeMessage.class);
             case "Win" -> gson.fromJson(message, WinMessage.class);
             default -> null;
         };
