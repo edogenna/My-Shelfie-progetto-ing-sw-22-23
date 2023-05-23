@@ -16,7 +16,7 @@ import java.util.Queue;
 public class Client {
     public static String hostName;
     protected Queue<String> queueChat; //queue that contains json string
-    public static void main(String[] args) throws IOException, NotBoundException {
+    public static void main() throws IOException, NotBoundException {
 
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Insert the hostName or just press enter to get your own device: ");
