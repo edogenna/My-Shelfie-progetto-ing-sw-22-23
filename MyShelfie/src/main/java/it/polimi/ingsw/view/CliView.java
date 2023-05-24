@@ -15,7 +15,7 @@ import java.io.*;
  * @author Alessandro Fornara
  * @author Donato Fiore
  */
-public class CliView{
+public class CliView extends UI{
     private final PrintStream outputStream;
     private ItemEnum[][] board;
     private String[] CommonCards;
@@ -48,6 +48,7 @@ public class CliView{
      * @param m message
      * @throws IOException
      */
+    @Override
     public String actionHandler(Message m) throws IOException {
 
         switch (m.getType()) {

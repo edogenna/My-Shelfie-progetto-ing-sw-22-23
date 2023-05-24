@@ -15,6 +15,7 @@ import it.polimi.ingsw.Network.messages.Message;
 import it.polimi.ingsw.Network.messages.WaitingMessage;
 import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.view.CliView;
+import it.polimi.ingsw.view.UI;
 
 /**
  * This class represents a rmi client implementation
@@ -24,7 +25,7 @@ import it.polimi.ingsw.view.CliView;
 public class RmiClient extends Client implements RmiClientInterface{
 
     private BufferedReader stdIn;
-    private CliView cliViewRmi;
+    private UI cliViewRmi;
     private RmiServerInterface rmiServerInterface;
 
     public RmiClient(){

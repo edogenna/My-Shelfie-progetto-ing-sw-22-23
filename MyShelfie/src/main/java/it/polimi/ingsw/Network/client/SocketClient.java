@@ -4,6 +4,7 @@ import it.polimi.ingsw.Constant;
 import it.polimi.ingsw.Network.messages.*;
 ;
 import it.polimi.ingsw.view.CliView;
+import it.polimi.ingsw.view.UI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class SocketClient extends Client{
         }
 
         System.out.println("you are connected with socket");
-        CliView cliView = new CliView(out, in, stdIn, null);
+        UI cliView = new CliView(out, in, stdIn, null);
 
         while(true){
             String message = in.readLine();
