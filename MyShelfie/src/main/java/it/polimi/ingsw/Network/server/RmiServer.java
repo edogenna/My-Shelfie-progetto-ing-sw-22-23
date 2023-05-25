@@ -62,6 +62,7 @@ public class RmiServer implements RmiServerInterface, Runnable{
             System.out.println("RmiServer started on port: " + Constant.PORT_RMI_GAME);
         } catch (UnknownHostException | RemoteException | AlreadyBoundException e) {
             System.out.println(e.getMessage());
+            System.exit(0);
         }
     }
 }
