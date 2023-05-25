@@ -3,9 +3,12 @@ package it.polimi.ingsw.model.CommonCards;
 import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 
+import java.util.LinkedList;
+
 /**
  * Contains the algorithms for the fourth common card:
  * Four lines each formed by 5 tiles of maximum three different types. One line can show the same or a different combination of another line.
+ * @author Edoardo Gennaretti
  * @author Alessandro Fornara
  */
 public class CommonCard04 implements CommonCardStrategy {
@@ -16,6 +19,37 @@ public class CommonCard04 implements CommonCardStrategy {
             "       x4            Lines can be different from one another.\n";
 
     public final int number = 4;
+
+    @Override
+    public boolean checkBookshelf(ItemEnum[][] b){
+        LinkedList<ItemEnum> list = new LinkedList<>();
+        int numerOfValidRows = 0;
+        boolean validity;
+
+        for(int i=0; i<6; i++){
+            list.clear();
+            validity = true;
+
+            for(int j=0; j<5; j++){
+                if(b[i][j].equals(ItemEnum.BLANK)) {
+                    validity = false;
+                }else{
+                    if(!list.contains(b[i][j].getStandardItemEnum())){
+                        list.add(b[i][j].getStandardItemEnum());
+                    }
+                }
+            }
+
+            if(list.size()<=3 && validity){
+                numerOfValidRows++;
+            }
+        }
+
+        return numerOfValidRows >= 4;
+    }
+
+
+    /*
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum firstColor;
@@ -60,15 +94,18 @@ public class CommonCard04 implements CommonCardStrategy {
         }
         return false;
     }
+    */
+
+
     @Override
     public CharMatrix printCommonCardMatrix(){
-
         return  new CharMatrix()
                 .appendAtBottom("Card number 4         Description:")
                 .appendAtBottom("|■| |■| |■| |■| |■|   Four lines each formed by 5 tiles of")
                 .appendAtBottom("     MAX 3 ≠          maximum three different types.")
                 .appendAtBottom("       x4             Lines can be different from one another.");
     }
+
     @Override
     public void printCommonCard() {
         System.out.println(constant4);

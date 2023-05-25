@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.CommonCards;
 
 import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
+
+import java.util.Arrays;
+
 /**
  * Contains the algorithms for the sixth common card:
  * Two column each formed by 6 different types of tiles.
@@ -9,7 +12,6 @@ import it.polimi.ingsw.ItemEnum;
  * @author Samuele Galli
  */
 public class CommonCard06 implements CommonCardStrategy{
-
     private final String constant6=
             "| ≠ | number 6  Description:\n"+
             "| ≠ |           Two columns each formed\n"+
@@ -29,7 +31,7 @@ public class CommonCard06 implements CommonCardStrategy{
         int counter=0; //contatore per il numero di colonne
 
         for (int j=0; j<5; j++) {
-            setArray(occurrences, 0);
+            Arrays.fill(occurrences, 0);
             columnOk=true;
 
                 for (i=0; i<6; i++) {
@@ -66,31 +68,24 @@ public class CommonCard06 implements CommonCardStrategy{
     private int enumToInt(ItemEnum b) { //hash per array occorrenze
         int value=0;
 
-        if(b.equals(ItemEnum.GREEN))
+        if(b.equals(ItemEnum.GREEN1) || b.equals(ItemEnum.GREEN2) || b.equals(ItemEnum.GREEN3))
             value=0;
-        else if(b.equals(ItemEnum.WHITE))
+        else if(b.equals(ItemEnum.WHITE1) || b.equals(ItemEnum.WHITE2) || b.equals(ItemEnum.WHITE3))
             value=1;
-        else if(b.equals(ItemEnum.YELLOW))
+        else if(b.equals(ItemEnum.YELLOW1) || b.equals(ItemEnum.YELLOW2) || b.equals(ItemEnum.YELLOW3))
             value=2;
-        else if(b.equals(ItemEnum.BLUE))
+        else if(b.equals(ItemEnum.BLUE1) || b.equals(ItemEnum.BLUE2) || b.equals(ItemEnum.BLUE3))
             value=3;
-        else if(b.equals(ItemEnum.AZURE))
+        else if(b.equals(ItemEnum.AZURE1) || b.equals(ItemEnum.AZURE2) || b.equals(ItemEnum.AZURE3))
             value=4;
-        else if(b.equals(ItemEnum.PURPLE))
+        else if(b.equals(ItemEnum.PURPLE1) || b.equals(ItemEnum.PURPLE2) || b.equals(ItemEnum.PURPLE3))
             value=5;
 
         return value;
     }
 
-    /**
-     * Sets all cells in an array to the indicated value
-     * @param a Array
-     * @param value Number to be assigned
-     */
-    private void setArray(int[] a, int value){
-        for(int i=0; i<a.length; i++)
-            a[i]=value;
-    }
+
+
     @Override
     public CharMatrix printCommonCardMatrix(){
 

@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.CommonCards;
 
 import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
+
+import java.util.Arrays;
+
 /**
  * Contains the algorithms for the eighth common card:
  * Two lines each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.
@@ -29,7 +32,8 @@ public class CommonCard08 implements CommonCardStrategy {
         int counter=0; //contatore per il numero di righe
 
         for (int i=0; i<6; i++) {
-            setArray(occurrences, 0);
+            Arrays.fill(occurrences, 0);
+
             lineOk=true;
                 for (j=0; j<5; j++) {
                     if (!b[i][j].equals(ItemEnum.BLANK)) { //escludo le righe non piene
@@ -60,26 +64,23 @@ public class CommonCard08 implements CommonCardStrategy {
     private int enumToInt(ItemEnum b) { //hash per colori array occorrenze
         int value=0;
 
-        if(b.equals(ItemEnum.GREEN))
+        if(b.equals(ItemEnum.GREEN1))
             value=0;
-        else if(b.equals(ItemEnum.WHITE))
+        else if(b.equals(ItemEnum.WHITE1))
             value=1;
-        else if(b.equals(ItemEnum.YELLOW))
+        else if(b.equals(ItemEnum.YELLOW1))
             value=2;
-        else if(b.equals(ItemEnum.BLUE))
+        else if(b.equals(ItemEnum.BLUE1))
             value=3;
-        else if(b.equals(ItemEnum.AZURE))
+        else if(b.equals(ItemEnum.AZURE1))
             value=4;
-        else if(b.equals(ItemEnum.PURPLE))
+        else if(b.equals(ItemEnum.PURPLE1))
             value=5;
 
         return value;
     }
 
-    private void setArray(int[] a, int value){
-        for(int i=0; i<a.length; i++)
-            a[i]=value;
-    }
+
     @Override
     public void printCommonCard() {
         System.out.println(constant8);
