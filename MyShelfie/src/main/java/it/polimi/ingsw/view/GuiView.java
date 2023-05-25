@@ -1,8 +1,13 @@
 package it.polimi.ingsw.view;
 
 
+import it.polimi.ingsw.GUI.controllers.FXMLChooseNickController;
 import it.polimi.ingsw.ItemEnum;
-import it.polimi.ingsw.Network.messages.Message;
+import it.polimi.ingsw.Network.messages.*;
+
+import it.polimi.ingsw.Network.messages.Answers.*;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMessage;
+import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.model.Card;
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -23,11 +28,13 @@ public class GuiView extends Application implements UI {
     private String[] CommonCards;
     private Card personalCard;
     private ItemEnum[][] shelf;
+    //canali verso e dal server validi solo per socket
     private PrintWriter out;
     private BufferedReader in;
     private String myUsername;
     private String userInput;
     private String messageToServer;
+    private FXMLChooseNickController fxmlChooseNickController;
 
     public GuiView(PrintWriter out, BufferedReader in){
         this.out = out;
@@ -39,6 +46,7 @@ public class GuiView extends Application implements UI {
         this.myUsername = null;
         this.userInput = null;
         this.messageToServer = null;
+        this.fxmlChooseNickController = new FXMLChooseNickController();
     }
     public static void main(String[] args) {
         launch(args);
@@ -55,14 +63,62 @@ public class GuiView extends Application implements UI {
 //        stage.getIcons().add(new Image("/resources/graphics/icon.png"));
         stage.show();
     }
+        /**
+     * This method sends a message to the socket server
+     * @param m {@link Message}
+     */
+    private void sendMessageToSocketServer(Message m){
+        String jsonString = Converter.convertToJSON(m);
+        out.println(jsonString);
+    }
+
+    /**
+     * This method sends a message to the rmi server
+     * @param m {@link Message}
+     */
+    private void sendMessageToRmiServer(Message m) throws IOException {
+        this.messageToServer = Converter.convertToJSON(m);
+    }
+    private void handleChooseUsernameMessage(Message m) throws IOException {
+        userInput = fxmlChooseNickController.getUsernameFromTextfield();
+        this.myUsername = userInput;
+        if(out != null)
+            sendMessageToSocketServer(new UsernameAnswer(userInput));
+        else
+            sendMessageToRmiServer(new UsernameAnswer(userInput));
+    }
+    private void handleNotValidUsernameError(Message m) throws IOException {
+        fxmlChooseNickController.setWrongUsername(((NotValidUsernameError) m).getS());
+        userInput = fxmlChooseNickController.getUsernameFromTextfield();
+        this.myUsername = userInput;
+        if(out != null)
+            sendMessageToSocketServer(new UsernameAnswer(userInput));
+        else sendMessageToRmiServer(new UsernameAnswer(userInput));
+    }
+    private void handleFirstPlayerMessage(Message m) throws IOException {
+        fxmlChooseNickController.setFirstPlayerMessage(((FirstPlayerMessage) m).getS());
+        userInput = fxmlChooseNickController.getNumPlayers();
+        while (userInput.length()!=1 || (userInput.charAt(0) < '2' || userInput.charAt(0) > '4')) {
+            fxmlChooseNickController.setWrongNumPlayers((new NotValidNumberofPlayersMessage()).getS());
+            userInput = fxmlChooseNickController.getUsernameFromTextfield();
+        }
+        if(out != null)
+            sendMessageToSocketServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
+        else sendMessageToRmiServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
+    }
 
     @Override
     public String actionHandler(Message m) throws IOException{
+        switch (m.getType()){
+            case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
+            case "NotValidUsername" -> {handleNotValidUsernameError(m);}
+            case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
+        }
         /*
         replicating the action handler in cliview
         switch (m.getType()) {
             case "MoveMessage" -> handleMoveMessage(m);
-            case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
+
             case "Lobby" -> {handleLobbyMessage(m);}
             case "CommonCard" -> handleCommonCardMessage(m);
             case "ChatBegins" -> {handleChatBeginsMessage(m);}
@@ -91,4 +147,5 @@ public class GuiView extends Application implements UI {
         */
         return messageToServer;
     }
+
 }
