@@ -22,6 +22,7 @@ public class RmiCommunication extends Communication{
 
     @Override
     public void run(){
+        System.out.println("Rmi Communication run");
         String answer = rmiServer.sendMessageAndGetAnswer(this.client, this.message);
         showAndSetAnswer(answer);
         if (this.timeExceeded) {

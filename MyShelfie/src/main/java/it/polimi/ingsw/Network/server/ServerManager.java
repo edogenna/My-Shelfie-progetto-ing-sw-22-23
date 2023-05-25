@@ -157,6 +157,7 @@ public class ServerManager implements Runnable{
 
     //TODO: finish this method for the resilience
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
+        //it never enters
         if (isDisconnected(number)){
             System.out.println("sendMessageAndWaitForAnswer, in the is 'isDisconnected(number)': " + nicknames.get(number));
             //TODO: create new message / i'm doubtful
@@ -173,6 +174,7 @@ public class ServerManager implements Runnable{
         }
         answerReady.put(number, false);
         Communication communication;
+        System.out.println("good-morning");
         if (socketClients.containsKey(number)) {
             communication = new SocketCommunication(serializedMessage, socketClients.get(number), socketServer, number, this);
             new Thread(communication).start();
@@ -185,6 +187,7 @@ public class ServerManager implements Runnable{
             return "ERROR registration";
         }
 
+        System.out.println("i'm here, in sendMessageAndWaitForAnswer");
         boolean isTimeExceeded = false;
         int counter = 0;
         while (!answerReady.get(number)) {
@@ -209,17 +212,18 @@ public class ServerManager implements Runnable{
                         socketClients.get(number).getInetAddress().isReachable(MILLIS_IN_SECOND);
                     } catch (IOException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
-                        //socketServer.unregister(socketClients.get(number));
+                        socketServer.unregister(socketClients.get(number));
                         return "ERROR";
                     }
                 }
             }
             if (counter > secondsDuringTurn * MILLIS_IN_SECOND / MILLIS_TO_WAIT) {
+                System.out.println("tempo scaduto in sendMessageAndWaitForAnswer");
                 isTimeExceeded = true;
                 break;
             }
         }
-        if (isTimeExceeded) {
+        if (isTimeExceeded && nicknames.get(number).equals(activeMatch.getActivePlayerUsername())) {
             communication.setTimeExceeded();
             if(isAwayFromKeyboard(number)){
                 /*
@@ -232,7 +236,7 @@ public class ServerManager implements Runnable{
                     removeClient(rmiClients.get(number));
                 }else if(socketClients.containsKey(number))
                     removeClient(socketClients.get(number));
-            }else if (lobby.containsKey(number) && !isAwayFromKeyboard(number)) {
+            }else if (lobby.containsKey(number)) {
                 afkPlayers.add(number);
             }
             return "Error";
@@ -409,7 +413,7 @@ public class ServerManager implements Runnable{
 
             if(isAwayFromKeyboard(x)){
                 System.out.println("i'm in afk edge");
-                sendMessageAndWaitForAnswer(x, new TurnTimeOut());
+//                sendMessageAndWaitForAnswer(x, new TurnTimeOut());
             }else {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);
@@ -423,6 +427,7 @@ public class ServerManager implements Runnable{
                     sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
                 }
             }
+            System.out.println();
         }
     }
 

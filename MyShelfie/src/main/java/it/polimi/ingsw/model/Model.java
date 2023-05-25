@@ -402,6 +402,10 @@ public class Model {
             finish = true;
             x = this.idActivePlayer+1;
             x %= this.numPlayers;
+            while(players[x].isDisconnected()){
+                x = this.idActivePlayer+1;
+                x %= this.numPlayers;
+            }
             if(x != this.idFirstPlayer)
                 finish = false;
         }

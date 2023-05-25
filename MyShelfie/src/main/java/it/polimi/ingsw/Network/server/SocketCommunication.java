@@ -23,6 +23,7 @@ public class SocketCommunication extends Communication{
 
     @Override
     public void run() {
+        System.out.println("Socket Communication run");
         String answer = socketServer.sendMessageAndGetAnswer(this.client, this.message);
         showAndSetAnswer(answer);
         if (this.timeExceeded) {

@@ -35,6 +35,7 @@ public class Converter {
         String type = jsonObject.get("type").getAsString();
         return switch (type) {
             case "ACK" -> gson.fromJson(message, ACKMessage.class);
+            case "ACKOffline" -> gson.fromJson(message, ACKOffline.class);
             case "ChatBegins" -> gson.fromJson(message, ChatBeginsMessage.class);
             case "ChatMessage" -> gson.fromJson(message, ChatMessage.class);
             case "ChooseUsername" -> gson.fromJson(message, ChooseUsernameMessage.class);

@@ -32,8 +32,9 @@ public class MyShelfie {
             System.out.println("rmi port: " + Constant.PORT_RMI_GAME);
 
             System.out.println("Insert 0 for CLI and any other number for GUI");
-            if (stdIn.readLine().equals("0"))
-                chooseCliGui = false;
+//            if (stdIn.readLine().equals("0"))
+//                chooseCliGui = false;
+            chooseCliGui = false;
 
             System.out.println("Insert 0 for Socket and any other number for RMI");
             if (stdIn.readLine().equals("0"))
