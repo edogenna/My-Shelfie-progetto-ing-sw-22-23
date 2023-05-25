@@ -58,6 +58,37 @@ public class GuiView extends Application implements UI {
 
     @Override
     public String actionHandler(Message m) throws IOException{
-        return null;
+        /*
+        replicating the action handler in cliview
+        switch (m.getType()) {
+            case "MoveMessage" -> handleMoveMessage(m);
+            case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
+            case "Lobby" -> {handleLobbyMessage(m);}
+            case "CommonCard" -> handleCommonCardMessage(m);
+            case "ChatBegins" -> {handleChatBeginsMessage(m);}
+            case "StartingGame" -> {handleStartingGameMessage(m);}
+            case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
+            case "NotValidUsername" -> {handleNotValidUsernameError(m);}
+            case "GraphicalGameInfo" -> {handleGraphicalInfoMessage(m);}
+            case "Waiting" -> {handleWaitingMessage(m);}
+            case "NotValidMove" -> {dummyInputPrint(m); handleNotValidMove();}
+            case "Win" -> handleWinMessage(m);
+            case "NotEnoughSpaceColumn" -> {outputStream.println(((NotEnoughSpaceColumnError) m).getS()); handleNotValidMove();}
+            case "InvalidColumn" -> {outputStream.println(((InvalidColumnError) m).getS()); handleNotValidMove();}
+            case "EmptyPosition" -> {outputStream.println(((EmptyPositionError) m).getS()); handleNotValidMove();}
+            case "NotAdjTiles" -> {outputStream.println(((NotAdjacTiles) m).getS()); handleNotValidMove();}
+            case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS()); handleNotValidMove();}
+            case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
+            case "ChatMessage" -> {handleChatMessage(m);}
+            case "Reconnect" -> {handleReconnectionMessage(m);}
+            case "OldGameId" -> {handleOldGameIdMessage(m);}
+            case "OldIdNotValid" ->{handleOldIdNotValidMessage(m);}
+            case "Disconnection" -> {handleDisconnectionMessage(m);}
+            case "WelcomeBack" -> {handleWelcomeBackMessage(m);}
+            case "TurnTimeOut" -> {handleTurnTimeOut(m);}
+            default -> throw new IllegalStateException("Unexpected value: " + m.getType());
+        }
+        */
+        return messageToServer;
     }
 }
