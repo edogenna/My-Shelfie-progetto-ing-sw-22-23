@@ -157,9 +157,10 @@ public class ServerManager implements Runnable{
 
     //TODO: finish this method for the resilience
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
-        if (isAwayFromKeyboard(number)){
+        if (isDisconnected(number)){
+            System.out.println("sendMessageAndWaitForAnswer, in the is 'isDisconnected(number)': " + nicknames.get(number));
             //TODO: create new message / i'm doubtful
-            return "the player" + number + "has disconnected";
+            return "the player" + number + "is disconnected";
         }
 
         String serializedMessage = Converter.convertToJSON(message);
@@ -221,9 +222,16 @@ public class ServerManager implements Runnable{
         if (isTimeExceeded) {
             communication.setTimeExceeded();
             if(isAwayFromKeyboard(number)){
+                /*
                 afkPlayers.remove(number);
                 disconnectedPlayers.add(number);
                 activeMatch.disconnect(nicknames.get(number));
+                */
+                System.out.println("i'm going to call removeClient for the player: " + nicknames.get(number));
+                if(rmiClients.containsKey(number)){
+                    removeClient(rmiClients.get(number));
+                }else if(socketClients.containsKey(number))
+                    removeClient(socketClients.get(number));
             }else if (lobby.containsKey(number) && !isAwayFromKeyboard(number)) {
                 afkPlayers.add(number);
             }
@@ -381,28 +389,40 @@ public class ServerManager implements Runnable{
                 sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
             }
 
-            //Sending to the active player a move request and handling the answer
+            //id of the active player;
             int x = getNumberByUsernameFromLobby(activeUsername);
+            //todo: add exception if x = -1;
+            System.out.println("the active user is: " + activeUsername + ", " + x);
 
+            if(x<-1){
+                System.out.println("the user " + activeUsername + " isn't in the lobby");
+            }
+
+            //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
+            System.out.println("answer x2: " + answer);
 
-            if(isDisconnected(x)) {
-                    //Do nothing, turn is skipped
-            }else if(isAwayFromKeyboard(x)){
+            System.out.print("afkPlayers: ");
+            for (Integer afkPlayer : afkPlayers)
+                System.out.print(afkPlayer + " " + nicknames.get(afkPlayer) + "; ");
+            System.out.println();
+
+            if(isAwayFromKeyboard(x)){
+                System.out.println("i'm in afk edge");
                 sendMessageAndWaitForAnswer(x, new TurnTimeOut());
             }else {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);
             }
-            win = activeMatch.finishTurn();
 
-            if (win) {
+            this.win = activeMatch.finishTurn();
+
+            if(this.win) {
                 int points = activeMatch.declareWinner();
                 for (Integer j : this.lobby.keySet()) {
                     sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
                 }
             }
-
         }
     }
 
