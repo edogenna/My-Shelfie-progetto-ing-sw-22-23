@@ -64,6 +64,7 @@ public class SocketServer implements Runnable{
             }
         } catch (IOException e) {
             System.out.println("SocketServer is closed.");
+            System.exit(0);
         }
     }
 }
