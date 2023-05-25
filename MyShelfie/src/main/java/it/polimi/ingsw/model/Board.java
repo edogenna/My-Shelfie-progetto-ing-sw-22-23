@@ -53,7 +53,7 @@ public class Board {
         }
         this.numPlayers = numPlayers;
 
-        for (int i = 0; i < ItemEnum.NUM_ITEMENUM; i++)
+        for (int i = 0; i < ItemEnum.NUM_ITEMENUM * ItemEnum.NUM_TYPE_PER_ITEMENUM; i++)
             numItemRemained[i] = INITIAL_NUMBER_ITEMENUM;
 
         setBoardAllBlank();
@@ -211,7 +211,7 @@ public class Board {
                         case 16 -> ItemEnum.AZURE2;
                         case 17 -> ItemEnum.AZURE3;
 
-                        default -> ItemEnum.BLANK; //covers also for case 6
+                        default -> ItemEnum.BLANK;
                     };
 
                     matrix[i][j] = item;
