@@ -21,17 +21,17 @@
          </font>
       </Text>
       <TextField layoutX="337.0" layoutY="163.0" prefHeight="35.0" prefWidth="179.0" />
-      <Text layoutX="21.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Would you like to use SOCKET (type 0) or RMI (type 1) ?" wrappingWidth="286.76236724853516">
+      <Text layoutX="14.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Would you like to use SOCKET (type 0) or RMI (type 1) ?" wrappingWidth="286.76236724853516">
          <font>
             <Font name="Poor Richard" size="24.0" />
          </font>
       </Text>
-      <Label layoutX="146.0" layoutY="286.0" prefHeight="54.0" prefWidth="268.0" text="You are connected!">
+      <Label layoutX="198.0" layoutY="278.0" prefHeight="54.0" prefWidth="179.0" text="You are connected!">
          <font>
             <Font name="Poor Richard" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="234.0" layoutY="232.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="127.0" text="CONNECT">
+      <Button layoutX="217.0" layoutY="232.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="127.0" text="CONNECT">
          <font>
             <Font name="Poor Richard" size="18.0" />
          </font>
