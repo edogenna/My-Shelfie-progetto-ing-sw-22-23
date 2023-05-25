@@ -76,10 +76,18 @@ public class CliView implements UI{
             case "Disconnection" -> {handleDisconnectionMessage(m);}
             case "WelcomeBack" -> {handleWelcomeBackMessage(m);}
             case "TurnTimeOut" -> {handleTurnTimeOut(m);}
+            case "TimeOut" -> {handleTimeOut(m);}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
         }
-
         return messageToServer;
+    }
+
+    private void handleTimeOut(Message m) throws IOException {
+        outputStream.println(((TimeoutMessage)m).getS());
+        if(out != null)
+            sendMessageToSocketServer(new TimeOutAnswer());
+        else
+            sendMessageToRmiServer(new TimeOutAnswer());
     }
 
     private void handleTurnTimeOut(Message m) throws IOException {
