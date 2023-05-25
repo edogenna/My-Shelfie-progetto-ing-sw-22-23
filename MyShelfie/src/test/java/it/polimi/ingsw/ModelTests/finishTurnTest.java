@@ -9,7 +9,7 @@ import org.junit.Test;
 public class finishTurnTest {
     Player player = new Player("ale");
     Model model = new Model(2);
-    public ItemEnum tile = ItemEnum.GREEN;
+    public ItemEnum tile = ItemEnum.GREEN1;
     @Test
     public void testFullfield(){
         model.setUsernamePlayer(player.getUsername());

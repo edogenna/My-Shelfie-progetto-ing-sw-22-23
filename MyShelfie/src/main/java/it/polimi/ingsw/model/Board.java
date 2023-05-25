@@ -14,13 +14,13 @@ public class Board {
     @Expose
     public static final int BOARD_SIZE = 9;
     @Expose
-    public static final int INITIAL_NUMBER_ITEMENUM = 22;
+    public static final int INITIAL_NUMBER_ITEMENUM = 8;
     @Expose
     private ItemEnum[][] matrix;
     @Expose
     private int numPlayers;
     @Expose
-    private int[] numItemRemained = new int[ItemEnum.NUM_ITEMENUM];
+    private int[] numItemRemained = new int[ItemEnum.NUM_ITEMENUM*ItemEnum.NUM_TYPE_PER_ITEMENUM];
 
     //TODO: modificare in un array in cui togliere i punti se si è in 3/4 giocatori
     //TODO: aggiungere funzione per togliere carta in una posizione, refill e prendere carta in una posizione
@@ -53,7 +53,7 @@ public class Board {
         }
         this.numPlayers = numPlayers;
 
-        for (int i = 0; i < ItemEnum.NUM_ITEMENUM; i++)
+        for (int i = 0; i < ItemEnum.NUM_ITEMENUM * ItemEnum.NUM_TYPE_PER_ITEMENUM; i++)
             numItemRemained[i] = INITIAL_NUMBER_ITEMENUM;
 
         setBoardAllBlank();
@@ -185,20 +185,33 @@ public class Board {
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (isPositionValid(i, j) && matrix[i][j] == ItemEnum.BLANK) {
-                    n = rand.nextInt(ItemEnum.NUM_ITEMENUM); //blank is excluded
+                    n = rand.nextInt(ItemEnum.NUM_ITEMENUM*ItemEnum.NUM_TYPE_PER_ITEMENUM); //blank is excluded
 
                     while (numItemRemained[n] <= 0)
-                        n = (n + 1) % ItemEnum.NUM_ITEMENUM;
+                        n = (n + 1) % (ItemEnum.NUM_ITEMENUM*ItemEnum.NUM_TYPE_PER_ITEMENUM);
 
                     numItemRemained[n]--;
                     item = switch (n) {
-                        case 0 -> ItemEnum.GREEN;
-                        case 1 -> ItemEnum.WHITE;
-                        case 2 -> ItemEnum.YELLOW;
-                        case 3 -> ItemEnum.BLUE;
-                        case 4 -> ItemEnum.AZURE;
-                        case 5 -> ItemEnum.PURPLE;
-                        default -> ItemEnum.BLANK; //covers also for case 6
+                        case 0 -> ItemEnum.GREEN1;
+                        case 1 -> ItemEnum.GREEN2;
+                        case 2 -> ItemEnum.GREEN3;
+                        case 3 -> ItemEnum.WHITE1;
+                        case 4 -> ItemEnum.WHITE2;
+                        case 5 -> ItemEnum.WHITE3;
+                        case 6 -> ItemEnum.YELLOW1;
+                        case 7 -> ItemEnum.YELLOW2;
+                        case 8 -> ItemEnum.YELLOW3;
+                        case 9 -> ItemEnum.PURPLE1;
+                        case 10 -> ItemEnum.PURPLE2;
+                        case 11 -> ItemEnum.PURPLE3;
+                        case 12 -> ItemEnum.BLUE1;
+                        case 13 -> ItemEnum.BLUE2;
+                        case 14 -> ItemEnum.BLUE3;
+                        case 15 -> ItemEnum.AZURE1;
+                        case 16 -> ItemEnum.AZURE2;
+                        case 17 -> ItemEnum.AZURE3;
+
+                        default -> ItemEnum.BLANK;
                     };
 
                     matrix[i][j] = item;

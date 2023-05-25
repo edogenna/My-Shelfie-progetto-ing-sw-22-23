@@ -38,52 +38,52 @@ public class CommonCard05Test {
      * */
     @Test
     public void Test(){
-        insertCorners(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insertCorners(ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         Assert.assertTrue(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
+        insertCorners(ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE);
+        insertCorners(ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertCorners(ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
+        insertCorners(ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.YELLOW);
+        insertCorners(ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.BLUE);
+        insertCorners(ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertCorners(ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insertCorners(ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.YELLOW);
+        insertCorners(ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.BLUE);
+        insertCorners(ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertCorners(ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.BLUE);
+        insertCorners(ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.BLUE, ItemEnum.YELLOW);
+        insertCorners(ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.BLUE);
+        insertCorners(ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertCorners(ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertCorners(ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertTrue(c.checkBookshelf(matrix));
     }
 

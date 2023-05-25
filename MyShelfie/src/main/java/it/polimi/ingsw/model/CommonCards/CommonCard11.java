@@ -20,10 +20,8 @@ public class CommonCard11 implements CommonCardStrategy {
     public boolean checkBookshelf(ItemEnum[][] b) {
         int[] occurrences = new int[6];
         int pos;
-        for (int i=0; i<occurrences.length; i++)
-            occurrences[i]=0;
 
-        for (int i=0; i<6; i++) { //scorro la matrice
+        for (int i=0; i<6; i++) {
             for (int j=0; j<5; j++) {
                 if(!b[i][j].equals(ItemEnum.BLANK)){
                     pos = enumToInt(b[i][j]);
@@ -50,17 +48,17 @@ public class CommonCard11 implements CommonCardStrategy {
     private int enumToInt(ItemEnum b) { //hash per array occorrenze
         int value=0;
 
-        if(b.equals(ItemEnum.GREEN))
+        if(b.equals(ItemEnum.GREEN1))
             value=0;
-        else if(b.equals(ItemEnum.WHITE))
+        else if(b.equals(ItemEnum.WHITE1))
             value=1;
-        else if(b.equals(ItemEnum.YELLOW))
+        else if(b.equals(ItemEnum.YELLOW1))
             value=2;
-        else if(b.equals(ItemEnum.BLUE))
+        else if(b.equals(ItemEnum.BLUE1))
             value=3;
-        else if(b.equals(ItemEnum.AZURE))
+        else if(b.equals(ItemEnum.AZURE1))
             value=4;
-        else if(b.equals(ItemEnum.PURPLE))
+        else if(b.equals(ItemEnum.PURPLE1))
             value=5;
 
         return value;

@@ -46,47 +46,47 @@ public class CommonCard01Test {
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertColumn(0, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.WHITE, ItemEnum.WHITE, ItemEnum.WHITE);
-        insertColumn(1, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
-        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW, ItemEnum.YELLOW);
-        insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertColumn(0, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.WHITE1, ItemEnum.WHITE1, ItemEnum.WHITE1);
+        insertColumn(1, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
+        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
+        insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
         //CORRECT BUT DIFFERENT CASE(2 SQUARES (YELLOW AND BLUE), 2 COLUMNS (BLUE AND GREEN))
-        insertColumn(0, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.BLUE);
-        insertColumn(1, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.BLUE);
+        insertColumn(0, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.WHITE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.WHITE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         insertColumn(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK);
-        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.YELLOW, ItemEnum.YELLOW);
-        insertColumn(4, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
+        insertColumn(4, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertColumn(0, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.WHITE);
-        insertColumn(1, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.GREEN, ItemEnum.BLUE, ItemEnum.BLUE);
-        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.BLUE);
-        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.YELLOW, ItemEnum.YELLOW);
-        insertColumn(4, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertColumn(0, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.WHITE1);
+        insertColumn(1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.GREEN1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.BLUE1);
+        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
+        insertColumn(4, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
-        insertColumn(0, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.WHITE);
-        insertColumn(1, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.BLUE);
-        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.BLUE);
-        insertColumn(3, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.YELLOW, ItemEnum.YELLOW);
-        insertColumn(4, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertColumn(0, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.WHITE1);
+        insertColumn(1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.BLUE1);
+        insertColumn(3, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
+        insertColumn(4, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertTrue(c.checkBookshelf(matrix));
 
-        insertColumn(0, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.WHITE);
-        insertColumn(1, ItemEnum.BLANK, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.BLUE);
-        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.BLUE);
-        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN, ItemEnum.BLUE, ItemEnum.WHITE, ItemEnum.YELLOW, ItemEnum.YELLOW);
-        insertColumn(4, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW, ItemEnum.YELLOW);
+        insertColumn(0, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.WHITE1);
+        insertColumn(1, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.WHITE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(2, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.BLUE1);
+        insertColumn(3, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.BLUE1, ItemEnum.WHITE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
+        insertColumn(4, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertTrue(c.checkBookshelf(matrix));
 
-        insertColumn(0, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.WHITE, ItemEnum.WHITE);
-        insertColumn(1, ItemEnum.YELLOW, ItemEnum.YELLOW, ItemEnum.WHITE, ItemEnum.WHITE, ItemEnum.BLUE, ItemEnum.BLUE);
-        insertColumn(2, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.PURPLE, ItemEnum.PURPLE, ItemEnum.WHITE, ItemEnum.WHITE);
-        insertColumn(3, ItemEnum.AZURE, ItemEnum.BLUE, ItemEnum.BLUE, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.YELLOW);
-        insertColumn(4, ItemEnum.AZURE, ItemEnum.GREEN, ItemEnum.GREEN, ItemEnum.PURPLE, ItemEnum.PURPLE, ItemEnum.YELLOW);
+        insertColumn(0, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.WHITE1, ItemEnum.WHITE1);
+        insertColumn(1, ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.WHITE1, ItemEnum.WHITE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(2, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.PURPLE1, ItemEnum.PURPLE1, ItemEnum.WHITE1, ItemEnum.WHITE1);
+        insertColumn(3, ItemEnum.AZURE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.YELLOW1);
+        insertColumn(4, ItemEnum.AZURE1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.PURPLE1, ItemEnum.PURPLE1, ItemEnum.YELLOW1);
         Assert.assertTrue(c.checkBookshelf(matrix));
     }
 

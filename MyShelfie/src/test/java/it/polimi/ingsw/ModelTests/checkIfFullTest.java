@@ -15,12 +15,12 @@ public class checkIfFullTest {
     @Test
     public void fullShelf(){
          for (int j = 0; j<5; j++){
-                player.insert(j, ItemEnum.WHITE);
-                player.insert(j, ItemEnum.WHITE);
-                player.insert(j, ItemEnum.WHITE);
-                player.insert(j, ItemEnum.WHITE);
-                player.insert(j, ItemEnum.WHITE);
-                player.insert(j, ItemEnum.WHITE);
+                player.insert(j, ItemEnum.WHITE1);
+                player.insert(j, ItemEnum.WHITE1);
+                player.insert(j, ItemEnum.WHITE1);
+                player.insert(j, ItemEnum.WHITE1);
+                player.insert(j, ItemEnum.WHITE1);
+                player.insert(j, ItemEnum.WHITE1);
             }
         Assert.assertTrue(player.checkIfFull());
     }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.*;
@@ -269,9 +270,22 @@ public class CliView implements UI{
      * This method prints the board and common goal cards
      */
     private void printGame(){
-        ItemEnum.generateCharMatrix(board, Board.BOARD_SIZE, Board.BOARD_SIZE)
-                .addNumbering(Board.BOARD_SIZE).appendToAllRows("   ").alignColumn()
-                .printMatrix();
+        CharMatrix boardCM = ItemEnum.generateCharMatrix(board, Board.BOARD_SIZE, Board.BOARD_SIZE)
+                .addNumbering(Board.BOARD_SIZE)
+                .appendToAllRows("   ")
+                .alignColumn();
+
+        CharMatrix bookshelfCM = ItemEnum.generateCharMatrix(shelf, 6, 5)
+                .addColumnNumbering(5)
+                .appendToAllRows("   ")
+                .alignColumn();
+
+        CharMatrix personalCM = ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)
+                .addColumnNumbering(5);
+
+        boardCM.addOnRight(bookshelfCM).addOnRight(personalCM).printMatrix();
+
+        
         outputStream.println(CommonCards[0]);
         outputStream.println(CommonCards[1]);
     }

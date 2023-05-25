@@ -153,25 +153,25 @@ public class Player {
                     stop = false;
 
                     while(!stop) {
-                        if (x > 0 && this.shelf[x - 1][y] == this.shelf[x][y] && visited[x-1][y]==0) {
+                        if (x > 0 && this.shelf[x - 1][y].equals(this.shelf[x][y]) && visited[x-1][y]==0) {
                             near++;
                             visited[x-1][y] = 1;
                             pathX.push(x-1);
                             pathY.push(y);
                             x = x - 1;
-                        } else if (y > 0 && this.shelf[x][y - 1] == this.shelf[x][y] && visited[x][y-1]==0) {
+                        } else if (y > 0 && this.shelf[x][y - 1].equals(this.shelf[x][y]) && visited[x][y-1]==0) {
                             near++;
                             visited[x][y-1] = 1;
                             pathX.push(x);
                             pathY.push(y-1);
                             y = y - 1;
-                        } else if (y < 4 && this.shelf[x][y + 1] == this.shelf[x][y] && visited[x][y+1]==0) {
+                        } else if (y < 4 && this.shelf[x][y + 1].equals(this.shelf[x][y]) && visited[x][y+1]==0) {
                             near++;
                             visited[x][y+1] = 1;
                             pathX.push(x);
                             pathY.push(y+1);
                             y = y + 1;
-                        } else if (x < 5 && this.shelf[x + 1][y] == this.shelf[x][y] && visited[x+1][y]==0) {
+                        } else if (x < 5 && this.shelf[x + 1][y].equals(this.shelf[x][y]) && visited[x+1][y]==0) {
                             near++;
                             visited[x+1][y] = 1;
                             pathX.push(x+1);
