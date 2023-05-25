@@ -72,7 +72,7 @@ public enum ItemEnum {
                         .concat(" ");
             }
 
-            cm.appendAtBottom(s);
+            cm.newLineAtBottom(s);
         }
 
         return cm;

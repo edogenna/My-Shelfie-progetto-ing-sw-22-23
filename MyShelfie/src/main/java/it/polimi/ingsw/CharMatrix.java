@@ -62,8 +62,18 @@ public class CharMatrix {
      * @param s string to be appended
      * @return CharMatrix modified
      */
-    public CharMatrix appendAtBottom(String s){
+    public CharMatrix newLineAtBottom(String s){
         m.add(s);
+        return this;
+    }
+
+    /**
+     * adds the string s as a new line at the top of the CharMatrix
+     * @param s string to be appended
+     * @return CharMatrix modified
+     */
+    public CharMatrix newLineAtTop(String s){
+        m.add(0,s);
         return this;
     }
 

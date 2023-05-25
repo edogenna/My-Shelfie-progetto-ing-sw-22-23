@@ -81,12 +81,12 @@ public class CommonCard02 implements CommonCardStrategy {
     public CharMatrix printCommonCardMatrix() {
 
         return new CharMatrix()
-                .appendAtBottom("Card number 2   Description:")
-                .appendAtBottom("|=|             Five tiles of the same type forming")
-                .appendAtBottom("  |=|           a diagonal.")
-                .appendAtBottom("    |=|")
-                .appendAtBottom("      |=|")
-                .appendAtBottom("        |=|");
+                .newLineAtBottom("Card number 2   Description:")
+                .newLineAtBottom("|=|             Five tiles of the same type forming")
+                .newLineAtBottom("  |=|           a diagonal.")
+                .newLineAtBottom("    |=|")
+                .newLineAtBottom("      |=|")
+                .newLineAtBottom("        |=|");
     }
     @Override
     public void printCommonCard() {

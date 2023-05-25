@@ -97,15 +97,7 @@ public class Controller {
      * @return true if the selected tile is a blank tile
      * */
     private boolean blankTiles(int x, int y){
-        boolean blank;
-        ItemEnum[][] board;
-
-        board = model.getBoardMatrix();
-        blank = board[x][y].equals(ItemEnum.BLANK);
-        /*if(blank)
-            view.blankTilesSelected(x,y);*/
-
-        return blank;
+        return model.getBoardMatrix()[x][y].equals(ItemEnum.BLANK);
     }
 
     /**

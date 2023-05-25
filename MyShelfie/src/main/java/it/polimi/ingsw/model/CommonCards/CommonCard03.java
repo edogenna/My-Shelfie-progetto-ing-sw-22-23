@@ -120,11 +120,11 @@ public class CommonCard03 implements CommonCardStrategy{
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .appendAtBottom("Card number 3   Description:")
-                .appendAtBottom("   |=|          Four groups each containing at least")
-                .appendAtBottom("   |=|          4 tiles of the same type (non necessarily")
-                .appendAtBottom("   |=|          in the depicted shape). Tiles can be")
-                .appendAtBottom("   |=| x4       different between different groups.");
+                .newLineAtBottom("Card number 3   Description:")
+                .newLineAtBottom("   |=|          Four groups each containing at least")
+                .newLineAtBottom("   |=|          4 tiles of the same type (non necessarily")
+                .newLineAtBottom("   |=|          in the depicted shape). Tiles can be")
+                .newLineAtBottom("   |=| x4       different between different groups.");
     }
 
     @Override

@@ -67,10 +67,10 @@ public class CommonCard11 implements CommonCardStrategy {
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .appendAtBottom("Card number 11  Description:")
-                .appendAtBottom("  |=| |=|       Eight tiles of the same type. There's")
-                .appendAtBottom("|=| |=| |=|     no restriction about the positions")
-                .appendAtBottom("|=| |=| |=|     of these tiles.");
+                .newLineAtBottom("Card number 11  Description:")
+                .newLineAtBottom("  |=| |=|       Eight tiles of the same type. There's")
+                .newLineAtBottom("|=| |=| |=|     no restriction about the positions")
+                .newLineAtBottom("|=| |=| |=|     of these tiles.");
     }
 
     @Override

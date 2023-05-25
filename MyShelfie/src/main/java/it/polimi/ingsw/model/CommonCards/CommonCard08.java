@@ -107,11 +107,11 @@ public class CommonCard08 implements CommonCardStrategy {
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .appendAtBottom("Card number 8        Description:")
-                .appendAtBottom("|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different")
-                .appendAtBottom("   x2                types of tiles. One line can show the")
-                .appendAtBottom("                     the same or a different combination")
-                .appendAtBottom("                     of another line.");
+                .newLineAtBottom("Card number 8        Description:")
+                .newLineAtBottom("|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different")
+                .newLineAtBottom("   x2                types of tiles. One line can show the")
+                .newLineAtBottom("                     the same or a different combination")
+                .newLineAtBottom("                     of another line.");
     }
 
     @Override

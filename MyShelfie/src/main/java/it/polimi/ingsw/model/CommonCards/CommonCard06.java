@@ -90,13 +90,13 @@ public class CommonCard06 implements CommonCardStrategy{
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .appendAtBottom("Card number 6   Description:")
-                .appendAtBottom("  | ≠ |         Two columns each formed")
-                .appendAtBottom("  | ≠ |         by 6 different")
-                .appendAtBottom("  | ≠ |         types of tiles.")
-                .appendAtBottom("  | ≠ |  x2     different between different groups.")
-                .appendAtBottom("  | ≠ |  ")
-                .appendAtBottom("  | ≠ |  ");
+                .newLineAtBottom("Card number 6   Description:")
+                .newLineAtBottom("  | ≠ |         Two columns each formed")
+                .newLineAtBottom("  | ≠ |         by 6 different")
+                .newLineAtBottom("  | ≠ |         types of tiles.")
+                .newLineAtBottom("  | ≠ |  x2     different between different groups.")
+                .newLineAtBottom("  | ≠ |  ")
+                .newLineAtBottom("  | ≠ |  ");
     }
 
     @Override

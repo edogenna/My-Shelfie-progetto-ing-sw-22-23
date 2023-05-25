@@ -66,13 +66,13 @@ public class CommonCard09 implements CommonCardStrategy {
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .appendAtBottom("Card number 9    Description:")
-                .appendAtBottom("  | ■ |          Three column each formed by 6 tiles")
-                .appendAtBottom("  | ■ | MAX 3 ≠  of maximum three different types. One")
-                .appendAtBottom("  | ■ |          column can show the same or a different")
-                .appendAtBottom("  | ■ |          combination of another column.")
-                .appendAtBottom("  | ■ |  ")
-                .appendAtBottom("  | ■ |  x3");
+                .newLineAtBottom("Card number 9    Description:")
+                .newLineAtBottom("  | ■ |          Three column each formed by 6 tiles")
+                .newLineAtBottom("  | ■ | MAX 3 ≠  of maximum three different types. One")
+                .newLineAtBottom("  | ■ |          column can show the same or a different")
+                .newLineAtBottom("  | ■ |          combination of another column.")
+                .newLineAtBottom("  | ■ |  ")
+                .newLineAtBottom("  | ■ |  x3");
     }
 
     @Override

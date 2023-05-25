@@ -45,10 +45,10 @@ public class CommonCard10 implements CommonCardStrategy{
     public CharMatrix printCommonCardMatrix(){
 
         return  new CharMatrix()
-                .appendAtBottom("Card number 10  Description:")
-                .appendAtBottom("|=|   |=|       Five tiles of the same type forming an X.")
-                .appendAtBottom("   |=|     ")
-                .appendAtBottom("|=|   |=|  ");
+                .newLineAtBottom("Card number 10  Description:")
+                .newLineAtBottom("|=|   |=|       Five tiles of the same type forming an X.")
+                .newLineAtBottom("   |=|     ")
+                .newLineAtBottom("|=|   |=|  ");
     }
 
     @Override

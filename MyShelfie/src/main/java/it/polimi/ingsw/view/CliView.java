@@ -228,7 +228,6 @@ public class CliView implements UI{
         this.personalCard = graphicalGameInfo.getPersonalCard();
         this.shelf = graphicalGameInfo.getShelf();
         printGame();
-        printBookshelfAndPersonal();
         outputStream.println(graphicalGameInfo.getS());
 
         if(out != null)
@@ -259,24 +258,27 @@ public class CliView implements UI{
     }
 
     /**
-     * This method prints the board and common goal cards
+     * This method prints the board, the player's bookshelf and his personal card and common goal cards
      */
     private void printGame(){
         CharMatrix boardCM = ItemEnum.generateCharMatrix(board, Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addNumbering(Board.BOARD_SIZE)
-                .appendToAllRows("   ")
-                .alignColumn();
+                .newLineAtTop("Board:")
+                .alignColumn()
+                .appendToAllRows("       ");
 
         CharMatrix bookshelfCM = ItemEnum.generateCharMatrix(shelf, 6, 5)
                 .addColumnNumbering(5)
-                .appendToAllRows("   ")
-                .alignColumn();
+                .newLineAtTop("Your Bookshelf:")
+                .alignColumn()
+                .appendToAllRows("     ");
 
         CharMatrix personalCM = ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)
-                .addColumnNumbering(5);
+                .addColumnNumbering(5)
+                .newLineAtTop("Your Personal Card:");
 
+        outputStream.println("\n\n");
         boardCM.addOnRight(bookshelfCM).addOnRight(personalCM).printMatrix();
-
         
         outputStream.println(CommonCards[0]);
         outputStream.println(CommonCards[1]);
@@ -286,7 +288,7 @@ public class CliView implements UI{
      * This method prints a player's bookshelf and his personal card
      */
     private void printBookshelfAndPersonal(){
-        outputStream.println("\n" + "Your Bookshelf:    Your Personal Card:");
+
         ItemEnum.generateCharMatrix(shelf, 6, 5)
                 .addColumnNumbering(5)
                 .appendToAllRows("   ")
