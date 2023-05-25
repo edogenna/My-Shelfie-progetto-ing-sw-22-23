@@ -16,7 +16,7 @@ public class pickCardTest {
     public void test(){
         for (int i = 0; i<9; i++){
             for (int j=0; j<9;j++)
-                board[i][j]= ItemEnum.BLUE;
+                board[i][j]= ItemEnum.BLUE1;
         }
         m.setUsernamePlayer("samu");
         m.setFirstPlayer();
@@ -24,7 +24,7 @@ public class pickCardTest {
         //created correct case
         for (int i=0; i<9; i++){
             for (int j=0; j<9; j++){
-                m.getBoard().setItemEnum(i,j,ItemEnum.WHITE);
+                m.getBoard().setItemEnum(i,j,ItemEnum.WHITE1);
             }
         }
         x=0; y=0; col=2;
@@ -43,7 +43,7 @@ public class pickCardTest {
 
         for (int i=0; i<9; i++){
             for (int j=0; j<9; j++){
-                m.getBoard().setItemEnum(i,j,ItemEnum.BLUE);
+                m.getBoard().setItemEnum(i,j,ItemEnum.BLUE1);
             }
         }
         x=0; y=0; col=3;
