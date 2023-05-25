@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Network.client.Client;
+import it.polimi.ingsw.Network.client.RmiClient;
+import it.polimi.ingsw.Network.client.SocketClient;
 import it.polimi.ingsw.Network.server.Server;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,13 +9,40 @@ import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
 
 public class MyShelfie {
-    public static void main(String[] args) throws IOException, NotBoundException {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+        boolean chooseServerClient = true;
+        boolean chooseCliGui = true;
+        String hostName;
+
         System.out.print(Constant.MY_SHELFIE_TITLE);
 
-        System.out.println("Would you like to run SERVER(0) or CLIENT(1)");
-        switch (Integer.parseInt((new BufferedReader(new InputStreamReader(System.in))).readLine())) {
-            case 0 -> Server.main();
-            case 1 -> Client.main();
+        System.out.println("Insert 0 for SERVER and any other number for CLIENT");
+        if (stdIn.readLine().equals("0"))
+            chooseServerClient = false;
+
+        if(chooseServerClient) {
+
+            System.out.println("Insert the hostName or just press enter to get your own device: ");
+            hostName = stdIn.readLine();
+            if (hostName.equals("\n"))
+                hostName = "127.0.0.1";
+            System.out.println("socket port: " + Constant.PORT_SOCKET_GAME);
+            System.out.println("rmi port: " + Constant.PORT_RMI_GAME);
+
+            System.out.println("Insert 0 for CLI and any other number for GUI");
+            if (stdIn.readLine().equals("0"))
+                chooseCliGui = false;
+
+            System.out.println("Insert 0 for Socket and any other number for RMI");
+            if (stdIn.readLine().equals("0"))
+                new SocketClient().startSocketClient(hostName, chooseCliGui);
+
+            new RmiClient().startRMIClient(hostName, chooseCliGui);
+
+        }else{
+            new Server().startServer();
         }
     }
 }

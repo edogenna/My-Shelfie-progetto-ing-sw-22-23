@@ -4,6 +4,7 @@ import it.polimi.ingsw.Constant;
 import it.polimi.ingsw.Network.messages.*;
 ;
 import it.polimi.ingsw.view.CliView;
+import it.polimi.ingsw.view.GuiView;
 import it.polimi.ingsw.view.UI;
 
 import java.io.BufferedReader;
@@ -16,43 +17,37 @@ import java.net.Socket;
  * This class represents a socket client implementation
  * @author Alessandro Fornara
  */
-public class SocketClient extends Client{
+public class SocketClient{
 
     //TODO: salvare l'username nel client quando questo si connette al server
-    Socket socket = null;
-    PrintWriter out = null;
-    BufferedReader in = null;
-    BufferedReader stdIn = null;
-    Thread inputReader;
-    public void startSocketClient() throws IOException {
+    private Socket socket = null;
+    private PrintWriter out = null;
+    private BufferedReader in = null;
+    private BufferedReader stdIn = null;
+    private UI ui = null;
+
+    public void startSocketClient(String hostName, boolean chooseCliGui) throws IOException {
         try {
             this.socket = new Socket(hostName, Constant.PORT_SOCKET_GAME);
             this.out = new PrintWriter(socket.getOutputStream(), true);
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.stdIn = new BufferedReader(new InputStreamReader(System.in));
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Invalid parameters: " + e.getMessage());
             System.exit(0);
         }
 
         System.out.println("you are connected with socket");
-        UI cliView = new CliView(out, in, stdIn, null);
 
-        while(true){
+        if (chooseCliGui)
+            ui = new GuiView(out, in);
+        else ui = new CliView(out, in, stdIn);
+
+        while (true) {
             String message = in.readLine();
             Message m = Converter.convertFromJSON(message);
-            cliView.actionHandler(m);
+            ui.actionHandler(m);
         }
 
-    }
-    @Override
-    public void stop() throws IOException {
-        out.close();
-        in.close();
-        try {
-            socket.close();
-        } catch (IOException e) {
-            System.out.println("An error occured while trying to close socket: " + e.getMessage());
-        }
     }
 }

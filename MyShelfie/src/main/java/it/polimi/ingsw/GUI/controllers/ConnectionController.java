@@ -1,5 +1,4 @@
 package it.polimi.ingsw.GUI.controllers;
-import it.polimi.ingsw.Network.client.Client;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,22 +25,22 @@ public class ConnectionController {
     private Button connectButton;
 
     private String takenHostname;
-    private Client client;
+    //private Client client;
     private String type;
 
 
-    public void setClient(Client client) {
+    /*public void setClient(Client client) {
         this.client = client;
-    }
+    }*/
     public void initialize(){
         connectedLabel.setText("You are connected! ");
         connectedLabel.setVisible(false);
     }
 
-    public void hostnameTextFieldTaken(){
+    /*public void hostnameTextFieldTaken(){
         takenHostname = hostnameTextField.getText();
         client.hostName = this.takenHostname;
-    }
+    }*/
     public void TypeTextFieldTaken(){
         type = typeTextField.getText();
 

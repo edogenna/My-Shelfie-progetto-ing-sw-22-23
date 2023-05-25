@@ -6,15 +6,14 @@ import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import it.polimi.ingsw.Constant;
 import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.Network.messages.Message;
-import it.polimi.ingsw.Network.messages.WaitingMessage;
 import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.view.CliView;
+import it.polimi.ingsw.view.GuiView;
 import it.polimi.ingsw.view.UI;
 
 /**
@@ -22,20 +21,18 @@ import it.polimi.ingsw.view.UI;
  * @author Donato Fiore
  * @author Alessandro Fornara
  */
-public class RmiClient extends Client implements RmiClientInterface{
+public class RmiClient implements RmiClientInterface{
 
-    private BufferedReader stdIn;
-    private UI cliViewRmi;
-    private RmiServerInterface rmiServerInterface;
+    private BufferedReader stdIn = null;
+    private UI ui = null;
+    private RmiServerInterface rmiServerInterface = null;
 
-    public RmiClient(){
-        this.stdIn = null;
-        this.cliViewRmi = null;
-    }
-
-    public void startRMIClient() throws IOException {
+    public void startRMIClient(String hostName, boolean chooseCliGui) {
         this.stdIn = new BufferedReader(new InputStreamReader(System.in));
-        this.cliViewRmi = new CliView(null, null, stdIn, rmiServerInterface);
+
+        if (chooseCliGui)
+            ui = new GuiView(null, null);
+        else ui = new CliView(null, null, stdIn);
 
         try {
             rmiServerInterface = (RmiServerInterface) LocateRegistry.getRegistry(hostName, Constant.PORT_RMI_GAME).lookup("MyShelfie");
@@ -48,7 +45,7 @@ public class RmiClient extends Client implements RmiClientInterface{
 
     synchronized String manageMessage(String messageJsonCoded) throws IOException {
         Message fromServer = Converter.convertFromJSON(messageJsonCoded);
-        return cliViewRmi.actionHandler(fromServer);
+        return ui.actionHandler(fromServer);
     }
 
     @Override

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.view;
 
 
+import it.polimi.ingsw.ItemEnum;
+import it.polimi.ingsw.Network.messages.Message;
+import it.polimi.ingsw.model.Card;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -8,11 +11,35 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Objects;
 
-public class GuiView extends Application {
+public class GuiView extends Application implements UI {
 
+    private ItemEnum[][] board;
+    private String[] CommonCards;
+    private Card personalCard;
+    private ItemEnum[][] shelf;
+    private PrintWriter out;
+    private BufferedReader in;
+    private String myUsername;
+    private String userInput;
+    private String messageToServer;
 
+    public GuiView(PrintWriter out, BufferedReader in){
+        this.out = out;
+        this.in = in;
+        this.personalCard = null;
+        this.CommonCards = null;
+        this.board = null;
+        this.shelf = null;
+        this.myUsername = null;
+        this.userInput = null;
+        this.messageToServer = null;
+    }
     public static void main(String[] args) {
         launch(args);
     }
@@ -27,5 +54,10 @@ public class GuiView extends Application {
 
 //        stage.getIcons().add(new Image("/resources/graphics/icon.png"));
         stage.show();
+    }
+
+    @Override
+    public String actionHandler(Message m) throws IOException{
+        return null;
     }
 }

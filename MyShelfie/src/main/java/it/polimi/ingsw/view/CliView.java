@@ -15,21 +15,20 @@ import java.io.*;
  * @author Alessandro Fornara
  * @author Donato Fiore
  */
-public class CliView extends UI{
-    private final PrintStream outputStream;
+public class CliView implements UI{
+    private PrintStream outputStream;
     private ItemEnum[][] board;
     private String[] CommonCards;
     private Card personalCard;
     private ItemEnum[][] shelf;
-    private final PrintWriter out;
-    private final BufferedReader in;
-    private final BufferedReader stdIn;
+    private PrintWriter out;
+    private BufferedReader in;
+    private BufferedReader stdIn;
     private String myUsername;
     private String userInput;
-    private RmiServerInterface remoteObject;
     private String messageToServer;
 
-    public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn, RmiServerInterface remoteObject){
+    public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn){
         this.out = out;
         this.in = in;
         this.stdIn = stdIn;
@@ -40,7 +39,7 @@ public class CliView extends UI{
         this.shelf = null;
         this.myUsername = null;
         this.userInput = null;
-        this.remoteObject = remoteObject;
+        this.messageToServer = null;
     }
 
     /**
@@ -123,9 +122,9 @@ public class CliView extends UI{
      */
     private void handleCommonCardMessage(Message m) throws IOException {
         outputStream.println(((CommonCardMessage) m).getS());
-            if(out != null)
-                sendMessageToSocketServer(new ACKMessage());
-            else sendMessageToRmiServer(new ACKMessage());
+        if(out != null)
+            sendMessageToSocketServer(new ACKMessage());
+        else sendMessageToRmiServer(new ACKMessage());
     }
     /**
      * This method handles the {@link MoveMessage}
