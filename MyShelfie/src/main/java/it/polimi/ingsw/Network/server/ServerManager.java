@@ -3,10 +3,7 @@ package it.polimi.ingsw.Network.server;
 import it.polimi.ingsw.Constant;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.*;
-import it.polimi.ingsw.Network.messages.Answers.MoveAnswer;
-import it.polimi.ingsw.Network.messages.Answers.NumberOfPlayersAnswer;
-import it.polimi.ingsw.Network.messages.Answers.ReconnectionAnswer;
-import it.polimi.ingsw.Network.messages.Answers.UsernameAnswer;
+import it.polimi.ingsw.Network.messages.Answers.*;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
@@ -31,7 +28,7 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 20;
+    private final int secondsDuringTurn = 10;
     private static final String RECONNECT = "Reconnect";
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
@@ -158,10 +155,16 @@ public class ServerManager implements Runnable{
     //TODO: finish this method for the resilience
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         //it never enters
+        boolean recall = isAwayFromKeyboard(number);
         if (isDisconnected(number)){
             System.out.println("sendMessageAndWaitForAnswer, in the is 'isDisconnected(number)': " + nicknames.get(number));
             //TODO: create new message / i'm doubtful
             return "the player" + number + "is disconnected";
+        }
+
+        if(isAwayFromKeyboard(number) && !activeMatch.getActivePlayerUsername().equals(nicknames.get(number))){
+            System.out.println("afk Players ack situation");
+            return new ACKOffline().getType();
         }
 
         String serializedMessage = Converter.convertToJSON(message);
@@ -174,7 +177,6 @@ public class ServerManager implements Runnable{
         }
         answerReady.put(number, false);
         Communication communication;
-        System.out.println("good-morning");
         if (socketClients.containsKey(number)) {
             communication = new SocketCommunication(serializedMessage, socketClients.get(number), socketServer, number, this);
             new Thread(communication).start();
@@ -190,6 +192,9 @@ public class ServerManager implements Runnable{
         System.out.println("i'm here, in sendMessageAndWaitForAnswer");
         boolean isTimeExceeded = false;
         int counter = 0;
+        if(isAwayFromKeyboard(number) && !activeMatch.getActivePlayerUsername().equals(nicknames.get(number))){
+            counter = 2 * secondsDuringTurn * MILLIS_IN_SECOND / (MILLIS_TO_WAIT * 3);
+        }
         while (!answerReady.get(number)) {
             try {
                 sleep(MILLIS_TO_WAIT);
@@ -223,7 +228,7 @@ public class ServerManager implements Runnable{
                 break;
             }
         }
-        if (isTimeExceeded && nicknames.get(number).equals(activeMatch.getActivePlayerUsername())) {
+        if (isTimeExceeded && nicknames.get(number).equals(activeMatch.getActivePlayerUsername()) && !recall) {
             communication.setTimeExceeded();
             if(isAwayFromKeyboard(number)){
                 /*
@@ -239,7 +244,7 @@ public class ServerManager implements Runnable{
             }else if (lobby.containsKey(number)) {
                 afkPlayers.add(number);
             }
-            return "Error";
+            return "Error time finished";
         }
         return answers.get(number);
     }
@@ -413,7 +418,7 @@ public class ServerManager implements Runnable{
 
             if(isAwayFromKeyboard(x)){
                 System.out.println("i'm in afk edge");
-//                sendMessageAndWaitForAnswer(x, new TurnTimeOut());
+                sendMessageAndWaitForAnswer(x, new TurnTimeOut());
             }else {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);

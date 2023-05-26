@@ -5,7 +5,7 @@ public class UserDisconnection extends Message{
 
     public UserDisconnection(String username){
         super("Disconnection");
-        s = username + " user logged out";
+        s = "'" + username + "' user logged out";
     }
     public String getS() {
         return s;
