@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * This class represents a socket client implementation
@@ -28,26 +29,36 @@ public class SocketClient{
 
     public void startSocketClient(String hostName, boolean chooseCliGui) throws IOException {
         try {
-            this.socket = new Socket(hostName, Constant.PORT_SOCKET_GAME);
-            this.out = new PrintWriter(socket.getOutputStream(), true);
-            this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.stdIn = new BufferedReader(new InputStreamReader(System.in));
-        } catch (IOException e) {
-            System.out.println("Invalid parameters: " + e.getMessage());
+
+            try {
+                this.socket = new Socket(hostName, Constant.PORT_SOCKET_GAME);
+                this.out = new PrintWriter(socket.getOutputStream(), true);
+                this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                this.stdIn = new BufferedReader(new InputStreamReader(System.in));
+            } catch (IOException e) {
+                System.out.println("Invalid parameters: " + e.getMessage());
+                System.out.println("Client will close now");
+                System.exit(0);
+            }
+
+            System.out.println("you are connected with socket");
+
+            if (chooseCliGui)
+                ui = new GuiView(out, in);
+            else ui = new CliView(out, in, stdIn);
+
+            while (true) {
+                String message = in.readLine();
+                Message m = Converter.convertFromJSON(message);
+                ui.actionHandler(m);
+            }
+
+        }catch (SocketException e){
+            System.out.println("Connection to the server has been lost");
+            System.out.println("Client will close now");
+            socket.close();
+            stdIn.close();
             System.exit(0);
         }
-
-        System.out.println("you are connected with socket");
-
-        if (chooseCliGui)
-            ui = new GuiView(out, in);
-        else ui = new CliView(out, in, stdIn);
-
-        while (true) {
-            String message = in.readLine();
-            Message m = Converter.convertFromJSON(message);
-            ui.actionHandler(m);
-        }
-
     }
 }

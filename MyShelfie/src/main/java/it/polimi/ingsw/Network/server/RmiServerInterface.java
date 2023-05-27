@@ -11,4 +11,6 @@ import java.rmi.RemoteException;
  */
 public interface RmiServerInterface extends Remote {
     public void registry(RmiClientInterface client) throws RemoteException;
+
+    public boolean testServerConnection() throws RemoteException;
 }

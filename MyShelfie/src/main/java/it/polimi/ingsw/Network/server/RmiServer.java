@@ -65,4 +65,9 @@ public class RmiServer implements RmiServerInterface, Runnable{
             System.exit(0);
         }
     }
+
+    @Override
+    public synchronized boolean testServerConnection(){
+        return true;
+    }
 }

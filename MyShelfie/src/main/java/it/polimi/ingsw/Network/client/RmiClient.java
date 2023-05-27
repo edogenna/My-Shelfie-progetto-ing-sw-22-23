@@ -16,6 +16,8 @@ import it.polimi.ingsw.view.CliView;
 import it.polimi.ingsw.view.GuiView;
 import it.polimi.ingsw.view.UI;
 
+import static java.lang.Thread.sleep;
+
 /**
  * This class represents a rmi client implementation
  * @author Donato Fiore
@@ -40,6 +42,21 @@ public class RmiClient implements RmiClientInterface{
         } catch (RemoteException | NotBoundException e) {
             System.out.println("Invalid parameters: " + e.getMessage());
             System.exit(0);
+        }
+
+        while(true){
+            try {
+                rmiServerInterface.testServerConnection();
+                try {
+                    sleep(1500);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            } catch (RemoteException e) {
+                System.out.println("Connection to the server has been lost");
+                System.out.println("Client will close now");
+                System.exit(0);
+            }
         }
     }
 
