@@ -45,12 +45,14 @@ public class ServerManager implements Runnable{
     private boolean firstPlayer;
     private int numberOfPlayers;
     private boolean win;
+    private boolean isTimeExceeded;
 
     public ServerManager() {
         this.firstPlayer = true;
         this.numberOfPlayers = 0;
         this.idClient = 0;
         this.win = false;
+        this.isTimeExceeded = false;
     }
 
     void addClient(Socket client) {
@@ -67,6 +69,10 @@ public class ServerManager implements Runnable{
 
     public String getNickname(int playerId) {
         return nicknames.get(playerId);
+    }
+
+    protected boolean isTimeExceeded() {
+        return isTimeExceeded;
     }
 
     private int getNumberByUsernameFromLobby(String value) {
@@ -123,14 +129,16 @@ public class ServerManager implements Runnable{
 
     //TODO: finish
     private void removeClient(int number) {
+        //todo: there are some useless if, but it depends on the new logout format
         System.out.println("remove Client method with number: " + number);
         if (lobby.containsKey(number)){
             removeClientFromLobby(number);
             if(isAwayFromKeyboard(number))
                 afkPlayers.remove(number);
         }
+        disconnectedPlayers.add(number);
         if (!activeMatch.isDisconnected(nicknames.get(number))){
-            disconnectedPlayers.add(number);
+            System.out.println("controller set disconnected");
             activeMatch.disconnect(nicknames.get(number));
         }
         System.out.println("Client " + number + " removed.");
@@ -155,17 +163,16 @@ public class ServerManager implements Runnable{
     //TODO: finish this method for the resilience
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         //it never enters
-        boolean recall = isAwayFromKeyboard(number);
-        if (isDisconnected(number)){
+        /*if (isDisconnected(number)){
             System.out.println("sendMessageAndWaitForAnswer, in the is 'isDisconnected(number)': " + nicknames.get(number));
             //TODO: create new message / i'm doubtful
             return "the player" + number + "is disconnected";
-        }
+        }*/
 
-        if(isAwayFromKeyboard(number) && !activeMatch.getActivePlayerUsername().equals(nicknames.get(number))){
+/*        if(isAwayFromKeyboard(number) && !activeMatch.getActivePlayerUsername().equals(nicknames.get(number))){
             System.out.println("afk Players ack situation");
             return new ACKOffline().getType();
-        }
+        }*/
 
         String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
@@ -189,12 +196,15 @@ public class ServerManager implements Runnable{
             return "ERROR registration";
         }
 
-        System.out.println("i'm here, in sendMessageAndWaitForAnswer");
-        boolean isTimeExceeded = false;
+        this.isTimeExceeded = false;
         int counter = 0;
+
+        /*
         if(isAwayFromKeyboard(number) && !activeMatch.getActivePlayerUsername().equals(nicknames.get(number))){
             counter = 2 * secondsDuringTurn * MILLIS_IN_SECOND / (MILLIS_TO_WAIT * 3);
         }
+        */
+
         while (!answerReady.get(number)) {
             try {
                 sleep(MILLIS_TO_WAIT);
@@ -223,20 +233,24 @@ public class ServerManager implements Runnable{
                 }
             }
             if (counter > secondsDuringTurn * MILLIS_IN_SECOND / MILLIS_TO_WAIT) {
-                System.out.println("tempo scaduto in sendMessageAndWaitForAnswer");
+                System.out.println("expired time in sendMessageAndWaitForAnswer");
                 isTimeExceeded = true;
                 break;
             }
         }
-        if (isTimeExceeded && nicknames.get(number).equals(activeMatch.getActivePlayerUsername()) && !recall) {
+        System.out.println("i'm here, in sendMessageAndWaitForAnswer");
+//        if (isTimeExceeded) { maybe it will be so the condition
+
+        if (isTimeExceeded && nicknames.get(number).equals(activeMatch.getActivePlayerUsername())) {
             communication.setTimeExceeded();
+            /*
             if(isAwayFromKeyboard(number)){
-                /*
+                *//*
                 afkPlayers.remove(number);
                 disconnectedPlayers.add(number);
                 activeMatch.disconnect(nicknames.get(number));
-                */
-                System.out.println("i'm going to call removeClient for the player: " + nicknames.get(number));
+                *//*
+                System.out.println("I'm going to call removeClient for the player: " + nicknames.get(number));
                 if(rmiClients.containsKey(number)){
                     removeClient(rmiClients.get(number));
                 }else if(socketClients.containsKey(number))
@@ -244,6 +258,13 @@ public class ServerManager implements Runnable{
             }else if (lobby.containsKey(number)) {
                 afkPlayers.add(number);
             }
+            */
+
+            if(rmiClients.containsKey(number)){
+                removeClient(rmiClients.get(number));
+            }else if(socketClients.containsKey(number))
+                removeClient(socketClients.get(number));
+
             return "Error time finished";
         }
         return answers.get(number);
@@ -410,10 +431,15 @@ public class ServerManager implements Runnable{
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
             System.out.println("answer x2: " + answer);
-
+/*
             System.out.print("afkPlayers: ");
             for (Integer afkPlayer : afkPlayers)
                 System.out.print(afkPlayer + " " + nicknames.get(afkPlayer) + "; ");
+            System.out.println();
+            */
+            System.out.print("disconnectedPlayers: ");
+            for (Integer disconnPlayers : disconnectedPlayers)
+                System.out.print(disconnPlayers + " " + nicknames.get(disconnPlayers) + "; ");
             System.out.println();
 
             if(isAwayFromKeyboard(x)){
@@ -424,7 +450,13 @@ public class ServerManager implements Runnable{
                 handleMoveAnswer(x, m);
             }
 
-            this.win = activeMatch.finishTurn();
+            //todo: update finishTurn with the disconnection;
+            if(!this.win)
+                this.win = activeMatch.finishTurn();
+            else{
+                activeMatch.finishTurn();
+                this.win = true;
+            }
 
             if(this.win) {
                 int points = activeMatch.declareWinner();

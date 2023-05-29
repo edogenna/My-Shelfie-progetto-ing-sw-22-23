@@ -20,10 +20,12 @@ import java.rmi.server.UnicastRemoteObject;
 public class RmiServer implements RmiServerInterface, Runnable{
     private int rmiPort;
     private ServerManager serverManager;
+    private boolean turnOff;
 
     public RmiServer(ServerManager serverManager, int port) throws RemoteException {
         this.serverManager = serverManager;
         this.rmiPort = port;
+//        turnOff = false;
     }
 
     @Override
@@ -68,6 +70,6 @@ public class RmiServer implements RmiServerInterface, Runnable{
 
     @Override
     public synchronized boolean testServerConnection(){
-        return true;
+        return serverManager.isTimeExceeded();
     }
 }
