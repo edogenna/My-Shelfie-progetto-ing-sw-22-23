@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 
 import it.polimi.ingsw.GUI.controllers.FXMLChooseNickController;
+import it.polimi.ingsw.GUI.controllers.FXMLFirstPlayerController;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
 
@@ -10,7 +11,9 @@ import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMes
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.model.Card;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,12 +23,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Objects;
 
 import static java.lang.Thread.sleep;
 
 public class GuiView extends Application implements UI {
-
     private ItemEnum[][] board;
     private String[] CommonCards;
     private Card personalCard;
@@ -35,8 +38,11 @@ public class GuiView extends Application implements UI {
     private BufferedReader in;
     private String userInput;
     private String messageToServer;
-    private static GuiView instance;
+    private Stage stage;
     private FXMLChooseNickController fxmlChooseNickController;
+    private FXMLFirstPlayerController fxmlFirstPlayerController;
+
+
 
     public GuiView(PrintWriter out, BufferedReader in){
         this.out = out;
@@ -48,16 +54,16 @@ public class GuiView extends Application implements UI {
         this.userInput = null;
         this.messageToServer = null;
         this.fxmlChooseNickController = new FXMLChooseNickController();
+        this.fxmlFirstPlayerController = new FXMLFirstPlayerController();
     }
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
-        Parent root = loader.load();
-
+        Parent root = (new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"))).load();
         stage.setScene(new Scene(root, 300, 275));
         stage.setTitle("MyShelfie");
 
@@ -72,6 +78,12 @@ public class GuiView extends Application implements UI {
         String jsonString = Converter.convertToJSON(m);
         out.println(jsonString);
     }
+
+    private void changeScene(String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+
+}
+
 
     /**
      * This method sends a message to the rmi server
@@ -105,7 +117,6 @@ public class GuiView extends Application implements UI {
             }
         }
 
-
         userInput = fxmlChooseNickController.getUsername();
         if(out != null)
             sendMessageToSocketServer(new UsernameAnswer(userInput));
@@ -113,10 +124,14 @@ public class GuiView extends Application implements UI {
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
     private void handleFirstPlayerMessage(Message m) throws IOException {
-        fxmlChooseNickController.setFirstPlayerMessage(((FirstPlayerMessage) m).getS());
+        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNumPlayers.fxml"))).load();
+        //stage è un attributo della classe
+        stage.setScene(new Scene(root, 300, 275));
+
+        fxmlFirstPlayerController.setMessageLabel(((FirstPlayerMessage) m).getS());
         userInput = fxmlChooseNickController.getNumPlayers();
         while (userInput.length()!=1 || (userInput.charAt(0) < '2' || userInput.charAt(0) > '4')) {
-            fxmlChooseNickController.setWrongNumPlayers((new NotValidNumberofPlayersMessage()).getS());
+            fxmlFirstPlayerController.setNumberErrorLabel((new NotValidNumberofPlayersMessage()).getS());
             userInput = fxmlChooseNickController.getUsername();
         }
         if(out != null)
