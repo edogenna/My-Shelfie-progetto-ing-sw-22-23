@@ -25,13 +25,5 @@ public class SocketCommunication extends Communication{
     public void run() {
         String answer = socketServer.sendMessageAndGetAnswer(this.client, this.message);
         showAndSetAnswer(answer);
-        if (this.timeExceeded) {
-//            answer = rmiServer.sendMessageAndGetAnswer(client, new Parser().serialize(new Message(Protocol.TIME_EXCEEDED, "", null)));
-            //TODO: maybe this is wrong;
-            answer = socketServer.sendMessageAndGetAnswer(this.client, new TimeoutMessage().getS());
-            System.out.println("answer in communication: " + answer);
-            showAndSetAnswer(answer);
-            socketServer.unregister(client);
-        }
     }
 }

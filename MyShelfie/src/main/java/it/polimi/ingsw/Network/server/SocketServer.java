@@ -49,7 +49,7 @@ public class SocketServer implements Runnable{
         try {
             return fromClient.get(socket).nextLine();
         } catch (NoSuchElementException e) {
-            //remove socket from server manager;
+            unregister(socket);
             return "Unable to reach the client." + e.getMessage();
         }
     }
