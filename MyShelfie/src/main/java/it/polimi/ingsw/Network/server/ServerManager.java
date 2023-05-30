@@ -47,6 +47,7 @@ public class ServerManager implements Runnable{
     private int numberOfPlayers;
     private boolean win;
     private boolean isTimeExceeded;
+    private boolean gameStarted;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -54,6 +55,7 @@ public class ServerManager implements Runnable{
         this.idClient = 0;
         this.win = false;
         this.isTimeExceeded = false;
+        this.gameStarted = false;
     }
 
     void addClient(Socket client) {
@@ -261,7 +263,8 @@ public class ServerManager implements Runnable{
         lobby.put(number, username);
         notifyNewConnection(this.numberOfPlayers);
 
-        if(lobby.size() == this.numberOfPlayers){
+        if(lobby.size() == this.numberOfPlayers && !gameStarted){
+            gameStarted = true;
             startGame();
         }
     }
@@ -292,6 +295,14 @@ public class ServerManager implements Runnable{
                     sendMessageAndWaitForAnswer(temporaryId, new OldIdNotValid());
                 }
             } else {
+                if(gameStarted){
+                    sendMessageAndWaitForAnswer(temporaryId, new RefusedConnectionMessage());
+                    if(rmiClients.containsKey(temporaryId)){
+                        rmiServer.unregister(rmiClients.get(temporaryId));
+                    }else if(socketClients.containsKey(temporaryId))
+                        socketServer.unregister(socketClients.get(temporaryId));
+                    break;
+                }
                 addClientToLobby(temporaryId);
                 break;
             }
@@ -394,22 +405,10 @@ public class ServerManager implements Runnable{
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
 
-            /*if(isAwayFromKeyboard(x)){
-                System.out.println("i'm in afk edge");
-                sendMessageAndWaitForAnswer(x, new TurnTimeOut());
-            }*/
-            if(!answer.equals(DISCONNECT)) {
+            if(!answer.equals(DISCONNECT) && !answer.equals(GENERIC_ERROR)) {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);
             }
-
-            //todo: update finishTurn with the disconnection;
-//            if(!this.win)
-//                this.win = activeMatch.finishTurn();
-//            else{
-//                activeMatch.finishTurn();
-//                this.win = true;
-//            }
 
             this.win = activeMatch.finishTurn();
 
