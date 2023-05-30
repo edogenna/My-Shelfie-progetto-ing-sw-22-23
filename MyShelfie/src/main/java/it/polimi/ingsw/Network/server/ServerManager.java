@@ -28,7 +28,7 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 10;
+    private final int secondsDuringTurn = 35;
     private static final String RECONNECT = "Reconnect";
     private static final String DISCONNECT = "Disconnect";
     private static final String GENERIC_ERROR = "Error";
@@ -206,12 +206,6 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         int counter = 0;
 
-        /*
-        if(isAwayFromKeyboard(number) && !activeMatch.getActivePlayerUsername().equals(nicknames.get(number))){
-            counter = 2 * secondsDuringTurn * MILLIS_IN_SECOND / (MILLIS_TO_WAIT * 3);
-        }
-        */
-
         while (!answerReady.get(number)) {
             try {
                 sleep(MILLIS_TO_WAIT);
@@ -296,6 +290,7 @@ public class ServerManager implements Runnable{
 
     protected void addClientToLobby(int number) throws IOException {
         String username = login(number);
+        sendMessageAndWaitForAnswer(number, new UserIdMessage(number));
 
         if(this.firstPlayer){
             this.firstPlayer = false;
