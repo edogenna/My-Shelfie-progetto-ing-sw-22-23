@@ -39,7 +39,6 @@ public class ServerManager implements Runnable{
     private final Map<Integer, String> lobby = new HashMap<>();
     private final Map<Integer, String> nicknames = new HashMap<>();
     private Controller activeMatch;
-    private final List<Integer> afkPlayers = new ArrayList<>();
     private final List<Integer> disconnectedPlayers = new ArrayList<>();
     private SocketServer socketServer;
     private RmiServer rmiServer;
@@ -122,7 +121,7 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * the client is disconnected for some problems, not the timeout; so we remove him from lobby, afkPlayers and we add him to disconnectedPlayers
+     * the client is disconnected for some problems or the timeout; so we remove him from lobby and we add him to disconnectedPlayers
      * */
     void removeClient(RmiClientInterface client) {
         try {
@@ -140,8 +139,6 @@ public class ServerManager implements Runnable{
         System.out.println("remove Client method with number: " + number);
         if (lobby.containsKey(number)){
             removeClientFromLobby(number);
-            if(isAwayFromKeyboard(number))
-                afkPlayers.remove(number);
         }
         disconnectedPlayers.add(number);
         if (!activeMatch.isDisconnected(nicknames.get(number))){
@@ -155,11 +152,6 @@ public class ServerManager implements Runnable{
         String name = lobby.get(number);
         lobby.remove(number);
         System.out.println("remove client from lobby: " + number);
-        //TODO: winner;
-
-        /*if(lobby.size()<MIN_PLAYERS){
-             this.win = true;
-         }*/
 
         Integer[] clients = lobby.keySet().toArray(new Integer[0]);
         for (int i : clients) {
@@ -168,20 +160,7 @@ public class ServerManager implements Runnable{
         }
     }
 
-    //TODO: finish this method for the resilience
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
-        //it never enters
-        /*if (isDisconnected(number)){
-            System.out.println("sendMessageAndWaitForAnswer, in the is 'isDisconnected(number)': " + nicknames.get(number));
-            //TODO: create new message / i'm doubtful
-            return "the player" + number + "is disconnected";
-        }*/
-
-/*        if(isAwayFromKeyboard(number) && !activeMatch.getActivePlayerUsername().equals(nicknames.get(number))){
-            System.out.println("afk Players ack situation");
-            return new ACKOffline().getType();
-        }*/
-
         String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
             try {
@@ -239,32 +218,13 @@ public class ServerManager implements Runnable{
                 break;
             }
         }
-        System.out.println("i'm here, in sendMessageAndWaitForAnswer");
-//        if (isTimeExceeded) { maybe it will be so the condition
 
         if (isTimeExceeded) {
-            communication.setTimeExceeded();
-            /*
-            if(isAwayFromKeyboard(number)){
-                *//*
-                afkPlayers.remove(number);
-                disconnectedPlayers.add(number);
-                activeMatch.disconnect(nicknames.get(number));
-                *//*
-                System.out.println("I'm going to call removeClient for the player: " + nicknames.get(number));
-                if(rmiClients.containsKey(number)){
-                    removeClient(rmiClients.get(number));
-                }else if(socketClients.containsKey(number))
-                    removeClient(socketClients.get(number));
-            }else if (lobby.containsKey(number)) {
-                afkPlayers.add(number);
-            }
-            */
-
+            //communication.setTimeExceeded();
             if(rmiClients.containsKey(number)){
-                removeClient(rmiClients.get(number));
+                rmiServer.unregister(rmiClients.get(number));
             }else if(socketClients.containsKey(number))
-                removeClient(socketClients.get(number));
+                socketServer.unregister(socketClients.get(number));
 
             return DISCONNECT;
 
@@ -312,13 +272,13 @@ public class ServerManager implements Runnable{
         while (true) {
             String answer = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
             Message m = Converter.convertFromJSON(answer);
-            if (answer.equals("ERR")){
+            if (answer.equals(GENERIC_ERROR)){
                 //this maybe will never enter
                 break;
             }else if(((ReconnectionAnswer) m).getString().equals(RECONNECT)) {
                 code = sendMessageAndWaitForAnswer(temporaryId, new OldGameId());
                 //TODO: insert a try{}catch(...) in OldGameId answer, so you set the answer like "ERR";
-                if (code.equals("ERR"))
+                if (code.equals(GENERIC_ERROR))
                     break;
                 if (checkIfDisconnected(code)) {
                     oldId = Integer.parseInt(code);
@@ -433,12 +393,6 @@ public class ServerManager implements Runnable{
 
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
-            System.out.println("answer x2: " + answer);
-
-            System.out.print("disconnectedPlayers: ");
-            for (Integer disconnPlayers : disconnectedPlayers)
-                System.out.print(disconnPlayers + " " + nicknames.get(disconnPlayers) + "; ");
-            System.out.println();
 
             /*if(isAwayFromKeyboard(x)){
                 System.out.println("i'm in afk edge");
@@ -527,14 +481,6 @@ public class ServerManager implements Runnable{
                 exit = true;
             }
         }
-    }
-
-    /**
-     * @param code the id of the player
-     * @return true if the player is AFK
-     * */
-    public boolean isAwayFromKeyboard(int code) {
-        return afkPlayers.contains(code);
     }
 
     /**
