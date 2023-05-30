@@ -40,6 +40,7 @@ public class FXMLChooseNickController  implements Initializable {
 
     private String username;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         wrongUsername.setVisible(false);
@@ -58,17 +59,7 @@ public class FXMLChooseNickController  implements Initializable {
         wrongUsername.setText(s);
         wrongUsername.setVisible(true);
     }
-    //TODO: CHANGE METHOD LOCATION
-    public void setWrongNumPlayers(String s){
-        wrongNumPlayers.setText(s);
-        wrongNumPlayers.setVisible(true);
-    }
 
-    //ATTIVO LA LABEL PER NOTIFICARE IL PRIMO GIOCATORE
-    public void setFirstPlayerMessage(String s){
-        firstPlayerMessage.setText(s);
-        firstPlayerMessage.setVisible(true);
-    }
 
     public String getNumPlayers() {
         return numPlayers.getText();
