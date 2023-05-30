@@ -44,9 +44,9 @@ public class GuiView extends Application implements UI {
 
 
 
-    public GuiView(PrintWriter out, BufferedReader in){
-        this.out = out;
-        this.in = in;
+    public GuiView(){
+        this.out = null;
+        this.in = null;
         this.personalCard = null;
         this.CommonCards = null;
         this.board = null;
@@ -57,8 +57,13 @@ public class GuiView extends Application implements UI {
         this.fxmlFirstPlayerController = new FXMLFirstPlayerController();
     }
 
-    public void main() {
-        launch();
+    @Override
+    public void setInAndOut(PrintWriter out, BufferedReader in){
+        this.out = out;
+        this.in = in;
+    }
+    public void main(String[] args) {
+        launch(args);
     }
 
     @Override

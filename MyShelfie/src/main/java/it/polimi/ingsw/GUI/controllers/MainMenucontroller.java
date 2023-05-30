@@ -30,7 +30,7 @@ public class MainMenucontroller {
     public void setupGameClicked() throws IOException {
         // esempio: Apertura di una nuova finestra di gioco
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("C:/Users/User/Desktop/Prog SOFTWARE/MyShelfie/src/main/resources/fxml/ConnectionScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ConnectionScene.fxml"));
         Parent root = loader.load();
         ConnectionController connectionController = loader.getController();
         Scene scene = new Scene(root);

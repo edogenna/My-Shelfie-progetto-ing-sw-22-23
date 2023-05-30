@@ -27,9 +27,8 @@ public class SocketClient{
     private BufferedReader stdIn = null;
     private UI ui = null;
 
-    public void startSocketClient(String hostName, boolean chooseCliGui) throws IOException {
+    public void startSocketClient(String hostName, boolean chooseCliGui, String[] args) throws IOException {
         try {
-
             try {
                 this.socket = new Socket(hostName, Constant.PORT_SOCKET_GAME);
                 this.out = new PrintWriter(socket.getOutputStream(), true);
@@ -44,8 +43,9 @@ public class SocketClient{
             System.out.println("you are connected with socket");
 
             if (chooseCliGui) {
-                ui = new GuiView(out, in);
-                ui.main();
+                ui = new GuiView();
+                ui.setInAndOut(out, in);
+                ui.main(args);
             }else
                 ui = new CliView(out, in, stdIn);
 
