@@ -30,6 +30,7 @@ public class ServerManager implements Runnable{
     private static final int MILLIS_IN_SECOND = 1000;
     private final int secondsDuringTurn = 10;
     private static final String RECONNECT = "Reconnect";
+    private static final String DISCONNECT = "Disconnect";
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
@@ -85,11 +86,10 @@ public class ServerManager implements Runnable{
     }
 
     public int getNumber(Socket client){
-        int x = -1;
         for (Map.Entry<Integer, Socket> entry : socketClients.entrySet())
             if (entry.getValue() == client)
-                x = entry.getKey();
-        return x;
+                return entry.getKey();
+        return -1;
     }
 
     public int getNumber(RmiClientInterface client) {
@@ -104,7 +104,7 @@ public class ServerManager implements Runnable{
         answerReady.put(client, true);
     }
 
-    void removeClient(Socket client) {
+    protected void removeClient(Socket client) {
         try {
             int number = getNumber(client);
             System.out.println("number getNumber: " + number);
@@ -271,7 +271,8 @@ public class ServerManager implements Runnable{
             }else if(socketClients.containsKey(number))
                 removeClient(socketClients.get(number));
 
-            return "Error time finished";
+            return DISCONNECT;
+
         }
         return answers.get(number);
     }
@@ -448,10 +449,11 @@ public class ServerManager implements Runnable{
                 System.out.print(disconnPlayers + " " + nicknames.get(disconnPlayers) + "; ");
             System.out.println();
 
-            if(isAwayFromKeyboard(x)){
+            /*if(isAwayFromKeyboard(x)){
                 System.out.println("i'm in afk edge");
                 sendMessageAndWaitForAnswer(x, new TurnTimeOut());
-            }else {
+            }*/
+            if(!answer.equals(DISCONNECT)) {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);
             }
