@@ -57,8 +57,8 @@ public class GuiView extends Application implements UI {
         this.fxmlFirstPlayerController = new FXMLFirstPlayerController();
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public void main() {
+        launch();
     }
 
     @Override
@@ -125,18 +125,20 @@ public class GuiView extends Application implements UI {
     }
     private void handleFirstPlayerMessage(Message m) throws IOException {
         Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNumPlayers.fxml"))).load();
-        //stage è un attributo della classe
-        stage.setScene(new Scene(root, 300, 275));
 
+        stage.setScene(new Scene(root, 300, 275));
+        int numPlayers;
         fxmlFirstPlayerController.setMessageLabel(((FirstPlayerMessage) m).getS());
-        userInput = fxmlChooseNickController.getNumPlayers();
-        while (userInput.length()!=1 || (userInput.charAt(0) < '2' || userInput.charAt(0) > '4')) {
+        numPlayers = fxmlFirstPlayerController.getNumberOfPlayers();
+
+        while (numPlayers < 2 || numPlayers > 4) {
             fxmlFirstPlayerController.setNumberErrorLabel((new NotValidNumberofPlayersMessage()).getS());
-            userInput = fxmlChooseNickController.getUsername();
+            numPlayers = fxmlFirstPlayerController.getNumberOfPlayers();
         }
         if(out != null)
-            sendMessageToSocketServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
-        else sendMessageToRmiServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));
+            sendMessageToSocketServer(new NumberOfPlayersAnswer(numPlayers));
+        else
+            sendMessageToRmiServer(new NumberOfPlayersAnswer(numPlayers));
     }
 
     @Override
