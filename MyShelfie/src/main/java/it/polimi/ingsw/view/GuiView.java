@@ -22,6 +22,8 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Objects;
 
+import static java.lang.Thread.sleep;
+
 public class GuiView extends Application implements UI {
 
     private ItemEnum[][] board;
@@ -31,9 +33,9 @@ public class GuiView extends Application implements UI {
     //canali verso e dal server validi solo per socket
     private PrintWriter out;
     private BufferedReader in;
-    private String myUsername;
     private String userInput;
     private String messageToServer;
+    private static GuiView instance;
     private FXMLChooseNickController fxmlChooseNickController;
 
     public GuiView(PrintWriter out, BufferedReader in){
@@ -43,7 +45,6 @@ public class GuiView extends Application implements UI {
         this.CommonCards = null;
         this.board = null;
         this.shelf = null;
-        this.myUsername = null;
         this.userInput = null;
         this.messageToServer = null;
         this.fxmlChooseNickController = new FXMLChooseNickController();
@@ -60,9 +61,9 @@ public class GuiView extends Application implements UI {
         stage.setScene(new Scene(root, 300, 275));
         stage.setTitle("MyShelfie");
 
-//        stage.getIcons().add(new Image("/resources/graphics/icon.png"));
         stage.show();
     }
+
         /**
      * This method sends a message to the socket server
      * @param m {@link Message}
@@ -79,9 +80,15 @@ public class GuiView extends Application implements UI {
     private void sendMessageToRmiServer(Message m) throws IOException {
         this.messageToServer = Converter.convertToJSON(m);
     }
-    private void handleChooseUsernameMessage(Message m) throws IOException {
-        userInput = fxmlChooseNickController.getUsernameFromTextfield();
-        this.myUsername = userInput;
+    public void handleChooseUsernameMessage(Message m) throws IOException {
+        while((userInput = fxmlChooseNickController.getUsername()) == null){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         if(out != null)
             sendMessageToSocketServer(new UsernameAnswer(userInput));
         else
@@ -89,18 +96,27 @@ public class GuiView extends Application implements UI {
     }
     private void handleNotValidUsernameError(Message m) throws IOException {
         fxmlChooseNickController.setWrongUsername(((NotValidUsernameError) m).getS());
-        userInput = fxmlChooseNickController.getUsernameFromTextfield();
-        this.myUsername = userInput;
+
+         while(fxmlChooseNickController.getUsername().equals(userInput)){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        userInput = fxmlChooseNickController.getUsername();
         if(out != null)
             sendMessageToSocketServer(new UsernameAnswer(userInput));
-        else sendMessageToRmiServer(new UsernameAnswer(userInput));
+        else
+            sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
     private void handleFirstPlayerMessage(Message m) throws IOException {
         fxmlChooseNickController.setFirstPlayerMessage(((FirstPlayerMessage) m).getS());
         userInput = fxmlChooseNickController.getNumPlayers();
         while (userInput.length()!=1 || (userInput.charAt(0) < '2' || userInput.charAt(0) > '4')) {
             fxmlChooseNickController.setWrongNumPlayers((new NotValidNumberofPlayersMessage()).getS());
-            userInput = fxmlChooseNickController.getUsernameFromTextfield();
+            userInput = fxmlChooseNickController.getUsername();
         }
         if(out != null)
             sendMessageToSocketServer(new NumberOfPlayersAnswer(Integer.parseInt(userInput)));

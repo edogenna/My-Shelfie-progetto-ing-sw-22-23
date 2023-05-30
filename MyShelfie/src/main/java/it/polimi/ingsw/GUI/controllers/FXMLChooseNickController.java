@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GUI.controllers;
 
+import it.polimi.ingsw.view.GuiView;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
@@ -37,14 +38,20 @@ public class FXMLChooseNickController  implements Initializable {
     @FXML
     private Label wrongNumPlayers;
 
+    private String username;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         wrongUsername.setVisible(false);
         firstPlayerMessage.setVisible(false);
         wrongNumPlayers.setVisible(false);
+        loginButton.setOnAction(event -> {
+            username = nickname.getText();
+        });
     }
-    public String getUsernameFromTextfield(){
-        return nickname.getText();
+
+    public String getUsername() {
+        return username;
     }
 
     public void setWrongUsername(String s) {
@@ -65,25 +72,6 @@ public class FXMLChooseNickController  implements Initializable {
 
     public String getNumPlayers() {
         return numPlayers.getText();
-    }
-
-    public void loginButtonPressed(){
-        loginButton.setOnAction(event -> {
-
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("C:/Users/User/Desktop/Prog SOFTWARE/MyShelfie/src/main/resources/fxml/FirstPlayerScene.fxml"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            Scene scena = new Scene(root);
-
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-
-            stage.setScene(scena);
-            stage.show();
-        });
-
     }
 
 }
