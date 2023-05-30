@@ -105,6 +105,7 @@ public class GuiView extends Application implements UI {
             }
         }
 
+
         userInput = fxmlChooseNickController.getUsername();
         if(out != null)
             sendMessageToSocketServer(new UsernameAnswer(userInput));
