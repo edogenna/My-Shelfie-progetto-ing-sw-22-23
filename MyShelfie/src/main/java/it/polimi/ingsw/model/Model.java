@@ -455,7 +455,7 @@ public class Model {
             this.setActivePlayer(id);
         }else{
             i = theOnlyPlayerConnected();
-            this.setActivePlayer(id);
+            this.setActivePlayer(i);
             return this.players[i].calculatePoints();
         }
         return this.activePlayer.getMyPoints();

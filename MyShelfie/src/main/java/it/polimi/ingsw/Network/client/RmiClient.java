@@ -48,12 +48,12 @@ public class RmiClient implements RmiClientInterface{
 
         while(true){
             try {
-                swichtOff = rmiServerInterface.testServerConnection();
-                if(swichtOff){
+                rmiServerInterface.testServerConnection();
+                /*if(swichtOff){
                     System.out.println("Connection to the server lost");
                     System.out.println("Client will close now");
                     System.exit(0);
-                }
+                }*/
                 try {
                     sleep(1500);
                 } catch (InterruptedException e) {

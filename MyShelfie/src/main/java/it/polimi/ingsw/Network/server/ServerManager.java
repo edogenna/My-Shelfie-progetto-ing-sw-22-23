@@ -31,6 +31,7 @@ public class ServerManager implements Runnable{
     private final int secondsDuringTurn = 10;
     private static final String RECONNECT = "Reconnect";
     private static final String DISCONNECT = "Disconnect";
+    private static final String GENERIC_ERROR = "Error";
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
@@ -199,8 +200,7 @@ public class ServerManager implements Runnable{
             new Thread(communication).start();
         } else {
             System.out.println("Unregistered Client");
-            //TODO: new ERROR message
-            return "ERROR registration";
+            return GENERIC_ERROR;
         }
 
         this.isTimeExceeded = false;
@@ -226,7 +226,7 @@ public class ServerManager implements Runnable{
                     } catch (RemoteException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
                         rmiServer.unregister(rmiClients.get(number));
-                        return "ERROR";
+                        return GENERIC_ERROR;
                     }
                 }
                 if (socketClients.containsKey(number)) {
@@ -235,7 +235,7 @@ public class ServerManager implements Runnable{
                     } catch (IOException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
                         socketServer.unregister(socketClients.get(number));
-                        return "ERROR";
+                        return GENERIC_ERROR;
                     }
                 }
             }
@@ -248,7 +248,7 @@ public class ServerManager implements Runnable{
         System.out.println("i'm here, in sendMessageAndWaitForAnswer");
 //        if (isTimeExceeded) { maybe it will be so the condition
 
-        if (isTimeExceeded && nicknames.get(number).equals(activeMatch.getActivePlayerUsername())) {
+        if (isTimeExceeded) {
             communication.setTimeExceeded();
             /*
             if(isAwayFromKeyboard(number)){
