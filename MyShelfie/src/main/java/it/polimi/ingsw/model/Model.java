@@ -64,6 +64,10 @@ public class Model {
     private void changeActivePlayer(){
         this.idActivePlayer++;
         this.idActivePlayer %= this.numPlayers;
+        while(this.players[this.idActivePlayer].isDisconnected()){
+            this.idActivePlayer++;
+            this.idActivePlayer %= this.numPlayers;
+        }
         this.activePlayer = this.players[this.idActivePlayer];
     }
 

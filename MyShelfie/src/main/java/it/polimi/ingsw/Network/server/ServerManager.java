@@ -206,12 +206,6 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         int counter = 0;
 
-        /*
-        if(isAwayFromKeyboard(number) && !activeMatch.getActivePlayerUsername().equals(nicknames.get(number))){
-            counter = 2 * secondsDuringTurn * MILLIS_IN_SECOND / (MILLIS_TO_WAIT * 3);
-        }
-        */
-
         while (!answerReady.get(number)) {
             try {
                 sleep(MILLIS_TO_WAIT);
