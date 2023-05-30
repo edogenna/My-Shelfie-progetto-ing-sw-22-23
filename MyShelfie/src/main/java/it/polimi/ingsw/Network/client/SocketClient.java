@@ -43,9 +43,11 @@ public class SocketClient{
 
             System.out.println("you are connected with socket");
 
-            if (chooseCliGui)
+            if (chooseCliGui) {
                 ui = new GuiView(out, in);
-            else ui = new CliView(out, in, stdIn);
+                ui.main();
+            }else
+                ui = new CliView(out, in, stdIn);
 
             while (true) {
                 String message = in.readLine();
