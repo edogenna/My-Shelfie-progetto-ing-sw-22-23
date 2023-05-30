@@ -5,7 +5,6 @@ import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.*;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
-import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.model.Board;
 import it.polimi.ingsw.model.Card;
 
@@ -58,6 +57,9 @@ public class CliView implements UI{
     @Override
     public String actionHandler(Message m) throws IOException {
 
+        if(m == null){
+            return null;
+        }
         switch (m.getType()) {
             case "MoveMessage" -> handleMoveMessage(m);
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
@@ -83,7 +85,8 @@ public class CliView implements UI{
             case "OldIdNotValid" ->{handleOldIdNotValidMessage(m);}
             case "Disconnection" -> {handleDisconnectionMessage(m);}
             case "WelcomeBack" -> {handleWelcomeBackMessage(m);}
-            case "TurnTimeOut" -> {handleTurnTimeOut(m);}
+            case "RefusedConnection" -> {
+                handleRefusedConnectionMessage(m);}
             case "TimeOut" -> {handleTimeOut(m);}
             case "UserIdMessage" -> {handleUserId(m);}
             default -> throw new IllegalStateException("Unexpected value: " + m.getType());
@@ -107,12 +110,13 @@ public class CliView implements UI{
             sendMessageToRmiServer(new TimeOutAnswer());
     }
 
-    private void handleTurnTimeOut(Message m) throws IOException {
-        outputStream.println(((TurnTimeOut) m).getS());
+    private void handleRefusedConnectionMessage(Message m) throws IOException {
+        outputStream.println(((RefusedConnectionMessage) m).getS());
         if(out != null)
             sendMessageToSocketServer(new ACKMessage());
         else
             sendMessageToRmiServer(new ACKMessage());
+        System.exit(0);
     }
     /**
      * This method handles the {@link WelcomeBackMessage}

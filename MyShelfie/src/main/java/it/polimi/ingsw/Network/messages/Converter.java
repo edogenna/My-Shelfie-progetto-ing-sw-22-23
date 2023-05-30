@@ -32,6 +32,9 @@ public class Converter {
     public static Message convertFromJSON(String message){
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(message, JsonObject.class);
+        if (jsonObject == null) {
+            return null;
+        }
         String type = jsonObject.get("type").getAsString();
         return switch (type) {
             case "ACK" -> gson.fromJson(message, ACKMessage.class);
@@ -66,7 +69,7 @@ public class Converter {
             case "ReconnectionAnswer" -> gson.fromJson(message, ReconnectionAnswer.class);
             case "StartingGame" -> gson.fromJson(message, StartingGameMessage.class);
             case "Timeout" -> gson.fromJson(message, TimeoutMessage.class);
-            case "TurnTimeOut" -> gson.fromJson(message, TurnTimeOut.class);
+            case "RefusedConnection" -> gson.fromJson(message, RefusedConnectionMessage.class);
             case "UserIdMessage" -> gson.fromJson(message, UserIdMessage.class);
             case "UsernameAnswer" -> gson.fromJson(message, UsernameAnswer.class);
             case "Waiting" -> gson.fromJson(message, WaitingMessage.class);

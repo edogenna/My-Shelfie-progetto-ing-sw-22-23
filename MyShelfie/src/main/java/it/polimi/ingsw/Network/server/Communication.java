@@ -9,13 +9,13 @@ public class Communication implements Runnable{
     final String message;
     private final int num;
     private final ServerManager serverManager;
-    boolean timeExceeded;
+    //boolean timeExceeded;
 
     Communication(int num, ServerManager serverManager, String message) {
         this.num = num;
         this.serverManager = serverManager;
         this.message = message;
-        this.timeExceeded = false;
+        //this.timeExceeded = false;
     }
 
     void showAndSetAnswer(String answer) {
@@ -23,9 +23,9 @@ public class Communication implements Runnable{
         System.out.println("User " + num + ": " + answer);
     }
 
-    void setTimeExceeded() {
+    /*void setTimeExceeded() {
         this.timeExceeded = true;
-    }
+    }*/
 
     @Override
     public void run() {
