@@ -107,10 +107,16 @@ public class ServerManager implements Runnable{
     void removeClient(Socket client) {
         try {
             int number = getNumber(client);
-            socketClients.remove(number);
-            removeClient(number);
+            System.out.println("number getNumber: " + number);
+            if(number > -1){
+                socketClients.get(number).close();
+                socketClients.remove(number);
+                removeClient(number);
+            }
         } catch (NoSuchElementException e) {
             //Do nothing
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

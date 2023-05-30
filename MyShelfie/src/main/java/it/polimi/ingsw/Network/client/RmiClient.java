@@ -50,7 +50,6 @@ public class RmiClient implements RmiClientInterface{
             try {
                 swichtOff = rmiServerInterface.testServerConnection();
                 if(swichtOff){
-                    System.out.println(new TimeoutMessage().getS());
                     System.out.println("Connection to the server lost");
                     System.out.println("Client will close now");
                     System.exit(0);
