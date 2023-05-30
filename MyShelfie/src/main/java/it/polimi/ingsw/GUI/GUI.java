@@ -1,6 +1,7 @@
 package it.polimi.ingsw.GUI;
 
 
+import it.polimi.ingsw.view.GuiView;
 import javafx.application.Application;
 import javafx.scene.ImageCursor;
 import javafx.scene.image.Image;

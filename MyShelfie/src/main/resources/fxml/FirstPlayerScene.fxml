@@ -18,16 +18,16 @@
             <Image url="@../../../../../../17_MyShelfie_BGA/Publisher%20material/Title%202000x2000px.png" />
          </image>
       </ImageView>
-      <Label layoutX="52.0" layoutY="263.0">
+      <Label layoutX="52.0" layoutY="263.0" text="Select another number, it has to be between 2 and 4.">
          <font>
             <Font name="Poor Richard" size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="349.0" layoutY="145.0" promptText="Number pf players">
+      <Label layoutX="52.0" layoutY="96.0" prefHeight="71.0" prefWidth="143.0" />
+      <TextField alignment="CENTER" layoutX="124.0" layoutY="132.0" prefHeight="77.0" prefWidth="323.0" promptText="Number of players">
          <font>
-            <Font name="Poor Richard" size="18.0" />
+            <Font name="Poor Richard" size="48.0" />
          </font>
       </TextField>
-      <Label layoutX="52.0" layoutY="96.0" prefHeight="71.0" prefWidth="143.0" />
    </children>
 </Pane>
