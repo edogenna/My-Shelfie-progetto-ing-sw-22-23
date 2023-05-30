@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
 
+import static it.polimi.ingsw.Constant.MIN_PLAYERS;
 import static java.lang.Thread.sleep;
 
 /**
@@ -23,7 +24,6 @@ import static java.lang.Thread.sleep;
  * @author Donato Fiore
  */
 public class ServerManager implements Runnable{
-    public static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 4;
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
@@ -155,9 +155,10 @@ public class ServerManager implements Runnable{
         lobby.remove(number);
         System.out.println("remove client from lobby: " + number);
         //TODO: winner;
-         if(lobby.size()<MIN_PLAYERS){
+
+        /*if(lobby.size()<MIN_PLAYERS){
              this.win = true;
-         }
+         }*/
 
         Integer[] clients = lobby.keySet().toArray(new Integer[0]);
         for (int i : clients) {
@@ -438,12 +439,7 @@ public class ServerManager implements Runnable{
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
             System.out.println("answer x2: " + answer);
-/*
-            System.out.print("afkPlayers: ");
-            for (Integer afkPlayer : afkPlayers)
-                System.out.print(afkPlayer + " " + nicknames.get(afkPlayer) + "; ");
-            System.out.println();
-            */
+
             System.out.print("disconnectedPlayers: ");
             for (Integer disconnPlayers : disconnectedPlayers)
                 System.out.print(disconnPlayers + " " + nicknames.get(disconnPlayers) + "; ");
@@ -459,12 +455,14 @@ public class ServerManager implements Runnable{
             }
 
             //todo: update finishTurn with the disconnection;
-            if(!this.win)
-                this.win = activeMatch.finishTurn();
-            else{
-                activeMatch.finishTurn();
-                this.win = true;
-            }
+//            if(!this.win)
+//                this.win = activeMatch.finishTurn();
+//            else{
+//                activeMatch.finishTurn();
+//                this.win = true;
+//            }
+
+            this.win = activeMatch.finishTurn();
 
             if(this.win) {
                 int points = activeMatch.declareWinner();
