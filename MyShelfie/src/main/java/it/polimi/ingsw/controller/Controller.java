@@ -413,6 +413,7 @@ public class Controller {
 
     public void disconnect(String username) {
         model.setDisconnected(username);
+        model.checkDisconnections();
     }
 
     public boolean isDisconnected(String username) {

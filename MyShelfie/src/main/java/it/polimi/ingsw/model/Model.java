@@ -3,9 +3,12 @@ package it.polimi.ingsw.model;
 import com.google.gson.annotations.Expose;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.Converter;
+import it.polimi.ingsw.Network.server.ServerManager;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 import java.util.Random;
+
+import static it.polimi.ingsw.Constant.MIN_PLAYERS;
 
 /**
  * This class implements the logic of the game
@@ -30,6 +33,8 @@ public class Model {
     private int idActivePlayer;
     @Expose
     private boolean lastTurn;
+    @Expose
+    private boolean stopMatch;
 
     public Model(int numPlayers){
         this.numPlayers = numPlayers;
@@ -42,6 +47,7 @@ public class Model {
         this.idFirstPlayer = -1;
         this.idActivePlayer = 0;
         this.lastTurn = false;
+        this.stopMatch = false;
     }
 
     /**
@@ -394,6 +400,10 @@ public class Model {
         boolean finish;
         int x;
 
+        if(this.stopMatch){
+            return true;
+        }
+
         finish = this.activePlayer.checkIfFull();
         if(finish)
             this.lastTurn = true;
@@ -427,21 +437,39 @@ public class Model {
 
         max = 0;
         id = -1;
-        for(i=0; i<this.numPlayers; i++){
-            x = this.players[i].calculatePoints();
-            if(x > max){
-                max = x;
-                id = i;
-            }else if(x == max){
-                if(distancePlayer(this.idFirstPlayer,i) > distancePlayer(this.idFirstPlayer,id)){
-                    id = i;
-                    max = x;
+        if(!stopMatch){
+            for(i=0; i<this.numPlayers; i++){
+                //if the player is disconnected, we won't calculate his points;
+                if(!this.players[i].isDisconnected()){
+                    x = this.players[i].calculatePoints();
+                    if(x > max){
+                        max = x;
+                        id = i;
+                    }else if(x == max){
+                        if(distancePlayer(this.idFirstPlayer,i) > distancePlayer(this.idFirstPlayer,id)){
+                            id = i;
+                        }
+                    }
                 }
             }
+            this.setActivePlayer(id);
+        }else{
+            i = theOnlyPlayerConnected();
+            this.setActivePlayer(i);
+            return this.players[i].calculatePoints();
         }
-        this.setActivePlayer(id);
-
         return this.activePlayer.getMyPoints();
+    }
+
+    /**
+     * @return the id of the only connected player
+     * this method will be called only if connectedPlayers < MIN_PLAYERS
+     * */
+    private int theOnlyPlayerConnected(){
+        for(int i=0; i<this.numPlayers; i++)
+            if(!this.players[i].isDisconnected())
+                return i;
+        return -3;
     }
 
     /**
@@ -506,6 +534,9 @@ public class Model {
             players[x].setDisconnected();
     }
 
+    /**
+     * @return true if the player is disconnected;
+     * */
     public boolean isDisconnected(String username) {
         int x=-1;
         for(int i=0; i<players.length; i++){
@@ -517,6 +548,19 @@ public class Model {
         if(x>-1)
             return players[x].isDisconnected();
         return true;
+    }
+
+    public void checkDisconnections() {
+        int counter = 0;
+        for(int i=0; i<this.numPlayers; i++){
+            if(!isDisconnected(this.players[i].getUsername())){
+                counter++;
+            }
+        }
+        if(counter < MIN_PLAYERS){
+            this.stopMatch = true;
+        }
+
     }
 
     //TODO: i don't think it is correct doing this; control the test method e modify it;

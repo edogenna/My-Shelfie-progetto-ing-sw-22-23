@@ -6,7 +6,7 @@ package it.polimi.ingsw;
 public final class Constant {
     public static final int PORT_SOCKET_GAME = 50010;
     public static final int PORT_RMI_GAME = 50011;
-
+    public static final int MIN_PLAYERS = 2;
     static final String square = "██";
     static final char squareChar = '█';
     static final int LEN_SQUARE = 2;

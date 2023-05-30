@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
 
+import static it.polimi.ingsw.Constant.MIN_PLAYERS;
 import static java.lang.Thread.sleep;
 
 /**
@@ -23,13 +24,14 @@ import static java.lang.Thread.sleep;
  * @author Donato Fiore
  */
 public class ServerManager implements Runnable{
-    public static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 4;
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
     private final int secondsDuringTurn = 10;
     private static final String RECONNECT = "Reconnect";
+    private static final String DISCONNECT = "Disconnect";
+    private static final String GENERIC_ERROR = "Error";
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
@@ -85,11 +87,10 @@ public class ServerManager implements Runnable{
     }
 
     public int getNumber(Socket client){
-        int x = -1;
         for (Map.Entry<Integer, Socket> entry : socketClients.entrySet())
             if (entry.getValue() == client)
-                x = entry.getKey();
-        return x;
+                return entry.getKey();
+        return -1;
     }
 
     public int getNumber(RmiClientInterface client) {
@@ -104,13 +105,19 @@ public class ServerManager implements Runnable{
         answerReady.put(client, true);
     }
 
-    void removeClient(Socket client) {
+    protected void removeClient(Socket client) {
         try {
             int number = getNumber(client);
-            socketClients.remove(number);
-            removeClient(number);
+            System.out.println("number getNumber: " + number);
+            if(number > -1){
+                socketClients.get(number).close();
+                socketClients.remove(number);
+                removeClient(number);
+            }
         } catch (NoSuchElementException e) {
             //Do nothing
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -149,9 +156,10 @@ public class ServerManager implements Runnable{
         lobby.remove(number);
         System.out.println("remove client from lobby: " + number);
         //TODO: winner;
-         if(lobby.size()<MIN_PLAYERS){
+
+        /*if(lobby.size()<MIN_PLAYERS){
              this.win = true;
-         }
+         }*/
 
         Integer[] clients = lobby.keySet().toArray(new Integer[0]);
         for (int i : clients) {
@@ -192,8 +200,7 @@ public class ServerManager implements Runnable{
             new Thread(communication).start();
         } else {
             System.out.println("Unregistered Client");
-            //TODO: new ERROR message
-            return "ERROR registration";
+            return GENERIC_ERROR;
         }
 
         this.isTimeExceeded = false;
@@ -219,7 +226,7 @@ public class ServerManager implements Runnable{
                     } catch (RemoteException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
                         rmiServer.unregister(rmiClients.get(number));
-                        return "ERROR";
+                        return GENERIC_ERROR;
                     }
                 }
                 if (socketClients.containsKey(number)) {
@@ -228,7 +235,7 @@ public class ServerManager implements Runnable{
                     } catch (IOException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
                         socketServer.unregister(socketClients.get(number));
-                        return "ERROR";
+                        return GENERIC_ERROR;
                     }
                 }
             }
@@ -241,7 +248,7 @@ public class ServerManager implements Runnable{
         System.out.println("i'm here, in sendMessageAndWaitForAnswer");
 //        if (isTimeExceeded) { maybe it will be so the condition
 
-        if (isTimeExceeded && nicknames.get(number).equals(activeMatch.getActivePlayerUsername())) {
+        if (isTimeExceeded) {
             communication.setTimeExceeded();
             /*
             if(isAwayFromKeyboard(number)){
@@ -265,7 +272,8 @@ public class ServerManager implements Runnable{
             }else if(socketClients.containsKey(number))
                 removeClient(socketClients.get(number));
 
-            return "Error time finished";
+            return DISCONNECT;
+
         }
         return answers.get(number);
     }
@@ -431,32 +439,30 @@ public class ServerManager implements Runnable{
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
             System.out.println("answer x2: " + answer);
-/*
-            System.out.print("afkPlayers: ");
-            for (Integer afkPlayer : afkPlayers)
-                System.out.print(afkPlayer + " " + nicknames.get(afkPlayer) + "; ");
-            System.out.println();
-            */
+
             System.out.print("disconnectedPlayers: ");
             for (Integer disconnPlayers : disconnectedPlayers)
                 System.out.print(disconnPlayers + " " + nicknames.get(disconnPlayers) + "; ");
             System.out.println();
 
-            if(isAwayFromKeyboard(x)){
+            /*if(isAwayFromKeyboard(x)){
                 System.out.println("i'm in afk edge");
                 sendMessageAndWaitForAnswer(x, new TurnTimeOut());
-            }else {
+            }*/
+            if(!answer.equals(DISCONNECT)) {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);
             }
 
             //todo: update finishTurn with the disconnection;
-            if(!this.win)
-                this.win = activeMatch.finishTurn();
-            else{
-                activeMatch.finishTurn();
-                this.win = true;
-            }
+//            if(!this.win)
+//                this.win = activeMatch.finishTurn();
+//            else{
+//                activeMatch.finishTurn();
+//                this.win = true;
+//            }
+
+            this.win = activeMatch.finishTurn();
 
             if(this.win) {
                 int points = activeMatch.declareWinner();
