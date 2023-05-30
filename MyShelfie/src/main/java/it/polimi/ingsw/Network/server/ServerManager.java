@@ -39,7 +39,6 @@ public class ServerManager implements Runnable{
     private final Map<Integer, String> lobby = new HashMap<>();
     private final Map<Integer, String> nicknames = new HashMap<>();
     private Controller activeMatch;
-    private final List<Integer> afkPlayers = new ArrayList<>();
     private final List<Integer> disconnectedPlayers = new ArrayList<>();
     private SocketServer socketServer;
     private RmiServer rmiServer;
@@ -122,7 +121,7 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * the client is disconnected for some problems, not the timeout; so we remove him from lobby, afkPlayers and we add him to disconnectedPlayers
+     * the client is disconnected for some problems or the timeout; so we remove him from lobby and we add him to disconnectedPlayers
      * */
     void removeClient(RmiClientInterface client) {
         try {
@@ -140,8 +139,6 @@ public class ServerManager implements Runnable{
         System.out.println("remove Client method with number: " + number);
         if (lobby.containsKey(number)){
             removeClientFromLobby(number);
-            if(isAwayFromKeyboard(number))
-                afkPlayers.remove(number);
         }
         disconnectedPlayers.add(number);
         if (!activeMatch.isDisconnected(nicknames.get(number))){
@@ -433,12 +430,6 @@ public class ServerManager implements Runnable{
 
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
-            System.out.println("answer x2: " + answer);
-
-            System.out.print("disconnectedPlayers: ");
-            for (Integer disconnPlayers : disconnectedPlayers)
-                System.out.print(disconnPlayers + " " + nicknames.get(disconnPlayers) + "; ");
-            System.out.println();
 
             /*if(isAwayFromKeyboard(x)){
                 System.out.println("i'm in afk edge");
@@ -527,14 +518,6 @@ public class ServerManager implements Runnable{
                 exit = true;
             }
         }
-    }
-
-    /**
-     * @param code the id of the player
-     * @return true if the player is AFK
-     * */
-    public boolean isAwayFromKeyboard(int code) {
-        return afkPlayers.contains(code);
     }
 
     /**
