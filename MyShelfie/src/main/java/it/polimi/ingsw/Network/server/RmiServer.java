@@ -48,7 +48,7 @@ public class RmiServer implements RmiServerInterface, Runnable{
         try {
             return rmiClient.sendMessageAndGetAnswer(message);
         } catch (RemoteException e) {
-            return "Impossible connection with the rmi client" + e.getMessage();
+            return "Disconnect";
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

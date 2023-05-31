@@ -28,7 +28,7 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 60;
+    private final int secondsDuringTurn = 10;
     private static final String RECONNECT = "Reconnect";
     private static final String DISCONNECT = "Disconnect";
     private static final String GENERIC_ERROR = "Error";
@@ -405,6 +405,7 @@ public class ServerManager implements Runnable{
 
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
+            System.out.println(answer);
             if(!answer.equals(DISCONNECT) && !answer.equals(GENERIC_ERROR)) {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);
