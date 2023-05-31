@@ -11,7 +11,6 @@ import java.rmi.server.UnicastRemoteObject;
 import it.polimi.ingsw.Constant;
 import it.polimi.ingsw.Network.messages.Converter;
 import it.polimi.ingsw.Network.messages.Message;
-import it.polimi.ingsw.Network.messages.TimeoutMessage;
 import it.polimi.ingsw.Network.server.RmiServerInterface;
 import it.polimi.ingsw.view.CliView;
 import it.polimi.ingsw.view.GuiView;
@@ -29,7 +28,7 @@ public class RmiClient implements RmiClientInterface{
     private BufferedReader stdIn = null;
     private UI ui = null;
     private RmiServerInterface rmiServerInterface = null;
-    private boolean swichtOff;
+    private boolean switchOff;
 
     public void startRMIClient(String hostName, boolean chooseCliGui) {
         this.stdIn = new BufferedReader(new InputStreamReader(System.in));
@@ -48,14 +47,14 @@ public class RmiClient implements RmiClientInterface{
 
         while(true){
             try {
-                swichtOff = rmiServerInterface.testServerConnection();
-                if(swichtOff){
+                switchOff = rmiServerInterface.testServerConnection();
+ /*               if(switchOff){
                     System.out.println("Connection to the server lost");
                     System.out.println("Client will close now");
                     System.exit(0);
-                }
+                }*/
                 try {
-                    sleep(1500);
+                    sleep(1000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -80,6 +79,11 @@ public class RmiClient implements RmiClientInterface{
     @Override
     public boolean testAliveness() {
         return true;
+    }
+
+    public void stopClient(){
+        System.out.println("Client will close now");
+        System.exit(0);
     }
 
 }

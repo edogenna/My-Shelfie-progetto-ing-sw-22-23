@@ -123,13 +123,15 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * the client is disconnected for some problems or the timeout; so we remove him from lobby and we add him to disconnectedPlayers
+     * the client is disconnected for some problems or the timeout; so we remove him from lobby, and we add him to disconnectedPlayers
      * */
     void removeClient(RmiClientInterface client) {
+        RmiClientInterface removal;
         try {
             int number = getNumber(client);
-            rmiClients.remove(number);
+            removal = rmiClients.remove(number);
             removeClient(number);
+//            removal.stopClient();
         } catch (NoSuchElementException e) {
             //Do nothing
         }
