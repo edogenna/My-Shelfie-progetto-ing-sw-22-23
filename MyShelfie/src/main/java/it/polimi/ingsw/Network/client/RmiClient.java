@@ -29,6 +29,7 @@ public class RmiClient implements RmiClientInterface{
     private UI ui = null;
     private RmiServerInterface rmiServerInterface = null;
     private boolean switchOff;
+    private int id;
 
     public void startRMIClient(String hostName, boolean chooseCliGui) {
         this.stdIn = new BufferedReader(new InputStreamReader(System.in));
@@ -47,12 +48,12 @@ public class RmiClient implements RmiClientInterface{
 
         while(true){
             try {
-                switchOff = rmiServerInterface.testServerConnection();
- /*               if(switchOff){
+                switchOff = rmiServerInterface.testServerConnection(this.id);
+                if(switchOff){
                     System.out.println("Connection to the server lost");
                     System.out.println("Client will close now");
                     System.exit(0);
-                }*/
+                }
                 try {
                     sleep(1000);
                 } catch (InterruptedException e) {
@@ -81,9 +82,15 @@ public class RmiClient implements RmiClientInterface{
         return true;
     }
 
+    @Override
     public void stopClient(){
         System.out.println("Client will close now");
         System.exit(0);
+    }
+
+    @Override
+    public void setId(int number) {
+        this.id = number;
     }
 
 }

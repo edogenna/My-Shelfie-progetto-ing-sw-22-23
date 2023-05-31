@@ -20,18 +20,17 @@ import java.rmi.server.UnicastRemoteObject;
 public class RmiServer implements RmiServerInterface, Runnable{
     private int rmiPort;
     private ServerManager serverManager;
-    private boolean turnOff;
 
     public RmiServer(ServerManager serverManager, int port) throws RemoteException {
         this.serverManager = serverManager;
         this.rmiPort = port;
-//        turnOff = false;
     }
 
     @Override
     public void registry(RmiClientInterface client) throws RemoteException {
         serverManager.addClient(client);
         int number = serverManager.getNumber(client);
+        client.setId(number);
         System.out.println("User " + number + " connected on the RmiServer.");
         new Thread(new ClientManager(serverManager, number)).start();
     }
@@ -69,7 +68,14 @@ public class RmiServer implements RmiServerInterface, Runnable{
     }
 
     @Override
-    public synchronized boolean testServerConnection(){
-        return serverManager.isTimeExceeded();
+    public synchronized boolean testServerConnection(int x){
+        boolean stop;
+
+        if(!serverManager.isDisconnected(x))
+            return false;
+
+        stop = serverManager.stopRmiClient();
+        serverManager.setTimeExceededPt2();
+        return stop;
     }
 }

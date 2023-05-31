@@ -48,6 +48,7 @@ public class ServerManager implements Runnable{
     private boolean win;
     private boolean isTimeExceeded;
     private boolean gameStarted;
+    private boolean isTimeExceededPt2;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -55,6 +56,7 @@ public class ServerManager implements Runnable{
         this.idClient = 0;
         this.win = false;
         this.isTimeExceeded = false;
+        this.isTimeExceededPt2 = false;
         this.gameStarted = false;
     }
 
@@ -74,13 +76,27 @@ public class ServerManager implements Runnable{
         return nicknames.get(playerId);
     }
 
-    protected boolean isTimeExceeded() {
-        return isTimeExceeded;
+    protected boolean stopRmiClient() {
+        return this.isTimeExceededPt2;
+    }
+
+    protected void setTimeExceededPt2(){
+        this.isTimeExceededPt2 = false;
     }
 
     private int getNumberByUsernameFromLobby(String value) {
         for (Map.Entry<Integer, String> entry : lobby.entrySet()) {
             if (entry.getValue().equals(value)) {
+                return entry.getKey();
+            }
+        }
+        return -1;
+    }
+
+    protected int getNumberActivePlayer() {
+        String activeUsername = activeMatch.getActivePlayerUsername();
+        for (Map.Entry<Integer, String> entry : lobby.entrySet()) {
+            if (entry.getValue().equals(activeUsername)) {
                 return entry.getKey();
             }
         }
@@ -226,6 +242,7 @@ public class ServerManager implements Runnable{
         if (isTimeExceeded) {
             //communication.setTimeExceeded();
             if(rmiClients.containsKey(number)){
+                this.isTimeExceededPt2 = true;
                 rmiServer.unregister(rmiClients.get(number));
             }else if(socketClients.containsKey(number))
                 socketServer.unregister(socketClients.get(number));
@@ -549,7 +566,6 @@ public class ServerManager implements Runnable{
     private Controller checkMemoryDisk() throws IOException {
         Model m = loadGame();
 
-        int i = 0;
         boolean samePlayers = true;
 
         if(m!=null) {

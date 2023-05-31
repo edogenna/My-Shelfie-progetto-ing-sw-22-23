@@ -14,4 +14,6 @@ public interface RmiClientInterface extends Remote {
 
     boolean testAliveness() throws RemoteException;
     void stopClient() throws RemoteException;
+
+    void setId(int number) throws RemoteException;
 }
