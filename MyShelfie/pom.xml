@@ -28,6 +28,16 @@
       <artifactId>gson</artifactId>
       <version>2.8.9</version>
     </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>11.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>11.0.2</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -83,6 +93,14 @@
                   <target>18</target>
               </configuration>
           </plugin>
+        <plugin>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-maven-plugin</artifactId>
+          <version>0.0.8</version>
+          <configuration>
+            <mainClass>MyShelfie</mainClass>
+          </configuration>
+        </plugin>
       </plugins>
   </build>
 </project>

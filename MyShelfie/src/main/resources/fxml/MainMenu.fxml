@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.StackPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.GUI.GUI">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.7" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.GUI.GUI">
    <children>
-      <StackPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('/graphics/misc/sfondo_parquet.jpg'); -fx-background-size: cover; -fx-background-position: cernter center; -fx-background-repeat: no-repeat;" />
+      <StackPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('/graphics/misc/sfondo_parquet.jpg'); -fx-background-size: cover; -fx-background-position: center; -fx-background-repeat: no-repeat;" />
    </children>
 </AnchorPane>
