@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -20,7 +18,7 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Button fx:id="loginButton" layoutX="237.0" layoutY="263.0" mnemonicParsing="false" onAction="#login" prefHeight="50.0" prefWidth="87.0" text="Login">
+      <Button fx:id="loginButton" layoutX="237.0" layoutY="263.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="87.0" text="Login">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
