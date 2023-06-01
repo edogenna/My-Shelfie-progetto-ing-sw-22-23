@@ -97,23 +97,6 @@ public class Model {
     }
 
     /**
-    * @return true if there is another player with the same username
-    * 
-    * */
-    @Deprecated
-    public boolean duplicatedUsername(String x){
-        int y = idFirstPlayer;
-        if(y==-1)
-            return false;
-        y = y + 1;
-        for(int i=0; i<y; i++){
-            if(x.equals(players[i].getUsername()))
-                return true;
-        }
-        return false;
-    }
-
-    /**
      * This method generates random Personal Cards which are contained in the class PersonalClass, (all different from one another).
      */
     private void GeneratePersonalCards(){
@@ -151,12 +134,6 @@ public class Model {
         Random xyz = new Random();
         int i;
         i = xyz.nextInt(numPlayers);
-        this.idFirstPlayer = i;
-        this.idActivePlayer = i;
-        this.activePlayer = players[i];
-    }
-
-    public void setFirstPlayer(int i){
         this.idFirstPlayer = i;
         this.idActivePlayer = i;
         this.activePlayer = players[i];

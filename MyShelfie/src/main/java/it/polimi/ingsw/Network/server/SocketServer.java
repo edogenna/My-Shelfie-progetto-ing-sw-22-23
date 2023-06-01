@@ -50,7 +50,7 @@ public class SocketServer implements Runnable{
             return fromClient.get(socket).nextLine();
         } catch (NoSuchElementException e) {
             unregister(socket);
-            return "Unable to reach the client." + e.getMessage();
+            return "Disconnect";
         }
     }
 

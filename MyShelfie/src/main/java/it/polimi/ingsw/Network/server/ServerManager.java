@@ -28,7 +28,7 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 35;
+    private final int secondsDuringTurn = 10;
     private static final String RECONNECT = "Reconnect";
     private static final String DISCONNECT = "Disconnect";
     private static final String GENERIC_ERROR = "Error";
@@ -48,6 +48,7 @@ public class ServerManager implements Runnable{
     private boolean win;
     private boolean isTimeExceeded;
     private boolean gameStarted;
+    private boolean isTimeExceededPt2;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -55,6 +56,7 @@ public class ServerManager implements Runnable{
         this.idClient = 0;
         this.win = false;
         this.isTimeExceeded = false;
+        this.isTimeExceededPt2 = false;
         this.gameStarted = false;
     }
 
@@ -74,13 +76,27 @@ public class ServerManager implements Runnable{
         return nicknames.get(playerId);
     }
 
-    protected boolean isTimeExceeded() {
-        return isTimeExceeded;
+    protected boolean stopRmiClient() {
+        return this.isTimeExceededPt2;
+    }
+
+    protected void setTimeExceededPt2(){
+        this.isTimeExceededPt2 = false;
     }
 
     private int getNumberByUsernameFromLobby(String value) {
         for (Map.Entry<Integer, String> entry : lobby.entrySet()) {
             if (entry.getValue().equals(value)) {
+                return entry.getKey();
+            }
+        }
+        return -1;
+    }
+
+    protected int getNumberActivePlayer() {
+        String activeUsername = activeMatch.getActivePlayerUsername();
+        for (Map.Entry<Integer, String> entry : lobby.entrySet()) {
+            if (entry.getValue().equals(activeUsername)) {
                 return entry.getKey();
             }
         }
@@ -123,13 +139,15 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * the client is disconnected for some problems or the timeout; so we remove him from lobby and we add him to disconnectedPlayers
+     * the client is disconnected for some problems or the timeout; so we remove him from lobby, and we add him to disconnectedPlayers
      * */
     void removeClient(RmiClientInterface client) {
+        RmiClientInterface removal;
         try {
             int number = getNumber(client);
-            rmiClients.remove(number);
+            removal = rmiClients.remove(number);
             removeClient(number);
+//            removal.stopClient();
         } catch (NoSuchElementException e) {
             //Do nothing
         }
@@ -224,6 +242,7 @@ public class ServerManager implements Runnable{
         if (isTimeExceeded) {
             //communication.setTimeExceeded();
             if(rmiClients.containsKey(number)){
+                this.isTimeExceededPt2 = true;
                 rmiServer.unregister(rmiClients.get(number));
             }else if(socketClients.containsKey(number))
                 socketServer.unregister(socketClients.get(number));
@@ -287,7 +306,7 @@ public class ServerManager implements Runnable{
                     oldId = Integer.parseInt(code);
                     if (!switchClientId(oldId, temporaryId))
                         break;
-                    disconnectedPlayers.remove((Object) oldId);
+                    disconnectedPlayers.remove(oldId);
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
                     activeMatch.reconnect(nicknames.get(oldId));
                     break;
@@ -325,9 +344,10 @@ public class ServerManager implements Runnable{
         if (!answerReady.getOrDefault(oldId, false))
             return false;
 
-        //TODO: this is a temporary message, create new message for connection
+        /*//TODO: this is a temporary message, create new message for connection
         //      sendMessageAndWaitForAnswer(oldId, new Message(Protocol.ARE_YOU_ALIVE, "", null));
         sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
+         */
         return isDisconnected(oldId);
     }
 
@@ -404,7 +424,7 @@ public class ServerManager implements Runnable{
 
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
-
+            System.out.println(answer);
             if(!answer.equals(DISCONNECT) && !answer.equals(GENERIC_ERROR)) {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);
@@ -546,7 +566,6 @@ public class ServerManager implements Runnable{
     private Controller checkMemoryDisk() throws IOException {
         Model m = loadGame();
 
-        int i = 0;
         boolean samePlayers = true;
 
         if(m!=null) {

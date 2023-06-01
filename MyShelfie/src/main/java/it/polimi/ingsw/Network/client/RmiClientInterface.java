@@ -13,4 +13,7 @@ public interface RmiClientInterface extends Remote {
     String sendMessageAndGetAnswer(String message) throws IOException;
 
     boolean testAliveness() throws RemoteException;
+    void stopClient() throws RemoteException;
+
+    void setId(int number) throws RemoteException;
 }

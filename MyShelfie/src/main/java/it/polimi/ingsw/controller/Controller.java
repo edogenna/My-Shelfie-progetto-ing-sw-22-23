@@ -70,7 +70,7 @@ public class Controller {
                     //view.dummyInputPrint();
                     return true;
                 }
-            }else if(i%2 != 0){
+            }else {
                 //the character must be between '0' and '8'
                 if(coordinates[i].charAt(0) < '0' || coordinates[i].charAt(0) > '8'){
                     //view.dummyInputPrint();
