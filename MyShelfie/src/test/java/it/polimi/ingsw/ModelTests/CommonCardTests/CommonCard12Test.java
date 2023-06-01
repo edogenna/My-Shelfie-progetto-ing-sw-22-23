@@ -89,7 +89,7 @@ public class CommonCard12Test {
         insertColumn(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.PURPLE1, ItemEnum.AZURE1, ItemEnum.WHITE1);
         insertColumn(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.PURPLE1, ItemEnum.PURPLE1);
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW1, ItemEnum.PURPLE1);
-        Assert.assertFalse(c.checkBookshelf(matrix));
+        Assert.assertTrue(c.checkBookshelf(matrix));
 
         //NOT DECREASING SCALE
         insertColumn(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.AZURE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
@@ -97,7 +97,7 @@ public class CommonCard12Test {
         insertColumn(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         insertColumn(3, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         insertColumn(4, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
-        Assert.assertFalse(c.checkBookshelf(matrix));
+        Assert.assertTrue(c.checkBookshelf(matrix));
 
         //NOT INCREASING SCALE
         insertColumn(0, ItemEnum.GREEN1, ItemEnum.PURPLE1, ItemEnum.AZURE1, ItemEnum.PURPLE1, ItemEnum.PURPLE1, ItemEnum.PURPLE1);
@@ -105,7 +105,7 @@ public class CommonCard12Test {
         insertColumn(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW1, ItemEnum.PURPLE1, ItemEnum.AZURE1, ItemEnum.WHITE1);
         insertColumn(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.WHITE1, ItemEnum.PURPLE1, ItemEnum.PURPLE1);
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.YELLOW1, ItemEnum.PURPLE1);
-        Assert.assertFalse(c.checkBookshelf(matrix));
+        Assert.assertTrue(c.checkBookshelf(matrix));
 
         //NOT DECREASING SCALE
         insertColumn(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.AZURE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
@@ -113,6 +113,13 @@ public class CommonCard12Test {
         insertColumn(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         insertColumn(3, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        Assert.assertTrue(c.checkBookshelf(matrix));
+
+        insertColumn(0, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(1, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(2, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(3, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
+        insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
     }
