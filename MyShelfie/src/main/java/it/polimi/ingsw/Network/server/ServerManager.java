@@ -28,7 +28,7 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 10;
+    private final int secondsDuringTurn = 30;
     private static final String RECONNECT = "Reconnect";
     private static final String DISCONNECT = "Disconnect";
     private static final String GENERIC_ERROR = "Error";
@@ -283,7 +283,7 @@ public class ServerManager implements Runnable{
         notifyNewConnection(this.numberOfPlayers);
 
         if(lobby.size() == this.numberOfPlayers && !gameStarted){
-            gameStarted = true;
+            this.gameStarted = true;
             startGame();
         }
     }
@@ -303,9 +303,11 @@ public class ServerManager implements Runnable{
                 if (code.equals(GENERIC_ERROR))
                     break;
                 if (checkIfDisconnected(code)) {
+                    System.out.println("l'user era disconnesso");
                     oldId = Integer.parseInt(code);
                     if (!switchClientId(oldId, temporaryId))
                         break;
+                    System.out.println("switchClient true");
                     disconnectedPlayers.remove(oldId);
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
                     activeMatch.reconnect(nicknames.get(oldId));
@@ -314,7 +316,10 @@ public class ServerManager implements Runnable{
                     sendMessageAndWaitForAnswer(temporaryId, new OldIdNotValid());
                 }
             } else {
-                if(gameStarted){
+                if(!this.gameStarted){
+                    addClientToLobby(temporaryId);
+                    break;
+                }else if(!this.isAvaibleSpace()){
                     sendMessageAndWaitForAnswer(temporaryId, new RefusedConnectionMessage());
                     if(rmiClients.containsKey(temporaryId)){
                         rmiServer.unregister(rmiClients.get(temporaryId));
@@ -349,6 +354,10 @@ public class ServerManager implements Runnable{
         sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
          */
         return isDisconnected(oldId);
+    }
+
+    private boolean isAvaibleSpace(){
+        return lobby.size() < this.numberOfPlayers;
     }
 
     /**
