@@ -9,7 +9,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.polimi.ingsw.GUI.GUI"
+            fx:controller="it.polimi.ingsw.GUI.GUI_old"
             prefHeight="400.0" prefWidth="600.0"
             >
 
@@ -25,7 +25,7 @@
                 <Font name="Britannic Bold" size="36.0" />
             </font>
         </Button>
-        <Button fx:id="quitGame" layoutX="390.0" layoutY="327.0" mnemonicParsing="false" onAction="#quit" styleClass="actionButton" stylesheets="@../css/mainMenu.css" text="QUIT" textFill="WHITE">
+        <Button fx:id="quitGame" layoutX="390.0" layoutY="327.0" mnemonicParsing="false" styleClass="actionButton" stylesheets="@../css/mainMenu.css" text="QUIT" textFill="WHITE">
             <font>
                 <Font name="Britannic Bold" size="36.0" />
             </font>

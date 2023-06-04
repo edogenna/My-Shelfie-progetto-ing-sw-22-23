@@ -31,12 +31,15 @@ public class RmiClient implements RmiClientInterface{
     private boolean switchOff;
     private int id;
 
-    public void startRMIClient(String hostName, boolean chooseCliGui) {
+    public void startRMIClient(String hostName, boolean chooseCliGui, String[] args) {
         this.stdIn = new BufferedReader(new InputStreamReader(System.in));
 
-        if (chooseCliGui)
+        if (chooseCliGui) {
             ui = new GuiView();
-        else ui = new CliView(null, null, stdIn);
+            ui.setInAndOut(null, null);
+            ((GuiView) ui).main(args);
+        }else
+            ui = new CliView(null, null, stdIn);
 
         try {
             rmiServerInterface = (RmiServerInterface) LocateRegistry.getRegistry(hostName, Constant.PORT_RMI_GAME).lookup("MyShelfie");

@@ -39,7 +39,7 @@ public class MyShelfie {
             if (stdIn.readLine().equals("0"))
                 new SocketClient().startSocketClient(hostName, chooseCliGui, args);
             else
-                new RmiClient().startRMIClient(hostName, chooseCliGui);
+                new RmiClient().startRMIClient(hostName, chooseCliGui, args);
 
         }else{
             new Server().startServer();

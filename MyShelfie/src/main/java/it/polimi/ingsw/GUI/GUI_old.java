@@ -1,7 +1,6 @@
 package it.polimi.ingsw.GUI;
 
 
-import it.polimi.ingsw.view.GuiView;
 import javafx.application.Application;
 import javafx.scene.ImageCursor;
 import javafx.scene.image.Image;
@@ -12,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 
-public class GUI extends Application {
+public class GUI_old extends Application {
     private Stage window;
     private Scene basicScene;
 

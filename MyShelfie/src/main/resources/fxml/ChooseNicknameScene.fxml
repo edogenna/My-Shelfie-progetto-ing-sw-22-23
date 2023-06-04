@@ -10,7 +10,7 @@
 
 <Pane fx:id="basePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="561.0" styleClass="background" stylesheets="@../css/ChooseNick.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.GUI.controllers.FXMLChooseNickController">
    <children>
-      <Label layoutX="100.0" layoutY="69.0" prefHeight="79.0" prefWidth="362.0" text="Choose your nickname" textAlignment="CENTER" textFill="WHITE">
+      <Label layoutX="27.0" layoutY="70.0" prefHeight="71.0" prefWidth="528.0" text="Choose your nickname" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Vivaldi Italic" size="48.0" />
          </font></Label>
@@ -28,7 +28,7 @@
          <effect>
             <DropShadow />
          </effect></Button>
-      <TextField fx:id="loginTextBox" layoutX="91.0" layoutY="169.0" onAction="#login" prefHeight="63.0" prefWidth="380.0" promptText="Nickname">
+      <TextField fx:id="loginTextBox" layoutX="91.0" layoutY="169.0" prefHeight="63.0" prefWidth="380.0" promptText="Nickname">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>

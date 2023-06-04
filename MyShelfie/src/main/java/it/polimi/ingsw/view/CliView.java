@@ -45,9 +45,6 @@ public class CliView implements UI{
     @Override
     public void setInAndOut(PrintWriter out, BufferedReader in){//Do nothing
     }
-    @Override
-    public void main(String[] args) throws IOException {//Do nothing
-    }
 
     /**
      * This method decides how to handle a certain message received by the client

@@ -37,17 +37,17 @@ public class FXMLChooseNickController  implements Initializable {
     private TextField numPlayers;
     @FXML
     private Label wrongNumPlayers;
+    @FXML
+    private TextField loginTextBox;
 
     private String username;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        wrongUsername.setVisible(false);
-        firstPlayerMessage.setVisible(false);
-        wrongNumPlayers.setVisible(false);
+        loginErrorLabel.setVisible(false);
         loginButton.setOnAction(event -> {
-            username = nickname.getText();
+            username = loginTextBox.getText();
         });
     }
 
@@ -56,13 +56,8 @@ public class FXMLChooseNickController  implements Initializable {
     }
 
     public void setWrongUsername(String s) {
-        wrongUsername.setText(s);
-        wrongUsername.setVisible(true);
-    }
-
-
-    public String getNumPlayers() {
-        return numPlayers.getText();
+        loginErrorLabel.setText(s);
+        loginErrorLabel.setVisible(true);
     }
 
 }

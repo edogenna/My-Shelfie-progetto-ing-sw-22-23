@@ -11,6 +11,7 @@ import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMes
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.model.Card;
 import javafx.application.Application;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -38,6 +39,7 @@ public class GuiView extends Application implements UI {
     private BufferedReader in;
     private String userInput;
     private String messageToServer;
+    private Scene basicScene;
     private Stage stage;
     private FXMLChooseNickController fxmlChooseNickController;
     private FXMLFirstPlayerController fxmlFirstPlayerController;
@@ -62,14 +64,23 @@ public class GuiView extends Application implements UI {
         this.out = out;
         this.in = in;
     }
+
     public void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = (new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"))).load();
-        stage.setScene(new Scene(root, 300, 275));
+        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNicknameScene.fxml"))).load();
+        basicScene = new Scene(root);
+        basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
+
+        stage.setScene(basicScene);
+        stage.getIcons().add(new Image("/graphics/icon.png"));
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
+        stage.setResizable(true);
+
         stage.setTitle("MyShelfie");
 
         stage.show();
@@ -87,7 +98,7 @@ public class GuiView extends Application implements UI {
     private void changeScene(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 
-}
+    }
 
 
     /**
