@@ -28,7 +28,7 @@ public class ServerManager implements Runnable{
     private static final int DEFAULT_BOARD = 1;
     private static final int MILLIS_TO_WAIT = 10;
     private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 10;
+    private final int secondsDuringTurn = 30;
     private static final String RECONNECT = "Reconnect";
     private static final String DISCONNECT = "Disconnect";
     private static final String GENERIC_ERROR = "Error";
@@ -303,7 +303,7 @@ public class ServerManager implements Runnable{
                 if (code.equals(GENERIC_ERROR))
                     break;
                 if (checkIfDisconnected(code)) {
-                    System.out.println("l'user era disconnesso");
+                    System.out.println("user was disconnected");
                     oldId = Integer.parseInt(code);
                     if (!switchClientId(oldId, temporaryId))
                         break;
@@ -339,11 +339,17 @@ public class ServerManager implements Runnable{
      * */
     private boolean checkIfDisconnected(String code) {
         int oldId;
+        System.out.println("I'm in check disconnection");
         try {
             oldId = Integer.parseInt(code);
+            System.out.println("the inserted id is: "+ oldId);
         } catch (NumberFormatException e) {
             return false;
         }
+        System.out.print("disconnected Players: ");
+        for (Integer disconnectedPlayer : disconnectedPlayers)
+            System.out.print(disconnectedPlayer);
+        System.out.println();
         if (isDisconnected(oldId))
             return true;
         if (!answerReady.getOrDefault(oldId, false))
@@ -515,7 +521,9 @@ public class ServerManager implements Runnable{
      * @param code the id of the player
      * @return true if the player was disconnected
      * */
-    public boolean isDisconnected(int code){
+//TODO: we have problem for the reconnection here!!
+    public synchronized boolean isDisconnected(Integer code){
+        System.out.println("I'm in isDisconnected?? " + code);
         return disconnectedPlayers.contains(code);
     }
 
