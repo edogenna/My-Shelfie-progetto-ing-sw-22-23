@@ -53,9 +53,9 @@ public enum ItemEnum {
 
         for(int i = 0; i < r; i++){
             for(int j = 0; j < c; j++){
-                System.out.print(m[i][j].label + Constant.square + " " + ItemEnum.RESET);
+                System.out.print(m[i][j].label + Constants.square + " " + ItemEnum.RESET);
             }
-            System.out.print(" "+ Constant.toChar(i) + "\n");
+            System.out.print(" "+ Constants.toChar(i) + "\n");
         }
     }
 
@@ -67,7 +67,7 @@ public enum ItemEnum {
             s = "";
             for (int j = 0; j < c; j++) {
                 s = s.concat(mEnum[i][j].label)
-                        .concat(Constant.square)
+                        .concat(Constants.square)
                         .concat(ItemEnum.RESET)
                         .concat(" ");
             }

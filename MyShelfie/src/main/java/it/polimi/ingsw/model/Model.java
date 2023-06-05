@@ -1,14 +1,12 @@
 package it.polimi.ingsw.model;
 
 import com.google.gson.annotations.Expose;
+import it.polimi.ingsw.Constants;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.Converter;
-import it.polimi.ingsw.Network.server.ServerManager;
 import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 
 import java.util.Random;
-
-import static it.polimi.ingsw.Constant.MIN_PLAYERS;
 
 /**
  * This class implements the logic of the game
@@ -538,7 +536,7 @@ public class Model {
                 counter++;
             }
         }
-        if(counter < MIN_PLAYERS){
+        if(counter < Constants.MIN_PLAYERS){
             this.stopMatch = true;
         }
 

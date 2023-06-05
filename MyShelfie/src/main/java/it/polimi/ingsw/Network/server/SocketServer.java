@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Constant;
-import it.polimi.ingsw.Network.messages.*;
-import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.Constants;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -57,7 +55,7 @@ public class SocketServer implements Runnable{
     @Override
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(this.portNumber)) {
-            System.out.println("SocketServer has started on port: "+ Constant.PORT_SOCKET_GAME);
+            System.out.println("SocketServer has started on port: "+ Constants.PORT_SOCKET_GAME);
             while (true) {
                 Socket client = serverSocket.accept();
                 registry(client);

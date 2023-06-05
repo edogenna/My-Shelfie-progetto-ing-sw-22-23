@@ -1,9 +1,7 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Constant;
+import it.polimi.ingsw.Constants;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
-import it.polimi.ingsw.Network.messages.ChooseUsernameMessage;
-import it.polimi.ingsw.Network.messages.Converter;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -60,7 +58,7 @@ public class RmiServer implements RmiServerInterface, Runnable{
             RmiServerInterface remoteObject = (RmiServerInterface) UnicastRemoteObject.exportObject(this, 0);
             LocateRegistry.createRegistry(this.rmiPort);
             LocateRegistry.getRegistry(this.rmiPort).bind("MyShelfie", remoteObject);
-            System.out.println("RmiServer started on port: " + Constant.PORT_RMI_GAME);
+            System.out.println("RmiServer started on port: " + Constants.PORT_RMI_GAME);
         } catch (UnknownHostException | RemoteException | AlreadyBoundException e) {
             System.out.println(e.getMessage());
             System.exit(0);

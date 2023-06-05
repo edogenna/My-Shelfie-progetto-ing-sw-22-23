@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.client;
 
-import it.polimi.ingsw.Constant;
+import it.polimi.ingsw.Constants;
 import it.polimi.ingsw.Network.messages.*;
 ;
 import it.polimi.ingsw.view.CliView;
@@ -14,6 +14,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 
+import static java.lang.Thread.sleep;
+
 /**
  * This class represents a socket client implementation
  * @author Alessandro Fornara
@@ -26,11 +28,12 @@ public class SocketClient{
     private BufferedReader in = null;
     private BufferedReader stdIn = null;
     private UI ui = null;
+    private Thread timer;
 
     public void startSocketClient(String hostName, boolean chooseCliGui, String[] args) throws IOException {
         try {
             try {
-                this.socket = new Socket(hostName, Constant.PORT_SOCKET_GAME);
+                this.socket = new Socket(hostName, Constants.PORT_SOCKET_GAME);
                 this.out = new PrintWriter(socket.getOutputStream(), true);
                 this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 this.stdIn = new BufferedReader(new InputStreamReader(System.in));
@@ -52,7 +55,9 @@ public class SocketClient{
             while (true) {
                 String message = in.readLine();
                 Message m = Converter.convertFromJSON(message);
+                startTimer();
                 ui.actionHandler(m);
+                stopTimer();
             }
 
         }catch (SocketException e){
@@ -62,5 +67,30 @@ public class SocketClient{
             stdIn.close();
             System.exit(0);
         }
+    }
+
+    private void startTimer(){
+        this.timer = new Thread(()->{
+            int counter = 0;
+
+            while(true) {
+                try {
+                    sleep(Constants.MILLIS_TO_WAIT);
+                    counter++;
+                    System.out.println(counter);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                if (counter > Constants.secondsDuringTurn * Constants.MILLIS_IN_SECOND / Constants.MILLIS_TO_WAIT) {
+                    System.out.println("Time out, client will close now");
+                    System.exit(0);
+                }
+            }
+        });
+        this.timer.start();
+    }
+
+    private void stopTimer(){
+        this.timer.interrupt();
     }
 }

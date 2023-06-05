@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network.server;
 
-import it.polimi.ingsw.Constant;
+import it.polimi.ingsw.Constants;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.*;
@@ -15,7 +15,6 @@ import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
 
-import static it.polimi.ingsw.Constant.MIN_PLAYERS;
 import static java.lang.Thread.sleep;
 
 /**
@@ -24,14 +23,6 @@ import static java.lang.Thread.sleep;
  * @author Donato Fiore
  */
 public class ServerManager implements Runnable{
-    private static final int MAX_PLAYERS = 4;
-    private static final int DEFAULT_BOARD = 1;
-    private static final int MILLIS_TO_WAIT = 10;
-    private static final int MILLIS_IN_SECOND = 1000;
-    private final int secondsDuringTurn = 30;
-    private static final String RECONNECT = "Reconnect";
-    private static final String DISCONNECT = "Disconnect";
-    private static final String GENERIC_ERROR = "Error";
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
@@ -161,7 +152,7 @@ public class ServerManager implements Runnable{
             removeClientFromLobby(number);
         }
         disconnectedPlayers.add(number);
-        if (!activeMatch.isDisconnected(nicknames.get(number))){
+        if (this.gameStarted && !activeMatch.isDisconnected(nicknames.get(number))){
             System.out.println("controller set disconnected");
             activeMatch.disconnect(nicknames.get(number));
         }
@@ -184,7 +175,7 @@ public class ServerManager implements Runnable{
         String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
             try {
-                sleep(MILLIS_TO_WAIT);
+                sleep(Constants.MILLIS_TO_WAIT);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -199,7 +190,7 @@ public class ServerManager implements Runnable{
             new Thread(communication).start();
         } else {
             System.out.println("Unregistered Client");
-            return GENERIC_ERROR;
+            return Constants.GENERIC_ERROR;
         }
 
         this.isTimeExceeded = false;
@@ -207,32 +198,32 @@ public class ServerManager implements Runnable{
 
         while (!answerReady.get(number)) {
             try {
-                sleep(MILLIS_TO_WAIT);
+                sleep(Constants.MILLIS_TO_WAIT);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
             counter++;
-            if (counter % MILLIS_TO_WAIT == 0) {
+            if (counter % Constants.MILLIS_TO_WAIT == 0) {
                 if (rmiClients.containsKey(number)) {
                     try {
                         rmiClients.get(number).testAliveness();
                     } catch (RemoteException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
                         rmiServer.unregister(rmiClients.get(number));
-                        return GENERIC_ERROR;
+                        return Constants.GENERIC_ERROR;
                     }
                 }
                 if (socketClients.containsKey(number)) {
                     try {
-                        socketClients.get(number).getInetAddress().isReachable(MILLIS_IN_SECOND);
+                        socketClients.get(number).getInetAddress().isReachable(Constants.MILLIS_IN_SECOND);
                     } catch (IOException e) {
                         System.out.println("Unable to reach client " + e.getMessage());
                         socketServer.unregister(socketClients.get(number));
-                        return GENERIC_ERROR;
+                        return Constants.GENERIC_ERROR;
                     }
                 }
             }
-            if (counter > secondsDuringTurn * MILLIS_IN_SECOND / MILLIS_TO_WAIT) {
+            if (counter > Constants.secondsDuringTurn * Constants.MILLIS_IN_SECOND / Constants.MILLIS_TO_WAIT) {
                 System.out.println("expired time in sendMessageAndWaitForAnswer");
                 isTimeExceeded = true;
                 break;
@@ -247,7 +238,7 @@ public class ServerManager implements Runnable{
             }else if(socketClients.containsKey(number))
                 socketServer.unregister(socketClients.get(number));
 
-            return DISCONNECT;
+            return Constants.DISCONNECT;
 
         }
         return answers.get(number);
@@ -260,10 +251,15 @@ public class ServerManager implements Runnable{
      */
     private String login(int number){
         String answer = sendMessageAndWaitForAnswer(number, new ChooseUsernameMessage());
+        if(answer.equals(Constants.DISCONNECT) || answer.equals(Constants.GENERIC_ERROR))
+            return answer;
         Message m = Converter.convertFromJSON(answer);
 
         while (isUsernameTaken(((UsernameAnswer) m).getString(), number)){
             answer = sendMessageAndWaitForAnswer(number, new NotValidUsernameError());
+
+            if(answer.equals(Constants.DISCONNECT) || answer.equals(Constants.GENERIC_ERROR))
+                return answer;
             m = Converter.convertFromJSON(answer);
         }
         return ((UsernameAnswer) m).getString();
@@ -271,11 +267,15 @@ public class ServerManager implements Runnable{
 
     protected void addClientToLobby(int number) throws IOException {
         String username = login(number);
+        if(username.equals(Constants.DISCONNECT))
+            return ;
         sendMessageAndWaitForAnswer(number, new UserIdMessage(number));
 
         if(this.firstPlayer){
             this.firstPlayer = false;
             String answer = sendMessageAndWaitForAnswer(number, new FirstPlayerMessage());
+            if(answer.equals(Constants.DISCONNECT) || answer.equals(Constants.GENERIC_ERROR))
+                return ;
             Message m = Converter.convertFromJSON(answer);
             this.numberOfPlayers = ((NumberOfPlayersAnswer) m).getNum();
         }
@@ -293,14 +293,13 @@ public class ServerManager implements Runnable{
         int oldId;
         while (true) {
             String answer = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
-            Message m = Converter.convertFromJSON(answer);
-            if (answer.equals(GENERIC_ERROR)){
-                //this maybe will never enter
+            if(answer.equals(Constants.DISCONNECT) || answer.equals(Constants.GENERIC_ERROR))
                 break;
-            }else if(((ReconnectionAnswer) m).getString().equals(RECONNECT)) {
+            Message m = Converter.convertFromJSON(answer);
+            if(((ReconnectionAnswer) m).getString().equals(Constants.RECONNECT)) {
                 code = sendMessageAndWaitForAnswer(temporaryId, new OldGameId());
                 //TODO: insert a try{}catch(...) in OldGameId answer, so you set the answer like "ERR";
-                if (code.equals(GENERIC_ERROR))
+                if (code.equals(Constants.GENERIC_ERROR))
                     break;
                 if (checkIfDisconnected(code)) {
                     System.out.println("user was disconnected");
@@ -319,7 +318,7 @@ public class ServerManager implements Runnable{
                 if(!this.gameStarted){
                     addClientToLobby(temporaryId);
                     break;
-                }else if(!this.isAvaibleSpace()){
+                }else if(!this.isAvailableSpace()){
                     sendMessageAndWaitForAnswer(temporaryId, new RefusedConnectionMessage());
                     if(rmiClients.containsKey(temporaryId)){
                         rmiServer.unregister(rmiClients.get(temporaryId));
@@ -362,7 +361,7 @@ public class ServerManager implements Runnable{
         return isDisconnected(oldId);
     }
 
-    private boolean isAvaibleSpace(){
+    private boolean isAvailableSpace(){
         return lobby.size() < this.numberOfPlayers;
     }
 
@@ -440,7 +439,7 @@ public class ServerManager implements Runnable{
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
             System.out.println(answer);
-            if(!answer.equals(DISCONNECT) && !answer.equals(GENERIC_ERROR)) {
+            if(!answer.equals(Constants.DISCONNECT) && !answer.equals(Constants.GENERIC_ERROR)) {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);
             }
@@ -529,9 +528,9 @@ public class ServerManager implements Runnable{
 
     @Override
     public void run() {
-        socketServer = new SocketServer(this, Constant.PORT_SOCKET_GAME);
+        socketServer = new SocketServer(this, Constants.PORT_SOCKET_GAME);
         try {
-            rmiServer = new RmiServer(this, Constant.PORT_RMI_GAME);
+            rmiServer = new RmiServer(this, Constants.PORT_RMI_GAME);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

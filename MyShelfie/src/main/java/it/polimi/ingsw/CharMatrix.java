@@ -91,7 +91,7 @@ public class CharMatrix {
 
         //adding headers for rows
         for(int j = 1; j < m.size(); j++)
-            m.set(j, m.get(j).concat(" " + Constant.toString(j-1)));
+            m.set(j, m.get(j).concat(" " + Constants.toString(j-1)));
 
         return this;
     }
@@ -118,7 +118,7 @@ public class CharMatrix {
     public CharMatrix addRowsNumbering(){
         //adding headers for rows
         for(int j = 1; j < m.size(); j++)
-            m.set(j, m.get(j).concat(" " + Constant.toString(j-1)));
+            m.set(j, m.get(j).concat(" " + Constants.toString(j-1)));
 
         return this;
     }
