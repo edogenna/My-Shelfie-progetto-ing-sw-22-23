@@ -300,7 +300,7 @@ public class ServerManager implements Runnable{
             if(((ReconnectionAnswer) m).getString().equals(Constants.RECONNECT)) {
                 code = sendMessageAndWaitForAnswer(temporaryId, new OldGameId());
                 //TODO: insert a try{}catch(...) in OldGameId answer, so you set the answer like "ERR";
-                if (code.equals(Constants.GENERIC_ERROR))
+                if (code.equals(Constants.GENERIC_ERROR) || code.equals(Constants.DISCONNECT))
                     break;
                 if (checkIfDisconnected(code)) {
                     System.out.println("user was disconnected");
