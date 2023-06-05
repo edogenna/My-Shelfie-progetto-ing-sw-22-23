@@ -272,12 +272,13 @@ public class ServerManager implements Runnable{
         sendMessageAndWaitForAnswer(number, new UserIdMessage(number));
 
         if(this.firstPlayer){
-            this.firstPlayer = false;
             String answer = sendMessageAndWaitForAnswer(number, new FirstPlayerMessage());
-            if(answer.equals(Constants.DISCONNECT) || answer.equals(Constants.GENERIC_ERROR))
-                return ;
+            if(answer.equals(Constants.DISCONNECT) || answer.equals(Constants.GENERIC_ERROR)) {
+                return;
+            }
             Message m = Converter.convertFromJSON(answer);
             this.numberOfPlayers = ((NumberOfPlayersAnswer) m).getNum();
+            this.firstPlayer = false;
         }
         lobby.put(number, username);
         notifyNewConnection(this.numberOfPlayers);
