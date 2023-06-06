@@ -315,6 +315,7 @@ public class ServerManager implements Runnable{
                         break;
                     System.out.println("switchClient true");
                     disconnectedPlayers.remove(Integer.valueOf(oldId));
+                    lobby.put(oldId, nicknames.get(oldId));
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
                     activeMatch.reconnect(nicknames.get(oldId));
                     break;
