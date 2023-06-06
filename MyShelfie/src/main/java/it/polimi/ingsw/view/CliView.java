@@ -394,7 +394,7 @@ public class CliView implements UI{
     private void handleOldGameIdMessage(Message m) throws IOException {
         outputStream.println(((OldGameId) m).getS());
         this.userInput = stdIn.readLine();
-        while (userInput.length()!=1 || (userInput.charAt(0) < '0' || userInput.charAt(0) > '1')) {
+        while (userInput.length()!=1 || (userInput.charAt(0) < '0' || userInput.charAt(0) > '9')) {
             outputStream.println("Insert a number");
             userInput = stdIn.readLine();
         }

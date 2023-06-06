@@ -14,6 +14,7 @@ import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
+import java.util.concurrent.Semaphore;
 
 import static java.lang.Thread.sleep;
 
@@ -40,6 +41,7 @@ public class ServerManager implements Runnable{
     private boolean isTimeExceeded;
     private boolean gameStarted;
     private boolean isTimeExceededPt2;
+    private Semaphore lock1;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -49,6 +51,7 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         this.isTimeExceededPt2 = false;
         this.gameStarted = false;
+        this.lock1 = new Semaphore(1);
     }
 
     void addClient(Socket client) {
@@ -136,9 +139,8 @@ public class ServerManager implements Runnable{
         RmiClientInterface removal;
         try {
             int number = getNumber(client);
-            removal = rmiClients.remove(number);
+            rmiClients.remove(number);
             removeClient(number);
-//            removal.stopClient();
         } catch (NoSuchElementException e) {
             //Do nothing
         }
@@ -151,7 +153,8 @@ public class ServerManager implements Runnable{
         if (lobby.containsKey(number)){
             removeClientFromLobby(number);
         }
-        disconnectedPlayers.add(number);
+        this.disconnectedPlayers.add(number);
+        System.out.println("DisconnectedPlayers");
         if (this.gameStarted && !activeMatch.isDisconnected(nicknames.get(number))){
             System.out.println("controller set disconnected");
             activeMatch.disconnect(nicknames.get(number));
@@ -292,23 +295,26 @@ public class ServerManager implements Runnable{
     void addClientToLog(int temporaryId) throws IOException {
         String code;
         int oldId;
+        Message m;
         while (true) {
             String answer = sendMessageAndWaitForAnswer(temporaryId, new ReconnectionMessage());
             if(answer.equals(Constants.DISCONNECT) || answer.equals(Constants.GENERIC_ERROR))
                 break;
-            Message m = Converter.convertFromJSON(answer);
+            m = Converter.convertFromJSON(answer);
             if(((ReconnectionAnswer) m).getString().equals(Constants.RECONNECT)) {
                 code = sendMessageAndWaitForAnswer(temporaryId, new OldGameId());
                 //TODO: insert a try{}catch(...) in OldGameId answer, so you set the answer like "ERR";
                 if (code.equals(Constants.GENERIC_ERROR) || code.equals(Constants.DISCONNECT))
                     break;
-                if (checkIfDisconnected(code)) {
+                m = Converter.convertFromJSON(code);
+                oldId = ((OldGameIdAnswer) m).getId();
+                if (checkIfDisconnected(oldId)) {
                     System.out.println("user was disconnected");
-                    oldId = Integer.parseInt(code);
+
                     if (!switchClientId(oldId, temporaryId))
                         break;
                     System.out.println("switchClient true");
-                    disconnectedPlayers.remove(oldId);
+                    disconnectedPlayers.remove(Integer.valueOf(oldId));
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
                     activeMatch.reconnect(nicknames.get(oldId));
                     break;
@@ -337,29 +343,28 @@ public class ServerManager implements Runnable{
      * @param code the id of the player
      * @return true if the player had been disconnected
      * */
-    private boolean checkIfDisconnected(String code) {
-        int oldId;
-        System.out.println("I'm in check disconnection");
-        try {
+    private boolean checkIfDisconnected(int code) {
+        System.out.println("I'm in check disconnection " + code);
+        /*try {
             oldId = Integer.parseInt(code);
             System.out.println("the inserted id is: "+ oldId);
         } catch (NumberFormatException e) {
             return false;
-        }
+        }*/
         System.out.print("disconnected Players: ");
         for (Integer disconnectedPlayer : disconnectedPlayers)
             System.out.print(disconnectedPlayer);
         System.out.println();
-        if (isDisconnected(oldId))
+        if (isDisconnected(code))
             return true;
-        if (!answerReady.getOrDefault(oldId, false))
+        if (!answerReady.getOrDefault(code, false))
             return false;
 
         /*//TODO: this is a temporary message, create new message for connection
         //      sendMessageAndWaitForAnswer(oldId, new Message(Protocol.ARE_YOU_ALIVE, "", null));
         sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
          */
-        return isDisconnected(oldId);
+        return isDisconnected(code);
     }
 
     private boolean isAvailableSpace(){
@@ -521,9 +526,8 @@ public class ServerManager implements Runnable{
      * @param code the id of the player
      * @return true if the player was disconnected
      * */
-//TODO: we have problem for the reconnection here!!
-    public synchronized boolean isDisconnected(Integer code){
-        System.out.println("I'm in isDisconnected?? " + code);
+    public boolean isDisconnected(Integer code){
+        //System.out.println("I'm in isDisconnected?? " + code);
         return disconnectedPlayers.contains(code);
     }
 

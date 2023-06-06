@@ -63,7 +63,7 @@ public class Converter {
             case "NotValidUsername" -> gson.fromJson(message, NotValidUsernameError.class);
             case "NumberOfPlayers" -> gson.fromJson(message, NumberOfPlayersAnswer.class);
             case "OldGameId" -> gson.fromJson(message, OldGameId.class);
-            case "OldGameIdAnswer" -> gson.fromJson(message, OldGameId.class);
+            case "OldGameIdAnswer" -> gson.fromJson(message, OldGameIdAnswer.class);
             case "OldIdNotValid" -> gson.fromJson(message, OldIdNotValid.class);
             case "Reconnect" -> gson.fromJson(message, ReconnectionMessage.class);
             case "ReconnectionAnswer" -> gson.fromJson(message, ReconnectionAnswer.class);

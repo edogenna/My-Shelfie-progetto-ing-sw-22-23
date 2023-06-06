@@ -54,8 +54,8 @@ public class SocketClient{
 
             while (true) {
                 String message = in.readLine();
-                Message m = Converter.convertFromJSON(message);
                 startTimer();
+                Message m = Converter.convertFromJSON(message);
                 ui.actionHandler(m);
                 stopTimer();
             }
