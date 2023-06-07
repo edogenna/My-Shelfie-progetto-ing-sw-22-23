@@ -41,7 +41,6 @@ public class ServerManager implements Runnable{
     private boolean isTimeExceeded;
     private boolean gameStarted;
     private boolean isTimeExceededPt2;
-    private Semaphore lock1;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -51,7 +50,6 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         this.isTimeExceededPt2 = false;
         this.gameStarted = false;
-        this.lock1 = new Semaphore(1);
     }
 
     void addClient(Socket client) {
@@ -136,7 +134,6 @@ public class ServerManager implements Runnable{
      * the client is disconnected for some problems or the timeout; so we remove him from lobby, and we add him to disconnectedPlayers
      * */
     void removeClient(RmiClientInterface client) {
-        RmiClientInterface removal;
         try {
             int number = getNumber(client);
             rmiClients.remove(number);
@@ -148,7 +145,7 @@ public class ServerManager implements Runnable{
 
     //TODO: finish
     private void removeClient(int number) {
-        System.out.println("remove Client method with number: " + number);
+        //todo: there are some useless if, but it depends on the new logout format
         if (lobby.containsKey(number)){
             removeClientFromLobby(number);
         }
@@ -311,6 +308,7 @@ public class ServerManager implements Runnable{
 
                     if (!switchClientId(oldId, temporaryId))
                         break;
+                    System.out.println("switchClient true");
                     disconnectedPlayers.remove(Integer.valueOf(oldId));
                     lobby.put(oldId, nicknames.get(oldId));
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
@@ -342,6 +340,13 @@ public class ServerManager implements Runnable{
      * @return true if the player had been disconnected
      * */
     private boolean checkIfDisconnected(int code) {
+        System.out.println("I'm in check disconnection " + code);
+        /*try {
+            oldId = Integer.parseInt(code);
+            System.out.println("the inserted id is: "+ oldId);
+        } catch (NumberFormatException e) {
+            return false;
+        }*/
         System.out.print("disconnected Players: ");
         for (Integer disconnectedPlayer : disconnectedPlayers)
             System.out.print(disconnectedPlayer);
@@ -351,6 +356,10 @@ public class ServerManager implements Runnable{
         if (!answerReady.getOrDefault(code, false))
             return false;
 
+        /*//TODO: this is a temporary message, create new message for connection
+        //      sendMessageAndWaitForAnswer(oldId, new Message(Protocol.ARE_YOU_ALIVE, "", null));
+        sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
+         */
         return isDisconnected(code);
     }
 
