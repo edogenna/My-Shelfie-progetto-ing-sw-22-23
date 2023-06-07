@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 
+import it.polimi.ingsw.GUI.controllers.FXMLChooseGameController;
 import it.polimi.ingsw.GUI.controllers.FXMLChooseNickController;
 import it.polimi.ingsw.GUI.controllers.FXMLFirstPlayerController;
 import it.polimi.ingsw.ItemEnum;
@@ -41,8 +42,11 @@ public class GuiView extends Application implements UI {
     private String messageToServer;
     private Scene basicScene;
     private Stage stage;
+    private GuiView guiView;
+
     private FXMLChooseNickController fxmlChooseNickController;
     private FXMLFirstPlayerController fxmlFirstPlayerController;
+    private FXMLChooseGameController fxmlChooseGameController;
 
 
 
@@ -57,6 +61,7 @@ public class GuiView extends Application implements UI {
         this.messageToServer = null;
         this.fxmlChooseNickController = new FXMLChooseNickController();
         this.fxmlFirstPlayerController = new FXMLFirstPlayerController();
+        this.fxmlChooseGameController = new FXMLChooseGameController(this);
     }
 
     @Override
@@ -71,19 +76,18 @@ public class GuiView extends Application implements UI {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNicknameScene.fxml"))).load();
-        basicScene = new Scene(root);
-        basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
+       changeScene("/fxml/ChooseGame.fxml");
 
-        stage.setScene(basicScene);
-        stage.getIcons().add(new Image("/graphics/icon.png"));
-        stage.setMinWidth(900);
-        stage.setMinHeight(600);
-        stage.setResizable(true);
+        this.stage = stage;
+        this.stage.setScene(basicScene);
+        this.stage.getIcons().add(new Image("/graphics/icon.png"));
+        this.stage.setMinWidth(900);
+        this.stage.setMinHeight(600);
+        this.stage.setResizable(true);
 
-        stage.setTitle("MyShelfie");
+        this.stage.setTitle("MyShelfie");
 
-        stage.show();
+        this.stage.show();
     }
 
         /**
@@ -95,11 +99,14 @@ public class GuiView extends Application implements UI {
         out.println(jsonString);
     }
 
-    private void changeScene(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+    public void changeScene(String fxmlPath) throws IOException {
+        Parent root = (new FXMLLoader(getClass().getResource(fxmlPath))).load();
+        basicScene = new Scene(root);
+        basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
 
+        this.stage.setScene(basicScene);
+        this.stage.show();
     }
-
 
     /**
      * This method sends a message to the rmi server
@@ -109,7 +116,7 @@ public class GuiView extends Application implements UI {
         this.messageToServer = Converter.convertToJSON(m);
     }
     public void handleChooseUsernameMessage(Message m) throws IOException {
-        while((userInput = fxmlChooseNickController.getUsername()) == null){
+        while((userInput = fxmlChooseGameController.getUsername()) == null){
             try {
                 sleep(100);
             } catch (InterruptedException e) {
@@ -122,10 +129,17 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
+
     private void handleNotValidUsernameError(Message m) throws IOException {
-        fxmlChooseNickController.setWrongUsername(((NotValidUsernameError) m).getS());
+        fxmlChooseGameController.wrongUsername(((NotValidUsernameError) m).getS());
 
-         while(fxmlChooseNickController.getUsername().equals(userInput)){
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+         while((userInput = fxmlChooseGameController.getUsername()) == null){
             try {
                 sleep(100);
             } catch (InterruptedException e) {
@@ -133,12 +147,13 @@ public class GuiView extends Application implements UI {
             }
         }
 
-        userInput = fxmlChooseNickController.getUsername();
         if(out != null)
             sendMessageToSocketServer(new UsernameAnswer(userInput));
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
+
+
     private void handleFirstPlayerMessage(Message m) throws IOException {
         Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNumPlayers.fxml"))).load();
 
@@ -163,6 +178,9 @@ public class GuiView extends Application implements UI {
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
+            case "Reconnect" -> {handleReconnectionMessage(m);}
+            case "OldGameId" -> {handleOldGameIdMessage(m);}
+
         }
         /*
         replicating the action handler in cliview
@@ -174,7 +192,6 @@ public class GuiView extends Application implements UI {
             case "ChatBegins" -> {handleChatBeginsMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
-            case "NotValidUsername" -> {handleNotValidUsernameError(m);}
             case "GraphicalGameInfo" -> {handleGraphicalInfoMessage(m);}
             case "Waiting" -> {handleWaitingMessage(m);}
             case "NotValidMove" -> {dummyInputPrint(m); handleNotValidMove();}
@@ -196,6 +213,36 @@ public class GuiView extends Application implements UI {
         }
         */
         return messageToServer;
+    }
+
+    private void handleOldGameIdMessage(Message m) throws IOException {
+        while((userInput = fxmlChooseGameController.getIdGame()) == null){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(this.out != null)
+            sendMessageToSocketServer(new OldGameIdAnswer(this.userInput));
+        else
+            sendMessageToRmiServer(new OldGameIdAnswer(this.userInput));
+    }
+
+    private void handleReconnectionMessage(Message m) throws IOException {
+        while((userInput = fxmlChooseGameController.getReconnect()) == null){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(out != null)
+            sendMessageToSocketServer(new UsernameAnswer(userInput));
+        else
+            sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
 
 }
