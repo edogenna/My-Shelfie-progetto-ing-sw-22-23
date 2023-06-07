@@ -11,7 +11,7 @@ public final class Constants {
     public static final int DEFAULT_BOARD = 1;
     public static final int MILLIS_TO_WAIT = 10;
     public static final int MILLIS_IN_SECOND = 1000;
-    public static final int secondsDuringTurn = 60;
+    public static final int secondsDuringTurn = 10;
     public static final String RECONNECT = "Reconnect";
     public static final String DISCONNECT = "Disconnect";
     public static final String GENERIC_ERROR = "Error";

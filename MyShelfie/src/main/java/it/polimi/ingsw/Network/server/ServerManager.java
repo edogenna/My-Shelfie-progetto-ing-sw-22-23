@@ -148,15 +148,12 @@ public class ServerManager implements Runnable{
 
     //TODO: finish
     private void removeClient(int number) {
-        //todo: there are some useless if, but it depends on the new logout format
         System.out.println("remove Client method with number: " + number);
         if (lobby.containsKey(number)){
             removeClientFromLobby(number);
         }
         this.disconnectedPlayers.add(number);
-        System.out.println("DisconnectedPlayers");
         if (this.gameStarted && !activeMatch.isDisconnected(nicknames.get(number))){
-            System.out.println("controller set disconnected");
             activeMatch.disconnect(nicknames.get(number));
         }
         System.out.println("Client " + number + " removed.");
@@ -178,7 +175,7 @@ public class ServerManager implements Runnable{
         String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
             try {
-                sleep(Constants.MILLIS_TO_WAIT);
+                sleep(Constants.MILLIS_IN_SECOND);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -201,11 +198,12 @@ public class ServerManager implements Runnable{
 
         while (!answerReady.get(number)) {
             try {
-                sleep(Constants.MILLIS_TO_WAIT);
+                sleep(Constants.MILLIS_IN_SECOND);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
             counter++;
+            System.out.println(counter);
             if (counter % Constants.MILLIS_TO_WAIT == 0) {
                 if (rmiClients.containsKey(number)) {
                     try {
@@ -226,7 +224,7 @@ public class ServerManager implements Runnable{
                     }
                 }
             }
-            if (counter > Constants.secondsDuringTurn * Constants.MILLIS_IN_SECOND / Constants.MILLIS_TO_WAIT) {
+            if (counter >= Constants.secondsDuringTurn) {
                 System.out.println("expired time in sendMessageAndWaitForAnswer");
                 isTimeExceeded = true;
                 break;
@@ -313,7 +311,6 @@ public class ServerManager implements Runnable{
 
                     if (!switchClientId(oldId, temporaryId))
                         break;
-                    System.out.println("switchClient true");
                     disconnectedPlayers.remove(Integer.valueOf(oldId));
                     lobby.put(oldId, nicknames.get(oldId));
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
@@ -345,13 +342,6 @@ public class ServerManager implements Runnable{
      * @return true if the player had been disconnected
      * */
     private boolean checkIfDisconnected(int code) {
-        System.out.println("I'm in check disconnection " + code);
-        /*try {
-            oldId = Integer.parseInt(code);
-            System.out.println("the inserted id is: "+ oldId);
-        } catch (NumberFormatException e) {
-            return false;
-        }*/
         System.out.print("disconnected Players: ");
         for (Integer disconnectedPlayer : disconnectedPlayers)
             System.out.print(disconnectedPlayer);
@@ -361,10 +351,6 @@ public class ServerManager implements Runnable{
         if (!answerReady.getOrDefault(code, false))
             return false;
 
-        /*//TODO: this is a temporary message, create new message for connection
-        //      sendMessageAndWaitForAnswer(oldId, new Message(Protocol.ARE_YOU_ALIVE, "", null));
-        sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
-         */
         return isDisconnected(code);
     }
 
