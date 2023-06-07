@@ -440,10 +440,6 @@ public class ServerManager implements Runnable{
             //todo: add exception if x = -1;
             System.out.println("the active user is: " + activeUsername + ", " + x);
 
-            if(x<-1){
-                System.out.println("the user " + activeUsername + " isn't in the lobby");
-            }
-
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
             System.out.println(answer);
