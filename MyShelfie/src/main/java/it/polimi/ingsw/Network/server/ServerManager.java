@@ -40,7 +40,6 @@ public class ServerManager implements Runnable{
     private boolean isTimeExceeded;
     private boolean gameStarted;
     private boolean isTimeExceededPt2;
-    private Semaphore lock1;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -50,7 +49,6 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         this.isTimeExceededPt2 = false;
         this.gameStarted = false;
-        this.lock1 = new Semaphore(1);
     }
 
     void addClient(Socket client) {
