@@ -40,6 +40,7 @@ public class ServerManager implements Runnable{
     private boolean isTimeExceeded;
     private boolean gameStarted;
     private boolean isTimeExceededPt2;
+    private Semaphore lock1;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -49,6 +50,7 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         this.isTimeExceededPt2 = false;
         this.gameStarted = false;
+        this.lock1 = new Semaphore(1);
     }
 
     void addClient(Socket client) {
@@ -133,6 +135,7 @@ public class ServerManager implements Runnable{
      * the client is disconnected for some problems or the timeout; so we remove him from lobby, and we add him to disconnectedPlayers
      * */
     void removeClient(RmiClientInterface client) {
+        RmiClientInterface removal;
         try {
             int number = getNumber(client);
             rmiClients.remove(number);
@@ -145,11 +148,14 @@ public class ServerManager implements Runnable{
     //TODO: finish
     private void removeClient(int number) {
         //todo: there are some useless if, but it depends on the new logout format
+        System.out.println("remove Client method with number: " + number);
         if (lobby.containsKey(number)){
             removeClientFromLobby(number);
         }
         this.disconnectedPlayers.add(number);
+        System.out.println("DisconnectedPlayers");
         if (this.gameStarted && !activeMatch.isDisconnected(nicknames.get(number))){
+            System.out.println("controller set disconnected");
             activeMatch.disconnect(nicknames.get(number));
         }
         System.out.println("Client " + number + " removed.");
@@ -171,7 +177,7 @@ public class ServerManager implements Runnable{
         String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
             try {
-                sleep(Constants.MILLIS_IN_SECOND);
+                sleep(Constants.MILLIS_TO_WAIT);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -194,7 +200,7 @@ public class ServerManager implements Runnable{
 
         while (!answerReady.get(number)) {
             try {
-                sleep(Constants.MILLIS_IN_SECOND);
+                sleep(Constants.MILLIS_TO_WAIT);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -219,7 +225,7 @@ public class ServerManager implements Runnable{
                     }
                 }
             }
-            if (counter >= Constants.secondsDuringTurn) {
+            if (counter > Constants.secondsDuringTurn * Constants.MILLIS_IN_SECOND / Constants.MILLIS_TO_WAIT) {
                 System.out.println("expired time in sendMessageAndWaitForAnswer");
                 isTimeExceeded = true;
                 break;
