@@ -77,6 +77,7 @@ public class SocketClient{
                 try {
                     sleep(Constants.MILLIS_IN_SECOND);
                     counter++;
+                    //System.out.println(counter);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }

@@ -147,8 +147,10 @@ public class ServerManager implements Runnable{
     private void removeClient(int number) {
         //todo: there are some useless if, but it depends on the new logout format
         System.out.println("remove Client method with number: " + number);
-        if (lobby.containsKey(number)){
-            removeClientFromLobby(number);
+        synchronized (lobby) {
+            if (lobby.containsKey(number)) {
+                removeClientFromLobby(number);
+            }
         }
         this.disconnectedPlayers.add(number);
         System.out.println("DisconnectedPlayers");
@@ -426,9 +428,11 @@ public class ServerManager implements Runnable{
 
             String activeUsername = activeMatch.getActivePlayerUsername();
 
-            //Sending graphical info on the game's status
-            for (Integer i : this.lobby.keySet()) {
-                sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
+            synchronized (lobby) {
+                //Sending graphical info on the game's status
+                for (Integer i : this.lobby.keySet()) {
+                    sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
+                }
             }
 
             //id of the active player;
@@ -461,16 +465,18 @@ public class ServerManager implements Runnable{
                         } catch (InterruptedException e) {
                             Thread.currentThread().interrupt();
                         }
-                        if (counter >= Constants.secondsDuringTurn) {
-                            points = activeMatch.declareWinner();
-                            for (Integer j : this.lobby.keySet()) {
-                                sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                        synchronized (lobby) {
+                            if (counter >= Constants.secondsDuringTurn) {
+                                points = activeMatch.declareWinner();
+                                for (Integer j : this.lobby.keySet()) {
+                                    sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                                }
+                                break;
+                            } else if (lobby.size() > 1) {
+                                this.win = false;
+                                this.activeMatch.setStopMatch();
+                                break;
                             }
-                            break;
-                        }else if(lobby.size()>1){
-                            this.win = false;
-                            this.activeMatch.setStopMatch();
-                            break;
                         }
                     }
                 }else{
