@@ -75,12 +75,12 @@ public class SocketClient{
 
             while(true) {
                 try {
-                    sleep(Constants.MILLIS_TO_WAIT);
+                    sleep(Constants.MILLIS_IN_SECOND);
                     counter++;
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
-                if (counter >= Constants.secondsDuringTurn * Constants.MILLIS_IN_SECOND / Constants.MILLIS_TO_WAIT) {
+                if (counter >= Constants.secondsDuringTurn) {
                     System.out.println("Time out, client will close now");
                     System.exit(0);
                 }
