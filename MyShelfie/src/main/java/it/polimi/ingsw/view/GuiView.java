@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 
+import it.polimi.ingsw.Constants;
 import it.polimi.ingsw.GUI.controllers.FXMLChooseNickController;
 import it.polimi.ingsw.GUI.controllers.FXMLFirstPlayerController;
 import it.polimi.ingsw.ItemEnum;
@@ -108,10 +109,11 @@ public class GuiView extends Application implements UI {
     private void sendMessageToRmiServer(Message m) throws IOException {
         this.messageToServer = Converter.convertToJSON(m);
     }
+
     public void handleChooseUsernameMessage(Message m) throws IOException {
         while((userInput = fxmlChooseNickController.getUsername()) == null){
             try {
-                sleep(100);
+                sleep(Constants.MILLIS_TO_WAIT*10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -122,6 +124,7 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
+
     private void handleNotValidUsernameError(Message m) throws IOException {
         fxmlChooseNickController.setWrongUsername(((NotValidUsernameError) m).getS());
 
@@ -139,6 +142,7 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
+
     private void handleFirstPlayerMessage(Message m) throws IOException {
         Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNumPlayers.fxml"))).load();
 

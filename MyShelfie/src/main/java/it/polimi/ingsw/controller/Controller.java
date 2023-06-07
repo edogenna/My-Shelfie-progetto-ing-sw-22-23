@@ -66,7 +66,7 @@ public class Controller {
                 }
             }else if(i%2 == 0){
                 //the character must be between 'a' and 'z'
-                if(coordinates[i].charAt(0) < 'a' || coordinates[i].charAt(0) > 'z'){
+                if(coordinates[i].charAt(0) < 'a' || coordinates[i].charAt(0) > 'i'){
                     //view.dummyInputPrint();
                     return true;
                 }
@@ -357,6 +357,11 @@ public class Controller {
         return turn;
     }
 
+    /**
+     * @return true if there's only 1 player connected
+     * */
+    public boolean getStopMatch(){return model.getStopMatch();}
+
     //TODO: finish this method
     /**
      * @return the points of the winner player
@@ -418,5 +423,9 @@ public class Controller {
 
     public boolean isDisconnected(String username) {
         return model.isDisconnected(username);
+    }
+
+    public void setStopMatch() {
+        model.setStopMatch();
     }
 }

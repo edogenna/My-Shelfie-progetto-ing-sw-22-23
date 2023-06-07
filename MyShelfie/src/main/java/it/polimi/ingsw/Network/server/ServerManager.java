@@ -2,8 +2,8 @@ package it.polimi.ingsw.Network.server;
 
 import it.polimi.ingsw.Constants;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
-import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.*;
+import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
@@ -14,7 +14,6 @@ import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
-import java.util.concurrent.Semaphore;
 
 import static java.lang.Thread.sleep;
 
@@ -200,7 +199,6 @@ public class ServerManager implements Runnable{
                 Thread.currentThread().interrupt();
             }
             counter++;
-            System.out.println(counter);
             if (counter % Constants.MILLIS_TO_WAIT == 0) {
                 if (rmiClients.containsKey(number)) {
                     try {
@@ -449,13 +447,38 @@ public class ServerManager implements Runnable{
             this.win = activeMatch.finishTurn();
 
             if(this.win) {
-                int points = activeMatch.declareWinner();
-                for (Integer j : this.lobby.keySet()) {
-                    sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                int points;
+                if(this.activeMatch.getStopMatch()){
+                    int counter = 0;
+                    while(true) {
+                        try {
+                            sleep(Constants.MILLIS_IN_SECOND);
+                            counter++;
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                        if (counter >= Constants.secondsDuringTurn) {
+                            points = activeMatch.declareWinner();
+                            for (Integer j : this.lobby.keySet()) {
+                                sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                            }
+                            break;
+                        }else if(lobby.size()>1){
+                            this.win = false;
+                            this.activeMatch.setStopMatch();
+                            break;
+                        }
+                    }
+                }else{
+                    points = activeMatch.declareWinner();
+                    for (Integer j : this.lobby.keySet()) {
+                        sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                    }
                 }
             }
             System.out.println();
         }
+        //System.exit(0); maybe
     }
 
     /**

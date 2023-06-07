@@ -539,8 +539,12 @@ public class Model {
         if(counter < Constants.MIN_PLAYERS){
             this.stopMatch = true;
         }
-
     }
+
+    /**
+     * @return true if there's only 1 player connected
+     * */
+    public boolean getStopMatch(){return this.stopMatch;}
 
     //TODO: i don't think it is correct doing this; control the test method e modify it;
     public Board getBoard() {
@@ -557,6 +561,10 @@ public class Model {
 
     public int getIdActivePlayer(){
         return this.idActivePlayer;
+    }
+
+    public void setStopMatch() {
+        this.stopMatch = false;
     }
 
     /*
