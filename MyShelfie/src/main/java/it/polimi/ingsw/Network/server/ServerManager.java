@@ -2,8 +2,8 @@ package it.polimi.ingsw.Network.server;
 
 import it.polimi.ingsw.Constants;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
-import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.*;
+import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
@@ -14,7 +14,6 @@ import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
-import java.util.concurrent.Semaphore;
 
 import static java.lang.Thread.sleep;
 
@@ -41,7 +40,6 @@ public class ServerManager implements Runnable{
     private boolean isTimeExceeded;
     private boolean gameStarted;
     private boolean isTimeExceededPt2;
-    private Semaphore lock1;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -51,7 +49,6 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         this.isTimeExceededPt2 = false;
         this.gameStarted = false;
-        this.lock1 = new Semaphore(1);
     }
 
     void addClient(Socket client) {
@@ -150,8 +147,10 @@ public class ServerManager implements Runnable{
     private void removeClient(int number) {
         //todo: there are some useless if, but it depends on the new logout format
         System.out.println("remove Client method with number: " + number);
-        if (lobby.containsKey(number)){
-            removeClientFromLobby(number);
+        synchronized (lobby) {
+            if (lobby.containsKey(number)) {
+                removeClientFromLobby(number);
+            }
         }
         this.disconnectedPlayers.add(number);
         System.out.println("DisconnectedPlayers");
@@ -429,19 +428,17 @@ public class ServerManager implements Runnable{
 
             String activeUsername = activeMatch.getActivePlayerUsername();
 
-            //Sending graphical info on the game's status
-            for (Integer i : this.lobby.keySet()) {
-                sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
+            synchronized (lobby) {
+                //Sending graphical info on the game's status
+                for (Integer i : this.lobby.keySet()) {
+                    sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
+                }
             }
 
             //id of the active player;
             int x = getNumberByUsernameFromLobby(activeUsername);
             //todo: add exception if x = -1;
             System.out.println("the active user is: " + activeUsername + ", " + x);
-
-            if(x<-1){
-                System.out.println("the user " + activeUsername + " isn't in the lobby");
-            }
 
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
@@ -454,13 +451,40 @@ public class ServerManager implements Runnable{
             this.win = activeMatch.finishTurn();
 
             if(this.win) {
-                int points = activeMatch.declareWinner();
-                for (Integer j : this.lobby.keySet()) {
-                    sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                int points;
+                if(this.activeMatch.getStopMatch()){
+                    int counter = 0;
+                    while(true) {
+                        try {
+                            sleep(Constants.MILLIS_IN_SECOND);
+                            counter++;
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                        synchronized (lobby) {
+                            if (counter >= Constants.secondsDuringTurn) {
+                                points = activeMatch.declareWinner();
+                                for (Integer j : this.lobby.keySet()) {
+                                    sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                                }
+                                break;
+                            } else if (lobby.size() > 1) {
+                                this.win = false;
+                                this.activeMatch.setStopMatch();
+                                break;
+                            }
+                        }
+                    }
+                }else{
+                    points = activeMatch.declareWinner();
+                    for (Integer j : this.lobby.keySet()) {
+                        sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                    }
                 }
             }
             System.out.println();
         }
+        //System.exit(0); maybe
     }
 
     /**
