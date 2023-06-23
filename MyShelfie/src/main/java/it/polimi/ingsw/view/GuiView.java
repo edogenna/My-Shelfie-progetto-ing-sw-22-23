@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 
+import it.polimi.ingsw.GUI.controllers.ChooseReconnectionScene;
 import it.polimi.ingsw.GUI.controllers.FXMLChooseNickController;
 import it.polimi.ingsw.GUI.controllers.FXMLFirstPlayerController;
 import it.polimi.ingsw.ItemEnum;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMes
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.model.Card;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -43,7 +45,7 @@ public class GuiView extends Application implements UI {
     private Stage stage;
     private FXMLChooseNickController fxmlChooseNickController;
     private FXMLFirstPlayerController fxmlFirstPlayerController;
-
+    private ChooseReconnectionScene chooseReconnectionScene;
 
 
     public GuiView(){
@@ -57,6 +59,7 @@ public class GuiView extends Application implements UI {
         this.messageToServer = null;
         this.fxmlChooseNickController = new FXMLChooseNickController();
         this.fxmlFirstPlayerController = new FXMLFirstPlayerController();
+        this.chooseReconnectionScene = new ChooseReconnectionScene();
     }
 
     @Override
@@ -71,10 +74,11 @@ public class GuiView extends Application implements UI {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNicknameScene.fxml"))).load();
+        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseReconnectionScene.fxml"))).load();
         basicScene = new Scene(root);
         basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
 
+        this.stage = stage;
         stage.setScene(basicScene);
         stage.getIcons().add(new Image("/graphics/icon.png"));
         stage.setMinWidth(900);
@@ -95,11 +99,6 @@ public class GuiView extends Application implements UI {
         out.println(jsonString);
     }
 
-    private void changeScene(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-
-    }
-
 
     /**
      * This method sends a message to the rmi server
@@ -108,6 +107,7 @@ public class GuiView extends Application implements UI {
     private void sendMessageToRmiServer(Message m) throws IOException {
         this.messageToServer = Converter.convertToJSON(m);
     }
+
     public void handleChooseUsernameMessage(Message m) throws IOException {
         while((userInput = fxmlChooseNickController.getUsername()) == null){
             try {
@@ -158,11 +158,12 @@ public class GuiView extends Application implements UI {
     }
 
     @Override
-    public String actionHandler(Message m) throws IOException{
+    public String actionHandler(Message m) throws IOException {
         switch (m.getType()){
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
+            case "Reconnect" -> {handleReconnectionMessage(m);}
         }
         /*
         replicating the action handler in cliview
@@ -173,8 +174,8 @@ public class GuiView extends Application implements UI {
             case "CommonCard" -> handleCommonCardMessage(m);
             case "ChatBegins" -> {handleChatBeginsMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
-            case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
-            case "NotValidUsername" -> {handleNotValidUsernameError(m);}
+
+
             case "GraphicalGameInfo" -> {handleGraphicalInfoMessage(m);}
             case "Waiting" -> {handleWaitingMessage(m);}
             case "NotValidMove" -> {dummyInputPrint(m); handleNotValidMove();}
@@ -186,7 +187,7 @@ public class GuiView extends Application implements UI {
             case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS()); handleNotValidMove();}
             case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
             case "ChatMessage" -> {handleChatMessage(m);}
-            case "Reconnect" -> {handleReconnectionMessage(m);}
+
             case "OldGameId" -> {handleOldGameIdMessage(m);}
             case "OldIdNotValid" ->{handleOldIdNotValidMessage(m);}
             case "Disconnection" -> {handleDisconnectionMessage(m);}
@@ -196,6 +197,52 @@ public class GuiView extends Application implements UI {
         }
         */
         return messageToServer;
+    }
+
+    private void handleReconnectionMessage(Message m) throws IOException {
+        int r;
+        String s;
+        System.out.println("cose a caso");
+        System.out.println("PwerfgqwerfgqwergUTO" + chooseReconnectionScene.getIsReconnection());
+        r = chooseReconnectionScene.getIsReconnection();
+        while(chooseReconnectionScene.gggggg == -1){
+            try {
+                sleep(100);
+                System.out.println(this.chooseReconnectionScene.gggggg);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            r = chooseReconnectionScene.gggggg;
+        }
+
+        System.out.println("PORCODIO ANDAVANTI FROCIction PREMUTO");
+
+        if(chooseReconnectionScene.getIsReconnection() == 0)
+            s = "newgame";
+        else
+            s = "Reconnection";
+
+
+        if(out != null)
+            sendMessageToSocketServer(new UsernameAnswer(s));
+        else
+            sendMessageToRmiServer(new UsernameAnswer(s));
+
+        System.out.println("PMESAGIO INVBIATO TO");
+
+        //changeScenes("/fxml/ChooseNick.fxml");
+    }
+    private void changeScenes(String sceneName){
+        Platform.runLater(() -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource(sceneName));
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

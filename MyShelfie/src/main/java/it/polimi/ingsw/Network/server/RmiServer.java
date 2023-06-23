@@ -43,7 +43,11 @@ public class RmiServer implements RmiServerInterface, Runnable{
 
     String sendMessageAndGetAnswer(RmiClientInterface rmiClient, String message){
         try {
-            return rmiClient.sendMessageAndGetAnswer(message);
+            try {
+                return rmiClient.sendMessageAndGetAnswer(message);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         } catch (RemoteException e) {
             return "Disconnect";
         } catch (IOException e) {

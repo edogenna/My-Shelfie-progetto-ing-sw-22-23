@@ -70,13 +70,13 @@ public class RmiClient implements RmiClientInterface{
         }
     }
 
-    synchronized String manageMessage(String messageJsonCoded) throws IOException {
+    synchronized String manageMessage(String messageJsonCoded) throws IOException, InterruptedException {
         Message fromServer = Converter.convertFromJSON(messageJsonCoded);
         return ui.actionHandler(fromServer);
     }
 
     @Override
-    public String sendMessageAndGetAnswer(String message) throws IOException {
+    public String sendMessageAndGetAnswer(String message) throws IOException, InterruptedException {
         return manageMessage(message);
     }
 

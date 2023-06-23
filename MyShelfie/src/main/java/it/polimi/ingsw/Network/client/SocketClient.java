@@ -48,11 +48,14 @@ public class SocketClient{
             if (chooseCliGui) {
                 ui = new GuiView();
                 ui.setInAndOut(out, in);
-                ((GuiView) ui).main(args);
+               new Thread( () -> {
+                   ((GuiView) ui).main(args);
+               }).start();
             }else
                 ui = new CliView(out, in, stdIn);
 
             while (true) {
+                System.out.println("Waiting for a message from the server");
                 String message = in.readLine();
                 startTimer();
                 Message m = Converter.convertFromJSON(message);
