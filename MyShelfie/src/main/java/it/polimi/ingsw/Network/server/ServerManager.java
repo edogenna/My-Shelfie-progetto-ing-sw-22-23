@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Semaphore;
 
 import static java.lang.Thread.sleep;
 
@@ -41,6 +42,7 @@ public class ServerManager implements Runnable{
     private boolean isTimeExceeded;
     private boolean gameStarted;
     private boolean isTimeExceededPt2;
+    private Semaphore lock1;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -50,6 +52,7 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         this.isTimeExceededPt2 = false;
         this.gameStarted = false;
+        this.lock1 = new Semaphore(1);
     }
 
     void addClient(Socket client) {
@@ -297,7 +300,7 @@ public class ServerManager implements Runnable{
         }
     }
 
-    void addClientToLog(int temporaryId) throws IOException {
+    void addClientToLog(int temporaryId) throws IOException, InterruptedException {
         String code;
         int oldId;
         Message m;
@@ -321,8 +324,10 @@ public class ServerManager implements Runnable{
                     System.out.println("switchClient true");
                     disconnectedPlayers.remove(Integer.valueOf(oldId));
                     lobby.put(oldId, nicknames.get(oldId));
+                    this.lock1.acquire(1);
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
                     activeMatch.reconnect(nicknames.get(oldId));
+                    this.lock1.release(1);
                     break;
                 }else{
                     sendMessageAndWaitForAnswer(temporaryId, new OldIdNotValid());
@@ -441,6 +446,8 @@ public class ServerManager implements Runnable{
                 System.out.println("the active user is: " + activeUsername + ", " + x);
             }while(x==-1);
 
+            while(!lock1.tryAcquire(1));
+            lock1.release(1);
             //Sending graphical info on the game's status
             for (Integer i : this.lobby.keySet()) {
                 sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));

@@ -21,7 +21,7 @@ public class ClientManager implements Runnable {
     public void run() {
         try {
             serverManager.addClientToLog(this.number);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
