@@ -27,7 +27,7 @@ public class ServerManager implements Runnable{
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
-    private final Map<Integer, Boolean> answerReady = new ConcurrentHashMap<>();
+    private final Map<Integer, Boolean> answerReady = new HashMap<>();
     private final Map<Integer, String> lobby = new ConcurrentHashMap<>();
     private final Map<Integer, String> nicknames = new HashMap<>();
     private Controller activeMatch;
@@ -181,6 +181,9 @@ public class ServerManager implements Runnable{
                 Thread.currentThread().interrupt();
             }
         }
+
+        System.out.println("post while ready, user: " + number);
+
         answerReady.put(number, false);
         Communication communication;
         if (socketClients.containsKey(number)) {
@@ -193,6 +196,8 @@ public class ServerManager implements Runnable{
             System.out.println("Unregistered Client");
             return Constants.GENERIC_ERROR;
         }
+
+        System.out.println("after the communications, user: " + number);
 
         this.isTimeExceeded = false;
         int counter = 0;
@@ -230,6 +235,8 @@ public class ServerManager implements Runnable{
                 break;
             }
         }
+
+        System.out.println("ciaccanello dopo il grande while, user: " + number);
 
         if (isTimeExceeded) {
             //communication.setTimeExceeded();
@@ -314,9 +321,7 @@ public class ServerManager implements Runnable{
                     System.out.println("switchClient true");
                     disconnectedPlayers.remove(Integer.valueOf(oldId));
                     lobby.put(oldId, nicknames.get(oldId));
-                    System.out.println("LOBBY.PUT BUG");
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
-                    System.out.println("SEND MESSAGE BUG");
                     activeMatch.reconnect(nicknames.get(oldId));
                     break;
                 }else{
@@ -429,7 +434,7 @@ public class ServerManager implements Runnable{
             String activeUsername;
             int x;
 
-            do {
+            do{
                 activeUsername = activeMatch.getActivePlayerUsername();
                 //id of the active player;
                 x = getNumberByUsernameFromLobby(activeUsername);
