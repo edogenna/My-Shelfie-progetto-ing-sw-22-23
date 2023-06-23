@@ -27,7 +27,7 @@ public class ServerManager implements Runnable{
     private final Map<Integer, Socket> socketClients = new HashMap<>();
     private final Map<Integer, RmiClientInterface> rmiClients = new HashMap<>();
     private final Map<Integer, String> answers = new HashMap<>();
-    private final Map<Integer, Boolean> answerReady = new HashMap<>();
+    private final Map<Integer, Boolean> answerReady = new ConcurrentHashMap<>();
     private final Map<Integer, String> lobby = new ConcurrentHashMap<>();
     private final Map<Integer, String> nicknames = new HashMap<>();
     private Controller activeMatch;
@@ -314,7 +314,9 @@ public class ServerManager implements Runnable{
                     System.out.println("switchClient true");
                     disconnectedPlayers.remove(Integer.valueOf(oldId));
                     lobby.put(oldId, nicknames.get(oldId));
+                    System.out.println("LOBBY.PUT BUG");
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
+                    System.out.println("SEND MESSAGE BUG");
                     activeMatch.reconnect(nicknames.get(oldId));
                     break;
                 }else{
@@ -424,18 +426,20 @@ public class ServerManager implements Runnable{
 
             saveGame();
             System.out.println("Game has been saved");
+            String activeUsername;
+            int x;
 
-            String activeUsername = activeMatch.getActivePlayerUsername();
+            do {
+                activeUsername = activeMatch.getActivePlayerUsername();
+                //id of the active player;
+                x = getNumberByUsernameFromLobby(activeUsername);
+                System.out.println("the active user is: " + activeUsername + ", " + x);
+            }while(x==-1);
 
             //Sending graphical info on the game's status
             for (Integer i : this.lobby.keySet()) {
                 sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
             }
-
-            //id of the active player;
-            int x = getNumberByUsernameFromLobby(activeUsername);
-            //todo: add exception if x = -1;
-            System.out.println("the active user is: " + activeUsername + ", " + x);
 
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
