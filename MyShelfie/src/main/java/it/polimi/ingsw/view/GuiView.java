@@ -76,7 +76,7 @@ public class GuiView extends Application implements UI {
 
     @Override
     public void start(Stage stage) throws Exception {
-       changeScene("/fxml/ChooseGame.fxml");
+       changeScene("/fxml/ChooseGameScene.fxml");
 
         this.stage = stage;
         this.stage.setScene(basicScene);
@@ -244,5 +244,113 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
+    /*
+    private void handleOldIdNotValidMessage(Message m) throws IOException {
+        fxmlChooseGameController.wrongId(((OldIdNotValidError) m).getS());
+
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        while((userInput = fxmlChooseGameController.getIdGame()) == null){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(out != null)
+            sendMessageToSocketServer(new OldGameIdAnswer(userInput));
+        else
+            sendMessageToRmiServer(new OldGameIdAnswer(userInput));
+    }
+    private void handleWelcomeBackMessage(Message m) throws IOException {
+        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNumPlayers.fxml"))).load();
+
+        stage.setScene(new Scene(root, 300, 275));
+        int numPlayers;
+        fxmlFirstPlayerController.setMessageLabel(((WelcomeBackMessage) m).getS());
+        numPlayers = fxmlFirstPlayerController.getNumberOfPlayers();
+
+        while (numPlayers < 2 || numPlayers > 4) {
+            fxmlFirstPlayerController.setNumberErrorLabel((new NotValidNumberofPlayersMessage()).getS());
+            numPlayers = fxmlFirstPlayerController.getNumberOfPlayers();
+        }
+        if(out != null)
+            sendMessageToSocketServer(new NumberOfPlayersAnswer(numPlayers));
+        else
+            sendMessageToRmiServer(new NumberOfPlayersAnswer(numPlayers));
+    }
+    private void handleDisconnectionMessage(Message m) throws IOException {
+        fxmlChooseGameController.disconnection(((DisconnectionMessage) m).getS());
+
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        while((userInput = fxmlChooseGameController.getReconnect()) == null){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(out != null)
+            sendMessageToSocketServer(new UsernameAnswer(userInput));
+        else
+            sendMessageToRmiServer(new UsernameAnswer(userInput));
+    }
+    private void handleTurnTimeOut(Message m) throws IOException {
+        fxmlChooseGameController.disconnection(((TurnTimeOutMessage) m).getS());
+
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        while((userInput = fxmlChooseGameController.getReconnect()) == null){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(out != null)
+            sendMessageToSocketServer(new UsernameAnswer(userInput));
+        else
+            sendMessageToRmiServer(new UsernameAnswer(userInput));
+    }
+    private void handleWinMessage(Message m) throws IOException {
+        fxmlChooseGameController.win(((WinMessage) m).getS());
+
+        try {
+            sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        while((userInput = fxmlChooseGameController.getReconnect()) == null){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(out != null)
+            sendMessageToSocketServer(new UsernameAnswer(userInput));
+        else
+            sendMessageToRmiServer(new UsernameAnswer(userInput));
+    }
+
+     */
 
 }
