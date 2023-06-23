@@ -181,6 +181,9 @@ public class ServerManager implements Runnable{
                 Thread.currentThread().interrupt();
             }
         }
+
+        System.out.println("post while ready, user: " + number);
+
         answerReady.put(number, false);
         Communication communication;
         if (socketClients.containsKey(number)) {
@@ -193,6 +196,8 @@ public class ServerManager implements Runnable{
             System.out.println("Unregistered Client");
             return Constants.GENERIC_ERROR;
         }
+
+        System.out.println("after the communications, user: " + number);
 
         this.isTimeExceeded = false;
         int counter = 0;
@@ -230,6 +235,8 @@ public class ServerManager implements Runnable{
                 break;
             }
         }
+
+        System.out.println("ciaccanello dopo il grande while, user: " + number);
 
         if (isTimeExceeded) {
             //communication.setTimeExceeded();
@@ -425,17 +432,20 @@ public class ServerManager implements Runnable{
             saveGame();
             System.out.println("Game has been saved");
 
-            String activeUsername = activeMatch.getActivePlayerUsername();
+            String activeUsername;
+            int x;
+
+            do{
+                activeUsername = activeMatch.getActivePlayerUsername();
+                //id of the active player;
+                x = getNumberByUsernameFromLobby(activeUsername);
+                System.out.println("the active user is: " + activeUsername + ", " + x);
+            }while(x==-1);
 
             //Sending graphical info on the game's status
             for (Integer i : this.lobby.keySet()) {
                 sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
             }
-
-            //id of the active player;
-            int x = getNumberByUsernameFromLobby(activeUsername);
-            //todo: add exception if x = -1;
-            System.out.println("the active user is: " + activeUsername + ", " + x);
 
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
