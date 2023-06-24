@@ -42,7 +42,6 @@ public class ServerManager implements Runnable{
     private boolean isTimeExceeded;
     private boolean gameStarted;
     private boolean isTimeExceededPt2;
-    private Semaphore lock1;
 
     public ServerManager() {
         this.firstPlayer = true;
@@ -52,7 +51,6 @@ public class ServerManager implements Runnable{
         this.isTimeExceeded = false;
         this.isTimeExceededPt2 = false;
         this.gameStarted = false;
-        this.lock1 = new Semaphore(1);
     }
 
     void addClient(Socket client) {
@@ -185,8 +183,6 @@ public class ServerManager implements Runnable{
             }
         }
 
-        System.out.println("post while ready, user: " + number);
-
         answerReady.put(number, false);
         Communication communication;
         if (socketClients.containsKey(number)) {
@@ -199,8 +195,6 @@ public class ServerManager implements Runnable{
             System.out.println("Unregistered Client");
             return Constants.GENERIC_ERROR;
         }
-
-        System.out.println("after the communications, user: " + number);
 
         this.isTimeExceeded = false;
         int counter = 0;
@@ -238,8 +232,6 @@ public class ServerManager implements Runnable{
                 break;
             }
         }
-
-        System.out.println("ciaccanello dopo il grande while, user: " + number);
 
         if (isTimeExceeded) {
             //communication.setTimeExceeded();
@@ -324,10 +316,8 @@ public class ServerManager implements Runnable{
                     System.out.println("switchClient true");
                     disconnectedPlayers.remove(Integer.valueOf(oldId));
                     lobby.put(oldId, nicknames.get(oldId));
-                    this.lock1.acquire(1);
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
                     activeMatch.reconnect(nicknames.get(oldId));
-                    this.lock1.release(1);
                     break;
                 }else{
                     sendMessageAndWaitForAnswer(temporaryId, new OldIdNotValid());
@@ -371,9 +361,9 @@ public class ServerManager implements Runnable{
         if (!answerReady.getOrDefault(code, false))
             return false;
 
-        /*//TODO: this is a temporary message, create new message for connection
+        //TODO: this is a temporary message, create new message for connection
         //      sendMessageAndWaitForAnswer(oldId, new Message(Protocol.ARE_YOU_ALIVE, "", null));
-        sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
+        /*sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
          */
         return isDisconnected(code);
     }
@@ -446,10 +436,9 @@ public class ServerManager implements Runnable{
                 System.out.println("the active user is: " + activeUsername + ", " + x);
             }while(x==-1);
 
-            while(!lock1.tryAcquire(1));
-            lock1.release(1);
             //Sending graphical info on the game's status
             for (Integer i : this.lobby.keySet()) {
+                System.out.println("sending graphical info to User " + i);
                 sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
             }
 
