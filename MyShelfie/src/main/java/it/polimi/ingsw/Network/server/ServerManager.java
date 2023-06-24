@@ -15,7 +15,6 @@ import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Semaphore;
 
 import static java.lang.Thread.sleep;
 
@@ -135,7 +134,6 @@ public class ServerManager implements Runnable{
      * the client is disconnected for some problems or the timeout; so we remove him from lobby, and we add him to disconnectedPlayers
      * */
     void removeClient(RmiClientInterface client) {
-        RmiClientInterface removal;
         try {
             int number = getNumber(client);
             rmiClients.remove(number);
@@ -440,6 +438,7 @@ public class ServerManager implements Runnable{
             for (Integer i : this.lobby.keySet()) {
                 System.out.println("sending graphical info to User " + i);
                 sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
+                System.out.println("pluto");
             }
 
             //Sending to the active player a move request and handling the answer;
@@ -453,11 +452,12 @@ public class ServerManager implements Runnable{
             this.win = activeMatch.finishTurn();
 
             if(this.win) {
-                int points = activeMatch.declareWinner();
-                for(Integer j : this.lobby.keySet()){
-                    sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
-                }
-/*              if(this.activeMatch.getStopMatch()){
+//                int points = activeMatch.declareWinner();
+                int points;
+//                for(Integer j : this.lobby.keySet()){
+//                    sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+//                }
+                if(this.activeMatch.getStopMatch()){
                     int counter = 0;
                     while(true) {
                         try {
@@ -483,11 +483,11 @@ public class ServerManager implements Runnable{
                     for (Integer j : this.lobby.keySet()) {
                         sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
                     }
-                }*/
+                }
             }
             System.out.println();
         }
-        //System.exit(0); maybe
+        System.exit(0);
     }
 
     /**
@@ -518,18 +518,15 @@ public class ServerManager implements Runnable{
             int i = tiles.length;
             //i = number of tiles * 2 + 1;
             switch (i) {
-                case 3:
+                case 3 ->
                     //we have taken 1 tile;
-                    done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
-                    break;
-                case 5:
+                        done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), Integer.parseInt(tiles[2]));
+                case 5 ->
                     //we have taken 2 tiles;
-                    done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0) - 'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
-                    break;
-                case 7:
+                        done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0) - 'a', Integer.parseInt(tiles[3]), Integer.parseInt(tiles[4]));
+                case 7 ->
                     //we have taken 3 tiles;
-                    done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0) - 'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0) - 'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
-                    break;
+                        done = activeMatch.pickCard(tiles[0].charAt(0) - 'a', Integer.parseInt(tiles[1]), tiles[2].charAt(0) - 'a', Integer.parseInt(tiles[3]), tiles[4].charAt(0) - 'a', Integer.parseInt(tiles[5]), Integer.parseInt(tiles[6]));
             }
 
             if (done == 0) {
@@ -622,8 +619,8 @@ public class ServerManager implements Runnable{
             Player[] players = m.getPlayers();
             ArrayList<String> oldUsernames = new ArrayList<>();
 
-            for(int k=0; k<players.length; k++){
-                oldUsernames.add(players[k].getUsername());
+            for (Player player : players) {
+                oldUsernames.add(player.getUsername());
             }
 
             if (oldUsernames.size() == this.numberOfPlayers) {
