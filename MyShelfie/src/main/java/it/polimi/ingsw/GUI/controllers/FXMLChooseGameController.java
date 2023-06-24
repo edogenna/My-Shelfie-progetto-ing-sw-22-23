@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 
 public class FXMLChooseGameController  implements Initializable {
+    private static GuiView instance;
     @FXML
     private Pane basePane;
     @FXML
