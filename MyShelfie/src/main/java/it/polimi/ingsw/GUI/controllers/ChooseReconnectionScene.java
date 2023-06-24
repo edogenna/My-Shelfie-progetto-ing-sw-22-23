@@ -26,6 +26,7 @@ public class ChooseReconnectionScene implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        GuiView guiView = GuiView.getInstance();
         isReconnection = -1;
         reconnectionButton.setOnAction(e -> {
             if(isReconnection == -1)
