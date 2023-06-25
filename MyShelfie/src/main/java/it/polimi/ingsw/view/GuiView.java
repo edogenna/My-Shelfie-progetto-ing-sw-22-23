@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view;
 
 
-import it.polimi.ingsw.GUI.controllers.FXMLChooseGameController;
+import it.polimi.ingsw.GUI.controllers.ChooseReconnectionScene;
 import it.polimi.ingsw.GUI.controllers.FXMLChooseNickController;
 import it.polimi.ingsw.GUI.controllers.FXMLFirstPlayerController;
 import it.polimi.ingsw.ItemEnum;
@@ -12,6 +12,7 @@ import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidNumberofPlayersMes
 import it.polimi.ingsw.Network.messages.ErrorMessages.NotValidUsernameError;
 import it.polimi.ingsw.model.Card;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -42,12 +43,10 @@ public class GuiView extends Application implements UI {
     private String messageToServer;
     private Scene basicScene;
     private Stage stage;
-    private GuiView guiView;
-
     private FXMLChooseNickController fxmlChooseNickController;
     private FXMLFirstPlayerController fxmlFirstPlayerController;
-    private FXMLChooseGameController fxmlChooseGameController;
-
+    private ChooseReconnectionScene chooseReconnectionScene;
+    private static GuiView instance = null;
 
 
     public GuiView(){
@@ -61,7 +60,13 @@ public class GuiView extends Application implements UI {
         this.messageToServer = null;
         this.fxmlChooseNickController = new FXMLChooseNickController();
         this.fxmlFirstPlayerController = new FXMLFirstPlayerController();
-        this.fxmlChooseGameController = new FXMLChooseGameController(this);
+        this.chooseReconnectionScene = new ChooseReconnectionScene();
+    }
+    public static GuiView getInstance() {
+        if (instance == null) {
+            instance = new GuiView();
+        }
+        return instance;
     }
 
     @Override
@@ -76,18 +81,21 @@ public class GuiView extends Application implements UI {
 
     @Override
     public void start(Stage stage) throws Exception {
-       changeScene("/fxml/ChooseGameScene.fxml");
+        GuiView guiView = GuiView.getInstance();
+        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseReconnectionScene.fxml"))).load();
+        basicScene = new Scene(root);
+        basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
 
         this.stage = stage;
-        this.stage.setScene(basicScene);
-        this.stage.getIcons().add(new Image("/graphics/icon.png"));
-        this.stage.setMinWidth(900);
-        this.stage.setMinHeight(600);
-        this.stage.setResizable(true);
+        stage.setScene(basicScene);
+        stage.getIcons().add(new Image("/graphics/icon.png"));
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
+        stage.setResizable(true);
 
-        this.stage.setTitle("MyShelfie");
+        stage.setTitle("MyShelfie");
 
-        this.stage.show();
+        stage.show();
     }
 
         /**
@@ -99,14 +107,6 @@ public class GuiView extends Application implements UI {
         out.println(jsonString);
     }
 
-    public void changeScene(String fxmlPath) throws IOException {
-        Parent root = (new FXMLLoader(getClass().getResource(fxmlPath))).load();
-        basicScene = new Scene(root);
-        basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
-
-        this.stage.setScene(basicScene);
-        this.stage.show();
-    }
 
     /**
      * This method sends a message to the rmi server
@@ -115,8 +115,9 @@ public class GuiView extends Application implements UI {
     private void sendMessageToRmiServer(Message m) throws IOException {
         this.messageToServer = Converter.convertToJSON(m);
     }
+
     public void handleChooseUsernameMessage(Message m) throws IOException {
-        while((userInput = fxmlChooseGameController.getUsername()) == null){
+        while((userInput = fxmlChooseNickController.getUsername()) == null){
             try {
                 sleep(100);
             } catch (InterruptedException e) {
@@ -129,17 +130,10 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
-
     private void handleNotValidUsernameError(Message m) throws IOException {
-        fxmlChooseGameController.wrongUsername(((NotValidUsernameError) m).getS());
+        fxmlChooseNickController.setWrongUsername(((NotValidUsernameError) m).getS());
 
-        try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-         while((userInput = fxmlChooseGameController.getUsername()) == null){
+         while(fxmlChooseNickController.getUsername().equals(userInput)){
             try {
                 sleep(100);
             } catch (InterruptedException e) {
@@ -147,13 +141,12 @@ public class GuiView extends Application implements UI {
             }
         }
 
+        userInput = fxmlChooseNickController.getUsername();
         if(out != null)
             sendMessageToSocketServer(new UsernameAnswer(userInput));
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
-
-
     private void handleFirstPlayerMessage(Message m) throws IOException {
         Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNumPlayers.fxml"))).load();
 
@@ -173,14 +166,12 @@ public class GuiView extends Application implements UI {
     }
 
     @Override
-    public String actionHandler(Message m) throws IOException{
+    public String actionHandler(Message m) throws IOException {
         switch (m.getType()){
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
             case "Reconnect" -> {handleReconnectionMessage(m);}
-            case "OldGameId" -> {handleOldGameIdMessage(m);}
-
         }
         /*
         replicating the action handler in cliview
@@ -191,7 +182,8 @@ public class GuiView extends Application implements UI {
             case "CommonCard" -> handleCommonCardMessage(m);
             case "ChatBegins" -> {handleChatBeginsMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
-            case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
+
+
             case "GraphicalGameInfo" -> {handleGraphicalInfoMessage(m);}
             case "Waiting" -> {handleWaitingMessage(m);}
             case "NotValidMove" -> {dummyInputPrint(m); handleNotValidMove();}
@@ -203,7 +195,7 @@ public class GuiView extends Application implements UI {
             case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS()); handleNotValidMove();}
             case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
             case "ChatMessage" -> {handleChatMessage(m);}
-            case "Reconnect" -> {handleReconnectionMessage(m);}
+
             case "OldGameId" -> {handleOldGameIdMessage(m);}
             case "OldIdNotValid" ->{handleOldIdNotValidMessage(m);}
             case "Disconnection" -> {handleDisconnectionMessage(m);}
@@ -215,142 +207,53 @@ public class GuiView extends Application implements UI {
         return messageToServer;
     }
 
-    private void handleOldGameIdMessage(Message m) throws IOException {
-        while((userInput = fxmlChooseGameController.getIdGame()) == null){
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if(this.out != null)
-            sendMessageToSocketServer(new OldGameIdAnswer(this.userInput));
-        else
-            sendMessageToRmiServer(new OldGameIdAnswer(this.userInput));
-    }
-
     private void handleReconnectionMessage(Message m) throws IOException {
-        while((userInput = fxmlChooseGameController.getReconnect()) == null){
+        int r;
+        String s;
+        System.out.println("cose a caso");
+        System.out.println("PwerfgqwerfgqwergUTO" + chooseReconnectionScene.getIsReconnection());
+        r = chooseReconnectionScene.getIsReconnection();
+
+
+
+        while(chooseReconnectionScene.getIsReconnection() == -1){
             try {
                 sleep(100);
+                //System.out.println(this.chooseReconnectionScene.gggggg);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
+
+            //r = chooseReconnectionScene.gggggg;
         }
+
+        System.out.println("PORCODIO ANDAVANTI FROCIction PREMUTO");
+
+        if(chooseReconnectionScene.getIsReconnection() == 0)
+            s = "newgame";
+        else
+            s = "Reconnection";
+
 
         if(out != null)
-            sendMessageToSocketServer(new UsernameAnswer(userInput));
+            sendMessageToSocketServer(new UsernameAnswer(s));
         else
-            sendMessageToRmiServer(new UsernameAnswer(userInput));
+            sendMessageToRmiServer(new UsernameAnswer(s));
+
+        System.out.println("PMESAGIO INVBIATO TO");
+
+        //changeScenes("/fxml/ChooseNick.fxml");
     }
-    /*
-    private void handleOldIdNotValidMessage(Message m) throws IOException {
-        fxmlChooseGameController.wrongId(((OldIdNotValidError) m).getS());
-
-        try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        while((userInput = fxmlChooseGameController.getIdGame()) == null){
+    private void changeScenes(String sceneName){
+        Platform.runLater(() -> {
             try {
-                sleep(100);
-            } catch (InterruptedException e) {
+                Parent root = FXMLLoader.load(getClass().getResource(sceneName));
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
-        if(out != null)
-            sendMessageToSocketServer(new OldGameIdAnswer(userInput));
-        else
-            sendMessageToRmiServer(new OldGameIdAnswer(userInput));
+        });
     }
-    private void handleWelcomeBackMessage(Message m) throws IOException {
-        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNumPlayers.fxml"))).load();
-
-        stage.setScene(new Scene(root, 300, 275));
-        int numPlayers;
-        fxmlFirstPlayerController.setMessageLabel(((WelcomeBackMessage) m).getS());
-        numPlayers = fxmlFirstPlayerController.getNumberOfPlayers();
-
-        while (numPlayers < 2 || numPlayers > 4) {
-            fxmlFirstPlayerController.setNumberErrorLabel((new NotValidNumberofPlayersMessage()).getS());
-            numPlayers = fxmlFirstPlayerController.getNumberOfPlayers();
-        }
-        if(out != null)
-            sendMessageToSocketServer(new NumberOfPlayersAnswer(numPlayers));
-        else
-            sendMessageToRmiServer(new NumberOfPlayersAnswer(numPlayers));
-    }
-    private void handleDisconnectionMessage(Message m) throws IOException {
-        fxmlChooseGameController.disconnection(((DisconnectionMessage) m).getS());
-
-        try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        while((userInput = fxmlChooseGameController.getReconnect()) == null){
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if(out != null)
-            sendMessageToSocketServer(new UsernameAnswer(userInput));
-        else
-            sendMessageToRmiServer(new UsernameAnswer(userInput));
-    }
-    private void handleTurnTimeOut(Message m) throws IOException {
-        fxmlChooseGameController.disconnection(((TurnTimeOutMessage) m).getS());
-
-        try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        while((userInput = fxmlChooseGameController.getReconnect()) == null){
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if(out != null)
-            sendMessageToSocketServer(new UsernameAnswer(userInput));
-        else
-            sendMessageToRmiServer(new UsernameAnswer(userInput));
-    }
-    private void handleWinMessage(Message m) throws IOException {
-        fxmlChooseGameController.win(((WinMessage) m).getS());
-
-        try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        while((userInput = fxmlChooseGameController.getReconnect()) == null){
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if(out != null)
-            sendMessageToSocketServer(new UsernameAnswer(userInput));
-        else
-            sendMessageToRmiServer(new UsernameAnswer(userInput));
-    }
-
-     */
 
 }

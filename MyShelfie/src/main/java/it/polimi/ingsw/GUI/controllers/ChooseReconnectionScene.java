@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GUI.controllers;
 
+import it.polimi.ingsw.view.GuiView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import java.util.ResourceBundle;
 public class ChooseReconnectionScene implements Initializable {
     @FXML
     private Pane basePane;
+    private static GuiView instance;
 
     @FXML
     private Button reconnectionButton;
@@ -24,6 +26,7 @@ public class ChooseReconnectionScene implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        GuiView guiView = GuiView.getInstance();
         isReconnection = -1;
         reconnectionButton.setOnAction(e -> {
             if(isReconnection == -1)

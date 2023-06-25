@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 
 public class FXMLChooseNickController  implements Initializable {
+    private static GuiView instance;
     @FXML
     private Pane basePane;
 

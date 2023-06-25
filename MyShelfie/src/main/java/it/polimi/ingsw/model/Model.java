@@ -414,7 +414,7 @@ public class Model {
     public int theWinnerIs(){
         int i, x, max, id;
 
-        max = 0;
+        max = -1;
         id = -1;
         if(!stopMatch){
             for(i=0; i<this.numPlayers; i++){

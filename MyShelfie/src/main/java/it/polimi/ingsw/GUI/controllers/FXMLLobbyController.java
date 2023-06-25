@@ -1,5 +1,6 @@
 package it.polimi.ingsw.GUI.controllers;
 
+import it.polimi.ingsw.view.GuiView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FXMLLobbyController {
+    private static GuiView instance;
 
     private List<String> connectedPlayers;
 

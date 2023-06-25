@@ -152,6 +152,10 @@ public class CliView implements UI{
             sendMessageToSocketServer(new ACKMessage());
         else sendMessageToRmiServer(new ACKMessage());
     }
+
+    //function that changes scene
+
+
     /**
      * This method handles the {@link MoveMessage}
      * @param m message

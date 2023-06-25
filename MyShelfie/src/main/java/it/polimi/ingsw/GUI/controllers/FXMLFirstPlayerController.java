@@ -38,8 +38,11 @@ public class FXMLFirstPlayerController  implements Initializable {
     private Button goButton;
     private int numberOfPlayers;
 
+    private static GuiView instance;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         messageLabel.setVisible(false);
         numberErroreLabel.setVisible(false);
         goButton.setOnAction(event -> {
