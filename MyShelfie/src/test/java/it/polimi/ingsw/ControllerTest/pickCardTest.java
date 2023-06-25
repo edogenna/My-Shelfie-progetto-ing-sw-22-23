@@ -7,8 +7,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class pickCardTest {
-    Model m = new Model(2);
-    Controller c = new Controller(m);
+    Model model = new Model(2);
+    Controller controller = new Controller(model);
     private int x, y, col;
     public ItemEnum[][] board = new ItemEnum[9][9];
 
@@ -18,48 +18,60 @@ public class pickCardTest {
             for (int j=0; j<9;j++)
                 board[i][j]= ItemEnum.BLUE1;
         }
-        m.setUsernamePlayer("samu");
-        m.setFirstPlayer();
+        model.setUsernamePlayer("giovanni");
+        model.setUsernamePlayer("luca");
+        model.setFirstPlayer();
 
-        //created correct case
+        //created correct 0 case - done
         for (int i=0; i<9; i++){
             for (int j=0; j<9; j++){
-                m.getBoard().setItemEnum(i,j,ItemEnum.WHITE1);
+                model.getBoard().setItemEnum(i,j,ItemEnum.WHITE1);
             }
         }
-        x=0; y=0; col=2;
-        Assert.assertEquals(c.pickCard(x, y, col),0 );
+        x=0; y=0; col=0;
+        Assert.assertEquals("error case done", 0, controller.pickCard(x, y, col));
+        x=1;
+        Assert.assertEquals("error case done", 0, controller.pickCard(x, y, x+1, y, col));
+        x=3;
+        Assert.assertEquals("error case done", 0, controller.pickCard(x, y, x+1, y, x+2, y, col));
 
-        //created error 1 case
+        //created error 1 case - blank tile
         for (int i=0; i<9; i++){
             for (int j=0; j<9; j++){
-                m.getBoard().setItemEnum(i,j,ItemEnum.BLANK);
+                model.getBoard().setItemEnum(i,j,ItemEnum.BLANK);
             }
         }
-        x=0; y=0; col=1;
-        Assert.assertEquals(c.pickCard(x, y, col),1 );
+        x=0; y=0; col=0;
+        Assert.assertEquals("error 1 case", 1, controller.pickCard(x, y, col) );
+        Assert.assertEquals("error 1 case", 1, controller.pickCard(x, y, x+1, y, col));
+        Assert.assertEquals("error 1 case", 1, controller.pickCard(x, y, x+1, y, x+2, y, col));
 
-        //created error 2 case
-
+        //created error 5 case - no free space in column
         for (int i=0; i<9; i++){
             for (int j=0; j<9; j++){
-                m.getBoard().setItemEnum(i,j,ItemEnum.BLUE1);
+                model.getBoard().setItemEnum(i,j,ItemEnum.BLUE1);
             }
         }
-        x=0; y=0; col=3;
-        Assert.assertEquals(c.pickCard(x, y, col),0 );
-        x=1; y=0; col=3;
-        Assert.assertEquals(c.pickCard(x, y, col),0 );
-        x=2; y=0; col=3;
-        Assert.assertEquals(c.pickCard(x, y, col),0 );
-        x=3; y=0; col=3;
-        Assert.assertEquals(c.pickCard(x, y, col),0 );
-        x=4; y=0; col=3;
-        Assert.assertEquals(c.pickCard(x, y, col),0 );
-        x=5; y=0; col=3;
-        Assert.assertEquals(c.pickCard(x, y, col),2 );
+        for(x=0, y=0, col=1; x<6; x++){
+            Assert.assertEquals("preparing the error 5 case, x = " + x, 0, controller.pickCard(x, y, col));
+        }
+        x=0; y=1; col=1;
+        Assert.assertEquals("error 5 case", 5, controller.pickCard(x, y, col) );
+        Assert.assertEquals("error 5 case", 5, controller.pickCard(x, y, x+1, y, col) );
+        Assert.assertEquals("error 5 case", 5, controller.pickCard(x, y, x+1, y, x+2, y, col) );
 
+        //created error 3 case - no free side
+        x=5; y=5; col=2;
+        Assert.assertEquals("error 3 case", 3, controller.pickCard(x, y, col) );
+        Assert.assertEquals("error 3 case", 3, controller.pickCard(x, y, x+1, y, col) );
+        Assert.assertEquals("error 3 case", 3, controller.pickCard(x, y, x+1, y, x+2, y, col) );
 
+        //created error 4 case - adjacent tiles
+        x=0; y=1; col=1;
+        Assert.assertEquals("error 4 case", 4, controller.pickCard(x, y, x+2, y, col) );
+        Assert.assertEquals("error 4 case", 4, controller.pickCard(x, y, x+2, y, x+3, y, col) );
+
+        //created error 2 case - full bookshelf
 
     }
 
@@ -67,11 +79,11 @@ public class pickCardTest {
 //setter and getter methods
 
     public Controller getC() {
-        return c;
+        return controller;
     }
 
-    public void setC(Controller c) {
-        this.c = c;
+    public void setC(Controller controller) {
+        this.controller = controller;
     }
 
     public int getX() {
