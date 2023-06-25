@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.CommonCards;
 
-import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 /**
  * Contains the algorithms for the seventh common card:
@@ -36,20 +35,6 @@ public class CommonCard07 implements CommonCardStrategy {
             }
         }
         return false;
-    }
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-
-        return  new CharMatrix()
-                .newLineAtBottom("Card number 7   Description:")
-                .newLineAtBottom(" |=| |=|        Two groups each containing 4 tiles of")
-                .newLineAtBottom(" |=| |=|        the same type in a 2x2 square. The tiles")
-                .newLineAtBottom("   x2           of one square can be different from")
-                .newLineAtBottom("                those of the other square.");
-    }
-    @Override
-    public void printCommonCard() {
-        System.out.println(constant7);
     }
 
     @Override

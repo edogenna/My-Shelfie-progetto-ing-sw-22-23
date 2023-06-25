@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.CommonCards;
 
-import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Utils;
 
@@ -109,22 +108,6 @@ public class CommonCard03 implements CommonCardStrategy{
             }
 
         return false;
-    }
-
-    @Override
-    public void printCommonCard() {
-        System.out.println(constant3);
-    }
-
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-
-        return  new CharMatrix()
-                .newLineAtBottom("Card number 3   Description:")
-                .newLineAtBottom("   |=|          Four groups each containing at least")
-                .newLineAtBottom("   |=|          4 tiles of the same type (non necessarily")
-                .newLineAtBottom("   |=|          in the depicted shape). Tiles can be")
-                .newLineAtBottom("   |=| x4       different between different groups.");
     }
 
     @Override

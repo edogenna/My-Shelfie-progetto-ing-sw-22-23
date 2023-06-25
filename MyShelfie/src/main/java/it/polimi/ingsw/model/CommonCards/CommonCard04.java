@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.CommonCards;
 
-import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 
 import java.util.LinkedList;
@@ -48,20 +47,6 @@ public class CommonCard04 implements CommonCardStrategy {
         return numerOfValidRows >= 4;
     }
 
-
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-        return  new CharMatrix()
-                .newLineAtBottom("Card number 4         Description:")
-                .newLineAtBottom("|■| |■| |■| |■| |■|   Four lines each formed by 5 tiles of")
-                .newLineAtBottom("     MAX 3 ≠          maximum three different types.")
-                .newLineAtBottom("       x4             Lines can be different from one another.");
-    }
-
-    @Override
-    public void printCommonCard() {
-        System.out.println(constant4);
-    }
 
     @Override
     public String getCommonCardDesign() {

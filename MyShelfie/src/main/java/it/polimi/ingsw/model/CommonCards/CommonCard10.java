@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.CommonCards;
 
-import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 /**
  * Contains the algorithms for the tenth common card:
@@ -35,20 +34,6 @@ public class CommonCard10 implements CommonCardStrategy{
             }
         }
         return false;
-    }
-
-    @Override
-    public void printCommonCard() {
-        System.out.println(constant10);
-    }
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-
-        return  new CharMatrix()
-                .newLineAtBottom("Card number 10  Description:")
-                .newLineAtBottom("|=|   |=|       Five tiles of the same type forming an X.")
-                .newLineAtBottom("   |=|     ")
-                .newLineAtBottom("|=|   |=|  ");
     }
 
     @Override

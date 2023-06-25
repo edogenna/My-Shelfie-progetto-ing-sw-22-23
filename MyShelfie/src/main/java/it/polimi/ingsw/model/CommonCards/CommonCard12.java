@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.CommonCards;
 
-import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 /**
  * Contains the algorithms for the twelfth common card:
@@ -60,22 +59,6 @@ public class CommonCard12 implements CommonCardStrategy{
             }
         }
         return false;
-    }
-
-    @Override
-    public void printCommonCard() {
-        System.out.println(constant12);
-    }
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-
-        return  new CharMatrix()
-                .newLineAtBottom("Card number 12  Description:")
-                .newLineAtBottom(" |=|            Five columns of increasing o decreasing height.")
-                .newLineAtBottom(" |=|=|          Starting from the first column on the left or")
-                .newLineAtBottom(" |=|=|=|        on the right, each next column must be made of")
-                .newLineAtBottom(" |=|=|=|=|      exactly one more tile. Tiles can be of any type.")
-                .newLineAtBottom(" |=|=|=|=|=| ");
     }
 
     @Override
