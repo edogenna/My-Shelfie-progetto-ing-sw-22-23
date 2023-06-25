@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.CommonCards;
 
 import it.polimi.ingsw.ItemEnum;
-import it.polimi.ingsw.model.Utils;
+import it.polimi.ingsw.Utils;
 
 /**
  * Contains the algorithms for the first common card:
