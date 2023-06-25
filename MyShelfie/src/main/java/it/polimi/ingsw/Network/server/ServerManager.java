@@ -8,7 +8,7 @@ import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.Utils;
+import it.polimi.ingsw.Utils;
 
 import java.io.*;
 import java.net.Socket;

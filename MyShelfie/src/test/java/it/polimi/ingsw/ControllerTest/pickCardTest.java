@@ -66,6 +66,10 @@ public class pickCardTest {
         Assert.assertEquals("error 3 case", 3, controller.pickCard(x, y, x+1, y, col) );
         Assert.assertEquals("error 3 case", 3, controller.pickCard(x, y, x+1, y, x+2, y, col) );
 
+        x=1; y=1; col=2;
+        Assert.assertEquals("error 3 case", 3, controller.pickCard(x, y, x, y+1, col) );
+        Assert.assertEquals("error 3 case", 3, controller.pickCard(x, y, x+1, y, x+2, y+2, col) );
+
         //created error 4 case - adjacent tiles
         x=0; y=1; col=1;
         Assert.assertEquals("error 4 case", 4, controller.pickCard(x, y, x+2, y, col) );
