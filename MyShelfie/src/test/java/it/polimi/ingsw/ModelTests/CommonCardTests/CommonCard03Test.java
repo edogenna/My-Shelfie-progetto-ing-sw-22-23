@@ -83,6 +83,14 @@ public class CommonCard03Test {
         insertColumn(3, ItemEnum.AZURE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.YELLOW1);
         insertColumn(4, ItemEnum.AZURE1, ItemEnum.GREEN1, ItemEnum.GREEN1, ItemEnum.PURPLE1, ItemEnum.PURPLE1, ItemEnum.YELLOW1);
         Assert.assertFalse(c.checkBookshelf(matrix));
+
+        Assert.assertTrue(c.getNumber() == 3);
+
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 3   Description:\n"+
+                "   |=|          Four groups each containing at least\n"+
+                "   |=|  x4      4 tiles of the same type (non necessarily\n"+
+                "   |=|          in the depicted shape). Tiles can be\n"+
+                "   |=|          different between different groups.\n"));
     }
 
 }

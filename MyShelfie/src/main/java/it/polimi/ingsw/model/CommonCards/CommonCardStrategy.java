@@ -17,17 +17,6 @@ public interface CommonCardStrategy {
     boolean checkBookshelf(ItemEnum[][] b);
 
     /**
-     * Prints a certain common goal card on CLI
-     */
-    void printCommonCard();
-
-    /**
-     * Returns the design of a common goal card as a {@link CharMatrix}
-     * @return Common Card design
-     */
-    CharMatrix printCommonCardMatrix();
-
-    /**
      * Returns the design of a common goal card as a String
      * @return Common Card Design
      */

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.CommonCards;
 
-import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 /**
  * Contains the algorithms for the fifth common card:
@@ -27,21 +26,6 @@ public class CommonCard05 implements CommonCardStrategy{
                 && !b[numberOfRows-1][0].equals(ItemEnum.BLANK))
             return true;
         return false;
-    }
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-
-        return  new CharMatrix()
-                .newLineAtBottom("Card number 5  Description:")
-                .newLineAtBottom("|=|       |=|  Four tiles of the same type in the four")
-                .newLineAtBottom("               corners of the bookshelf.")
-                .newLineAtBottom("               ")
-                .newLineAtBottom("|=|       |=|");
-    }
-
-    @Override
-    public void printCommonCard() {
-        System.out.println(constant5);
     }
 
     @Override

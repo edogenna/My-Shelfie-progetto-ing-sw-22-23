@@ -79,6 +79,13 @@ public class CommonCard06Test {
         insertColumn(4, ItemEnum.BLUE1, ItemEnum.PURPLE1, ItemEnum.WHITE1, ItemEnum.GREEN1, ItemEnum.AZURE1, ItemEnum.PURPLE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
+        Assert.assertTrue(c.getNumber() == 6);
 
+        Assert.assertTrue(c.getCommonCardDesign().equals("| ≠ | number 6  Description:\n"+
+                "| ≠ |           Two columns each formed\n"+
+                "| ≠ |           by 6 different\n"+
+                "| ≠ |    x2     types of tiles.\n"+
+                "| ≠ |\n"+
+                "| ≠ |\n"));
     }
 }

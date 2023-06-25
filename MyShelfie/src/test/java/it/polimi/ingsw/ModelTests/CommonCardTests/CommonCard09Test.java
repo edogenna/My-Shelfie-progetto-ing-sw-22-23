@@ -92,6 +92,15 @@ public class CommonCard09Test {
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.WHITE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
+        Assert.assertTrue(c.getNumber() == 9);
+
+        Assert.assertTrue(c.getCommonCardDesign().equals("| ■ | number 9  Description:\n"+
+                "| ■ |           Three column each formed by 6 tiles\n"+
+                "| ■ |  MAX 3 ≠  of maximum three different types. One\n"+
+                "| ■ |    x3     column can show the same or a different\n"+
+                "| ■ |           combination of another column.\n"+
+                "| ■ |\n"));
+
     }
 
 }

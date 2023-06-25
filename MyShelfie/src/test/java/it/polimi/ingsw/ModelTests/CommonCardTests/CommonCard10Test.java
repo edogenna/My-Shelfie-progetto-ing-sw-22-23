@@ -77,6 +77,11 @@ public class CommonCard10Test {
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
+        Assert.assertTrue(c.getNumber() == 10);
 
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 10   Description:\n" +
+                "|=|   |=|        Five tiles of the same type forming an X.\n"+
+                "   |=|\n"+
+                "|=|   |=|\n"));
     }
 }

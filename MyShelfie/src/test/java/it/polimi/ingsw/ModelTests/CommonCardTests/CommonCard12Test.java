@@ -122,6 +122,14 @@ public class CommonCard12Test {
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
+        Assert.assertTrue(c.getNumber() == 12);
+
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 12  Description:\n"+
+                "|•|             Five columns of increasing o decreasing height.\n"+
+                "|•|•|           Starting from the first column on the left or \n"+
+                "|•|•|•|         on the right, each next column must be made of\n"+
+                "|•|•|•|•|       exactly one more tile. Tiles can be of any type.\n"+
+                "|•|•|•|•|•|\n"));
     }
 
 }

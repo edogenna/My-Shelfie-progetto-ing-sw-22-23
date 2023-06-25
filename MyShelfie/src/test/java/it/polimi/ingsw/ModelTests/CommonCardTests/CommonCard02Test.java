@@ -120,6 +120,15 @@ public class CommonCard02Test {
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.GREEN1, ItemEnum.YELLOW1, ItemEnum.PURPLE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
+        Assert.assertTrue(c.getNumber() == 2);
+
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 2   Description:\n"+
+                "|=|             Five tiles of the same type forming\n"+
+                "  |=|           a diagonal.\n"+
+                "    |=|\n"+
+                "      |=|\n"+
+                "        |=|\n"));
+
     }
 
 }

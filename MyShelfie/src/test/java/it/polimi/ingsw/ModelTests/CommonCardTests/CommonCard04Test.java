@@ -87,7 +87,12 @@ public class CommonCard04Test {
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
+        Assert.assertTrue(c.getNumber() == 4);
 
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 4        Description:\n"+
+                "|■| |■| |■| |■| |■|  Four lines each formed by 5 tiles of\n"+
+                "     MAX 3 ≠         maximum three different types.\n"+
+                "       x4            Lines can be different from one another.\n"));
     }
 
 }

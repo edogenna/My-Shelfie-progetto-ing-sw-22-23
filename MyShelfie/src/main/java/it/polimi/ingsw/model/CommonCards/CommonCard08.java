@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.CommonCards;
 
-import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 
 import java.util.Arrays;
@@ -81,11 +80,6 @@ public class CommonCard08 implements CommonCardStrategy {
     }
 
 
-    @Override
-    public void printCommonCard() {
-        System.out.println(constant8);
-    }
-
     /**
      * This method sorts an array in decreasing order.
      * @author Samuele Pietro Galli
@@ -101,17 +95,6 @@ public class CommonCard08 implements CommonCardStrategy {
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
                 }
-    }
-
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-
-        return  new CharMatrix()
-                .newLineAtBottom("Card number 8        Description:")
-                .newLineAtBottom("|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different")
-                .newLineAtBottom("   x2                types of tiles. One line can show the")
-                .newLineAtBottom("                     the same or a different combination")
-                .newLineAtBottom("                     of another line.");
     }
 
     @Override

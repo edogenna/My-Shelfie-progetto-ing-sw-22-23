@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.CommonCards;
 
-import it.polimi.ingsw.CharMatrix;
 import it.polimi.ingsw.ItemEnum;
 
 import java.util.Arrays;
@@ -54,11 +53,6 @@ public class CommonCard06 implements CommonCardStrategy{
     }
 
 
-    @Override
-    public void printCommonCard() {
-        System.out.println(constant6);
-    }
-
     /**
      * This function converts an ItemEnum value into an int value
      * @author Samuele Pietro Galli
@@ -84,20 +78,6 @@ public class CommonCard06 implements CommonCardStrategy{
         return value;
     }
 
-
-
-    @Override
-    public CharMatrix printCommonCardMatrix(){
-
-        return  new CharMatrix()
-                .newLineAtBottom("Card number 6   Description:")
-                .newLineAtBottom("  | ≠ |         Two columns each formed")
-                .newLineAtBottom("  | ≠ |         by 6 different")
-                .newLineAtBottom("  | ≠ |         types of tiles.")
-                .newLineAtBottom("  | ≠ |  x2     different between different groups.")
-                .newLineAtBottom("  | ≠ |  ")
-                .newLineAtBottom("  | ≠ |  ");
-    }
 
     @Override
     public String getCommonCardDesign() {
