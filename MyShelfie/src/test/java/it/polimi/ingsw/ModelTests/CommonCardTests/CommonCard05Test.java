@@ -85,6 +85,14 @@ public class CommonCard05Test {
 
         insertCorners(ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.YELLOW1);
         Assert.assertTrue(c.checkBookshelf(matrix));
+
+        Assert.assertTrue(c.getNumber() == 5);
+
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 5     Description:\n"+
+                "|=|       |=|     Four tiles of the same type in the four\n"+
+                "                  corners of the bookshelf.\n"+
+                "\n"+
+                "|=|       |=|\n"));
     }
 
 }

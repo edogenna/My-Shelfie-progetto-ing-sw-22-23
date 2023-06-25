@@ -118,5 +118,12 @@ public class CommonCard07Test {
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1, ItemEnum.BLUE1);
         Assert.assertTrue(c.checkBookshelf(matrix));
 
+        Assert.assertTrue(c.getNumber() == 7);
+
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 7   Description\n"+
+                "|=| |=|         Two groups each containing 4 tiles of\n" +
+                "|=| |=|         the same type in a 2x2 square. The tiles\n" +
+                "   x2           of one square can be different from\n" +
+                "                those of the other square.\n"));
     }
 }

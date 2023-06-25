@@ -86,5 +86,11 @@ public class CommonCard11Test {
         insertColumn(4, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLANK, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
 
+        Assert.assertTrue(c.getNumber() == 11);
+
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 11  Description:\n"+
+                "  |=| |=|       Eight tiles of the same type. There's\n"+
+                "|=| |=| |=|     no restriction about the positions\n"+
+                "|=| |=| |=|     of these tiles.\n"));
     }
 }

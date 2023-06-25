@@ -94,5 +94,13 @@ public class CommonCard08Test {
         insertColumn(3, ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.BLUE1, ItemEnum.YELLOW1, ItemEnum.YELLOW1, ItemEnum.AZURE1);
         insertColumn(4, ItemEnum.WHITE1, ItemEnum.YELLOW1, ItemEnum.BLUE1, ItemEnum.AZURE1, ItemEnum.YELLOW1, ItemEnum.BLUE1);
         Assert.assertFalse(c.checkBookshelf(matrix));
+
+        Assert.assertTrue(c.getNumber() == 8);
+
+        Assert.assertTrue(c.getCommonCardDesign().equals("Card number 8        Description:\n"+
+                "|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different\n"+
+                "                     types of tiles. One line can show \n"+
+                "       x2            the same or a different combination\n"+
+                "                     of another line.\n"));
     }
 }
