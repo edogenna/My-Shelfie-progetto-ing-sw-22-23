@@ -328,4 +328,8 @@ public class Player {
     public void setConnected() {
         this.disconnected = false;
     }
+
+    public void setBookshelf(ItemEnum[][] matrix){
+        this.shelf = matrix;
+    }
 }
