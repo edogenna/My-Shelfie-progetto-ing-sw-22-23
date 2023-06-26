@@ -2,11 +2,19 @@ package it.polimi.ingsw.ModelTests;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Board;
+import it.polimi.ingsw.model.CommonCards.CommonCard01;
+import it.polimi.ingsw.model.CommonCards.CommonCard02;
+import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class BoardTest {
     private Board b;
+    private CommonCardStrategy[] commonCardStrategies = new CommonCardStrategy[2];
+    private CommonCard01 commonCard01 = new CommonCard01();
+    private CommonCard02 commonCard02 = new CommonCard02();
+    private Board board = new Board(2);
+    int first, second;
     @Test
     public void Test(){
         b = new Board(4);
@@ -26,6 +34,15 @@ public class BoardTest {
         positionEmptyFor2Players(b);
         ItemEnum.generateCharMatrix(b.getMatrix(),Board.BOARD_SIZE,Board.BOARD_SIZE).addNumbering(Board.BOARD_SIZE).printMatrix();
         System.out.println("\n\n");
+
+        commonCardStrategies = board.getCommonCards();
+        first = commonCardStrategies[0].getNumber();
+        second = commonCardStrategies[1].getNumber();
+        board.setCommonCards();
+
+        Assert.assertEquals(board.getCommonCards()[0].getNumber(), first);
+        Assert.assertEquals(board.getCommonCards()[1].getNumber(), second);
+
 
     }
 
@@ -83,13 +100,5 @@ public class BoardTest {
 
         Assert.assertEquals(ItemEnum.BLANK, b.getMatrix()[5][8]);
         Assert.assertEquals(ItemEnum.BLANK, b.getMatrix()[6][6]);
-    }
-
-    public Board getB() {
-        return b;
-    }
-
-    public void setB(Board b) {
-        this.b = b;
     }
 }
