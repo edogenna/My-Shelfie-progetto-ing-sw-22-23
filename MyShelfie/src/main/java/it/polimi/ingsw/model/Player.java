@@ -330,6 +330,13 @@ public class Player {
     }
 
     public void setBookshelf(ItemEnum[][] matrix){
-        this.shelf = matrix;
+//        this.shelf = matrix;
+        for(int i=0; i<6; i++)
+            for(int j=0; j<5; j++)
+                this.shelf[i][j] = matrix[i][j];
+    }
+
+    public int getMyCommonPoints(){
+        return this.myCommonPoints;
     }
 }
