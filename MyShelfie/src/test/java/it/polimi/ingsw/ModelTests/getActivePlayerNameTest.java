@@ -13,17 +13,14 @@ public class getActivePlayerNameTest {
 
     private Player p3 = new Player("puppo");
 
-    Model m = new Model(2);
-
+    Model model = new Model(2);
 
     @Test
     public void Test(){
-        m.setUsernamePlayer("pippo");
-        m.setFirstPlayer();
-        m.setUsernamePlayer("S9so");
-        Assert.assertEquals(p.getUsername(), m.getPlayers()[0].getUsername());
-        Assert.assertEquals(p1.getUsername(), m.getPlayers()[1].getUsername());
-
+        model.setUsernamePlayer("pippo");
+        model.setFirstPlayer();
+        model.setUsernamePlayer("S9so");
+        Assert.assertEquals(p.getUsername(), model.getPlayers()[0].getUsername());
+        Assert.assertEquals(p1.getUsername(), model.getPlayers()[1].getUsername());
     }
-
 }

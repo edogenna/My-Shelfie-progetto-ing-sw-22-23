@@ -143,9 +143,7 @@ public class Model {
     * @return true if the maximum number of tiles that can be inserted is >= than x
     */
     public boolean enoughSpaceBookshelf(int x){
-        if(x>activePlayer.maxTilesPick())
-            return false;
-        return true;
+        return x <= activePlayer.maxTilesPick();
     }
 
     /**

@@ -7,116 +7,63 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class insertTest {
-    Model m = new Model(2);
-
-    Player p1;
-    Player p2;
-
-
-    private ItemEnum[][] s;
-    private int x, x1;
-    private int y, y1;
-    private int col;
-    private ItemEnum tile;
+    Model model = new Model(2);
 
     /**
-     * this method tests the insertion and deletion of a tile, respectively, in the bookshelf and the board
-     * @author Samuele Pietro Galli
+     * this method tests the insertion and deletion of the tiles, respectively, in the bookshelf and the board
+     * @author Donato Fiore
      */
     @Test
     public void Test(){
-        m.setUsernamePlayer("pollo");
-        m.setUsernamePlayer("pollo1");
-        m.setFirstPlayer();
-        x1=4;
-        y1=6;
-        col=0;
-        tile = m.getBoardMatrix()[x1][y1];
+        model.setUsernamePlayer("luca");
+        model.setUsernamePlayer("paolo");
+        model.setFirstPlayer();
+        int col, i, j;
+        int x1, y1, x2, y2, x3, y3;
+        ItemEnum tile1, tile2, tile3;
+        ItemEnum[][] shelf;
+                
+        col = 0;
+        x1 = 5;
+        y1 = 5;
+        tile1 = model.getBoardMatrix()[x1][y1];
+        model.insert(x1, y1, col);
+        shelf = model.getActivePlayerBookshelf();
+        Assert.assertEquals(ItemEnum.BLANK, model.getBoardMatrix()[x1][y1]);
+        Assert.assertEquals(tile1, shelf[5][0]);
 
-        //insert da rivedere
-        m.insert(x1,y1,col);
-        s=m.getActivePlayerBookshelf();
-        Assert.assertEquals(m.getBoardMatrix()[x1][y1], ItemEnum.BLANK);
-        Assert.assertEquals(tile, s[5][0]);
-    }
+        for (i=0; i<9; i++){
+            for (j=0; j<9; j++){
+                model.getBoard().setItemEnum(i,j,ItemEnum.WHITE1);
+            }
+        }
+        
+        x1 = y1 = 0;
+        x2 = y2 = 1;
+        col = 1;
+        tile1 = model.getBoardMatrix()[x1][y1];
+        tile2 = model.getBoardMatrix()[x2][y2];
+        model.insert(x1, y1, x2, y2, col);
+        shelf = model.getActivePlayerBookshelf();
+        Assert.assertEquals(ItemEnum.BLANK, model.getBoardMatrix()[x1][y1]);
+        Assert.assertEquals(ItemEnum.BLANK, model.getBoardMatrix()[x2][y2]);
+        Assert.assertEquals(tile1, shelf[5][1]);
+        Assert.assertEquals(tile2, shelf[4][1]);
 
-    public Player getP1() {
-        return p1;
-    }
-
-    public void setP1(Player p1) {
-        this.p1 = p1;
-    }
-
-    public Player getP2() {
-        return p2;
-    }
-
-    public void setP2(Player p2) {
-        this.p2 = p2;
-    }
-
-    public ItemEnum[][] getS() {
-        return s;
-    }
-
-    public void setS(ItemEnum[][] s) {
-        this.s = s;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getX1() {
-        return x1;
-    }
-
-    public void setX1(int x1) {
-        this.x1 = x1;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getY1() {
-        return y1;
-    }
-
-    public void setY1(int y1) {
-        this.y1 = y1;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
-    }
-
-    public ItemEnum getTile() {
-        return tile;
-    }
-
-    public void setTile(ItemEnum tile) {
-        this.tile = tile;
-    }
-
-    public Model getM() {
-        return m;
-    }
-
-    public void setM(Model m) {
-        this.m = m;
+        x1 = y1 = 2;
+        x2 = y2 = 3;
+        x3 = y3 = 4;
+        col = 2;
+        tile1 = model.getBoardMatrix()[x1][y1];
+        tile2 = model.getBoardMatrix()[x2][y2];
+        tile3 = model.getBoardMatrix()[x3][y3];
+        model.insert(x1, y1, x2, y2, x3, y3, col);
+        shelf = model.getActivePlayerBookshelf();
+        Assert.assertEquals(ItemEnum.BLANK, model.getBoardMatrix()[x1][y1]);
+        Assert.assertEquals(ItemEnum.BLANK, model.getBoardMatrix()[x2][y2]);
+        Assert.assertEquals(ItemEnum.BLANK, model.getBoardMatrix()[x3][y3]);
+        Assert.assertEquals(tile1, shelf[5][2]);
+        Assert.assertEquals(tile2, shelf[4][2]);
+        Assert.assertEquals(tile3, shelf[3][2]);
     }
 }
