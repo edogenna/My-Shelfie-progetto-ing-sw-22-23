@@ -380,14 +380,6 @@ public class Controller {
         return model.getCommonCardsDesigns();
     }
 
-    public void setModel(Model model) {
-        this.model = model;
-    }
-
-    public Model getModel() {
-        return model;
-    }
-
     /**
      * @return The active player's username
      */
