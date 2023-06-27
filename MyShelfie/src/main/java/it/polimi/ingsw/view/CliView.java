@@ -296,12 +296,12 @@ public class CliView implements UI{
                 .alignColumn()
                 .appendToAllRows("       ");
 
+
         CharMatrix bookshelfCM = ItemEnum.generateCharMatrix(shelf, 6, 5)
                 .addColumnNumbering(5)
                 .newLineAtTop("Your Bookshelf:")
                 .alignColumn()
                 .appendToAllRows("     ");
-
         CharMatrix personalCM = ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5)
                 .addColumnNumbering(5)
                 .newLineAtTop("Your Personal Card:");

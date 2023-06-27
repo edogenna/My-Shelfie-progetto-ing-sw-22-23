@@ -202,8 +202,4 @@ public class CharMatrix {
 
         return this;
     }
-
-
-
-
 }
