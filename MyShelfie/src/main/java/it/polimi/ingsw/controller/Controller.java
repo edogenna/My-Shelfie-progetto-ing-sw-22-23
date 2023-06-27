@@ -16,10 +16,6 @@ public class Controller {
     }
     public Controller(Model m) {this.model = m;}
 
-    public int getNumPlayers(){
-        return this.model.getNumPlayers();
-    }
-
     public void setUsernamePlayer(String name){
         this.model.setUsernamePlayer(name);
     }
