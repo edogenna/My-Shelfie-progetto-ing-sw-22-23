@@ -90,7 +90,7 @@ public class GuiView extends Application implements UI {
             this.stage.getIcons().add(new Image("/graphics/icon.png"));
             this.stage.setMinWidth(900);
             this.stage.setMinHeight(600);
-            this.stage.setResizable(true);
+            this.stage.setResizable(false);
 
             this.stage.setTitle("MyShelfie");
 
