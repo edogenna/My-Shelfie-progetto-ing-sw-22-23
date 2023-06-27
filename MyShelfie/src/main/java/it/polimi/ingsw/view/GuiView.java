@@ -72,7 +72,7 @@ public class GuiView extends Application implements UI {
     }
 
     public void main(String[] args) {
-        launch(args);
+        Application.launch(args);
     }
 
     @Override
@@ -93,8 +93,10 @@ public class GuiView extends Application implements UI {
             this.stage.setResizable(false);
 
             this.stage.setTitle("MyShelfie");
+            System.out.println("Il valore di stage è: " + stage);
 
             this.stage.show();
+            System.out.println("AH: Il valore di stage è: " + stage);
         });
 
         this.stage.setOnCloseRequest(e -> {
@@ -184,6 +186,8 @@ public class GuiView extends Application implements UI {
 
     @Override
     public String actionHandler(Message m) throws IOException {
+
+        System.out.println("AH: Il valore di stage è: " + stage);
         switch (m.getType()){
 
 
@@ -250,6 +254,8 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(s));
 
+        System.out.println("REC: Il valore di stage è: " + stage);
+
         if(isReconnection == 0){
             changeScenes("/fxml/ChooseNicknameScene.fxml");
         }else{
@@ -260,7 +266,7 @@ public class GuiView extends Application implements UI {
     private void changeScenes(String sceneName){
         Platform.runLater(() -> {
             try {
-                Parent loader = FXMLLoader.load(getClass().getResource(sceneName));
+                Parent loader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
                 stage.getScene().setRoot(loader);
             } catch (IOException e) {
                 e.printStackTrace();
