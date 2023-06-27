@@ -46,7 +46,7 @@ public class SocketClient{
             System.out.println("you are connected with socket");
 
             if (chooseCliGui) {
-                ui = new GuiView();
+                ui = GuiView.getInstance();
                 ui.setInAndOut(out, in);
                new Thread( () -> {
                    ((GuiView) ui).main(args);

@@ -43,9 +43,8 @@ public class GuiView extends Application implements UI {
     private String messageToServer;
     private Scene basicScene;
     private Stage stage;
-    private FXMLChooseNickController fxmlChooseNickController;
-    private FXMLFirstPlayerController fxmlFirstPlayerController;
-    private ChooseReconnectionScene chooseReconnectionScene;
+
+    public int isReconnection = -1;
     private static GuiView instance = null;
 
 
@@ -58,9 +57,6 @@ public class GuiView extends Application implements UI {
         this.shelf = null;
         this.userInput = null;
         this.messageToServer = null;
-        this.fxmlChooseNickController = new FXMLChooseNickController();
-        this.fxmlFirstPlayerController = new FXMLFirstPlayerController();
-        this.chooseReconnectionScene = new ChooseReconnectionScene();
     }
     public static GuiView getInstance() {
         if (instance == null) {
@@ -81,21 +77,32 @@ public class GuiView extends Application implements UI {
 
     @Override
     public void start(Stage stage) throws Exception {
-        GuiView guiView = GuiView.getInstance();
-        Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseReconnectionScene.fxml"))).load();
-        basicScene = new Scene(root);
-        basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
-
         this.stage = stage;
-        stage.setScene(basicScene);
-        stage.getIcons().add(new Image("/graphics/icon.png"));
-        stage.setMinWidth(900);
-        stage.setMinHeight(600);
-        stage.setResizable(true);
+        Platform.runLater(() -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChooseReconnectionScene.fxml"));
+            try {
+                basicScene = new Scene(loader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
+            this.stage.setScene(basicScene);
+            this.stage.getIcons().add(new Image("/graphics/icon.png"));
+            this.stage.setMinWidth(900);
+            this.stage.setMinHeight(600);
+            this.stage.setResizable(true);
 
-        stage.setTitle("MyShelfie");
+            this.stage.setTitle("MyShelfie");
 
-        stage.show();
+            this.stage.show();
+        });
+
+        this.stage.setOnCloseRequest(e -> {
+            this.stage.close();
+            Platform.exit();
+            System.exit(0);
+        });
+
     }
 
         /**
@@ -116,6 +123,9 @@ public class GuiView extends Application implements UI {
         this.messageToServer = Converter.convertToJSON(m);
     }
 
+
+
+    /*
     public void handleChooseUsernameMessage(Message m) throws IOException {
         while((userInput = fxmlChooseNickController.getUsername()) == null){
             try {
@@ -130,6 +140,9 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
+
+
+
     private void handleNotValidUsernameError(Message m) throws IOException {
         fxmlChooseNickController.setWrongUsername(((NotValidUsernameError) m).getS());
 
@@ -147,6 +160,8 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(userInput));
     }
+
+
     private void handleFirstPlayerMessage(Message m) throws IOException {
         Parent root = (new FXMLLoader(getClass().getResource("/fxml/ChooseNumPlayers.fxml"))).load();
 
@@ -165,24 +180,26 @@ public class GuiView extends Application implements UI {
             sendMessageToRmiServer(new NumberOfPlayersAnswer(numPlayers));
     }
 
+*/
+
     @Override
     public String actionHandler(Message m) throws IOException {
         switch (m.getType()){
-            case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
-            case "NotValidUsername" -> {handleNotValidUsernameError(m);}
-            case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
+
+
             case "Reconnect" -> {handleReconnectionMessage(m);}
         }
         /*
         replicating the action handler in cliview
         switch (m.getType()) {
             case "MoveMessage" -> handleMoveMessage(m);
-
+            case "NotValidUsername" -> {handleNotValidUsernameError(m);}
+            case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
             case "Lobby" -> {handleLobbyMessage(m);}
             case "CommonCard" -> handleCommonCardMessage(m);
             case "ChatBegins" -> {handleChatBeginsMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
-
+            case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
 
             case "GraphicalGameInfo" -> {handleGraphicalInfoMessage(m);}
             case "Waiting" -> {handleWaitingMessage(m);}
@@ -207,29 +224,22 @@ public class GuiView extends Application implements UI {
         return messageToServer;
     }
 
+    public void setIsReconnection(int isReconnection) {
+        this.isReconnection = isReconnection;
+    }
+
     private void handleReconnectionMessage(Message m) throws IOException {
-        int r;
         String s;
-        System.out.println("cose a caso");
-        System.out.println("PwerfgqwerfgqwergUTO" + chooseReconnectionScene.getIsReconnection());
-        r = chooseReconnectionScene.getIsReconnection();
 
-
-
-        while(chooseReconnectionScene.getIsReconnection() == -1){
+        while(isReconnection == -1){
             try {
                 sleep(100);
-                //System.out.println(this.chooseReconnectionScene.gggggg);
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
-
-            //r = chooseReconnectionScene.gggggg;
         }
 
-        System.out.println("PORCODIO ANDAVANTI FROCIction PREMUTO");
-
-        if(chooseReconnectionScene.getIsReconnection() == 0)
+        if(isReconnection == 0)
             s = "newgame";
         else
             s = "Reconnection";
@@ -240,16 +250,18 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new UsernameAnswer(s));
 
-        System.out.println("PMESAGIO INVBIATO TO");
-
-        //changeScenes("/fxml/ChooseNick.fxml");
+        if(isReconnection == 0){
+            changeScenes("/fxml/ChooseNicknameScene.fxml");
+        }else{
+            changeScenes("/fxml/ReconnectionScene.fxml");
+        }
     }
+
     private void changeScenes(String sceneName){
         Platform.runLater(() -> {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource(sceneName));
-                stage.setScene(new Scene(root));
-                stage.show();
+                Parent loader = FXMLLoader.load(getClass().getResource(sceneName));
+                stage.getScene().setRoot(loader);
             } catch (IOException e) {
                 e.printStackTrace();
             }
