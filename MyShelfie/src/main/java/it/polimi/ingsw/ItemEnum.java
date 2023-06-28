@@ -44,6 +44,12 @@ public enum ItemEnum {
     private ItemEnum(String label) { this.label = label; }
 
 
+    /**
+     * @return the color of the tile
+     * @param m the tile
+     * @param r the row of the tile
+     * @param c the column of the tile
+     */
     @Deprecated
     public static void printMatrix(ItemEnum[][] m, int r, int c){
         for(int i = 0; i < c; i++){
@@ -59,6 +65,13 @@ public enum ItemEnum {
         }
     }
 
+    /**
+     * Generates a CharMatrix from a matrix of ItemEnum
+     * @param mEnum
+     * @param r
+     * @param c
+     * @return
+     */
     public static CharMatrix generateCharMatrix(ItemEnum mEnum[][], int r, int c) {
         CharMatrix cm = new CharMatrix();
         String s = "";
@@ -77,6 +90,7 @@ public enum ItemEnum {
 
         return cm;
     }
+
 
     public static boolean equals(ItemEnum tile1, ItemEnum tile2){
         return getStandardItemEnum(tile1) == getStandardItemEnum(tile2);

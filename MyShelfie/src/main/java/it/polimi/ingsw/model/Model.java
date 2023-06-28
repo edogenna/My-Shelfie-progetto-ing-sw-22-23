@@ -144,7 +144,7 @@ public class Model {
     }
 
     /**
-     * 
+     * checks if two tiles are adjacent
      * @return true if the two tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates
      * */
     public boolean adjacentTiles(int x1, int y1, int x2, int y2){
@@ -161,7 +161,7 @@ public class Model {
     }
 
     /**
-     * 
+     * checks if the three tiles are adjacent
      * @return true if the three tiles are adjacent; on the same 'x' coordinates or on the same 'y' coordinates
      * */
     public boolean adjacentTiles(int x1, int y1, int x2, int y2, int x3, int y3){
@@ -176,7 +176,7 @@ public class Model {
     //istanzio il model, creo una board, inserisco nella shelf, getactiveboard e le confronto
 
     /**
-     * 
+     * insert a tile in the bookshelf
      * @param x coordinate of the tile in the board
      * @param y coordinate of the tile in the board
      * @param col column of the bookshelf
@@ -187,7 +187,7 @@ public class Model {
     }
 
     /**
-     * 
+     * insert two tiles in the bookshelf
      * @param x1 coordinate of the first selected tile in the board
      * @param y1 coordinate of the first selected tile in the board
      * @param x2 coordinate of the second selected tile in the board
@@ -200,7 +200,7 @@ public class Model {
     }
 
     /**
-     * 
+     * insert three tiles in the bookshelf
      * @param x1 coordinate of the first selected tile in the board
      * @param y1 coordinate of the first selected tile in the board
      * @param x2 coordinate of the second selected tile in the board
@@ -215,7 +215,7 @@ public class Model {
     }
 
     /**
-     * 
+     * checks if the player has achieved the goal of the selected CommonCard
      * @param x it is the number of the CommonCard; it can be 0 or 1
      * @return true if the player has achieved the goal
      * */
@@ -238,7 +238,7 @@ public class Model {
     }
 
     /**
-     * 
+     * gets the available points of the CommonCards
      * @param card it is the number of the CommonCard; it can be 0 or 1
      * @return the available points of the selected CommonCard
      * */
@@ -251,7 +251,7 @@ public class Model {
     }
 
     /**
-     * 
+     * updates the available points of the CommonCards
      * @param numCard it is the number of the CommonCard; it can be 0 or 1
      * it updates the available points of the CommonCards
      * */
@@ -313,7 +313,7 @@ public class Model {
     public ItemEnum[][] getActivePlayerBookshelf(){return activePlayer.getMatrixBookshelf();}
 
     /**
-     * 
+     * get the player's bookshelf
      * @param username the name of the player concerned
      * @return the player's bookshelf
      */
@@ -331,7 +331,7 @@ public class Model {
     }
 
     /**
-     * 
+     * get the player's PersonalCard
      * @param username the name of the player concerned
      * @return the player's PersonalCard
      */

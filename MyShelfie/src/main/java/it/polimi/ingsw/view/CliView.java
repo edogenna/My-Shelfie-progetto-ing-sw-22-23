@@ -89,6 +89,12 @@ public class CliView implements UI{
         return messageToServer;
     }
 
+    /**
+     * This method handles the {@link UserIdMessage} message
+     * @param m message
+     * @throws IOException if an I/O error occurs
+     */
+
     private void handleUserId(Message m) throws IOException {
         outputStream.println(((UserIdMessage)m).getS());
         if(out != null)
@@ -97,6 +103,11 @@ public class CliView implements UI{
             sendMessageToRmiServer(new ACKMessage());
     }
 
+    /**
+     * This method handles the {@link TimeoutMessage} message
+     * @param m message
+     * @throws IOException if an I/O error occurs
+     */
     private void handleTimeOut(Message m) throws IOException {
         outputStream.println(((TimeoutMessage)m).getS());
         if(out != null)
@@ -105,6 +116,10 @@ public class CliView implements UI{
             sendMessageToRmiServer(new TimeOutAnswer());
     }
 
+    /**
+     * This method handles the {@link RefusedConnectionMessage} message
+     * @throws IOException if an I/O error occurs
+     */
     private void handleRefusedConnectionMessage(Message m) throws IOException {
         outputStream.println(((RefusedConnectionMessage) m).getS());
         if(out != null)

@@ -141,6 +141,10 @@ public class ServerManager implements Runnable{
         answerReady.put(client, true);
     }
 
+    /**
+     * Removes the client from the lobby
+     * @param client
+     */
     protected void removeClient(Socket client) {
         try {
             int number = getNumber(client);
@@ -186,6 +190,10 @@ public class ServerManager implements Runnable{
         System.out.println("Client " + number + " removed.");
     }
 
+    /**
+     * This method removes a client from the lobby
+     * @param number the number of the client to be removed
+     */
     private void removeClientFromLobby(int number) {
         String name = lobby.get(number);
         lobby.remove(number);
@@ -199,6 +207,7 @@ public class ServerManager implements Runnable{
     }
 
 
+    //TODO: DOCUMENTARE QUESTA
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
@@ -318,6 +327,12 @@ public class ServerManager implements Runnable{
         }
     }
 
+    /**
+     * adds a client to the log of the server
+     * @param temporaryId
+     * @throws IOException
+     * @throws InterruptedException
+     */
     void addClientToLog(int temporaryId) throws IOException, InterruptedException {
         String code;
         int oldId;
@@ -367,6 +382,7 @@ public class ServerManager implements Runnable{
     }
 
     /**
+     * check if the id is in the list of disconnected players
      * @param code the id of the player
      * @return true if the player had been disconnected
      * */
@@ -399,6 +415,7 @@ public class ServerManager implements Runnable{
     }
 
     /**
+     * This method is used to switch the id of a player when he reconnects to the server
      * @param oldId the id of the player before his disconnection
      * @param temporaryId the new id of the player when he reconnected again with the server
      * @return true if the oldId is present in  socketClients or rmiClients maps
@@ -417,6 +434,10 @@ public class ServerManager implements Runnable{
         return false;
     }
 
+    /**
+     * This method is used to notify all the clients in the lobby that a new player has connected
+     * @param numberOfPlayers the number of players in the lobby
+     */
     private void notifyNewConnection(int numberOfPlayers) {
         Integer[] clients = lobby.keySet().toArray(new Integer[0]);
         for (int i : clients) {
@@ -445,6 +466,16 @@ public class ServerManager implements Runnable{
         return false;
     }
 
+    /**
+     * This method starts a new game
+     * saves the game in a file
+     * sends the graphical info to the clients
+     * sends the first player the message to start his turn
+     * checks if the game is finished
+     * handles the game until it is finished
+     * handles the win
+     * @throws IOException if the file is not found
+     */
     private void startGame() throws IOException {
         activeMatch = checkMemoryDisk();
 
@@ -576,6 +607,7 @@ public class ServerManager implements Runnable{
     }
 
     /**
+     * This method checks if a player is disconnected
      * @param code the id of the player
      * @return true if the player was disconnected
      * */
