@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 public class Server {
 
     /**
-     * This method starts the server
+     * Starts the server
      */
     public void startServer() {
         ServerManager serverManager;
