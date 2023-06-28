@@ -57,19 +57,6 @@ public class Model {
     }
 
     /**
-    * it upgrades the player who will play the turn
-    * */
-    private void changeActivePlayer(){
-        this.idActivePlayer++;
-        this.idActivePlayer %= this.numPlayers;
-        while(this.players[this.idActivePlayer].isDisconnected()){
-            this.idActivePlayer++;
-            this.idActivePlayer %= this.numPlayers;
-        }
-        this.activePlayer = this.players[this.idActivePlayer];
-    }
-
-    /**
     * it returns the username of the player that will play the turn
     * */
     public String getActivePlayerName(){
@@ -344,11 +331,6 @@ public class Model {
     }
 
     /**
-     * @return The active player's personal card
-     */
-    public Card getActivePlayerPersonalCard(){return activePlayer.getPersonalCard();}
-
-    /**
      * 
      * @param username the name of the player concerned
      * @return the player's PersonalCard
@@ -402,6 +384,19 @@ public class Model {
             board.refill();
 
         return finish;
+    }
+
+    /**
+     * it upgrades the player who will play the turn
+     * */
+    private void changeActivePlayer(){
+        this.idActivePlayer++;
+        this.idActivePlayer %= this.numPlayers;
+        while(this.players[this.idActivePlayer].isDisconnected()){
+            this.idActivePlayer++;
+            this.idActivePlayer %= this.numPlayers;
+        }
+        this.activePlayer = this.players[this.idActivePlayer];
     }
 
     /**

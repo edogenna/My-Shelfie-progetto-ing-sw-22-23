@@ -16,10 +16,6 @@ public class Controller {
     }
     public Controller(Model m) {this.model = m;}
 
-    public int getNumPlayers(){
-        return this.model.getNumPlayers();
-    }
-
     public void setUsernamePlayer(String name){
         this.model.setUsernamePlayer(name);
     }
@@ -53,8 +49,8 @@ public class Controller {
                 return true;
             }
         }
-//  x,y,x,y,x,y,c
-//  0123456789012
+        //  x,y,x,y,x,y,c
+        //  0123456789012
 
         coordinates = input.split(",");
         for(i=0; i<coordinates.length; i++){
@@ -179,10 +175,7 @@ public class Controller {
         if(!done)
             return false;
         done = model.tileFreeSide(x2,y2);
-        if(!done)
-            return false;
-
-        return true;
+        return done;
     }
 
     /**
@@ -203,10 +196,7 @@ public class Controller {
         if(!done)
             return false;
         done = model.tileFreeSide(x3,y3);
-        if(!done)
-            return false;
-
-        return true;
+        return done;
     }
 
 
@@ -385,9 +375,6 @@ public class Controller {
      */
     public String getActivePlayerUsername(){return model.getActivePlayerName();}
 
-    /**
-     * @return the active player's bookshelf
-     */
 
     /**
      * @return a copy of the model
@@ -400,6 +387,10 @@ public class Controller {
         return model.getPlayerPersonalCard(username);
     }
 
+    /**
+     * @param username the name of the player
+     * @return the player's bookshelf
+     */
     public ItemEnum[][] getPlayerBookshelf(String username){
         return model.getPlayerBookshelf(username);
     }
@@ -425,5 +416,9 @@ public class Controller {
 
     public void setStopMatch() {
         model.setStopMatch();
+    }
+
+    public int getNumPlayers(){
+        return this.model.getNumPlayers();
     }
 }

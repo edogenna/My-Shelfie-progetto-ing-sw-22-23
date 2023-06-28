@@ -12,8 +12,8 @@ public class dummyInputTest {
     String wrongIn = "xy,x,y,x,y,c";
     String space = "f,5 , c,5, d, 6";
     String firstOk = "c,2,c,3,d,4,3";
-
     String wrongColumn = "c,2,c,3,9";
+    String outOfNumber = "c,2,c,9,1";
 
 
     /**
@@ -26,28 +26,28 @@ public class dummyInputTest {
        Assert.assertTrue(c.dummyInput(inputTest));
        String newStr = inputTest.replace("test1", "verde");
 
-       //cnotrollo con metodo replace
+       //conotrol with replace method
        Assert.assertTrue(c.dummyInput(newStr));
 
-       //controllo su ingresso con meno lettere expected
+       //control input with less expected letters
        Assert.assertTrue(c.dummyInput(inputTest1n));
 
-       //controllo sui numeri
+       //number control
        Assert.assertTrue(c.dummyInput(in));
-
 
        Assert.assertTrue(c.dummyInput(wrongIn));
 
-
-       //controllo su una stringa ok
+       //control on OK string
        Assert.assertFalse(c.dummyInput(firstOk));
 
-       //controllo input con spazi
+       //control input with spaces
        Assert.assertTrue(c.dummyInput(space));
 
-       //controllo con numero di colonna sbagliato
+       //control on wrong column
        Assert.assertTrue(c.dummyInput(wrongColumn));
 
+       //control on wrong number
+       Assert.assertTrue(c.dummyInput(outOfNumber));
     }
 
     public String getWrongColumn() {
