@@ -92,5 +92,7 @@ public class CommonCard11Test {
                 "  |=| |=|       Eight tiles of the same type. There's\n"+
                 "|=| |=| |=|     no restriction about the positions\n"+
                 "|=| |=| |=|     of these tiles.\n"));
+
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/11.png");
     }
 }

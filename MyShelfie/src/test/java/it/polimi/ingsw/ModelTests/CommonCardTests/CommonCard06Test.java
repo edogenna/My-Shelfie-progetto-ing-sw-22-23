@@ -87,5 +87,7 @@ public class CommonCard06Test {
                 "| ≠ |    x2     types of tiles.\n"+
                 "| ≠ |\n"+
                 "| ≠ |\n"));
+
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/6.png");
     }
 }

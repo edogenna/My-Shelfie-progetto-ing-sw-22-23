@@ -130,6 +130,8 @@ public class CommonCard12Test {
                 "|•|•|•|         on the right, each next column must be made of\n"+
                 "|•|•|•|•|       exactly one more tile. Tiles can be of any type.\n"+
                 "|•|•|•|•|•|\n"));
+
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/12.png");
     }
 
 }

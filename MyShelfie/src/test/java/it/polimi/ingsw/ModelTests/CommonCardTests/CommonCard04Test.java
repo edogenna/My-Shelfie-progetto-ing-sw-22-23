@@ -93,6 +93,8 @@ public class CommonCard04Test {
                 "|■| |■| |■| |■| |■|  Four lines each formed by 5 tiles of\n"+
                 "     MAX 3 ≠         maximum three different types.\n"+
                 "       x4            Lines can be different from one another.\n"));
+
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/4.png");
     }
 
 }

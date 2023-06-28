@@ -93,6 +93,8 @@ public class CommonCard05Test {
                 "                  corners of the bookshelf.\n"+
                 "\n"+
                 "|=|       |=|\n"));
+
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/5.png");
     }
 
 }

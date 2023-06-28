@@ -83,5 +83,7 @@ public class CommonCard10Test {
                 "|=|   |=|        Five tiles of the same type forming an X.\n"+
                 "   |=|\n"+
                 "|=|   |=|\n"));
+
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/10.png");
     }
 }

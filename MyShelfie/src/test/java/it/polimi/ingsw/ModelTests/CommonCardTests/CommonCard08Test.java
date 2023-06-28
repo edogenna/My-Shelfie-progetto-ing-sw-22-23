@@ -102,5 +102,7 @@ public class CommonCard08Test {
                 "                     types of tiles. One line can show \n"+
                 "       x2            the same or a different combination\n"+
                 "                     of another line.\n"));
+
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/8.png");
     }
 }

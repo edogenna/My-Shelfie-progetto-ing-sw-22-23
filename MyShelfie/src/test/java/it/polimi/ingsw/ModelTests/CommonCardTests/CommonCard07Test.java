@@ -125,5 +125,7 @@ public class CommonCard07Test {
                 "|=| |=|         the same type in a 2x2 square. The tiles\n" +
                 "   x2           of one square can be different from\n" +
                 "                those of the other square.\n"));
+
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/7.png");
     }
 }
