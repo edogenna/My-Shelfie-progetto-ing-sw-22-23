@@ -129,6 +129,8 @@ public class CommonCard02Test {
                 "      |=|\n"+
                 "        |=|\n"));
 
+        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/2.png");
+
     }
 
 }
