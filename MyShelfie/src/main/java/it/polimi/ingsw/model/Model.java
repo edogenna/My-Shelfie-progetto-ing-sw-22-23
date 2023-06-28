@@ -350,7 +350,6 @@ public class Model {
 
     //todo: test this method
     /**
-     * 
      * @return true if match is finished
      * it controls if the activePlayer has filled his bookshelf, changes the activePlayer and refills the board if it is
      * necessary
@@ -369,17 +368,25 @@ public class Model {
 
         if(this.lastTurn){
             finish = true;
+            System.out.println("id active pre while = " + this.idActivePlayer);
             x = this.idActivePlayer+1;
             x %= this.numPlayers;
-            while(players[x].isDisconnected()){
-                x = this.idActivePlayer+1;
-                x %= this.numPlayers;
-            }
             if(x != this.idFirstPlayer)
                 finish = false;
+            while(players[x].isDisconnected()){
+                x++;
+                x %= this.numPlayers;
+                System.out.println("x = " + x);
+            }
+            if(x == this.idFirstPlayer)
+                finish = true;
+            this.idActivePlayer = x;
+            System.out.println("id active = " + this.idActivePlayer);
+            System.out.println("id first Player = " + this.idFirstPlayer);
+        }else{
+            this.changeActivePlayer();
         }
 
-        this.changeActivePlayer();
         if(board.isRefillable())
             board.refill();
 
@@ -558,6 +565,10 @@ public class Model {
 
     public void setStopMatch() {
         this.stopMatch = false;
+    }
+
+    public int getIdFirstPlayer() {
+        return this.idFirstPlayer;
     }
 
     /*

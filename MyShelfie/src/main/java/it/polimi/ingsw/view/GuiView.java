@@ -1,9 +1,6 @@
 package it.polimi.ingsw.view;
 
 
-import it.polimi.ingsw.GUI.controllers.ChooseReconnectionScene;
-import it.polimi.ingsw.GUI.controllers.FXMLChooseNickController;
-import it.polimi.ingsw.GUI.controllers.FXMLFirstPlayerController;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
 
@@ -13,11 +10,8 @@ import it.polimi.ingsw.model.Card;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.ImageCursor;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
@@ -25,8 +19,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Objects;
 
 import static java.lang.Thread.sleep;
 

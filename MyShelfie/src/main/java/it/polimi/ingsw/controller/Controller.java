@@ -421,4 +421,8 @@ public class Controller {
     public int getNumPlayers(){
         return this.model.getNumPlayers();
     }
+
+    public int getIdFirstPlayer() {
+        return model.getIdFirstPlayer();
+    }
 }
