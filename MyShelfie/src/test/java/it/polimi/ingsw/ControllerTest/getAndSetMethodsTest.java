@@ -4,6 +4,9 @@ import it.polimi.ingsw.controller.Controller;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * getAndSetMethodsTest tests the methods of the class Controller that manage the get and set methods
+ */
 public class getAndSetMethodsTest {
 
     Controller controller = new Controller(2);

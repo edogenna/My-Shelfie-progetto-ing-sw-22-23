@@ -8,6 +8,9 @@ import it.polimi.ingsw.model.CommonCards.CommonCardStrategy;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * This class tests methods of the class Board
+ */
 public class BoardTest {
     private Board b;
     private CommonCardStrategy[] commonCardStrategies = new CommonCardStrategy[2];

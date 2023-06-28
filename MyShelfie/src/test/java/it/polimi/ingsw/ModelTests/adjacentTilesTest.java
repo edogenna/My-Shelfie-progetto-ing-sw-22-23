@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.Model;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * This class is a test for the following method: adjacentTiles with 1 parameter
+ */
 public class adjacentTilesTest {
 
     Model m = new Model(2);

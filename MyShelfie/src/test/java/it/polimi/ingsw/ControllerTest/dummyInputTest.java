@@ -4,6 +4,9 @@ import it.polimi.ingsw.controller.Controller;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * ControlCommonCardsTest tests the methods of the class Controller that manage the common cards
+ */
 public class dummyInputTest {
     Controller c = new Controller(2);
     String inputTest = "test1";

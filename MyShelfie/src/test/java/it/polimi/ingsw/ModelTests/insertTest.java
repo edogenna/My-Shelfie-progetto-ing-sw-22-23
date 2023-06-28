@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * This class is a test for the following method: insert
+ */
 public class insertTest {
     Model model = new Model(2);
 

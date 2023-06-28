@@ -9,6 +9,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+/**
+ * This class is a test for the following method: controlCommonCards
+ */
 public class ControlCommonCardsTest {
     Model model;
     ArrayList<ItemEnum[][]> commonCards = new ArrayList<>();
