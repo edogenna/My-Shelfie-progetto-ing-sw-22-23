@@ -116,6 +116,7 @@ public class Model {
 
     /**
     * it sets casually the first player of the match
+    * the 'i' value is between 0 inclusive and numPlayers exclusive
     * */
     public void setFirstPlayer(){
         Random xyz = new Random();
@@ -372,7 +373,7 @@ public class Model {
 
         if(this.lastTurn){
             finish = true;
-            System.out.println("id active pre while = " + this.idActivePlayer);
+//            System.out.println("id active pre while = " + this.idActivePlayer);
             x = this.idActivePlayer+1;
             x %= this.numPlayers;
             if(x != this.idFirstPlayer)
@@ -380,13 +381,13 @@ public class Model {
             while(players[x].isDisconnected()){
                 x++;
                 x %= this.numPlayers;
-                System.out.println("x = " + x);
+//                System.out.println("x = " + x);
             }
             if(x == this.idFirstPlayer)
                 finish = true;
             this.idActivePlayer = x;
-            System.out.println("id active = " + this.idActivePlayer);
-            System.out.println("id first Player = " + this.idFirstPlayer);
+//            System.out.println("id active = " + this.idActivePlayer);
+//            System.out.println("id first Player = " + this.idFirstPlayer);
         }else{
             this.changeActivePlayer();
         }
@@ -464,7 +465,7 @@ public class Model {
         int z;
 
         z = y - x;
-        if(z < 0){
+        while(z < 0){
             z = z + this.numPlayers;
         }
         return z;
