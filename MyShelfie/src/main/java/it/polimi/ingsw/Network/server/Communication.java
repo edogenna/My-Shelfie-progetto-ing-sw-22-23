@@ -25,8 +25,8 @@ public class Communication implements Runnable{
     }
 
     /**
-     * 
-     * @param answer
+     * This method shows the answer of the server and sets it
+     * @param answer answer of the server
      */
     void showAndSetAnswer(String answer) {
         serverManager.setAnswer(num, answer);
