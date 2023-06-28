@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class CommonCard08 implements CommonCardStrategy {
 
-    private final String constant8=
+    public static final String constant8=
             "Card number 8        Description:\n"+
             "|≠| |≠| |≠| |≠| |≠|  Two lines each formed by 5 different\n"+
             "                     types of tiles. One line can show \n"+
@@ -20,6 +20,12 @@ public class CommonCard08 implements CommonCardStrategy {
             "                     of another line.\n";
 
     public final int number = 8;
+
+    @Override
+    public String getPath(){
+        return "/graphics/commongoalcards/8.png";
+    }
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         //TODO: check BLANK CASE and general check

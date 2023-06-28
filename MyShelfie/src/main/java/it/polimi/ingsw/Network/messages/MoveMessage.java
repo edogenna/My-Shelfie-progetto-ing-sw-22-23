@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.Card;
 
 /**
  * Message to send generic information about the game to the user and ask for a player's move
- * @author Alessandro Fornara
  */
 public final class MoveMessage extends Message {
     private final String s = "it's your turn." +

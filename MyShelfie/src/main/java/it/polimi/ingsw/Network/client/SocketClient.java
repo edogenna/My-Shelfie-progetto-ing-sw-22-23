@@ -55,9 +55,7 @@ public class SocketClient{
             if (chooseCliGui) {
                 ui = GuiView.getInstance();
                 ui.setInAndOut(out, in);
-               new Thread( () -> {
-                   ((GuiView) ui).main(args, stdIn);
-               }).start();
+                ((GuiView) ui).main(args, stdIn);
             }else
                 ui = new CliView(out, in, stdIn);
 

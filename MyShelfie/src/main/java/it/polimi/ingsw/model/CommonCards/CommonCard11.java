@@ -8,13 +8,19 @@ import it.polimi.ingsw.ItemEnum;
  * @author Samuele Galli
  */
 public class CommonCard11 implements CommonCardStrategy {
-    private final String constant11=
+    public static final String constant11=
             "Card number 11  Description:\n"+
             "  |=| |=|       Eight tiles of the same type. There's\n"+
             "|=| |=| |=|     no restriction about the positions\n"+
             "|=| |=| |=|     of these tiles.\n";
 
     public final int number = 11;
+
+    @Override
+    public String getPath(){
+        return "/graphics/commongoalcards/11.png";
+    }
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         int[] occurrences = new int[6];

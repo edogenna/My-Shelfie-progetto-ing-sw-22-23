@@ -80,10 +80,8 @@ public class RmiClient implements RmiClientInterface{
      * Manages the message received from the server
      * @param messageJsonCoded The message received from the server
      * @return The answer to the server
-     * @throws IOException
-     * @throws InterruptedException
      */
-    synchronized String manageMessage(String messageJsonCoded) throws IOException, InterruptedException {
+    synchronized String manageMessage(String messageJsonCoded) throws IOException {
         Message fromServer = Converter.convertFromJSON(messageJsonCoded);
         return ui.actionHandler(fromServer);
     }
@@ -92,11 +90,9 @@ public class RmiClient implements RmiClientInterface{
      * Sends a message to the server and waits for the answer
      * @param message The message to send
      * @return The answer to the server
-     * @throws IOException
-     * @throws InterruptedException
      */
     @Override
-    public String sendMessageAndGetAnswer(String message) throws IOException, InterruptedException {
+    public String sendMessageAndGetAnswer(String message) throws IOException {
         return manageMessage(message);
     }
 

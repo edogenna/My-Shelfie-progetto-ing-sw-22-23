@@ -2,7 +2,6 @@ package it.polimi.ingsw.Network.messages;
 
 /**
  * Message to ask for a username to the user
- * @author Alessandro Fornara
  */
 public final class ChooseUsernameMessage extends Message{
 

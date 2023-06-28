@@ -8,7 +8,7 @@ import it.polimi.ingsw.ItemEnum;
  */
 public class CommonCard09 implements CommonCardStrategy {
 
-    private final String constant9=
+    public static final String constant9=
             "| ■ | number 9  Description:\n"+
             "| ■ |           Three column each formed by 6 tiles\n"+
             "| ■ |  MAX 3 ≠  of maximum three different types. One\n"+
@@ -17,6 +17,12 @@ public class CommonCard09 implements CommonCardStrategy {
             "| ■ |\n";
 
     public final int number = 9;
+
+    @Override
+    public String getPath(){
+        return "/graphics/commongoalcards/9.png";
+    }
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum firstColor;

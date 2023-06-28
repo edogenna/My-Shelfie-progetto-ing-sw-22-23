@@ -8,7 +8,7 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  */
 public class CommonCard02 implements CommonCardStrategy {
-    private final String constant2=
+    public static final String constant2=
             "Card number 2   Description:\n"+
             "|=|             Five tiles of the same type forming\n"+
             "  |=|           a diagonal.\n"+
@@ -17,6 +17,11 @@ public class CommonCard02 implements CommonCardStrategy {
             "        |=|\n";
 
     public final int number = 2;
+    @Override
+    public String getPath(){
+        return "/graphics/commongoalcards/2.png";
+    }
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum color;

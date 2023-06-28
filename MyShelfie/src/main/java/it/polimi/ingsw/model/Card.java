@@ -21,10 +21,10 @@ public class Card {
 
     /**
      * This method is used to add a triplet to the card
-     * @param idTriplet
-     * @param x
-     * @param y
-     * @param color
+     * @param idTriplet id
+     * @param x row
+     * @param y column
+     * @param color color
      */
     public void addTriplet(int idTriplet, int x, int y, ItemEnum color) {
         matrixPersonal[x][y] = color;

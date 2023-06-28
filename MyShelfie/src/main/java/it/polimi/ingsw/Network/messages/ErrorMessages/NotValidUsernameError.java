@@ -4,7 +4,6 @@ import it.polimi.ingsw.Network.messages.Message;
 
 /**
  * Message that is sent by the server to a client when the chosen username is not valid (already taken)
- * @author Alessandro Fornara
  */
 public final class NotValidUsernameError extends Message {
 

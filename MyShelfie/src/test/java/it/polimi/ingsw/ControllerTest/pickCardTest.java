@@ -6,6 +6,9 @@ import it.polimi.ingsw.model.Model;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * pickCardTest tests the methods of the class Controller that manage the pick of a card
+ */
 public class pickCardTest {
     Model model = new Model(2);
     Controller controller = new Controller(model);

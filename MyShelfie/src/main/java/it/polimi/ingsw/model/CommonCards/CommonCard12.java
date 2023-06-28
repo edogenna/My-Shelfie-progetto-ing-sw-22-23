@@ -7,7 +7,7 @@ import it.polimi.ingsw.ItemEnum;
  * @author Alessandro Fornara
  */
 public class CommonCard12 implements CommonCardStrategy{
-    private final String constant12=
+    public static final String constant12=
             "Card number 12  Description:\n"+
             "|•|             Five columns of increasing o decreasing height.\n"+
             "|•|•|           Starting from the first column on the left or \n"+
@@ -16,6 +16,11 @@ public class CommonCard12 implements CommonCardStrategy{
             "|•|•|•|•|•|\n";
 
     public final int number = 12;
+
+    @Override
+    public String getPath(){
+        return "/graphics/commongoalcards/12.png";
+    }
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         final int numberOfRows=b.length;

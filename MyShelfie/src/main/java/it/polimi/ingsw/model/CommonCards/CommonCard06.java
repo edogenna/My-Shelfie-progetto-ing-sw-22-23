@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @author Samuele Galli
  */
 public class CommonCard06 implements CommonCardStrategy{
-    private final String constant6=
+    public static final String constant6=
             "| ≠ | number 6  Description:\n"+
             "| ≠ |           Two columns each formed\n"+
             "| ≠ |           by 6 different\n"+
@@ -20,6 +20,11 @@ public class CommonCard06 implements CommonCardStrategy{
             "| ≠ |\n";
 
     public final int number = 6;
+
+    @Override
+    public String getPath(){
+        return "/graphics/commongoalcards/6.png";
+    }
 
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
