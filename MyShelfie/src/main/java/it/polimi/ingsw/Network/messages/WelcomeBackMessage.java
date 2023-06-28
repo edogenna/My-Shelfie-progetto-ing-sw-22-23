@@ -2,7 +2,6 @@ package it.polimi.ingsw.Network.messages;
 
 /**
  * Message to welcome back a user
- * @author Alessandro Fornara
  */
 public final class WelcomeBackMessage extends Message{
 

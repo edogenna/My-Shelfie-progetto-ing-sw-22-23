@@ -521,6 +521,9 @@ public class Model {
         return true;
     }
 
+    /**
+     * This method is used to check if the number of players still connected is lower than the minimum number required to play
+     */
     public void checkDisconnections() {
         int counter = 0;
         for(int i=0; i<this.numPlayers; i++){

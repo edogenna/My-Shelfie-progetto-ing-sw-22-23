@@ -4,7 +4,6 @@ import it.polimi.ingsw.Network.messages.Message;
 
 /**
  * Message to send to the server containing the username chosen by the user
- * @author Alessandro Fornara
  */
 public final class UsernameAnswer extends Message {
     private final String s;
