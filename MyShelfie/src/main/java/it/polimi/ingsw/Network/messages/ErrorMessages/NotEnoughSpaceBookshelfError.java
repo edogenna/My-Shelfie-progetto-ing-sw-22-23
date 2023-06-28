@@ -4,7 +4,6 @@ import it.polimi.ingsw.Network.messages.Message;
 
 /**
  * Message that is sent by the server to a client when the chosen tiles of a move are not adjacent
- * @author Alessandro Fornara
  */
 public final class NotEnoughSpaceBookshelfError extends Message {
 

@@ -2,7 +2,6 @@ package it.polimi.ingsw.Network.messages;
 
 /**
  * Message to notify clients that the server is waiting for more players
- * @author Alessandro Fornara
  */
 public class WaitingMessage extends Message{
 

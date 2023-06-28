@@ -24,8 +24,7 @@ public class SocketServer implements Runnable{
 
     /**
      * This method adds a socket client to a map on the {@link ServerManager}
-     * @param client
-     * @throws IOException
+     * @param client client
      */
     private void registry(Socket client) throws IOException {
         serverManager.addClient(client);
@@ -36,12 +35,22 @@ public class SocketServer implements Runnable{
         new Thread(new ClientManager(serverManager, number)).start();
     }
 
+    /**
+     * This method removes a socket client from the map on the {@link ServerManager}
+     * @param client the client to remove
+     */
     public void unregister(Socket client){
         fromClient.remove(client);
         toClient.remove(client);
         serverManager.removeClient(client);
     }
 
+    /**
+     * This method sends a message to a client and waits for an answer
+     * @param socket the socket of the client
+     * @param message the message to send
+     * @return the answer of the client
+     */
     public String sendMessageAndGetAnswer(Socket socket, String message) {
         toClient.get(socket).println(message);
         try {

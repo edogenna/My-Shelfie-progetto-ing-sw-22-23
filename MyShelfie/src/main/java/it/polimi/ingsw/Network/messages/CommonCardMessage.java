@@ -1,10 +1,8 @@
 package it.polimi.ingsw.Network.messages;
 
 /**
- * Message that is sent to the client when a common goal card is completed
- * It contains the username of the player that completed the card and the points he received
- * It is sent to all the players
- * @author Alessandro Fornara
+ * Message that is sent to the client when a common goal card is completed.
+ * It contains the username of the player that completed the card and the points he received.
  */
 public final class CommonCardMessage extends Message{
     private final String s;

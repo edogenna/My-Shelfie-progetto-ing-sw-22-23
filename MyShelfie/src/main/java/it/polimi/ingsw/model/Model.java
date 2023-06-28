@@ -49,9 +49,11 @@ public class Model {
     }
 
     /**
-    * @return true if the tile has at least one free side
-    * 
-    * */
+     * Method that checks if a tile has a free side
+     * @param x x coordinate of the tile
+     * @param y y coordinate of the tile
+     * @return true if the tile has a free side, false otherwise
+     */
     public boolean tileFreeSide(int x, int y){
         return this.board.tileFreeSide(x, y);
     }
@@ -125,7 +127,7 @@ public class Model {
     }
 
     /**
-    * 
+    * Method that checks if the player has enough space in his bookshelf to insert the tiles
     * @param x is the number of tiles you want to insert in the bookshelf
     * @return true if the maximum number of tiles that can be inserted is >= than x
     */
@@ -134,6 +136,7 @@ public class Model {
     }
 
     /**
+     * Method that checks if the player has enough space in a chosen column to insert the tiles
     * @param y column selected
     * @param num number of tiles to insert
     * @return true if the selected column has enough space to insert the 'num' tiles
@@ -293,7 +296,7 @@ public class Model {
     }
 
     /**
-     * 
+     * Method that returns a matrix of ItemEnum representing the board
      * @return a matrix of ItemEnum representing the board
      * */
     public ItemEnum[][] getBoardMatrix(){
@@ -301,6 +304,7 @@ public class Model {
     }
 
     /**
+     * Method that returns 2 Common Cards
      * @return 2 Common Cards
      */
     public CommonCardStrategy[] getCommonCards(){
@@ -350,10 +354,9 @@ public class Model {
 
     //todo: test this method
     /**
-     * 
-     * @return true if match is finished
      * it controls if the activePlayer has filled his bookshelf, changes the activePlayer and refills the board if it is
-     * necessary
+     * necessary.
+     * @return true if match is finished
      * */
     public boolean finishTurn(){
         boolean finish;
@@ -400,9 +403,8 @@ public class Model {
     }
 
     /**
-     * 
-     * @return the points of the winner player
      * it calculates the winner player and sets him as the activePlayer
+     * @return the points of the winner player
      * */
     public int theWinnerIs(){
         int i, x, max, id;
@@ -434,8 +436,8 @@ public class Model {
     }
 
     /**
+     * this method will be called only if connectedPlayers < MIN_PLAYERS and gives the id of the only connected player
      * @return the id of the only connected player
-     * this method will be called only if connectedPlayers < MIN_PLAYERS
      * */
     private int theOnlyPlayerConnected(){
         for(int i=0; i<this.numPlayers; i++)
@@ -445,7 +447,7 @@ public class Model {
     }
 
     /**
-     * 
+     * Method hat calculates the distance between 2 players
      * @param x the position of the first player
      * @param y the position of the interested player
      * @return the distance (mod numPlayers) between the 2 players
@@ -461,9 +463,8 @@ public class Model {
     }
 
     /**
-     * 
+     * sets the selected player as activePlayer
      * @param id index of the selected player
-     * it sets the selected player as activePlayer
      */
     public void setActivePlayer(int id){
         this.activePlayer = this.players[id];
@@ -471,6 +472,7 @@ public class Model {
     }
 
     /**
+     * Method used to saave the model, it converts the model in a json string
      * @return a json string containing all information of the model
      */
     public String saveModel(){
@@ -478,9 +480,9 @@ public class Model {
     }
 
     /**
-     * 
+     * sets the connection's boolean of the player class
      * @param username the name of the player connected
-     * it set the connection's boolean of the player class
+
      * */
     public void setConnected(String username){
         int x=-1;
@@ -494,6 +496,9 @@ public class Model {
             players[x].setConnected();
     }
 
+    /**
+     * Method that sets a player as disconnected
+     * */
     public void setDisconnected(String username) {
         int x=-1;
         for(int i=0; i<players.length; i++){
@@ -507,6 +512,7 @@ public class Model {
     }
 
     /**
+     * Method that checks if a player is disconnected
      * @return true if the player is disconnected;
      * */
     public boolean isDisconnected(String username) {
@@ -522,6 +528,9 @@ public class Model {
         return true;
     }
 
+    /**
+     * Method that sets stopMatch to true if there are less than MIN_PLAYERS connected
+     * */
     public void checkDisconnections() {
         int counter = 0;
         for(int i=0; i<this.numPlayers; i++){
@@ -535,6 +544,7 @@ public class Model {
     }
 
     /**
+     * Method that checks if there's only 1 player connected
      * @return true if there's only 1 player connected
      * */
     public boolean getStopMatch(){return this.stopMatch;}

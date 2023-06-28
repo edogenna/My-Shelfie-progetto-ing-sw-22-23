@@ -74,7 +74,6 @@ public class RmiServer implements RmiServerInterface, Runnable{
         }
     }
 
-
     @Override
     public void run() {
         try {
