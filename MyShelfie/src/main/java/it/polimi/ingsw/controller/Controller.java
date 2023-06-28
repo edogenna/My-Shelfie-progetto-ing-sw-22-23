@@ -424,6 +424,10 @@ public class Controller {
         return model.getPlayerBookshelf(username);
     }
 
+    /**
+     * This method is used when a player reconnects to the game to allow him to continue playing
+     * @param username
+     */
     public void reconnect(String username) {
         model.setConnected(username);
     }
