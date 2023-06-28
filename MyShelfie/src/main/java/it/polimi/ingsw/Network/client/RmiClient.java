@@ -43,7 +43,7 @@ public class RmiClient implements RmiClientInterface{
         if (chooseCliGui) {
             ui = GuiView.getInstance();
             ui.setInAndOut(null, null);
-            ((GuiView) ui).main(args);
+            ((GuiView) ui).main(args, stdIn);
         }else
             ui = new CliView(null, null, stdIn);
 

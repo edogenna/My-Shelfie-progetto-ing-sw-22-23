@@ -13,7 +13,7 @@
       <Pane layoutX="689.0" layoutY="179.0" prefHeight="400.0" prefWidth="400.0" styleClass="background1" stylesheets="@../css/PrincipalSceneCSS.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="689.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="179.0">
          <children>
             <GridPane layoutX="28.0" layoutY="28.0" prefHeight="608.0" prefWidth="591.0">
-              <columnConstraints>
+               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,250 +21,250 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="63.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="8">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="8">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="6">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="6">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="6">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="7">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="7">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="7">
                      <image>
-                        <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                        <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                      </image>
                   </ImageView>
                </children>
@@ -273,181 +273,181 @@
       </Pane>
       <ImageView fitHeight="434.0" fitWidth="379.0" layoutX="7.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../17_MyShelfie_BGA/boards/bookshelf.png" />
+            <Image url="@/graphics/boards/bookshelf.png" />
          </image>
       </ImageView>
       <GridPane layoutX="59.0" layoutY="497.0" prefHeight="307.0" prefWidth="285.0">
-        <columnConstraints>
+         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
             <RowConstraints maxHeight="59.6666259765625" minHeight="10.0" prefHeight="58.77777099609375" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="49.888916015625" minHeight="10.0" prefHeight="47.22222900390625" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Gatti1.1.png" />
+                  <Image url="@/graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
          </children>
       </GridPane>
       <ImageView fitHeight="248.0" fitWidth="196.0" layoutX="9.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="94.0">
          <image>
-            <Image url="@../../../../../../17_MyShelfie_BGA/boards/bookshelf_orth.png" />
+            <Image url="@/graphics/boards/bookshelf_orth.png" />
          </image>
       </ImageView>
       <GridPane layoutX="34.0" layoutY="102.0" prefHeight="164.0" prefWidth="145.0">
@@ -469,169 +469,169 @@
          <children>
             <ImageView fitHeight="45.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="50.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../../../../../../17_MyShelfie_BGA/item%20tiles/Cornici1.1.png" />
+                  <Image url="@/graphics/itemtiles/Cornici1.1.png" />
                </image>
             </ImageView>
          </children>
       </GridPane>
       <ImageView fitHeight="132.0" fitWidth="347.0" layoutX="963.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../17_MyShelfie_BGA/Publisher%20material/Title%202000x618px.png" />
+            <Image url="@/graphics/publisher_material/Title2000x618px.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="248.0" fitWidth="196.0" layoutX="235.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="94.0">
          <image>
-            <Image url="@../../../../../../17_MyShelfie_BGA/boards/bookshelf_orth.png" />
+            <Image url="@/graphics/boards/bookshelf_orth.png" />
          </image>
       </ImageView>
       <GridPane layoutX="253.0" layoutY="102.0" prefHeight="164.0" prefWidth="160.0">
@@ -653,7 +653,7 @@
       </GridPane>
       <ImageView fitHeight="248.0" fitWidth="196.0" layoutX="458.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../17_MyShelfie_BGA/boards/bookshelf_orth.png" />
+            <Image url="@/graphics/boards/bookshelf_orth.png" />
          </image>
       </ImageView>
       <GridPane layoutX="476.0" layoutY="102.0" prefHeight="164.0" prefWidth="160.0">
@@ -675,17 +675,17 @@
       </GridPane>
       <ImageView fitHeight="279.0" fitWidth="242.0" layoutX="457.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../graphics/personal%20goal%20cards/front_EMPTY.jpg" />
+            <Image url="@/graphics/personalgoalcards/front_EMPTY.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="151.0" fitWidth="241.0" layoutX="54.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../graphics/common%20goal%20cards/4.jpg" />
+            <Image url="@../graphics/commongoalcards/4.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="151.0" fitWidth="241.0" layoutX="342.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../graphics/common%20goal%20cards/4.jpg" />
+            <Image url="@../graphics/commongoalcards/4.jpg" />
          </image>
       </ImageView>
    </children>
