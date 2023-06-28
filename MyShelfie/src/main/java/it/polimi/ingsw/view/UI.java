@@ -7,10 +7,16 @@ import java.io.PrintWriter;
 
 public interface UI {
     /**
-     * set the input and output of the UI
+     * set the input and output of the UI towards the server
      * @param out output
      * @param in input
      */
     public void setInAndOut(PrintWriter out, BufferedReader in);
+
+    /**
+     * This method decides how to handle a certain message received by the client
+     * @param m message
+     * @throws IOException
+     */
     String actionHandler(Message m) throws IOException;
 }

@@ -57,6 +57,9 @@ public final class Utils {
             System.out.print(a[i] + " ");
     }
 
+    /**
+     * Sorts a list of strings
+     */
     public static void mergeSort(List<String> list, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;

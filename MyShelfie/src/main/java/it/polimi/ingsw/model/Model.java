@@ -350,11 +350,10 @@ public class Model {
 
     //todo: test this method
     /**
-     * 
-     * @return true if match is finished
      * it controls if the activePlayer has filled his bookshelf, changes the activePlayer and refills the board if it is
      * necessary
-     * */
+     * @return true if match is finished
+     */
     public boolean finishTurn(){
         boolean finish;
         int x;

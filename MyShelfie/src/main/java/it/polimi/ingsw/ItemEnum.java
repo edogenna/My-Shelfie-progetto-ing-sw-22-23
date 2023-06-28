@@ -26,16 +26,7 @@ public enum ItemEnum {
     PURPLE3 ("\u001B[38;5;135m"),
     BLANK ("\u001B[38;5;235m");
 
-
     public static final String RESET = "\u001B[00000000m";
-
-    public static final String colorGreen = "\u001B[38;5;040m";
-    public static final String colorWhite = "\u001B[38;5;255m";
-    public static final String colorYellow = "\u001B[38;5;221m";
-    public static final String colorBlue = "\u001B[38;5;018m";
-    public static final String colorAzure = "\u001B[38;5;050m";
-    public static final String colorPurple = "\u001B[38;5;135m";
-
 
     public static final int NUM_ITEMENUM = 6; //blank is excluded
     public static final int NUM_TYPE_PER_ITEMENUM = 3;
@@ -67,10 +58,10 @@ public enum ItemEnum {
 
     /**
      * Generates a CharMatrix from a matrix of ItemEnum
-     * @param mEnum
-     * @param r
-     * @param c
-     * @return
+     * @param mEnum matrix
+     * @param r rows
+     * @param c column
+     * @return CharMatrix object
      */
     public static CharMatrix generateCharMatrix(ItemEnum mEnum[][], int r, int c) {
         CharMatrix cm = new CharMatrix();
@@ -91,15 +82,14 @@ public enum ItemEnum {
         return cm;
     }
 
-
-    public static boolean equals(ItemEnum tile1, ItemEnum tile2){
-        return getStandardItemEnum(tile1) == getStandardItemEnum(tile2);
-    }
-
     public boolean equals(ItemEnum tile1){
         return getStandardItemEnum(tile1) == getStandardItemEnum(this);
     }
 
+    /**
+     * @param i Color
+     * @return standard color (example: GREEN2 -> returns GREEN1)
+     */
     public static ItemEnum getStandardItemEnum(ItemEnum i){
         return switch (i) {
             case GREEN1, GREEN2, GREEN3 -> GREEN1;
@@ -112,6 +102,9 @@ public enum ItemEnum {
         };
     }
 
+    /**
+     * @return standard color (example: GREEN2 -> returns GREEN1)
+     */
     public ItemEnum getStandardItemEnum(){
         return switch (this) {
             case GREEN1, GREEN2, GREEN3 -> GREEN1;
