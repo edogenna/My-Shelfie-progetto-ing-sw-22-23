@@ -36,7 +36,6 @@ public enum ItemEnum {
 
 
     /**
-     * @return the color of the tile
      * @param m the tile
      * @param r the row of the tile
      * @param c the column of the tile

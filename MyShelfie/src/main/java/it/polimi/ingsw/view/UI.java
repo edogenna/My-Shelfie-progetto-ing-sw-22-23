@@ -19,7 +19,7 @@ public interface UI {
     /**
      * This method decides how to handle a certain message received by the client
      * @param m message
-     * @throws IOException
+     * @return json string
      */
     String actionHandler(Message m) throws IOException;
 }

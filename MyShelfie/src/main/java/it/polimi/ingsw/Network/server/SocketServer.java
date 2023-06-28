@@ -24,8 +24,7 @@ public class SocketServer implements Runnable{
 
     /**
      * This method adds a socket client to a map on the {@link ServerManager}
-     * @param client
-     * @throws IOException
+     * @param client client
      */
     private void registry(Socket client) throws IOException {
         serverManager.addClient(client);
