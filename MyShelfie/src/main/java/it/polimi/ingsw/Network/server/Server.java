@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
  * Main server class that starts a socket server and an RMI server.
  */
 public class Server {
+
     /**
      * Starts the server
      */

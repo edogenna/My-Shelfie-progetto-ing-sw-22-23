@@ -76,6 +76,9 @@ public class ServerManager implements Runnable{
         return nicknames.get(playerId);
     }
 
+    /**
+     * This method is used to tell a rmi client to shut down
+     */
     protected boolean stopRmiClient() {
         return this.isTimeExceededPt2;
     }
