@@ -411,4 +411,8 @@ public class Controller {
     public void setStopMatch() {
         model.setStopMatch();
     }
+
+    public int getNumPlayers(){
+        return this.model.getNumPlayers();
+    }
 }
