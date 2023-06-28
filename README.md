@@ -1,6 +1,6 @@
 ![](https://cf.geekdo-images.com/Sgg2B7kxtx8fFXz_2mPefA__opengraph/img/u7oY_IuMdJmX2X_xOlSd1XBsFNo=/0x179:3085x1798/fit-in/1200x630/filters:strip_icc()/pic7193695.png)
 
-# My Shelfie Videogame
+# My Shelfie Videogame - SPS01 Group
 
 ## Overview
 This project is a digital implementation in `Java` of <b>My Shelfie<b> board game made by <b>Cranio Games</b>.
