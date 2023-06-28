@@ -39,8 +39,6 @@ public class Converter {
         return switch (type) {
             case "ACK" -> gson.fromJson(message, ACKMessage.class);
             case "ACKOffline" -> gson.fromJson(message, ACKOffline.class);
-            case "ChatBegins" -> gson.fromJson(message, ChatBeginsMessage.class);
-            case "ChatMessage" -> gson.fromJson(message, ChatMessage.class);
             case "ChooseUsername" -> gson.fromJson(message, ChooseUsernameMessage.class);
             case "CommonCard" -> gson.fromJson(message, CommonCardMessage.class);
             case "Disconnection" -> gson.fromJson(message, UserDisconnection.class);
@@ -49,7 +47,6 @@ public class Converter {
             case "GraphicalGameInfo" -> gson.fromJson(message, GraphicalGameInfo.class);
             case "GraphicalGameInformation" -> gson.fromJson(message, GraphicalGameInfo.class);
             case "InvalidColumn" -> gson.fromJson(message, InvalidColumnError.class);
-            case "ListOfLobbies" -> gson.fromJson(message, ListOfLobbies.class);
             case "Lobby" -> gson.fromJson(message, LobbyMessage.class);
             case "Move" -> gson.fromJson(message, MoveAnswer.class);
             case "MoveMessage" -> gson.fromJson(message, MoveMessage.class);
@@ -73,7 +70,6 @@ public class Converter {
             case "UserIdMessage" -> gson.fromJson(message, UserIdMessage.class);
             case "UsernameAnswer" -> gson.fromJson(message, UsernameAnswer.class);
             case "Waiting" -> gson.fromJson(message, WaitingMessage.class);
-            case "UnknownCode" -> gson.fromJson(message, UnknownCodeMessage.class);
             case "WelcomeBack" -> gson.fromJson(message, WelcomeBackMessage.class);
             case "Win" -> gson.fromJson(message, WinMessage.class);
             default -> null;

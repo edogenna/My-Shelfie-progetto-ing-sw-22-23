@@ -35,7 +35,7 @@ public class RmiClient implements RmiClientInterface{
         this.stdIn = new BufferedReader(new InputStreamReader(System.in));
 
         if (chooseCliGui) {
-            ui = new GuiView();
+            ui = GuiView.getInstance();
             ui.setInAndOut(null, null);
             ((GuiView) ui).main(args);
         }else

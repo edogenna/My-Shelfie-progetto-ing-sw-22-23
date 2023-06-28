@@ -331,11 +331,6 @@ public class Model {
     }
 
     /**
-     * @return The active player's personal card
-     */
-    public Card getActivePlayerPersonalCard(){return activePlayer.getPersonalCard();}
-
-    /**
      * 
      * @param username the name of the player concerned
      * @return the player's PersonalCard

@@ -13,8 +13,10 @@ public class getAndSetMethodsTest {
         controller.setUsernamePlayer("player1");
         controller.setUsernamePlayer("player2");
         controller.setFirstPlayer();
+        controller.setActivePlayer(1);
+        Assert.assertEquals(1, controller.getIdActivePlayer());
         controller.setStopMatch();
-        Assert.assertEquals(controller.getStopMatch(), false);
+        Assert.assertFalse(controller.getStopMatch());
         Assert.assertNotNull(controller.getBoard());
         Assert.assertNotNull(controller.getCommonCardsDesigns());
         Assert.assertNotNull(controller.getModelSave());

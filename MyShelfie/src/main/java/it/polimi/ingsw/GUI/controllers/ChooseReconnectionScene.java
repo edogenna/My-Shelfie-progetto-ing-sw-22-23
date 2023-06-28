@@ -14,31 +14,30 @@ import java.util.ResourceBundle;
 public class ChooseReconnectionScene implements Initializable {
     @FXML
     private Pane basePane;
-    private static GuiView instance;
+    private GuiView guiView;
 
     @FXML
     private Button reconnectionButton;
     @FXML
     private Button newGameButton;
 
-    //0 if new game, 1 if reconnection
-    private int isReconnection;
+    boolean done = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        GuiView guiView = GuiView.getInstance();
-        isReconnection = -1;
+        guiView = GuiView.getInstance();
+
         reconnectionButton.setOnAction(e -> {
-            if(isReconnection == -1)
-                isReconnection = 1;
+            if(!done) {
+                done = true;
+                guiView.setIsReconnection(1);
+            }
         });
         newGameButton.setOnAction(e -> {
-            if(isReconnection == -1)
-                isReconnection = 0;
+           if(!done) {
+                done = true;
+               guiView.setIsReconnection(0);
+           }
         });
-    }
-
-    public int getIsReconnection() {
-        return isReconnection;
     }
 }

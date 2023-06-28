@@ -62,7 +62,6 @@ public class CliView implements UI{
             case "FirstPlayer" -> {handleFirstPlayerMessage(m);}
             case "Lobby" -> {handleLobbyMessage(m);}
             case "CommonCard" -> handleCommonCardMessage(m);
-            case "ChatBegins" -> {handleChatBeginsMessage(m);}
             case "StartingGame" -> {handleStartingGameMessage(m);}
             case "ChooseUsername" -> {handleChooseUsernameMessage(m);}
             case "NotValidUsername" -> {handleNotValidUsernameError(m);}
@@ -76,7 +75,6 @@ public class CliView implements UI{
             case "NotAdjTiles" -> {outputStream.println(((NotAdjacTiles) m).getS()); handleNotValidMove();}
             case "NotEnoughSpaceBookshelf" -> {outputStream.println(((NotEnoughSpaceBookshelfError) m).getS()); handleNotValidMove();}
             case "NoFreeSide" -> {outputStream.println(((NoFreeSideError) m).getS()); handleNotValidMove();}
-            case "ChatMessage" -> {handleChatMessage(m);}
             case "Reconnect" -> {handleReconnectionMessage(m);}
             case "OldGameId" -> {handleOldGameIdMessage(m);}
             case "OldIdNotValid" ->{handleOldIdNotValidMessage(m);}
@@ -351,32 +349,7 @@ public class CliView implements UI{
         this.messageToServer = Converter.convertToJSON(m);
     }
 
-    /**
-     * This method handles the {@link ChatMessage}
-     * @param m message
-     */
-    private void handleChatMessage(Message m) throws IOException {
-        outputStream.print(((ChatMessage) m).getSender() + ": ");
-        outputStream.println(((ChatMessage) m).getMessage());
 
-        if(out != null)
-            sendMessageToSocketServer(new ACKMessage());
-        else sendMessageToRmiServer(new ACKMessage());
-
-    }
-
-    /**
-     * This method handles the {@link ChatBeginsMessage}
-     * @param m message
-     */
-    private void handleChatBeginsMessage(Message m) throws IOException {
-        outputStream.println(((ChatBeginsMessage) m).getS());
-        userInput = stdIn.readLine();
-
-        if(out != null)
-            sendMessageToSocketServer(new ChatMessage(userInput, "1"));
-        else sendMessageToRmiServer(new ChatMessage(userInput, "1"));
-    }
 
     /**
      * This method handles the {@link ReconnectionMessage}
