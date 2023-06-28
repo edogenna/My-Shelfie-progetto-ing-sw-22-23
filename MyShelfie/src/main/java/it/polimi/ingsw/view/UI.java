@@ -5,6 +5,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * User interface for the client
+ */
 public interface UI {
     /**
      * set the input and output of the UI towards the server
