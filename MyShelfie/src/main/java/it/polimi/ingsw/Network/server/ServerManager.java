@@ -63,7 +63,7 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * his method adds a RMI client to the hashmaps
+     * This method adds a RMI client to the hashmaps
      * @param client the client to be added to the hashmaps
      */
     void addClient(RmiClientInterface client) {
@@ -478,13 +478,13 @@ public class ServerManager implements Runnable{
     }
 
     /**
-     * This method starts a new game
-     * saves the game in a file
-     * sends the graphical info to the clients
-     * sends the first player the message to start his turn
-     * checks if the game is finished
-     * handles the game until it is finished
-     * handles the win
+     * This method starts a new game.
+     * saves the game in a file.
+     * sends the graphical info to the clients.
+     * sends the first player the message to start his turn.
+     * checks if the game is finished.
+     * handles the game until it is finished.
+     * handles the win.
      * @throws IOException if the file is not found
      */
     private void startGame() throws IOException {
