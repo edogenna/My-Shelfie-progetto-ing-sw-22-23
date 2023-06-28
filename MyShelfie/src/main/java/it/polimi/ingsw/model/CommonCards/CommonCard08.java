@@ -97,6 +97,10 @@ public class CommonCard08 implements CommonCardStrategy {
                 }
     }
 
+    /**
+     * Returns the string containing the design of the card.
+     * @return the string containing the design of the card.
+     */
     @Override
     public String getCommonCardDesign() {
         return constant8;

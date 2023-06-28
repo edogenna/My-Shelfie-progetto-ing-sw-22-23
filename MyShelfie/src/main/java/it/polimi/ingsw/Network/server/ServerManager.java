@@ -52,12 +52,20 @@ public class ServerManager implements Runnable{
         this.gameStarted = false;
     }
 
+    /**
+     * This method adds a socket client to the hashmaps
+     * @param client the client to be added
+     */
     void addClient(Socket client) {
         socketClients.put(idClient, client);
         answerReady.put(idClient, true);
         idClient++;
     }
 
+    /**
+     * his method adds a RMI client to the hashmaps
+     * @param client the client to be added to the hashmaps
+     */
     void addClient(RmiClientInterface client) {
         rmiClients.put(idClient, client);
         answerReady.put(idClient, true);
@@ -76,6 +84,11 @@ public class ServerManager implements Runnable{
         this.isTimeExceededPt2 = false;
     }
 
+    /**
+     * This method returns the number of a player by his username
+     * @param value the username of the player
+     * @return the number of the player
+     */
     private int getNumberByUsernameFromLobby(String value) {
         for (Map.Entry<Integer, String> entry : lobby.entrySet()) {
             if (entry.getValue().equals(value)) {
@@ -85,6 +98,10 @@ public class ServerManager implements Runnable{
         return -1;
     }
 
+    /**
+     * This method returns the number of the active player
+     * @return the number of the player
+     */
     protected int getNumberActivePlayer() {
         String activeUsername = activeMatch.getActivePlayerUsername();
         for (Map.Entry<Integer, String> entry : lobby.entrySet()) {
@@ -95,6 +112,11 @@ public class ServerManager implements Runnable{
         return -1;
     }
 
+    /**
+     * This method returns the number of a player
+     * @param client the socket client of the player
+     * @return the number of the player
+     */
     public int getNumber(Socket client){
         for (Map.Entry<Integer, Socket> entry : socketClients.entrySet())
             if (entry.getValue() == client)
@@ -102,6 +124,11 @@ public class ServerManager implements Runnable{
         return -1;
     }
 
+        /**
+     * This method returns the number of a player
+     * @param client the RMI client of the player
+     * @return the number of the player
+     */
     public int getNumber(RmiClientInterface client) {
         for (Map.Entry<Integer, RmiClientInterface> entry : rmiClients.entrySet())
             if (entry.getValue() == client)
@@ -170,6 +197,7 @@ public class ServerManager implements Runnable{
 //            notifyTimeLeft(i, clients.length);//to be removed?
         }
     }
+
 
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         String serializedMessage = Converter.convertToJSON(message);

@@ -77,11 +77,17 @@ public class CommonCard02 implements CommonCardStrategy {
         return false;
     }
 
+    /**
+     * @return the description of the card
+     */
     @Override
     public String getCommonCardDesign() {
         return constant2;
     }
 
+    /**
+     * @return the number of the card
+     */
     @Override
     public int getNumber() {
         return number;

@@ -48,11 +48,16 @@ public class CommonCard04 implements CommonCardStrategy {
     }
 
 
+    /**
+     * @return the string containing the common card design
+     */
     @Override
     public String getCommonCardDesign() {
         return constant4;
     }
-
+    /**
+     * @return the number of the common card
+     */
     @Override
     public int getNumber() {
         return number;

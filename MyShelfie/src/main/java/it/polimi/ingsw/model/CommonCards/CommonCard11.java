@@ -58,6 +58,10 @@ public class CommonCard11 implements CommonCardStrategy {
         return value;
     }
 
+    /**
+     * Returns the string containing the design of the card.
+     * @return the string containing the design of the card.
+     */
     @Override
     public String getCommonCardDesign() {
         return constant11;

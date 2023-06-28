@@ -24,6 +24,11 @@ public class RmiServer implements RmiServerInterface, Runnable{
         this.rmiPort = port;
     }
 
+    /**
+     * This method allows to register a client to the server
+     * @param client the client to be registered
+     * @throws RemoteException if there are problems with the connection
+     */
     @Override
     public void registry(RmiClientInterface client) throws RemoteException {
         serverManager.addClient(client);
@@ -33,14 +38,28 @@ public class RmiServer implements RmiServerInterface, Runnable{
         new Thread(new ClientManager(serverManager, number)).start();
     }
 
+    /**
+     * This method allows to unregister a client from the server
+     * @param client the client to be unregistered
+     */
     public void unregister(RmiClientInterface client) {
         serverManager.removeClient(client);
     }
 
+    /**
+     * This method allows to test the aliveness of the server
+     * @return true if the server is alive, false otherwise
+     */
     public synchronized boolean testAliveness() {
         return true;
     }
 
+    /**
+     * This method allows to send a message to a client and get an answer
+     * @param rmiClient the client to which the message is sent
+     * @param message the message to be sent
+     * @return the answer of the client
+     */
     String sendMessageAndGetAnswer(RmiClientInterface rmiClient, String message){
         try {
             try {
@@ -54,6 +73,7 @@ public class RmiServer implements RmiServerInterface, Runnable{
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public void run() {
@@ -69,6 +89,11 @@ public class RmiServer implements RmiServerInterface, Runnable{
         }
     }
 
+    /**
+     * This method allows to test the connection with the server
+     * @param x a number to test the connection
+     * @return true if the connection is active, false otherwise
+     */
     @Override
     public synchronized boolean testServerConnection(int x){
         boolean stop;

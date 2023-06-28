@@ -72,12 +72,14 @@ public class GuiView extends Application implements UI {
     }
 
     public void main(String[] args) {
+         System.out.println("MAIN: Il valore di stage è: " + stage);
         Application.launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
+        System.out.println("START: Il valore di stage è: " + stage);
         Platform.runLater(() -> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChooseReconnectionScene.fxml"));
             try {
@@ -187,6 +189,7 @@ public class GuiView extends Application implements UI {
     @Override
     public String actionHandler(Message m) throws IOException {
 
+
         System.out.println("AH: Il valore di stage è: " + stage);
         switch (m.getType()){
 
@@ -234,7 +237,7 @@ public class GuiView extends Application implements UI {
 
     private void handleReconnectionMessage(Message m) throws IOException {
         String s;
-
+        System.out.println("HANDLEREC: Il valore di stage è: " + stage);
         while(isReconnection == -1){
             try {
                 sleep(100);
@@ -266,8 +269,9 @@ public class GuiView extends Application implements UI {
     private void changeScenes(String sceneName){
         Platform.runLater(() -> {
             try {
+                System.out.println("CHANGE SCENE: Il valore di stage è: " + stage);
                 Parent loader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
-                stage.getScene().setRoot(loader);
+                this.stage.getScene().setRoot(loader);
             } catch (IOException e) {
                 e.printStackTrace();
             }

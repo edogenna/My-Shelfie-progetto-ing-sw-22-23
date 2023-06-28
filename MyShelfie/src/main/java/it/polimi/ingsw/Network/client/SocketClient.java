@@ -30,6 +30,13 @@ public class SocketClient{
     private UI ui = null;
     private Thread timer;
 
+    /**
+     * Starts the socket client
+     * @param hostName The host name of the server to connect to
+     * @param chooseCliGui True if the user wants to play with the cli, false if he wants to play with the gui
+     * @param args The arguments of the main
+     * @throws IOException If there is an error with the socket
+     */
     public void startSocketClient(String hostName, boolean chooseCliGui, String[] args) throws IOException {
         try {
             try {
@@ -72,6 +79,10 @@ public class SocketClient{
         }
     }
 
+    /**
+     * Starts the timer
+     * The timer is used to check if the client is still connected to the server
+     */
     private void startTimer(){
         this.timer = new Thread(()->{
             int counter = 0;
@@ -93,6 +104,9 @@ public class SocketClient{
         this.timer.start();
     }
 
+    /**
+     * Stops the timer
+     */
     private void stopTimer(){
         this.timer.interrupt();
     }

@@ -22,6 +22,10 @@ public interface CommonCardStrategy {
      */
     String getCommonCardDesign();
 
+    /**
+     * Returns the number of the common goal card
+     * @return Common Card Number
+     */
     int getNumber();
 }
 

@@ -408,11 +408,17 @@ public class Controller {
         model.setConnected(username);
     }
 
+    /**
+     * sets the player as disconnected
+     * */
     public void disconnect(String username) {
         model.setDisconnected(username);
         model.checkDisconnections();
     }
 
+    /**
+     * @return true if the player is disconnected
+     * */
     public boolean isDisconnected(String username) {
         return model.isDisconnected(username);
     }

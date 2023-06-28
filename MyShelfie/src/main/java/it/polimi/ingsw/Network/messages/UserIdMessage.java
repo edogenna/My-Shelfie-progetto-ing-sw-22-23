@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Network.messages;
 
+/**
+ * Message to inform the user of his UserId
+ * @author Samuele Pietro Galli
+ */
 public final class UserIdMessage extends Message{
     private final int id;
     private final String s;

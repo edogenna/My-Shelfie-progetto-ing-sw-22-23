@@ -14,6 +14,14 @@ public class RmiCommunication extends Communication{
     private final RmiClientInterface client;
     private final RmiServer rmiServer;
 
+    /**
+     * Constructor of the class RmiCommunication
+     * @param message the message to be sent
+     * @param client the client to which the message is sent
+     * @param rmiServer the rmi server
+     * @param number the number of the client
+     * @param serverManager the server manager
+     */
     RmiCommunication(String message, RmiClientInterface client, RmiServer rmiServer, int number, ServerManager serverManager){
         super(number, serverManager, message);
         this.client = client;

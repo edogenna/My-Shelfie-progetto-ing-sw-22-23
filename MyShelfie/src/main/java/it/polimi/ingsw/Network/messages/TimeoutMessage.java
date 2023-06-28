@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Network.messages;
 
+/**
+ * Message to inform a player that he has been disconnected from the game because of a timeout
+ * @author Samuele Pietro Galli
+ */
 public final class TimeoutMessage extends Message{
     public TimeoutMessage() {
         super("Timeout");

@@ -31,6 +31,12 @@ public class RmiClient implements RmiClientInterface{
     private boolean switchOff;
     private int id;
 
+    /**
+     * Starts the rmi client
+     * @param hostName The host name
+     * @param chooseCliGui True if the user wants to play with the cli, false if he wants to play with the gui
+     * @param args The arguments
+     */
     public void startRMIClient(String hostName, boolean chooseCliGui, String[] args) {
         this.stdIn = new BufferedReader(new InputStreamReader(System.in));
 
@@ -70,27 +76,52 @@ public class RmiClient implements RmiClientInterface{
         }
     }
 
+    /**
+     * Manages the message received from the server
+     * @param messageJsonCoded The message received from the server
+     * @return The answer to the server
+     * @throws IOException
+     * @throws InterruptedException
+     */
     synchronized String manageMessage(String messageJsonCoded) throws IOException, InterruptedException {
         Message fromServer = Converter.convertFromJSON(messageJsonCoded);
         return ui.actionHandler(fromServer);
     }
 
+    /**
+     * Sends a message to the server and waits for the answer
+     * @param message The message to send
+     * @return The answer to the server
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     public String sendMessageAndGetAnswer(String message) throws IOException, InterruptedException {
         return manageMessage(message);
     }
 
+    /**
+     * Tests the connection with the server
+     * @return True if the connection is still alive, false otherwise
+     */
     @Override
     public boolean testAliveness() {
         return true;
     }
 
+    /**
+     * Closes the client
+     */
     @Override
     public void stopClient(){
         System.out.println("Client will close now");
         System.exit(0);
     }
 
+    /**
+     * Sets the id of the client
+     * @param number The id of the client
+     */
     @Override
     public void setId(int number) {
         this.id = number;

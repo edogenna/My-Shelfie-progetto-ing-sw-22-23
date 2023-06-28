@@ -12,6 +12,10 @@ import java.io.Serializable;
 //TODO: organizzare i messaggi in package
 public abstract class Message implements Serializable {
 
+    /**
+     * Serial Version UID
+     * @see Serializable
+     */
     @Serial
     private static final long serialVersionUID = 1L;
 

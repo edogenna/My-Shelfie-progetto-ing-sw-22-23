@@ -11,6 +11,12 @@ public class Communication implements Runnable{
     private final ServerManager serverManager;
     //boolean timeExceeded;
 
+    /**
+     * Constructor of the class
+     * @param num number of the client
+     * @param serverManager server manager
+     * @param message message to be sent
+     */
     Communication(int num, ServerManager serverManager, String message) {
         this.num = num;
         this.serverManager = serverManager;
@@ -18,6 +24,10 @@ public class Communication implements Runnable{
         //this.timeExceeded = false;
     }
 
+    /**
+     * 
+     * @param answer
+     */
     void showAndSetAnswer(String answer) {
         serverManager.setAnswer(num, answer);
         System.out.println("User " + num + ": " + answer);
