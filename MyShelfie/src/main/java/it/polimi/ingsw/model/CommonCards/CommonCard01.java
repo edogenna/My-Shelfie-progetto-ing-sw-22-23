@@ -13,7 +13,7 @@ public class CommonCard01 implements CommonCardStrategy{
     private final int c=5;
     private final int minGroups =6;
     private final int minTiles=2;
-    private final String constant1=
+    public static final String constant1=
             "Card number 1   Description:\n"+
             "   |=|          Six groups each containing at least\n"+
             "   |=|   x6     2 tiles of the same type (non necessarily\n"+
@@ -21,6 +21,12 @@ public class CommonCard01 implements CommonCardStrategy{
             "                different between different groups.\n";
 
     public final int number = 1;
+
+    @Override
+    public String getPath(){
+        return "/graphics/commongoalcards/1.png";
+    }
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[][] m=new int[r][c];

@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * @author Alessandro Fornara
  */
 public class CommonCard04 implements CommonCardStrategy {
-    private final String constant4=
+    public static final String constant4=
             "Card number 4        Description:\n"+
             "|■| |■| |■| |■| |■|  Four lines each formed by 5 tiles of\n"+
             "     MAX 3 ≠         maximum three different types.\n"+
@@ -45,6 +45,11 @@ public class CommonCard04 implements CommonCardStrategy {
         }
 
         return numerOfValidRows >= 4;
+    }
+
+    @Override
+    public String getPath(){
+        return "/graphics/commongoalcards/4.png";
     }
 
 

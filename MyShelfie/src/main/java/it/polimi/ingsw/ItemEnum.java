@@ -124,4 +124,31 @@ public enum ItemEnum {
         };
     }
 
+    public String getPath(){
+        String s = "/graphics/itemtiles/";
+        switch (this) {
+            case GREEN1 -> s = s.concat("Gatti1.1.png");
+            case GREEN2 -> s = s.concat("Gatti1.2.png");
+            case GREEN3 -> s = s.concat("Gatti1.3.png");
+            case WHITE1 -> s = s.concat("Libri1.1.png");
+            case WHITE2 -> s = s.concat("Libri1.2.png");
+            case WHITE3 -> s = s.concat("Libri1.3.png");
+            case YELLOW1 -> s = s.concat("Giochi1.1.png");
+            case YELLOW2 -> s = s.concat("Giochi1.2.png");
+            case YELLOW3 -> s = s.concat("Giochi1.3.png");
+            case BLUE1 -> s = s.concat("Cornici1.1.png");
+            case BLUE2 -> s = s.concat("Cornici1.2.png");
+            case BLUE3 -> s = s.concat("Cornici1.3.png");
+            case AZURE1 -> s = s.concat("Trofei1.1.png");
+            case AZURE2 -> s = s.concat("Trofei1.2.png");
+            case AZURE3 -> s = s.concat("Trofei1.3.png");
+            case PURPLE1 -> s = s.concat("Piante1.1.png");
+            case PURPLE2 -> s = s.concat("Piante1.2.png");
+            case PURPLE3 -> s = s.concat("Piante1.3.png");
+            default -> s = s.concat("NULL");
+        };
+
+        return s;
+    }
+
 }

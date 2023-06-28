@@ -1,23 +1,18 @@
 package it.polimi.ingsw.view;
 
 
-import it.polimi.ingsw.GUI.controllers.ChooseReconnectionScene;
-import it.polimi.ingsw.GUI.controllers.FXMLChooseNickController;
-import it.polimi.ingsw.GUI.controllers.FXMLFirstPlayerController;
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
 
 import it.polimi.ingsw.Network.messages.Answers.*;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.model.Card;
+import it.polimi.ingsw.model.CommonCards.CommonCard01;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.ImageCursor;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 
@@ -25,8 +20,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Objects;
+
+import it.polimi.ingsw.model.CommonCards.*;
 
 import static java.lang.Thread.sleep;
 
@@ -46,6 +41,8 @@ public class GuiView extends Application implements UI {
     private BufferedReader stdIn;
     private static GuiView instance = null;
     private String[] args;
+    private PrincipalSceneController controller;
+    public String move;
 
 
 
@@ -83,7 +80,7 @@ public class GuiView extends Application implements UI {
         this.stage = stage;
         System.out.println("START: Il valore di stage è: " + stage);
         Platform.runLater(() -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ChooseReconnectionScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PrincipalScene.fxml"));
             try {
                 basicScene = new Scene(loader.load());
             } catch (IOException e) {
@@ -92,8 +89,6 @@ public class GuiView extends Application implements UI {
             basicScene.setCursor(new ImageCursor(new Image("/graphics/cursor.png")));
             this.stage.setScene(basicScene);
             this.stage.getIcons().add(new Image("/graphics/icon.png"));
-            this.stage.setMinWidth(900);
-            this.stage.setMinHeight(600);
             this.stage.setResizable(false);
 
             this.stage.setTitle("MyShelfie");
@@ -109,6 +104,49 @@ public class GuiView extends Application implements UI {
             System.exit(0);
         });
 
+    }
+
+    public ItemEnum[][] getBoard() {
+        return board;
+    }
+
+    public String[] getCommonCards() {
+        String[] a = new String[2];
+
+        a[0] = switch (CommonCards[0]){
+            case CommonCard01.constant1 -> "1";
+            case CommonCard02.constant2 -> "2";
+            case CommonCard03.constant3 -> "3";
+            case CommonCard04.constant4 -> "4";
+            case CommonCard05.constant5 -> "5";
+            case CommonCard06.constant6 -> "6";
+            case CommonCard07.constant7 -> "7";
+            case CommonCard08.constant8 -> "8";
+            case CommonCard09.constant9 -> "9";
+            case CommonCard10.constant10 -> "10";
+            case CommonCard11.constant11 -> "11";
+            case CommonCard12.constant12 -> "12";
+            default -> null;
+        };
+
+        a[1] = switch (CommonCards[1]){
+            case CommonCard01.constant1 -> "1";
+            case CommonCard02.constant2 -> "2";
+            case CommonCard03.constant3 -> "3";
+            case CommonCard04.constant4 -> "4";
+            case CommonCard05.constant5 -> "5";
+            case CommonCard06.constant6 -> "6";
+            case CommonCard07.constant7 -> "7";
+            case CommonCard08.constant8 -> "8";
+            case CommonCard09.constant9 -> "9";
+            case CommonCard10.constant10 -> "10";
+            case CommonCard11.constant11 -> "11";
+            case CommonCard12.constant12 -> "12";
+            default -> null;
+        };
+
+
+        return a;
     }
 
     /**
@@ -129,6 +167,10 @@ public class GuiView extends Application implements UI {
         this.messageToServer = Converter.convertToJSON(m);
     }
 
+    public void setController(PrincipalSceneController controller) {
+        System.out.println("CONTROLLER SETTATO");
+        this.controller = controller;
+    }
 
     @Override
     public String actionHandler(Message m) throws IOException {
@@ -167,6 +209,7 @@ public class GuiView extends Application implements UI {
         }
         return messageToServer;
     }
+
 
     /**
      * This method handles the {@link UserIdMessage} message
@@ -245,8 +288,6 @@ public class GuiView extends Application implements UI {
         else sendMessageToRmiServer(new ACKMessage());
     }
 
-    //function that changes scene
-
 
     /**
      * This method handles the {@link MoveMessage}
@@ -254,10 +295,18 @@ public class GuiView extends Application implements UI {
      */
     private void handleMoveMessage(Message m) throws IOException{
         outputStream.println(((MoveMessage) m).getS());
-        userInput = stdIn.readLine();
+
+        while(move == null){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         if(out != null)
-            sendMessageToSocketServer(new MoveAnswer(userInput));
-        else sendMessageToRmiServer(new MoveAnswer(userInput));
+            sendMessageToSocketServer(new MoveAnswer(move));
+        else sendMessageToRmiServer(new MoveAnswer(move));
     }
     /**
      * This method handles the {@link LobbyMessage}
@@ -275,6 +324,11 @@ public class GuiView extends Application implements UI {
      * @param m message
      */
     private void handleStartingGameMessage(Message m) throws IOException {
+        new Thread( () -> {
+            Application.launch(args);
+        }).start();
+
+
         outputStream.println(((StartingGameMessage) m).getS());
         if(out != null)
             sendMessageToSocketServer(new ACKMessage());
@@ -287,6 +341,8 @@ public class GuiView extends Application implements UI {
      */
     private void handleWaitingMessage(Message m) throws IOException {
         outputStream.println(((WaitingMessage) m).getS());
+        if(controller != null)
+            controller.setLabelText(((WaitingMessage) m).getS());
         if(out != null)
             sendMessageToSocketServer(new ACKMessage());
         else sendMessageToRmiServer(new ACKMessage());
@@ -351,6 +407,25 @@ public class GuiView extends Application implements UI {
         this.personalCard = graphicalGameInfo.getPersonalCard();
         this.shelf = graphicalGameInfo.getShelf();
 
+
+        System.out.println("sono qui controller boh");
+
+        while(controller == null){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("sono qui controller NON N YLL");
+
+        controller.board = board;
+        controller.shelf = shelf;
+        controller.common = getCommonCards();
+        controller.updateView();
+        move = null;
+
         outputStream.println(graphicalGameInfo.getS());
 
         if(out != null)
@@ -365,6 +440,9 @@ public class GuiView extends Application implements UI {
      */
     private void handleReconnectionMessage(Message m) throws IOException {
         outputStream.println(((ReconnectionMessage) m).getS());
+        if(controller != null)
+            controller.setLabelText(((ReconnectionMessage) m).getS());
+
         this.userInput = stdIn.readLine();
         if(this.out != null)
             sendMessageToSocketServer(new ReconnectionAnswer(this.userInput));
@@ -376,10 +454,23 @@ public class GuiView extends Application implements UI {
      * This method handles the {@link NotValidMoveError}
      * @throws IOException
      */
-
-    //TODO: modificare
     private void handleNotValidMove() throws IOException {
-        userInput = stdIn.readLine();
+        if(controller != null)
+            controller.setLabelText("Move not valid, try again");
+
+        while(move == null){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(out != null)
+            sendMessageToSocketServer(new MoveAnswer(move));
+        else sendMessageToRmiServer(new MoveAnswer(move));
+
+
         if(out != null)
             sendMessageToSocketServer(new MoveAnswer(userInput));
         else
