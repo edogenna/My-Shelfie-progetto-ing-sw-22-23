@@ -16,7 +16,7 @@ A game instance is made up of a single server and multiple clients, which connec
 
 The implemented functionalities are:
 
-- Basic and Comeplete Rules.
+- Basic and Complete Rules.
 - Socket and RMI Connection.
 - CLI: command line game interface. 
 - GUI: graphical game interface realized using JavaFX.
