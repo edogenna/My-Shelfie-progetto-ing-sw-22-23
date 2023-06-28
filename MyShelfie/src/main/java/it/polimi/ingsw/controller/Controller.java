@@ -33,6 +33,7 @@ public class Controller {
     }
 
     /**
+     * this method checks if the player has inserted a wrong format of input
      * @param input the move that the player wants to do
      * @return true if the player has inserted a wrong format of input
      * */
@@ -78,6 +79,7 @@ public class Controller {
     }
 
     /**
+     * this method checks if there is enough space in the bookshelf
      * @param x the number of tiles that the player wants to take
      * @return true if 'x' is greater than the available space in the bookshelf
      * */
@@ -88,6 +90,7 @@ public class Controller {
     }
 
     /**
+     * checks if a tile is blank
      * @param x the x's coordinate of the tile
      * @param y the y's coordinate of the tile
      * @return true if the selected tile is a blank tile
@@ -97,6 +100,7 @@ public class Controller {
     }
 
     /**
+     * checks id at least one of the 2 selected tiles is a blank tile
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -113,6 +117,7 @@ public class Controller {
     }
 
     /**
+     * checks id at least one of the 3 selected tiles is a blank tile
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -131,6 +136,7 @@ public class Controller {
     }
 
     /**
+     * checks if the selected tile has a free side
      * @return true if the tile has at least one free side
      * */
     private boolean tileFreeSide(int x, int y){
@@ -138,6 +144,7 @@ public class Controller {
     }
 
     /**
+     * checks id the 2 selected tiles are adjacent
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -149,6 +156,7 @@ public class Controller {
     }
 
     /**
+     * checks id the 3 selected tiles are adjacent
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -162,6 +170,7 @@ public class Controller {
     }
 
     /**
+     * checks if the selected tile has a free side
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -179,6 +188,7 @@ public class Controller {
     }
 
     /**
+     * checks if the 3 selected tiles hava a free side
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
      * @param x2 the x's coordinate of the second tile
@@ -201,6 +211,10 @@ public class Controller {
 
 
     /**
+     * Method that picks a card
+     * @param x the x's coordinate of the tile
+     * @param y the y's coordinate of the tile
+     * @param col the column where the tile will be inserted
      * @return the code of the error or 0 if the move is done
      * ERROR CODES:
      * ERROR CODES:
@@ -235,6 +249,7 @@ public class Controller {
     }
 
     /**
+     * Method that picks 2 cards
      * @return the code of the error or 0 if the move is done
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
@@ -278,6 +293,7 @@ public class Controller {
     }
 
     /**
+     * Method that picks 3 cards
      * @return the code of the error or 0 if the move is done
      * @param x1 the x's coordinate of the first tile
      * @param y1 the y's coordinate of the first tile
@@ -323,6 +339,7 @@ public class Controller {
     }
 
     /**
+     * Method that controls if a player has achieved a goal
      * @param id the number of the common card, 0:CommonCard1; 1: CommonCard2
      * @return the points done with the CommonCard; if the goal isn't achieved, the points will be = 0;
      * */
@@ -339,6 +356,7 @@ public class Controller {
     }
 
     /**
+     * Method to check if the turn is finished
      * @return true if the match is finished
      * */
     public boolean finishTurn(){
@@ -348,12 +366,14 @@ public class Controller {
     }
 
     /**
+     * Method to check if there is only 1 player left
      * @return true if there's only 1 player connected
      * */
     public boolean getStopMatch(){return model.getStopMatch();}
 
     //TODO: finish this method
     /**
+     * Method to declare the winner
      * @return the points of the winner player
      * */
     public int declareWinner(){
@@ -408,6 +428,8 @@ public class Controller {
     }
 
     /**
+     * Method to check if a player is disconnected by his username
+     * @param username the name of the player
      * @return true if the player is disconnected
      * */
     public boolean isDisconnected(String username) {
