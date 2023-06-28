@@ -46,11 +46,6 @@ public class CliView implements UI{
     public void setInAndOut(PrintWriter out, BufferedReader in){//Do nothing
     }
 
-    /**
-     * This method decides how to handle a certain message received by the client
-     * @param m message
-     * @throws IOException
-     */
     @Override
     public String actionHandler(Message m) throws IOException {
 
@@ -130,8 +125,8 @@ public class CliView implements UI{
     }
     /**
      * This method handles the {@link WelcomeBackMessage}
-     * @param m message
-     * @throws IOException
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleWelcomeBackMessage(Message m) throws IOException {
         outputStream.println(((WelcomeBackMessage) m).getString());
@@ -143,8 +138,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link OldIdNotValid}
-     * @param m message
-     * @throws IOException
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleOldIdNotValidMessage(Message m) throws IOException {
         outputStream.println(((OldIdNotValid) m).getS());
@@ -156,8 +151,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link CommonCardMessage}
-     * @param m message
-     * @throws IOException
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleCommonCardMessage(Message m) throws IOException {
         outputStream.println(((CommonCardMessage) m).getS());
@@ -171,7 +166,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link MoveMessage}
-     * @param m message
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleMoveMessage(Message m) throws IOException{
         outputStream.println(((MoveMessage) m).getS());
@@ -182,7 +178,8 @@ public class CliView implements UI{
     }
     /**
      * This method handles the {@link LobbyMessage}
-     * @param m message
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleLobbyMessage(Message m) throws IOException {
         outputStream.println(((LobbyMessage) m).getS());
@@ -193,7 +190,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link StartingGameMessage}
-     * @param m message
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleStartingGameMessage(Message m) throws IOException {
         outputStream.println(((StartingGameMessage) m).getS());
@@ -204,7 +202,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link WaitingMessage}
-     * @param m message
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleWaitingMessage(Message m) throws IOException {
         outputStream.println(((WaitingMessage) m).getS());
@@ -214,8 +213,8 @@ public class CliView implements UI{
     }
     /**
      * This method handles the {@link FirstPlayerMessage}
-     * @param m message
-     * @throws IOException
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleFirstPlayerMessage(Message m) throws IOException {
         outputStream.println(((FirstPlayerMessage) m).getS());
@@ -231,8 +230,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link ChooseUsernameMessage}
-     * @param m message
-     * @throws IOException
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleChooseUsernameMessage(Message m) throws IOException {
         outputStream.println(((ChooseUsernameMessage) m).getS());
@@ -246,8 +245,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link NotValidUsernameError}
-     * @param m message
-     * @throws IOException
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleNotValidUsernameError(Message m) throws IOException {
         outputStream.println(((NotValidUsernameError) m).getS());
@@ -260,8 +259,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link GraphicalGameInfo}
-     * @param m message
-     * @throws IOException
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleGraphicalInfoMessage(Message m) throws IOException {
         GraphicalGameInfo graphicalGameInfo = (GraphicalGameInfo) m;
@@ -279,7 +278,7 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link NotValidMoveError}
-     * @throws IOException
+     * @throws IOException if an I/O error occurs
      */
     private void handleNotValidMove() throws IOException {
         userInput = stdIn.readLine();
@@ -290,7 +289,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link WinMessage}
-     * @param m message
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleWinMessage(Message m) throws IOException {
         outputStream.println(((WinMessage) m).getS());
@@ -327,21 +327,8 @@ public class CliView implements UI{
     }
 
     /**
-     * This method prints a player's bookshelf and his personal card
-     */
-    private void printBookshelfAndPersonal(){
-
-        ItemEnum.generateCharMatrix(shelf, 6, 5)
-                .addColumnNumbering(5)
-                .appendToAllRows("   ")
-                .alignColumn()
-                .addOnRight(ItemEnum.generateCharMatrix(personalCard.getMatrix(), 6, 5).addColumnNumbering(5))
-                .printMatrix();
-    }
-
-    /**
      * This method prints a {@link NotValidMoveError}
-     * @param m
+     * @param m {@link Message}
      */
     public void dummyInputPrint(Message m){
         outputStream.println(((NotValidMoveError) m).getS());
@@ -360,7 +347,7 @@ public class CliView implements UI{
      * This method sends a message to the rmi server
      * @param m {@link Message}
      */
-    private void sendMessageToRmiServer(Message m) throws IOException {
+    private void sendMessageToRmiServer(Message m) {
         this.messageToServer = Converter.convertToJSON(m);
     }
 
@@ -368,7 +355,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link ReconnectionMessage}
-     * @param m message
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleReconnectionMessage(Message m) throws IOException {
         outputStream.println(((ReconnectionMessage) m).getS());
@@ -381,7 +369,8 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link OldGameId}
-     * @param m message
+     * @param m {@link Message}
+     * @throws IOException if an I/O error occurs
      */
     private void handleOldGameIdMessage(Message m) throws IOException {
         outputStream.println(((OldGameId) m).getS());
@@ -398,9 +387,9 @@ public class CliView implements UI{
 
     /**
      * This method handles the {@link UserDisconnection}
-     * @param m message
+     * @param m {@link Message}
      */
-    private void handleDisconnectionMessage(Message m) throws IOException {
+    private void handleDisconnectionMessage(Message m) {
         outputStream.println(((UserDisconnection) m).getS());
         if(this.out != null)
             sendMessageToSocketServer(new ACKMessage());

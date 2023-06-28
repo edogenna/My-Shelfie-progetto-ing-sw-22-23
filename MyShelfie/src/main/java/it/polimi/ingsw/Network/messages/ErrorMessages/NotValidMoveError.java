@@ -4,7 +4,6 @@ import it.polimi.ingsw.Network.messages.Message;
 
 /**
  * Message that is sent by the server to a client when the move the player wants to make is not valid
- * @author Samuele Pietro Galli
  */
 public final class NotValidMoveError extends Message {
 

@@ -207,7 +207,12 @@ public class ServerManager implements Runnable{
     }
 
 
-    //TODO: DOCUMENTARE QUESTA
+    /**
+     * This method sends a message to a client using rmi or socket technology and waits for its answer
+     * @param number Client id
+     * @param message Message
+     * @return Client's answer
+     */
     protected String sendMessageAndWaitForAnswer(int number, Message message) {
         String serializedMessage = Converter.convertToJSON(message);
         while (!answerReady.get(number)) {
@@ -303,6 +308,11 @@ public class ServerManager implements Runnable{
         return ((UsernameAnswer) m).getString();
     }
 
+    /**
+     * This method adds a client to the lobby
+     * @param number Client's id
+     * @throws IOException
+     */
     protected void addClientToLobby(int number) throws IOException {
         String username = login(number);
         if(username.equals(Constants.DISCONNECT))
@@ -329,9 +339,7 @@ public class ServerManager implements Runnable{
 
     /**
      * adds a client to the log of the server
-     * @param temporaryId
-     * @throws IOException
-     * @throws InterruptedException
+     * @param temporaryId Temporary id for the client
      */
     void addClientToLog(int temporaryId) throws IOException, InterruptedException {
         String code;
@@ -630,7 +638,6 @@ public class ServerManager implements Runnable{
 
     /**
      * This method saves the game
-     * @throws IOException
      */
     private void saveGame() throws IOException {
         String save = this.activeMatch.getModelSave();
@@ -644,7 +651,6 @@ public class ServerManager implements Runnable{
     /**
      * This method loads a game that has been saved in file
      * @return game {@link Model}
-     * @throws IOException
      */
     private Model loadGame() throws IOException {
         File file = new File("save.txt");
@@ -667,7 +673,6 @@ public class ServerManager implements Runnable{
     /**
      * This method checks if there is game present on the memory disk
      * @return a controller linked to the model loaded from memory
-     * @throws IOException
      */
     private Controller checkMemoryDisk() throws IOException {
         Model m = loadGame();

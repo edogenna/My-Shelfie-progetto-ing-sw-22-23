@@ -7,9 +7,6 @@ import java.io.Serializable;
  * This class represents a generic message
  * @author Alessandro Fornara
  */
-
-
-//TODO: organizzare i messaggi in package
 public abstract class Message implements Serializable {
 
     /**

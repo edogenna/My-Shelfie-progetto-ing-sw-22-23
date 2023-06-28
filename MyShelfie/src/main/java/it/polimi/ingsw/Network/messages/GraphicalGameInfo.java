@@ -4,11 +4,10 @@ import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.model.Card;
 
 /**
- * Message that contains the information needed to update the graphical interface of the client
- * it contains the board, the common cards, the shelf, the personal card and the active player
- * it is sent to all the players
- * It is sent by the server to the client
- * @author Samuele Pietro Galli, Alessandro Fornara
+ * Message that contains the information needed to update the graphical interface of the client.
+ * it contains the board, the common cards, the shelf, the personal card and the active player.
+ * it is sent to all the players.
+ * It is sent by the server to the client.
  */
 public final class GraphicalGameInfo extends Message {
 

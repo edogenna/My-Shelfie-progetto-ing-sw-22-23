@@ -11,9 +11,18 @@ import it.polimi.ingsw.model.Model;
 public class Controller {
     private Model model;
 
+    /**
+     * This constructor is used to create a new controller and model
+     * @param x number of players
+     */
     public Controller(int x){
         this.model = new Model(x);
     }
+
+    /**
+     * This constructor is used to associate a new controller to a model that already exists
+     * @param m Model
+     */
     public Controller(Model m) {this.model = m;}
 
     public void setUsernamePlayer(String name){
