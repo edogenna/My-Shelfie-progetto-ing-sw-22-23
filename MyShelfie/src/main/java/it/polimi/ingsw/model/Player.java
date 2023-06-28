@@ -80,6 +80,7 @@ public class Player {
     }
 
     /**
+     * Method that calculates the points earned by the player
      * @return the total points earned by the player: personalCard points, commonCard points and adjacentTiles points
      * */
     public int calculatePoints(){
@@ -90,6 +91,7 @@ public class Player {
     }
 
     /**
+     * Method for the points earned by achieving a personal card by the player
      * @return the personalCard points achieved
      * */
     private int pointPersonalCard(){
@@ -116,6 +118,7 @@ public class Player {
     }
 
     /**
+     * Method for the points earned by placing tiles of the same color adjacent to each other
      * @return the points earned by placing tiles of the same color adjacent to each other
      * */
     private int adjacentTilesPoints(){
@@ -216,6 +219,7 @@ public class Player {
     }
 
     /**
+     * This method checks if the CommonDone1 is true
      * @return Returns the boolean value CommonDone1
      */
     public boolean getCommonDone1(){
@@ -223,12 +227,14 @@ public class Player {
     }
 
     /**
+     * This method checks if the CommonDone2 is true
      * @return Returns the boolean value CommonDone2
      */
     public boolean getCommonDone2(){
         return this.CommonDone2;
     }
     /**
+     * Method that returns the int value myCommonPoints
      * @return Returns the int value myCommonPoints
      */
     public int getMyPoints(){
@@ -261,6 +267,7 @@ public class Player {
     }
 
     /**
+     * This method returns the maximum number of tiles in a column
      * @return the maximum number of tiles that can be inserted in a column
      * */
     public int maxTilesPick(){
@@ -273,6 +280,7 @@ public class Player {
     }
 
     /**
+     * Method inserts a tile in the shelf
      * @param y the library column
      * @param tile the tile he wants to insert
      * The tile is placed on the first available row starting from the bottom
@@ -283,6 +291,7 @@ public class Player {
     }
 
     /**
+     * Method inserts two tiles in the shelf
      * @param y the library column
      * @param tile1 the first tile he wants to insert
      * @param tile2 the second tile he wants to insert
@@ -296,6 +305,7 @@ public class Player {
     }
 
     /**
+     * Method inserts three tiles in the shelf
      * @param y the library column
      * @param tile1 the first tile he wants to insert
      * @param tile2 the second tile he wants to insert
