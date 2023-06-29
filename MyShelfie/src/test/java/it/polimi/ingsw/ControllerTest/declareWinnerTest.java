@@ -13,7 +13,6 @@ public class declareWinnerTest {
     Player player1;
     @Test
     public void Test(){
-        int x;
         ItemEnum[][] matrix = new ItemEnum[6][5];
 
         for(int i=0; i<6; i++)
@@ -34,7 +33,7 @@ public class declareWinnerTest {
         controller.disconnect("giovanni");
         Assert.assertTrue(controller.finishTurn());
         int y = player1.calculatePoints();
-        Assert.assertEquals(y, controller.declareWinner());
+        Assert.assertEquals(y, controller.declareWinner()[controller.getIdActivePlayer()]);
         Assert.assertEquals(0, controller.getIdActivePlayer());
 
 
@@ -56,7 +55,7 @@ public class declareWinnerTest {
         player1 = model.getPlayers()[1];
         Assert.assertTrue(controller.finishTurn());
         y = player1.calculatePoints();
-        Assert.assertEquals(y, controller.declareWinner());
+        Assert.assertEquals(y, controller.declareWinner()[controller.getIdActivePlayer()]);
         Assert.assertEquals(1, controller.getIdActivePlayer());
 
         model = new Model(2);
@@ -67,7 +66,7 @@ public class declareWinnerTest {
         controller.setActivePlayer(0);
         controller.disconnect("giovanni");
         Assert.assertTrue(controller.finishTurn());
-        Assert.assertEquals(0, controller.declareWinner());
+        Assert.assertEquals(0, controller.declareWinner()[controller.getIdActivePlayer()]);
         Assert.assertEquals(0, controller.getIdActivePlayer());
 
 
@@ -96,7 +95,7 @@ public class declareWinnerTest {
         Assert.assertFalse(controller.finishTurn());
         Assert.assertTrue(controller.finishTurn());
         y = player1.calculatePoints();
-        Assert.assertEquals(y, controller.declareWinner());
+        Assert.assertEquals(y, controller.declareWinner()[controller.getIdActivePlayer()]);
         Assert.assertEquals(0, controller.getIdActivePlayer());
     }
 }

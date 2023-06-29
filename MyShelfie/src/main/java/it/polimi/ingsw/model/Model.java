@@ -384,23 +384,18 @@ public class Model {
 
         if(this.lastTurn){
             finish = true;
-//            System.out.println("id active pre while = " + this.idActivePlayer);
             x = this.idActivePlayer+1;
             x %= this.numPlayers;
             if(x != this.idFirstPlayer)
                 finish = false;
             while(players[x].isDisconnected()){
-                System.out.println("cipolla");
                 x++;
                 x %= this.numPlayers;
-//                System.out.println("x = " + x);
             }
             if(x == this.idFirstPlayer)
                 finish = true;
             this.idActivePlayer = x;
             this.activePlayer = this.players[this.idActivePlayer];
-//            System.out.println("id active = " + this.idActivePlayer);
-//            System.out.println("id first Player = " + this.idFirstPlayer);
         }else{
             this.changeActivePlayer();
         }
