@@ -528,7 +528,6 @@ public class ServerManager implements Runnable{
                         }
                         if (counter >= Constants.secondsDuringTurn) {
                             points = activeMatch.declareWinner();
-                            //TODO: control the declareWinner methods here
                             for (Integer j : this.lobby.keySet()) {
                                 sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points[activeMatch.getIdActivePlayer()], usernamePlayers, points));
                             }
@@ -540,7 +539,6 @@ public class ServerManager implements Runnable{
                         }
                     }
                 }else{
-                    //TODO: control the declareWinner methods here
                     points = activeMatch.declareWinner();
                     for (Integer j : this.lobby.keySet()) {
                         sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points[activeMatch.getIdActivePlayer()], usernamePlayers, points));
