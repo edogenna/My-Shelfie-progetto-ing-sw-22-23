@@ -510,7 +510,7 @@ public class ServerManager implements Runnable{
 
             if(this.win) {
 //                int points = activeMatch.declareWinner();
-                int points;
+                int[] points = new int[this.numberOfPlayers];
 //                for(Integer j : this.lobby.keySet()){
 //                    sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
 //                }
@@ -525,8 +525,9 @@ public class ServerManager implements Runnable{
                         }
                         if (counter >= Constants.secondsDuringTurn) {
                             points = activeMatch.declareWinner();
+                            //TODO: CONTROLLARE SE FUNZIONA QUI IL METODO declareWinner
                             for (Integer j : this.lobby.keySet()) {
-                                sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                                sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points[activeMatch.getIdActivePlayer()], nicknames, points));
                             }
                             break;
                         } else if (lobby.size() > 1) {
@@ -536,9 +537,10 @@ public class ServerManager implements Runnable{
                         }
                     }
                 }else{
+                    //TODO: CONTROLLARE SE FUNZIONA QUI IL METODO declareWinner
                     points = activeMatch.declareWinner();
                     for (Integer j : this.lobby.keySet()) {
-                        sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
+                        sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points[activeMatch.getIdActivePlayer()], nicknames, points));
                     }
                     saveGame();
                 }

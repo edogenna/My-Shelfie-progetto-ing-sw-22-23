@@ -428,8 +428,12 @@ public class Model {
      * it calculates the winner player and sets him as the activePlayer
      * @return the points of the winner player
      * */
-    public int theWinnerIs(){
+    public int[] theWinnerIs(){
         int i, x, max, id;
+        int[] finalPoints = new int[this.numPlayers];
+
+        for(i=0; i<this.numPlayers; i++)
+            finalPoints[i] = 0;
 
         max = -1;
         id = -1;
@@ -438,6 +442,7 @@ public class Model {
                 //if the player is disconnected, we won't calculate his points;
                 if(!this.players[i].isDisconnected()){
                     x = this.players[i].calculatePoints();
+                    finalPoints[i] = x;
                     if(x > max){
                         max = x;
                         id = i;
@@ -450,11 +455,13 @@ public class Model {
             }
             this.setActivePlayer(id);
         }else{
+            //we enter here if there's only one connected player
             i = theOnlyPlayerConnected();
             this.setActivePlayer(i);
-            return this.players[i].calculatePoints();
+            int score = this.players[i].calculatePoints();
+            finalPoints[this.idActivePlayer] = score;
         }
-        return this.activePlayer.getMyPoints();
+        return finalPoints;
     }
 
     /**

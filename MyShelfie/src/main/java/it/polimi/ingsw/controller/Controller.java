@@ -384,8 +384,8 @@ public class Controller {
      * Method to declare the winner
      * @return the points of the winner player
      * */
-    public int declareWinner(){
-        int x;
+    public int[] declareWinner(){
+        int[] x;
         x = model.theWinnerIs();
         return x;
     }
