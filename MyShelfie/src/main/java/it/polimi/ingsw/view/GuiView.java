@@ -24,6 +24,7 @@ import it.polimi.ingsw.model.CommonCards.*;
 /**
  * This class offers a Graphical User Interface
  * @author Edoardo Gennaretti
+ * @author Samuele Pietro Galli
  */
 public class GuiView extends Application implements UI {
     private ItemEnum[][] board;
