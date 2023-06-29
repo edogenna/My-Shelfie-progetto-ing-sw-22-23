@@ -124,11 +124,9 @@ public class Player {
     private int adjacentTilesPoints(){
         int points, near, i, j, x, y;
         int[][] visited = new int[6][5];
-        Stack<Integer> pathX = new Stack<Integer>();
-        Stack<Integer> pathY = new Stack<Integer>();
+        Stack<Integer> pathX = new Stack<>();
+        Stack<Integer> pathY = new Stack<>();
         boolean stop;
-
-        points = 0;
 
         for(i=0; i<6; i++){
             for(j=0; j<5; j++){
@@ -139,8 +137,10 @@ public class Player {
             }
         }
 
+        points = 0;
+
         for(i=0; i<6; i++){
-            for(j=0; j<5; j++){
+            for(j=0; j<5 && !this.shelf[i][j].equals(ItemEnum.BLANK); j++){
                 pathX.push(i);
                 pathY.push(j);
                 visited[i][j] = 1;
@@ -184,7 +184,6 @@ public class Player {
                             stop = true;
                         }
                     }
-
                 }
                 if(near == 3) {
                     points += 2;
