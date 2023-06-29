@@ -19,11 +19,6 @@ public class CommonCard09 implements CommonCardStrategy {
     public final int number = 9;
 
     @Override
-    public String getPath(){
-        return "/graphics/commongoalcards/9.png";
-    }
-
-    @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         ItemEnum firstColor;
         ItemEnum secondColor;

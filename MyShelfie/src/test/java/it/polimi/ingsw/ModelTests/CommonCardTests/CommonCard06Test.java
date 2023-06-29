@@ -88,6 +88,5 @@ public class CommonCard06Test {
                 "| ≠ |\n"+
                 "| ≠ |\n"));
 
-        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/6.png");
     }
 }

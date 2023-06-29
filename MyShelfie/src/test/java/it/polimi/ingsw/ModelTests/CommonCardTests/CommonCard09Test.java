@@ -101,8 +101,6 @@ public class CommonCard09Test {
                 "| ■ |           combination of another column.\n"+
                 "| ■ |\n"));
 
-        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/9.png");
-
     }
 
 }

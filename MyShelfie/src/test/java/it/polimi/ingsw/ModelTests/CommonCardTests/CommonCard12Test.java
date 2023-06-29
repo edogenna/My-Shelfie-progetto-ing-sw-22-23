@@ -131,7 +131,6 @@ public class CommonCard12Test {
                 "|•|•|•|•|       exactly one more tile. Tiles can be of any type.\n"+
                 "|•|•|•|•|•|\n"));
 
-        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/12.png");
     }
 
 }

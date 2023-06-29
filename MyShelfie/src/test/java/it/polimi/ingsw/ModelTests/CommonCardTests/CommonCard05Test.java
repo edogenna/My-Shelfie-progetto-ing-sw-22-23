@@ -94,7 +94,6 @@ public class CommonCard05Test {
                 "\n"+
                 "|=|       |=|\n"));
 
-        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/5.png");
     }
 
 }

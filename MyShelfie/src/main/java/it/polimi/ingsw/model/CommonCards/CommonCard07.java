@@ -18,10 +18,6 @@ public class CommonCard07 implements CommonCardStrategy {
     public final int number = 7;
 
     @Override
-    public String getPath(){
-        return "/graphics/commongoalcards/7.png";
-    }
-    @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
         int count=0;
         boolean[][] matrix = new boolean[6][5];

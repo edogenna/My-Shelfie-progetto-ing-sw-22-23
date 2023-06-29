@@ -93,6 +93,5 @@ public class CommonCard11Test {
                 "|=| |=| |=|     no restriction about the positions\n"+
                 "|=| |=| |=|     of these tiles.\n"));
 
-        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/11.png");
     }
 }

@@ -47,12 +47,6 @@ public class CommonCard04 implements CommonCardStrategy {
         return numerOfValidRows >= 4;
     }
 
-    @Override
-    public String getPath(){
-        return "/graphics/commongoalcards/4.png";
-    }
-
-
     /**
      * @return the string containing the common card design
      */

@@ -17,10 +17,6 @@ public class CommonCard02 implements CommonCardStrategy {
             "        |=|\n";
 
     public final int number = 2;
-    @Override
-    public String getPath(){
-        return "/graphics/commongoalcards/2.png";
-    }
 
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {

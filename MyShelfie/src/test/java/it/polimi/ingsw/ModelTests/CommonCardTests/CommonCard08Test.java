@@ -103,6 +103,5 @@ public class CommonCard08Test {
                 "       x2            the same or a different combination\n"+
                 "                     of another line.\n"));
 
-        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/8.png");
     }
 }

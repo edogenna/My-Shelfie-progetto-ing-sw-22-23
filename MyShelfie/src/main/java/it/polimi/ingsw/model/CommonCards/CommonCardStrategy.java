@@ -28,11 +28,5 @@ public interface CommonCardStrategy {
      */
     int getNumber();
 
-
-    /**
-     * Returns the path of the immage
-     * @return String
-     */
-    String getPath();
 }
 

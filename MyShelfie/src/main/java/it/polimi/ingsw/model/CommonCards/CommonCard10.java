@@ -16,11 +16,6 @@ public class CommonCard10 implements CommonCardStrategy{
     public final int number = 10;
 
     @Override
-    public String getPath(){
-        return "/graphics/commongoalcards/10.png";
-    }
-
-    @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;
         final int numberOfColumns=b[0].length;

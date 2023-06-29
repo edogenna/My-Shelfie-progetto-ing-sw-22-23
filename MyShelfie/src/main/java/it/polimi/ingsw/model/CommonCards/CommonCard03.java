@@ -23,10 +23,6 @@ public class CommonCard03 implements CommonCardStrategy{
     public final int number = 3;
 
     @Override
-    public String getPath(){
-        return "/graphics/commongoalcards/3.png";
-    }
-    @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[][] m=new int[r][c];
         int[] groups=new int[15];

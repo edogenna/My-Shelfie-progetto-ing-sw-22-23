@@ -97,7 +97,6 @@ public class CommonCard01Test {
                 "                in the depicted shape). Tiles can be\n"+
                 "                different between different groups.\n"));
 
-        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/1.png");
     }
 
 

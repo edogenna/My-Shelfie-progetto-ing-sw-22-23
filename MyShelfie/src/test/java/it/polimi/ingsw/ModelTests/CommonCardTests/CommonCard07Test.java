@@ -126,6 +126,5 @@ public class CommonCard07Test {
                 "   x2           of one square can be different from\n" +
                 "                those of the other square.\n"));
 
-        Assert.assertEquals(c.getPath(), "/graphics/commongoalcards/7.png");
     }
 }

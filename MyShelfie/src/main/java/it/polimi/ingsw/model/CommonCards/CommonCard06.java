@@ -22,11 +22,6 @@ public class CommonCard06 implements CommonCardStrategy{
     public final int number = 6;
 
     @Override
-    public String getPath(){
-        return "/graphics/commongoalcards/6.png";
-    }
-
-    @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         int[] occurrences = new int[6];
         int pos;
