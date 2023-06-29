@@ -177,15 +177,12 @@ public class ServerManager implements Runnable{
         }
     }
 
-    //TODO: finish
     private void removeClient(int number) {
-        //todo: there are some useless if, but it depends on the new logout format
         System.out.println("remove Client method with number: " + number);
             if (lobby.containsKey(number)) {
                 removeClientFromLobby(number);
             }
         this.disconnectedPlayers.add(number);
-        System.out.println("DisconnectedPlayers");
         if (this.gameStarted && !activeMatch.isDisconnected(nicknames.get(number))){
             System.out.println("controller set disconnected");
             activeMatch.disconnect(nicknames.get(number));
@@ -355,17 +352,14 @@ public class ServerManager implements Runnable{
             m = Converter.convertFromJSON(answer);
             if(((ReconnectionAnswer) m).getString().equals(Constants.RECONNECT)) {
                 code = sendMessageAndWaitForAnswer(temporaryId, new OldGameId());
-                //TODO: insert a try{}catch(...) in OldGameId answer, so you set the answer like "ERR";
                 if (code.equals(Constants.GENERIC_ERROR) || code.equals(Constants.DISCONNECT))
                     break;
                 m = Converter.convertFromJSON(code);
                 oldId = ((OldGameIdAnswer) m).getId();
                 if (checkIfDisconnected(oldId)) {
-                    System.out.println("user was disconnected");
 
                     if (!switchClientId(oldId, temporaryId))
                         break;
-                    System.out.println("switchClient true");
                     disconnectedPlayers.remove(Integer.valueOf(oldId));
                     lobby.put(oldId, nicknames.get(oldId));
                     sendMessageAndWaitForAnswer(oldId, new WelcomeBackMessage(nicknames.get(oldId)));
@@ -398,13 +392,6 @@ public class ServerManager implements Runnable{
      * @return true if the player had been disconnected
      * */
     private boolean checkIfDisconnected(int code) {
-        System.out.println("I'm in check disconnection " + code);
-        /*try {
-            oldId = Integer.parseInt(code);
-            System.out.println("the inserted id is: "+ oldId);
-        } catch (NumberFormatException e) {
-            return false;
-        }*/
         System.out.print("disconnected Players: ");
         for (Integer disconnectedPlayer : disconnectedPlayers)
             System.out.print(disconnectedPlayer);
@@ -413,11 +400,6 @@ public class ServerManager implements Runnable{
             return true;
         if (!answerReady.getOrDefault(code, false))
             return false;
-
-        //TODO: this is a temporary message, create new message for connection
-        //      sendMessageAndWaitForAnswer(oldId, new Message(Protocol.ARE_YOU_ALIVE, "", null));
-        /*sendMessageAndWaitForAnswer(oldId, new ChooseUsernameMessage());
-         */
         return isDisconnected(code);
     }
 
@@ -506,14 +488,12 @@ public class ServerManager implements Runnable{
 
             //Sending graphical info on the game's status
             for (Integer i : this.lobby.keySet()) {
-                System.out.println("sending graphical info to User " + i);
+ //               System.out.println("sending graphical info to User " + i);
                 sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
-                System.out.println("pluto");
             }
 
             //Sending to the active player a move request and handling the answer;
             String answer = sendMessageAndWaitForAnswer(x, new MoveMessage(activeUsername));
-            System.out.println(answer);
             if(!answer.equals(Constants.DISCONNECT) && !answer.equals(Constants.GENERIC_ERROR)) {
                 Message m = Converter.convertFromJSON(answer);
                 handleMoveAnswer(x, m);

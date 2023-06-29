@@ -180,7 +180,6 @@ public class Model {
         return isAdjacent;
     }
 
-    //todo: eliminare questo commento se non serve più
     //istanzio il model, creo una board, inserisco nella shelf, getactiveboard e le confronto
 
     /**
@@ -357,7 +356,6 @@ public class Model {
         return players[x].getPersonalCard();
     }
 
-    //todo: test this method
     /**
      * it controls if the activePlayer has filled his bookshelf, changes the activePlayer and refills the board if it is
      * necessary.
@@ -383,6 +381,7 @@ public class Model {
             if(x != this.idFirstPlayer)
                 finish = false;
             while(players[x].isDisconnected()){
+                System.out.println("cipolla");
                 x++;
                 x %= this.numPlayers;
 //                System.out.println("x = " + x);
@@ -390,6 +389,7 @@ public class Model {
             if(x == this.idFirstPlayer)
                 finish = true;
             this.idActivePlayer = x;
+            this.activePlayer = this.players[this.idActivePlayer];
 //            System.out.println("id active = " + this.idActivePlayer);
 //            System.out.println("id first Player = " + this.idFirstPlayer);
         }else{
@@ -562,7 +562,6 @@ public class Model {
      * */
     public boolean getStopMatch(){return this.stopMatch;}
 
-    //TODO: i don't think it is correct doing this; control the test method e modify it;
     public Board getBoard() {
         return board;
     }
