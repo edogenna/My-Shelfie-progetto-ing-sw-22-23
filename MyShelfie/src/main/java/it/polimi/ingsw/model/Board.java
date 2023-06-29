@@ -129,18 +129,6 @@ public class Board {
     }
 
     /**
-     * It returns the ItemEnum from a given position.
-     * @param r row of the matrix
-     * @param c coloumn of the matrix
-     * @return ItemEnum
-     */
-    public ItemEnum getItemEnum(int r, int c) {
-        if (matrix[r][c] == ItemEnum.BLANK)
-            System.out.println("Restituita una carta Blank!");
-        return matrix[r][c];
-    }
-
-    /**
      * It sets all the ItemEnum of the board as a blank ItemEnum
      */
     private void setBoardAllBlank(){
