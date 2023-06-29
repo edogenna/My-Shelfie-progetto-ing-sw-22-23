@@ -8,7 +8,14 @@ My Shelfie Board Game is the final test of "Software Engineering", course of "Co
 This project is a digital implementation in `Java` of <b>My Shelfie<b> board game made by <b>Cranio Games</b>.
 
 In this game you will have to sort various objects that are on the board by placing them in your library. 
-You will have to try to complete the formation you have been assigned but at the same time you will have to complete the two goals! 
+You will have to try to complete the formation you have been assigned but at the same time you will have to complete the two goals!
+
+### The Team
+- [Donato Fiore](https://github.com/DoneyMoney)
+- [Alessandro Fornara](https://github.com/AlessandroFornara)
+- [Samuele Pietro Galli](https://github.com/SamuGalli)
+- [Edoardo Gennaretti](https://github.com/edogenna)
+
 
 ## Project Specifications
 The program is developed using the Model-View-Controller design pattern. Several UML diagrams are provided to clarify the structure and dynamics of the code.
