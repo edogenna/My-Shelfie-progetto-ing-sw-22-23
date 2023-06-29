@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="712.0" prefWidth="1000.0" styleClass="background" stylesheets="@../css/PrincipalSceneCSS.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.PrincipalSceneController">
+<AnchorPane fx:id="mainPane" prefHeight="712.0" prefWidth="1176.0" styleClass="background" stylesheets="@../css/PrincipalSceneCSS.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.PrincipalSceneController">
    <children>
       <ImageView fitHeight="307.0" fitWidth="285.0" layoutX="57.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -214,7 +214,7 @@
       </ImageView>
       <TextField fx:id="textField" layoutX="50.0" layoutY="27.0" prefHeight="54.0" prefWidth="447.0" />
       <Button fx:id="buttonGO" layoutX="519.0" layoutY="39.0" mnemonicParsing="false" text="GO" />
-      <Label fx:id="labelText" layoutX="50.0" layoutY="120.0" prefHeight="79.0" prefWidth="926.0">
+      <Label fx:id="labelText" layoutX="50.0" layoutY="120.0" prefHeight="79.0" prefWidth="926.0" AnchorPane.bottomAnchor="512.6666666666666" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="120.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
