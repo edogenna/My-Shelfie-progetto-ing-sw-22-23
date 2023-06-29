@@ -12,6 +12,8 @@ public class Card {
     private final Triplet[] dataTriad = new Triplet[6];
     @Expose
     private final ItemEnum[][] matrixPersonal = new ItemEnum[6][5];
+    @Expose
+    private int id;
 
     public Card() {
         for (int i = 0; i < 6; i++)
@@ -51,5 +53,13 @@ public class Card {
         tris = dataTriad[i];
 
         return tris;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

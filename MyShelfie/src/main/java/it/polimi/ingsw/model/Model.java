@@ -97,13 +97,16 @@ public class Model {
         while (idPersonalCards[1] == idPersonalCards[0])
             idPersonalCards[1] = rand.nextInt(12);
         this.personalCards[0] = playerCard.getCard(idPersonalCards[0]);
+        this.personalCards[0].setId(idPersonalCards[0]);
         this.personalCards[1] = playerCard.getCard(idPersonalCards[1]);
+        this.personalCards[1].setId(idPersonalCards[1]);
 
         if(this.numPlayers >= 3){
             idPersonalCards[2] = idPersonalCards[0];
             while (idPersonalCards[2]==idPersonalCards[0] || idPersonalCards[2]==idPersonalCards[1])
                 idPersonalCards[2] = rand.nextInt(12);
             this.personalCards[2] = playerCard.getCard(idPersonalCards[2]);
+            this.personalCards[2].setId(idPersonalCards[2]);
         }
 
         if(this.numPlayers == 4){
@@ -111,6 +114,7 @@ public class Model {
             while (idPersonalCards[3]==idPersonalCards[0] || idPersonalCards[3]==idPersonalCards[1] || idPersonalCards[3]==idPersonalCards[2])
                 idPersonalCards[3] = rand.nextInt(12);
             this.personalCards[3] = playerCard.getCard(idPersonalCards[3]);
+            this.personalCards[3].setId(idPersonalCards[3]);
         }
     }
 

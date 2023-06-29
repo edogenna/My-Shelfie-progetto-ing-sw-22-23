@@ -47,4 +47,8 @@ public final class GraphicalGameInfo extends Message {
     public String getS() {
         return s;
     }
+
+    public int getPersonalCardId(){
+        return personalCard.getId();
+    }
 }
