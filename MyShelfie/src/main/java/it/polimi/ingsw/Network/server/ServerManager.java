@@ -509,6 +509,9 @@ public class ServerManager implements Runnable{
             this.win = activeMatch.finishTurn();
 
             if(this.win) {
+                Map<Integer, String> usernamePlayers = new HashMap<>();
+                for(int j=0; j<this.numberOfPlayers; j++)
+                    usernamePlayers.put(j, activeMatch.getUsernamePlayer(j));
 //                int points = activeMatch.declareWinner();
                 int[] points = new int[this.numberOfPlayers];
 //                for(Integer j : this.lobby.keySet()){
@@ -527,7 +530,7 @@ public class ServerManager implements Runnable{
                             points = activeMatch.declareWinner();
                             //TODO: control the declareWinner methods here
                             for (Integer j : this.lobby.keySet()) {
-                                sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points[activeMatch.getIdActivePlayer()], nicknames, points));
+                                sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points[activeMatch.getIdActivePlayer()], usernamePlayers, points));
                             }
                             break;
                         } else if (lobby.size() > 1) {
@@ -540,7 +543,7 @@ public class ServerManager implements Runnable{
                     //TODO: control the declareWinner methods here
                     points = activeMatch.declareWinner();
                     for (Integer j : this.lobby.keySet()) {
-                        sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points[activeMatch.getIdActivePlayer()], nicknames, points));
+                        sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points[activeMatch.getIdActivePlayer()], usernamePlayers, points));
                     }
                     saveGame();
                 }
