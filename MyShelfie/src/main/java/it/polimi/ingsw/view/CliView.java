@@ -20,13 +20,15 @@ public class CliView implements UI{
     private ItemEnum[][] board;
     private String[] CommonCards;
     private Card personalCard;
-    private ItemEnum[][] shelf;
+    private ItemEnum[][][] shelves;
     private PrintWriter out;
     private BufferedReader in;
     private BufferedReader stdIn;
     private String myUsername;
     private String userInput;
     private String messageToServer;
+    int id;
+    String[] usernames;
 
     public CliView(PrintWriter out, BufferedReader in, BufferedReader stdIn){
         this.out = out;
@@ -36,10 +38,12 @@ public class CliView implements UI{
         this.personalCard = null;
         this.CommonCards = null;
         this.board = null;
-        this.shelf = null;
+        this.shelves = null;
         this.myUsername = null;
         this.userInput = null;
         this.messageToServer = null;
+        this.id = 0;
+        this.usernames = null;
     }
 
     @Override
@@ -267,7 +271,9 @@ public class CliView implements UI{
         this.board = graphicalGameInfo.getBoard();
         this.CommonCards = graphicalGameInfo.getCommonCards();
         this.personalCard = graphicalGameInfo.getPersonalCard();
-        this.shelf = graphicalGameInfo.getShelf();
+        this.shelves = graphicalGameInfo.getShelves();
+        this.id = graphicalGameInfo.getYourId();
+        this.usernames = graphicalGameInfo.getUsernames();
         printGame();
         outputStream.println(graphicalGameInfo.getS());
 
@@ -303,14 +309,35 @@ public class CliView implements UI{
      * This method prints the board, the player's bookshelf and his personal card and common goal cards
      */
     private void printGame(){
+        CharMatrix shelf = null;
+        int i = 0;
+        boolean iniz = false;
+        for(; i<4 && !iniz; i++){
+            if(i != id){
+                shelf = ItemEnum.generateCharMatrix(shelves[i], 6, 5)
+                        .addColumnNumbering(5)
+                        .newLineAtTop(usernames[i]);
+                iniz = true;
+            }
+        }
+
+        for(; i<4; i++){
+            if(i != id && shelves[i] != null){
+                shelf = shelf.alignColumn().appendToAllRows("   ").addOnRight(
+                        ItemEnum.generateCharMatrix(shelves[i], 6, 5)
+                        .addColumnNumbering(5)
+                        .newLineAtTop(usernames[i]));
+            }
+        }
+
+
         CharMatrix boardCM = ItemEnum.generateCharMatrix(board, Board.BOARD_SIZE, Board.BOARD_SIZE)
                 .addNumbering(Board.BOARD_SIZE)
                 .newLineAtTop("Board:")
                 .alignColumn()
                 .appendToAllRows("       ");
 
-
-        CharMatrix bookshelfCM = ItemEnum.generateCharMatrix(shelf, 6, 5)
+        CharMatrix bookshelfCM = ItemEnum.generateCharMatrix(shelves[id], 6, 5)
                 .addColumnNumbering(5)
                 .newLineAtTop("Your Bookshelf:")
                 .alignColumn()
@@ -320,6 +347,7 @@ public class CliView implements UI{
                 .newLineAtTop("Your Personal Card:");
 
         outputStream.println("\n\n");
+        shelf.printMatrix();
         boardCM.addOnRight(bookshelfCM).addOnRight(personalCM).printMatrix();
         
         outputStream.println(CommonCards[0]);

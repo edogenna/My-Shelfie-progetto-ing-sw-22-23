@@ -417,7 +417,7 @@ public class GuiView extends Application implements UI {
         this.board = graphicalGameInfo.getBoard();
         this.CommonCards = graphicalGameInfo.getCommonCards();
         this.personalCard = graphicalGameInfo.getPersonalCard();
-        this.shelf = graphicalGameInfo.getShelf();
+        //his.shelf = graphicalGameInfo.getShelves();
 
         while(controller == null){
             try {

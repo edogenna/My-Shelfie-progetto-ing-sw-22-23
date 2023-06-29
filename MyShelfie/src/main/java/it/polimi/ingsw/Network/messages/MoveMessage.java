@@ -8,8 +8,8 @@ import it.polimi.ingsw.model.Card;
  */
 public final class MoveMessage extends Message {
     private final String s = "it's your turn." +
-                             "Please insert which tiles you would like to remove from the board and the column of your bookshelf you want to put your tiles in\n" +
-                             "the first one will go to the first position available on the bottom of the column and the others will pile up\n" +
+                             " Please insert which tiles you would like to remove from the board and the column\nof your bookshelf you want to put your tiles in " +
+                             "the first one will go to the first position available\non the bottom of the column and the others will pile up\n" +
                              "Example: x1,y1,x2,y2,x3,y3,column\n" +
                              "Example: a,3,a,4,a,5,column";
 

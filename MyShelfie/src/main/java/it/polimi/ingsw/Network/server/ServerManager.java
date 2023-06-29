@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network.server;
 
 import it.polimi.ingsw.Constants;
+import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.client.RmiClientInterface;
 import it.polimi.ingsw.Network.messages.Answers.*;
 import it.polimi.ingsw.Network.messages.*;
@@ -478,6 +479,8 @@ public class ServerManager implements Runnable{
             System.out.println("Game has been saved");
             String activeUsername;
             int x;
+            ItemEnum[][][] shelves = new ItemEnum[4][][];
+            String[] usernames = new String[4];
 
             do{
                 activeUsername = activeMatch.getActivePlayerUsername();
@@ -486,10 +489,14 @@ public class ServerManager implements Runnable{
                 System.out.println("the active user is: " + activeUsername + ", " + x);
             }while(x==-1);
 
+            for (Integer i : this.lobby.keySet()) {
+                shelves[i] = activeMatch.getPlayerBookshelf(this.lobby.get(i));
+                usernames[i] = this.lobby.get(i);
+            }
             //Sending graphical info on the game's status
             for (Integer i : this.lobby.keySet()) {
  //               System.out.println("sending graphical info to User " + i);
-                sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
+                sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), usernames, shelves, activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername, i));
             }
 
             //Sending to the active player a move request and handling the answer;
@@ -533,11 +540,12 @@ public class ServerManager implements Runnable{
                     for (Integer j : this.lobby.keySet()) {
                         sendMessageAndWaitForAnswer(j, new WinMessage(activeMatch.getActivePlayerUsername(), points));
                     }
+                    saveGame();
                 }
             }
             System.out.println();
         }
-        System.exit(0);
+        //System.exit(0);
     }
 
     /**
