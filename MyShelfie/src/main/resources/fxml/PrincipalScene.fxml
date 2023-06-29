@@ -8,272 +8,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="854.0" prefWidth="1349.0" styleClass="background" stylesheets="@../css/PrincipalSceneCSS.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.PrincipalSceneController">
+<AnchorPane fx:id="mainPane" prefHeight="712.0" prefWidth="1000.0" styleClass="background" stylesheets="@../css/PrincipalSceneCSS.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.PrincipalSceneController">
    <children>
-      <Pane layoutX="689.0" layoutY="179.0" prefHeight="400.0" prefWidth="400.0" styleClass="background1" stylesheets="@../css/PrincipalSceneCSS.css" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="689.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="179.0">
-         <children>
-            <GridPane layoutX="28.0" layoutY="28.0" prefHeight="608.0" prefWidth="591.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <ImageView fx:id="b03" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b04" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b13" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b14" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b15" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b34" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b33" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b23" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b22" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b32" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b31" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b26" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b25" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b24" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b53" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b52" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b51" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b50" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b48" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b38" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b37" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b36" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b35" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b47" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b46" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b45" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b44" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b43" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b42" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b41" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b40" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b54" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b55" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b56" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b57" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b62" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b85" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="8">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b84" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="8">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b66" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="6">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b65" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="6">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b64" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="6">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b63" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b73" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="7">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b75" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="7">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="b74" fitHeight="110.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="7">
-                     <image>
-                        <Image url="@../graphics/itemtiles/Cornici1.1.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </GridPane>
-         </children>
-      </Pane>
-      <ImageView fitHeight="434.0" fitWidth="379.0" layoutX="7.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="307.0" fitWidth="285.0" layoutX="57.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/boards/bookshelf.png" />
          </image>
       </ImageView>
-      <GridPane layoutX="59.0" layoutY="497.0" prefHeight="307.0" prefWidth="285.0">
+      <ImageView fitHeight="450.0" fitWidth="450.0" layoutX="539.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../graphics/boards/livingroom.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="90.0" layoutY="409.0" prefHeight="229.0" prefWidth="233.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -282,188 +32,560 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="59.6666259765625" minHeight="10.0" prefHeight="58.77777099609375" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="49.888916015625" minHeight="10.0" prefHeight="47.22222900390625" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="41.333343505859375" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="71.0" minHeight="0.0" prefHeight="41.666656494140625" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="57.66668701171875" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="35.33331298828125" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="40.66668701171875" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fx:id="s51" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <ImageView fx:id="s51" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s02" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="s02" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@../graphics/itemtiles/Piante1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s03" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fx:id="s03" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s04" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+            <ImageView fx:id="s04" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s10" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+            <ImageView fx:id="s10" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s20" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+            <ImageView fx:id="s20" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s14" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <ImageView fx:id="s14" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s13" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <ImageView fx:id="s13" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s12" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <ImageView fx:id="s12" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s11" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fx:id="s11" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s33" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <ImageView fx:id="s33" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s32" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <ImageView fx:id="s32" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s31" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <ImageView fx:id="s31" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s30" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+            <ImageView fx:id="s30" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s24" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <ImageView fx:id="s24" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s23" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <ImageView fx:id="s23" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s22" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <ImageView fx:id="s22" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s21" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ImageView fx:id="s21" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s50" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+            <ImageView fx:id="s50" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s44" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <ImageView fx:id="s44" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s43" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <ImageView fx:id="s43" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s42" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <ImageView fx:id="s42" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s41" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <ImageView fx:id="s41" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s40" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+            <ImageView fx:id="s40" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s34" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <ImageView fx:id="s34" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s00" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="s00" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s01" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="s01" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s54" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5">
+            <ImageView fx:id="s54" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s53" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5">
+            <ImageView fx:id="s53" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="s52" fitHeight="43.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <ImageView fx:id="s52" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <image>
                   <Image url="@../graphics/itemtiles/Gatti1.1.png" />
                </image>
             </ImageView>
          </children>
       </GridPane>
-      <ImageView fitHeight="132.0" fitWidth="347.0" layoutX="963.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="107.0" fitWidth="285.0" layoutX="666.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/publisher_material/Title2000x618px.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="personalCard" fitHeight="279.0" fitWidth="242.0" layoutX="457.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="personalCard" fitHeight="230.0" fitWidth="155.0" layoutX="348.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/personalgoalcards/front_EMPTY.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="commonGoalSX" fitHeight="151.0" fitWidth="241.0" layoutX="54.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="commonGoalSX" fitHeight="120.0" fitWidth="230.0" layoutX="38.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/commongoalcards/4.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="commonGoalDX" fitHeight="151.0" fitWidth="241.0" layoutX="342.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="commonGoalDX" fitHeight="130.0" fitWidth="225.0" layoutX="283.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/commongoalcards/4.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="textField" layoutX="83.0" layoutY="42.0" prefHeight="54.0" prefWidth="447.0" text="move" />
+      <TextField fx:id="textField" layoutX="83.0" layoutY="42.0" prefHeight="54.0" prefWidth="447.0" />
       <Button fx:id="buttonGO" layoutX="593.0" layoutY="54.0" mnemonicParsing="false" text="GO" />
-      <Label fx:id="labelText" layoutX="83.0" layoutY="135.0" prefHeight="107.0" prefWidth="462.0" />
+      <Label fx:id="labelText" layoutX="50.0" layoutY="120.0" prefHeight="107.0" prefWidth="320.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label layoutX="102.0" layoutY="362.0" text="0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="147.0" layoutY="362.0" text="1">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="193.0" layoutY="361.0" text="2">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="363.0" text="3">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="287.0" layoutY="362.0" text="4">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="567.0" layoutY="195.0" text="0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="620.0" layoutY="195.0" text="1">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="668.0" layoutY="196.0" text="2">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="751.0" layoutY="195.0" text="4">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="708.0" layoutY="196.0" text="3">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="802.0" layoutY="197.0" text="5">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="519.0" layoutY="253.0" text="a">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="934.0" layoutY="196.0" text="8">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="888.0" layoutY="197.0" text="7">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="845.0" layoutY="198.0" text="6">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="557.0" layoutY="254.0" prefHeight="409.0" prefWidth="412.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fx:id="b03" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b04" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b13" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b14" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b15" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b34" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b33" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b23" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b22" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b32" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b31" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b26" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b25" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b24" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b53" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b52" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b51" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b50" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b48" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b38" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b37" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b36" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b35" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b47" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b46" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b45" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b44" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b43" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b42" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b41" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b40" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b54" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b55" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b56" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b57" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="5">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b62" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b85" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="8">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b84" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="8">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b66" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b65" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b64" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b63" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b73" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="7">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b75" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="7">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="b74" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="7">
+               <image>
+                  <Image url="@../graphics/itemtiles/Cornici1.1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <Label layoutX="517.0" layoutY="305.0" text="b">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="517.0" layoutY="347.0" text="c">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <graphic>
+            <AnchorPane />
+         </graphic>
+      </Label>
+      <Label layoutX="520.0" layoutY="399.0" text="d">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="522.0" layoutY="442.0" text="e">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="525.0" layoutY="485.0" text="f">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="524.0" layoutY="528.0" text="g">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="523.0" layoutY="579.0" text="h">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="526.0" layoutY="620.0" text="i">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
