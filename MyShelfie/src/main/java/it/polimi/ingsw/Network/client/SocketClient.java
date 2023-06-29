@@ -22,7 +22,6 @@ import static java.lang.Thread.sleep;
  */
 public class SocketClient{
 
-    //TODO: salvare l'username nel client quando questo si connette al server
     private Socket socket = null;
     private PrintWriter out = null;
     private BufferedReader in = null;

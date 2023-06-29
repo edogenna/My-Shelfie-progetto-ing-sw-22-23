@@ -380,7 +380,6 @@ public class Controller {
      * */
     public boolean getStopMatch(){return model.getStopMatch();}
 
-    //TODO: finish this method
     /**
      * Method to declare the winner
      * @return the points of the winner player

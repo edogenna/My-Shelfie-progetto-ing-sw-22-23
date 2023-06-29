@@ -21,10 +21,6 @@ public class Board {
     private int numPlayers;
     @Expose
     private int[] numItemRemained = new int[ItemEnum.NUM_ITEMENUM*ItemEnum.NUM_TYPE_PER_ITEMENUM];
-
-    //TODO: modificare in un array in cui togliere i punti se si è in 3/4 giocatori
-    //TODO: aggiungere funzione per togliere carta in una posizione, refill e prendere carta in una posizione
-
     @Expose
     private final static int[][] positionsAlwaysForbidden = new int[][]{{0, 0}, {0, 1}, {0, 2},
             {1, 0}, {1, 1}, {1, 2},
