@@ -20,6 +20,7 @@ public class CommonCard05 implements CommonCardStrategy{
     public String getPath(){
         return "/graphics/commongoalcards/5.png";
     }
+
     @Override
     public boolean checkBookshelf(ItemEnum[][] b){
         final int numberOfRows=b.length;

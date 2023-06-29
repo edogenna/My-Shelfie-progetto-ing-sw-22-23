@@ -28,8 +28,6 @@ public class CommonCard08 implements CommonCardStrategy {
 
     @Override
     public boolean checkBookshelf(ItemEnum[][] b) {
-        //TODO: check BLANK CASE and general check
-        //TODO: rethink algorithm
         int[] occurrences = new int[6];
         int pos;
         int j=0;

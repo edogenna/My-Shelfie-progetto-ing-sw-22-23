@@ -21,10 +21,6 @@ public class Board {
     private int numPlayers;
     @Expose
     private int[] numItemRemained = new int[ItemEnum.NUM_ITEMENUM*ItemEnum.NUM_TYPE_PER_ITEMENUM];
-
-    //TODO: modificare in un array in cui togliere i punti se si è in 3/4 giocatori
-    //TODO: aggiungere funzione per togliere carta in una posizione, refill e prendere carta in una posizione
-
     @Expose
     private final static int[][] positionsAlwaysForbidden = new int[][]{{0, 0}, {0, 1}, {0, 2},
             {1, 0}, {1, 1}, {1, 2},
@@ -126,18 +122,6 @@ public class Board {
                 (r1 == BOARD_SIZE - 1 - c2 && c1 == r2) ||
                 (r1 == BOARD_SIZE - 1 - r2 && c1 == BOARD_SIZE - 1 - c2) ||
                 (r1 == c2 && c1 == BOARD_SIZE - 1 - r2);
-    }
-
-    /**
-     * It returns the ItemEnum from a given position.
-     * @param r row of the matrix
-     * @param c coloumn of the matrix
-     * @return ItemEnum
-     */
-    public ItemEnum getItemEnum(int r, int c) {
-        if (matrix[r][c] == ItemEnum.BLANK)
-            System.out.println("Restituita una carta Blank!");
-        return matrix[r][c];
     }
 
     /**

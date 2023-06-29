@@ -101,7 +101,6 @@ public final class PersonalCards {
           figure[11].addTriplet(5,1,1, ItemEnum.PURPLE1);
      }
 
-     //TODO: fix the pointer return!
      public Card getCard(int i){
           return this.figure[i];
      }
