@@ -30,7 +30,7 @@ public class GuiView extends Application implements UI {
     private ItemEnum[][] board;
     private String[] CommonCards;
     private Card personalCard;
-    private ItemEnum[][] shelf;
+    private ItemEnum[][][] shelves;
     //canali verso e dal server validi solo per socket
     private PrintWriter out;
     private BufferedReader in;
@@ -53,7 +53,7 @@ public class GuiView extends Application implements UI {
         this.personalCard = null;
         this.CommonCards = null;
         this.board = null;
-        this.shelf = null;
+        this.shelves = null;
         this.userInput = null;
         this.messageToServer = null;
         this.outputStream = new PrintStream(System.out);
@@ -417,7 +417,9 @@ public class GuiView extends Application implements UI {
         this.board = graphicalGameInfo.getBoard();
         this.CommonCards = graphicalGameInfo.getCommonCards();
         this.personalCard = graphicalGameInfo.getPersonalCard();
-        //his.shelf = graphicalGameInfo.getShelves();
+        this.shelves = graphicalGameInfo.getShelves();
+        int myID = graphicalGameInfo.getYourId();
+        String[] usernames = graphicalGameInfo.getUsernames();
 
         while(controller == null){
             try {
@@ -428,7 +430,32 @@ public class GuiView extends Application implements UI {
         }
 
         controller.board = board;
-        controller.shelf = shelf;
+        controller.shelf = shelves[myID];
+        int i = 0;
+        boolean find = false;
+        for(; i < 4 && !find; i++){
+            if(i != myID) {
+                controller.shelfA = shelves[i];
+                controller.setLabelA(usernames[i]);
+                find = true;
+            }
+        }
+        find = false;
+        for(; i < 4 && !find; i++){
+            if(i != myID) {
+                controller.shelfB = shelves[i];
+                controller.setLabelB(usernames[i]);
+                find = true;
+            }
+        }
+        find = false;
+        for(; i < 4 && !find; i++){
+            if(i != myID) {
+                controller.shelfC = shelves[i];
+                controller.setLabelC(usernames[i]);
+                find = true;
+            }
+        }
         controller.personal = Integer.toString(graphicalGameInfo.getPersonalCardId());
         controller.common = getCommonCards();
         controller.updateView();
