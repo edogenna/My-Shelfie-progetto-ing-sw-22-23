@@ -7,7 +7,6 @@ import it.polimi.ingsw.Network.messages.*;
 import it.polimi.ingsw.Network.messages.Answers.*;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.model.Card;
-import it.polimi.ingsw.model.CommonCards.CommonCard01;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.ImageCursor;
@@ -78,7 +77,7 @@ public class GuiView extends Application implements UI {
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        System.out.println("START: Il valore di stage è: " + stage);
+
         Platform.runLater(() -> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PrincipalScene.fxml"));
             try {
@@ -90,12 +89,9 @@ public class GuiView extends Application implements UI {
             this.stage.setScene(basicScene);
             this.stage.getIcons().add(new Image("/graphics/icon.png"));
             this.stage.setResizable(false);
-
             this.stage.setTitle("MyShelfie");
-            System.out.println("Il valore di stage è: " + stage);
 
             this.stage.show();
-            System.out.println("AH: Il valore di stage è: " + stage);
         });
 
         this.stage.setOnCloseRequest(e -> {
@@ -106,10 +102,18 @@ public class GuiView extends Application implements UI {
 
     }
 
+    /**
+     * This method is used to get the board
+     * @return the board
+     */
     public ItemEnum[][] getBoard() {
         return board;
     }
 
+    /**
+     * This method is used to get the common cards
+     * @return the common cards
+     */
     public String[] getCommonCards() {
         String[] a = new String[2];
 
@@ -167,8 +171,11 @@ public class GuiView extends Application implements UI {
         this.messageToServer = Converter.convertToJSON(m);
     }
 
+    /**
+     * This method sets the controller of the principal scene
+     * @param controller {@link PrincipalSceneController}
+     */
     public void setController(PrincipalSceneController controller) {
-        System.out.println("CONTROLLER SETTATO");
         this.controller = controller;
     }
 
@@ -295,6 +302,8 @@ public class GuiView extends Application implements UI {
      */
     private void handleMoveMessage(Message m) throws IOException{
         outputStream.println(((MoveMessage) m).getS());
+        if(controller != null)
+            controller.setLabelText(((MoveMessage) m).getS());
 
         while(move == null){
             try {
@@ -307,7 +316,10 @@ public class GuiView extends Application implements UI {
         if(out != null)
             sendMessageToSocketServer(new MoveAnswer(move));
         else sendMessageToRmiServer(new MoveAnswer(move));
+
+        move = null;
     }
+
     /**
      * This method handles the {@link LobbyMessage}
      * @param m message
@@ -328,7 +340,6 @@ public class GuiView extends Application implements UI {
             Application.launch(args);
         }).start();
 
-
         outputStream.println(((StartingGameMessage) m).getS());
         if(out != null)
             sendMessageToSocketServer(new ACKMessage());
@@ -343,6 +354,7 @@ public class GuiView extends Application implements UI {
         outputStream.println(((WaitingMessage) m).getS());
         if(controller != null)
             controller.setLabelText(((WaitingMessage) m).getS());
+
         if(out != null)
             sendMessageToSocketServer(new ACKMessage());
         else sendMessageToRmiServer(new ACKMessage());
@@ -398,17 +410,12 @@ public class GuiView extends Application implements UI {
      * @param m message
      * @throws IOException
      */
-
-    //TODO: modificare
     private void handleGraphicalInfoMessage(Message m) throws IOException {
         GraphicalGameInfo graphicalGameInfo = (GraphicalGameInfo) m;
         this.board = graphicalGameInfo.getBoard();
         this.CommonCards = graphicalGameInfo.getCommonCards();
         this.personalCard = graphicalGameInfo.getPersonalCard();
         this.shelf = graphicalGameInfo.getShelf();
-
-
-        System.out.println("sono qui controller boh");
 
         while(controller == null){
             try {
@@ -418,15 +425,17 @@ public class GuiView extends Application implements UI {
             }
         }
 
-        System.out.println("sono qui controller NON N YLL");
-
         controller.board = board;
         controller.shelf = shelf;
+        controller.personal = Integer.toString(graphicalGameInfo.getPersonalCardId());
         controller.common = getCommonCards();
         controller.updateView();
         move = null;
 
         outputStream.println(graphicalGameInfo.getS());
+
+        if(controller != null)
+            controller.setLabelText(graphicalGameInfo.getS());
 
         if(out != null)
             sendMessageToSocketServer(new ACKMessage());
@@ -470,21 +479,18 @@ public class GuiView extends Application implements UI {
             sendMessageToSocketServer(new MoveAnswer(move));
         else sendMessageToRmiServer(new MoveAnswer(move));
 
-
-        if(out != null)
-            sendMessageToSocketServer(new MoveAnswer(userInput));
-        else
-            sendMessageToRmiServer(new MoveAnswer(userInput));
+        move = null;
     }
 
     /**
      * This method handles the {@link WinMessage}
      * @param m message
      */
-
-    //TODO: modificare
     private void handleWinMessage(Message m) throws IOException {
         outputStream.println(((WinMessage) m).getS());
+        if(controller != null)
+            controller.setLabelText(((WinMessage) m).getS());
+
         if(out != null)
             sendMessageToSocketServer(new ACKMessage());
         else sendMessageToRmiServer(new ACKMessage());
@@ -495,9 +501,10 @@ public class GuiView extends Application implements UI {
      * This method prints a {@link NotValidMoveError}
      * @param m
      */
-    //TODO: modificare
     public void dummyInputPrint(Message m){
         outputStream.println(((NotValidMoveError) m).getS());
+        if(controller != null)
+            controller.setLabelText(((NotValidMoveError) m).getS());
     }
 
     /**
@@ -506,12 +513,15 @@ public class GuiView extends Application implements UI {
      */
     private void handleDisconnectionMessage(Message m) throws IOException {
         outputStream.println(((UserDisconnection) m).getS());
+
+        if(controller != null)
+            controller.setLabelText(((UserDisconnection) m).getS());
+
         if(this.out != null)
             sendMessageToSocketServer(new ACKMessage());
         else
             sendMessageToRmiServer(new ACKMessage());
     }
-
 
 
     /**
@@ -530,61 +540,4 @@ public class GuiView extends Application implements UI {
         else
             sendMessageToRmiServer(new OldGameIdAnswer(this.userInput));
     }
-
-
-
-
-    /*
-
-
-    private void handleReconnectionMessage(Message m) throws IOException {
-        String s;
-        System.out.println("HANDLEREC: Il valore di stage è: " + stage);
-        while(isReconnection == -1){
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if(isReconnection == 0)
-            s = "newgame";
-        else
-            s = "Reconnection";
-
-
-        if(out != null)
-            sendMessageToSocketServer(new UsernameAnswer(s));
-        else
-            sendMessageToRmiServer(new UsernameAnswer(s));
-
-        System.out.println("REC: Il valore di stage è: " + stage);
-
-        if(isReconnection == 0){
-            changeScenes("/fxml/ChooseNicknameScene.fxml");
-        }else{
-            changeScenes("/fxml/ReconnectionScene.fxml");
-        }
-    }
-
-     */
-
-
-    /*
-    private void changeScenes(String sceneName){
-        Platform.runLater(() -> {
-            try {
-                System.out.println("CHANGE SCENE: Il valore di stage è: " + stage);
-                Parent loader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(sceneName)));
-                this.stage.getScene().setRoot(loader);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-
-     */
-
 }

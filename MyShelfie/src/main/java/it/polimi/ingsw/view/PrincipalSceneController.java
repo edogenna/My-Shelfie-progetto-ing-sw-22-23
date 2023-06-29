@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.view.GuiView;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ public class PrincipalSceneController implements Initializable {
     public ItemEnum[][] board;
     public ItemEnum[][] shelf;
     public String[] common;
+    public String personal;
 
 
 
@@ -198,6 +200,9 @@ public class PrincipalSceneController implements Initializable {
     private ImageView[][] boardIV;
     private ImageView[][] shelfIV;
 
+    /**
+     * This method is used to update the board
+     */
     private void updateBoard(){
         for(int i = 0; i < 9; i++){
             for(int j = 0; j < 9; j++){
@@ -213,6 +218,9 @@ public class PrincipalSceneController implements Initializable {
         }
     }
 
+    /**
+     * This method is used to update the shelf
+     */
     private void updateShelf(){
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 5; j++){
@@ -227,14 +235,36 @@ public class PrincipalSceneController implements Initializable {
     }
 
 
+    /**
+     * This method is used to update the view of the game
+     */
     public void updateView(){
         updateBoard();
         updateShelf();
+        if(common != null) {
+            commonGoalDX.setImage(new Image("/graphics/commongoalcards/" + common[0] + ".jpg"));
+            commonGoalSX.setImage(new Image("/graphics/commongoalcards/" + common[1] + ".jpg"));
+        }
 
+        if(personal != null){
+            personalCard.setImage(new Image("/graphics/personalgoalcards/" + personal + ".png"));
+        }
     }
 
+    /**
+     * This method is used to set the text of the label
+     * @param text is the text to set
+     */
     public void setLabelText(String text){
-        labelText.setText(text);
+        Platform.runLater(() -> {
+            labelText.setText(text);
+            labelText.setOpacity(1);
+        });
+    }
+
+    public void setCommon(String common1, String common2){
+        commonGoalDX.setImage(new Image("/graphics/commongoalcards/" + common1 + ".jpg"));
+        commonGoalSX.setImage(new Image("/graphics/commongoalcards/" + common2 + ".jpg"));
     }
 
     @Override
@@ -260,11 +290,11 @@ public class PrincipalSceneController implements Initializable {
 
         guiView = GuiView.getInstance();
         guiView.setController(this);
-        commonGoalDX.setImage(new Image("/graphics/commongoalcards/" + guiView.getCommonCards()[0] + ".jpg"));
-        commonGoalSX.setImage(new Image("/graphics/commongoalcards/" + guiView.getCommonCards()[1] + ".jpg"));
+
 
         buttonGO.setOnAction(actionEvent -> {
             guiView.move = textField.getText();
+            labelText.setText("");
         });
 
     }
