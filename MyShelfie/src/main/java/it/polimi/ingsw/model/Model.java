@@ -383,6 +383,7 @@ public class Model {
             if(x != this.idFirstPlayer)
                 finish = false;
             while(players[x].isDisconnected()){
+                System.out.println("cipolla");
                 x++;
                 x %= this.numPlayers;
 //                System.out.println("x = " + x);
@@ -390,6 +391,7 @@ public class Model {
             if(x == this.idFirstPlayer)
                 finish = true;
             this.idActivePlayer = x;
+            this.activePlayer = this.players[this.idActivePlayer];
 //            System.out.println("id active = " + this.idActivePlayer);
 //            System.out.println("id first Player = " + this.idFirstPlayer);
         }else{

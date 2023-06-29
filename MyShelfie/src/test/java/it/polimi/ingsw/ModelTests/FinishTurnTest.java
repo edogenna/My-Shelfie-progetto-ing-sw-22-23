@@ -109,7 +109,33 @@ public class FinishTurnTest {
         Assert.assertEquals(2, controller.getIdActivePlayer());
         Assert.assertTrue(controller.finishTurn());
 
-        //First Player = 2
+        //First Player = 0 - no disconnection
+        model = new Model(3);
+        model.setUsernamePlayer("aldo");
+        model.setUsernamePlayer("giovanni");
+        model.setUsernamePlayer("giacomo");
+        controller = new Controller(model);
+
+        controller.setFirstPlayer();
+        z = controller.getIdFirstPlayer();
+        while(z!=0){
+            controller.setFirstPlayer();
+            z = controller.getIdFirstPlayer();
+        }
+
+        Assert.assertFalse(controller.finishTurn());
+        controller.setActivePlayer(0);
+        Assert.assertEquals(0, controller.getIdActivePlayer());
+        player1 = model.getPlayers()[0];
+        player1.setBookshelf(matrix);
+
+        controller.setActivePlayer(0);
+        Assert.assertFalse(controller.finishTurn());
+        Assert.assertFalse(controller.finishTurn());
+        Assert.assertEquals(2, controller.getIdActivePlayer());
+        Assert.assertTrue(controller.finishTurn());
+
+        //First Player = 2 - with disconnection
         model = new Model(3);
         model.setUsernamePlayer("aldo");
         model.setUsernamePlayer("giovanni");

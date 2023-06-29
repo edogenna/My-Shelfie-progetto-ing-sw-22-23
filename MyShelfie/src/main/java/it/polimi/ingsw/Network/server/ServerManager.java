@@ -506,9 +506,8 @@ public class ServerManager implements Runnable{
 
             //Sending graphical info on the game's status
             for (Integer i : this.lobby.keySet()) {
-                System.out.println("sending graphical info to User " + i);
+ //               System.out.println("sending graphical info to User " + i);
                 sendMessageAndWaitForAnswer(i, new GraphicalGameInfo(activeMatch.getBoard(), activeMatch.getCommonCardsDesigns(), activeMatch.getPlayerBookshelf(this.lobby.get(i)), activeMatch.getPlayerPersonalCard(this.lobby.get(i)), activeUsername));
-                System.out.println("pluto");
             }
 
             //Sending to the active player a move request and handling the answer;
