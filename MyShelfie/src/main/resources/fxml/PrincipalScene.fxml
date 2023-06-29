@@ -192,7 +192,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <ImageView fitHeight="107.0" fitWidth="285.0" layoutX="666.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="75.0" fitWidth="230.0" layoutX="666.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../graphics/publisher_material/Title2000x618px.png" />
          </image>
@@ -214,9 +214,9 @@
       </ImageView>
       <TextField fx:id="textField" layoutX="50.0" layoutY="27.0" prefHeight="54.0" prefWidth="447.0" />
       <Button fx:id="buttonGO" layoutX="519.0" layoutY="39.0" mnemonicParsing="false" text="GO" />
-      <Label fx:id="labelText" layoutX="50.0" layoutY="120.0" prefHeight="79.0" prefWidth="934.0" AnchorPane.bottomAnchor="512.6666666666666" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="217.0" AnchorPane.topAnchor="120.0">
+      <Label fx:id="labelText" layoutX="50.0" layoutY="88.0" prefHeight="111.0" prefWidth="945.0" AnchorPane.bottomAnchor="513.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="88.0">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font size="16.0" />
          </font></Label>
       <Label layoutX="102.0" layoutY="362.0" text="0">
          <font>
