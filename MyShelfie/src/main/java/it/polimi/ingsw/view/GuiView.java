@@ -1,9 +1,7 @@
 package it.polimi.ingsw.view;
 
-
 import it.polimi.ingsw.ItemEnum;
 import it.polimi.ingsw.Network.messages.*;
-
 import it.polimi.ingsw.Network.messages.Answers.*;
 import it.polimi.ingsw.Network.messages.ErrorMessages.*;
 import it.polimi.ingsw.model.Card;
@@ -22,8 +20,11 @@ import java.io.PrintWriter;
 
 import it.polimi.ingsw.model.CommonCards.*;
 
-import static java.lang.Thread.sleep;
 
+/**
+ * This class offers a Graphical User Interface
+ * @author Edoardo Gennaretti
+ */
 public class GuiView extends Application implements UI {
     private ItemEnum[][] board;
     private String[] CommonCards;

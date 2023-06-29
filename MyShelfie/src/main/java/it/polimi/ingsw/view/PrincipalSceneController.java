@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.ItemEnum;
-import it.polimi.ingsw.view.GuiView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,12 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PrincipalSceneController implements Initializable {
 
+/**
+ * This class is the controller of the principal scene of the GUI.
+ * @author Edoardo Gennaretti
+ */
+public class PrincipalSceneController implements Initializable {
     private GuiView guiView;
     public ItemEnum[][] board;
     public ItemEnum[][] shelf;
@@ -24,11 +26,8 @@ public class PrincipalSceneController implements Initializable {
     public String personal;
 
 
-
-
     @FXML
     private ImageView personalCard;
-
     @FXML
     private ImageView commonGoalSX;
     @FXML
@@ -262,11 +261,6 @@ public class PrincipalSceneController implements Initializable {
         });
     }
 
-    public void setCommon(String common1, String common2){
-        commonGoalDX.setImage(new Image("/graphics/commongoalcards/" + common1 + ".jpg"));
-        commonGoalSX.setImage(new Image("/graphics/commongoalcards/" + common2 + ".jpg"));
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         boardIV = new ImageView[][]
@@ -296,6 +290,5 @@ public class PrincipalSceneController implements Initializable {
             guiView.move = textField.getText();
             labelText.setText("");
         });
-
     }
 }
