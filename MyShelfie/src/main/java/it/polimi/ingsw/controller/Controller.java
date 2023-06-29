@@ -459,4 +459,13 @@ public class Controller {
     public int getIdFirstPlayer() {
         return model.getIdFirstPlayer();
     }
+
+    /**
+     * it returns the username of the player with that id
+     * @param id the id of the player
+     * @return the username of the player
+     * */
+    public String getUsernamePlayer(int id){
+        return model.getUsernamePlayer(id);
+    }
 }

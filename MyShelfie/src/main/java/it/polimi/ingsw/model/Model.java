@@ -66,6 +66,15 @@ public class Model {
     }
 
     /**
+     * it returns the username of the player with that id
+     * @param id the id of the player
+     * @return the username of the player
+     * */
+    public String getUsernamePlayer(int id){
+        return new String(this.players[id].getUsername());
+    }
+
+    /**
     * it implements the player class setting the username of the player; it also set the PersonalCard of the player
     * 
     */
