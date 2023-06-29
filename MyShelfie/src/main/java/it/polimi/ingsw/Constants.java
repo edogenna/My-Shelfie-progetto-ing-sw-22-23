@@ -35,7 +35,7 @@ public final class Constants {
     /**
      * The number of seconds to wait for a turn
      */
-    public static final int secondsDuringTurn = 30;
+    public static final int secondsDuringTurn = 60;
     /**
      * string to reconnect
      */
