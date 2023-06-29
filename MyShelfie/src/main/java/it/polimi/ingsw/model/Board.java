@@ -40,7 +40,6 @@ public class Board {
     }
 
 
-
     public Board(int numPlayers) {
         matrix = new ItemEnum[BOARD_SIZE][BOARD_SIZE];
 
