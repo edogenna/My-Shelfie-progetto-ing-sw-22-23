@@ -42,8 +42,8 @@ public class MyShelfie {
         if(chooseServerClient) {
 
             System.out.println("Insert the hostName or just press enter to get your own device: ");
-//            hostName = stdIn.readLine();
-//            if (hostName.equals("\n"))
+            hostName = stdIn.readLine();
+            if (hostName.equals("\n"))
                 hostName = "127.0.0.1";
             System.out.println("socket port: " + Constants.PORT_SOCKET_GAME);
             System.out.println("rmi port: " + Constants.PORT_RMI_GAME);

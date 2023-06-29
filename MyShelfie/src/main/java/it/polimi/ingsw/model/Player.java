@@ -101,7 +101,7 @@ public class Player {
         points = 0;
         for(i=0; i<6; i++){
             control = this.myGoals.getTriplet(i);
-            if(control.getColor() == this.shelf[control.getX()][control.getY()]){
+            if(control.getColor().equals(this.shelf[control.getX()][control.getY()])){
                 points++;
             }
         }
