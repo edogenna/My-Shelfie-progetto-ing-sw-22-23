@@ -33,7 +33,7 @@ The implemented functionalities are:
 
 
 ## Running the Game
-The game can me run with the jar file named <code>FILE.jar</code>, in the <code>/target</code> directory after building the project with Maven.
+The game can me run with the jar file named <code>FILE.jar</code>, in the <code>/jar</code> directory after building the project with Maven.
 
 This file holds both the Server, the CLI and the GUI applications, one of which can be selected when booting.
 
