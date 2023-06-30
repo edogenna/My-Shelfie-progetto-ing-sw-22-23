@@ -43,6 +43,8 @@ To run the jar file, use the command <code>java -jar FILE.jar</code> from the co
 
 Once the game begins, a <code>save.txt</code> file will appear in the same folder that contains the jar. This file will contain the game saving.
 
+If the server crashes during a match, the players will have to connect to the server again using the same nicknames they used before and selecting the same number of players. If these conditions are met, the server will look into the <code>save.txt</code> file and load the previous game.
+
 ### Server
 
 The machine running the server must be reachable from the clients in order to play the game. To start the server, select the <code>0</code> option when booting.  
