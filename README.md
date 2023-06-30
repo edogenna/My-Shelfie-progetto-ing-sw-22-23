@@ -37,7 +37,11 @@ The game can me run with the jar file named <code>FILE.jar</code>, in the <code>
 
 This file holds both the Server, the CLI and the GUI applications, one of which can be selected when booting.
 
+Before running the file, open from command line the <code>EnableAnsiCmd.bat</code> file to install colors for the CLI.
+
 To run the jar file, use the command <code>java -jar FILE.jar</code> from the command line in the jar's folder.
+
+Once the game begins, a <code>save.txt</code> file will appear in the same folder that contains the jar. This file will contain the game save.
 
 ### Server
 
