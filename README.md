@@ -33,7 +33,7 @@ The implemented functionalities are:
 
 
 ## Running the Game
-The game can me run with the jar file named <code>FILE.jar</code>, in the <code>/jar</code> directory after building the project with Maven.
+The game can be run with the jar file named <code>FILE.jar</code>, in the <code>/jar</code> directory after building the project with Maven.
 
 This file holds both the Server, the CLI and the GUI applications, one of which can be selected when booting.
 
@@ -41,7 +41,7 @@ Before running the file, open from command line the <code>EnableAnsiCmd.bat</cod
 
 To run the jar file, use the command <code>java -jar FILE.jar</code> from the command line in the jar's folder.
 
-Once the game begins, a <code>save.txt</code> file will appear in the same folder that contains the jar. This file will contain the game save.
+Once the game begins, a <code>save.txt</code> file will appear in the same folder that contains the jar. This file will contain the game saving.
 
 ### Server
 
