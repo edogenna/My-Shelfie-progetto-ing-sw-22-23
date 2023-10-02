@@ -3,6 +3,12 @@
 # My Shelfie Videogame - PSP01 Group
 My Shelfie Board Game is the final test of "Software Engineering", course of "Computer Science Engineering" held at Politecnico di Milano (2022/2023).
 
+### Copyright
+My Shelfie is a board game developed and published by Cranio Creations Srl. 
+The graphic contents of this project attributable to the board editorial product are used with the prior approval of Cranio Creations Srl for educational purposes only. 
+The distribution, copying or reproduction of the contents and images in any form outside the project is prohibited, as is the redistribution and publication of the contents and images for purposes other than the aforementioned. 
+Furthermore, the commercial use of these contents is prohibited.
+
 
 ## Overview
 This project is a digital implementation in `Java` of <b>My Shelfie<b> board game made by <b>Cranio Games</b>.
